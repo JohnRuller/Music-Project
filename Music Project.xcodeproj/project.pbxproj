@@ -19,6 +19,9 @@
 		0220CB63182C977F006C10A8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0220CB4B182C977F006C10A8 /* UIKit.framework */; };
 		0220CB6B182C977F006C10A8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0220CB69182C977F006C10A8 /* InfoPlist.strings */; };
 		0220CB6D182C977F006C10A8 /* Music_ProjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0220CB6C182C977F006C10A8 /* Music_ProjectTests.m */; };
+		0220CB79183DCA2B006C10A8 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0220CB78183DCA2B006C10A8 /* Storyboard.storyboard */; };
+		0220CB7B183DCCF4006C10A8 /* Music720.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0220CB7A183DCCF4006C10A8 /* Music720.jpg */; };
+		0220CB7C183DCE13006C10A8 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0220CB78183DCA2B006C10A8 /* Storyboard.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +51,8 @@
 		0220CB68182C977F006C10A8 /* Music ProjectTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Music ProjectTests-Info.plist"; sourceTree = "<group>"; };
 		0220CB6A182C977F006C10A8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0220CB6C182C977F006C10A8 /* Music_ProjectTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Music_ProjectTests.m; sourceTree = "<group>"; };
+		0220CB78183DCA2B006C10A8 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
+		0220CB7A183DCCF4006C10A8 /* Music720.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Music720.jpg; path = ../../Music720.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				0220CB56182C977F006C10A8 /* AppDelegate.h */,
+				0220CB78183DCA2B006C10A8 /* Storyboard.storyboard */,
 				0220CB57182C977F006C10A8 /* AppDelegate.m */,
 				0220CB59182C977F006C10A8 /* Images.xcassets */,
 				0220CB4E182C977F006C10A8 /* Supporting Files */,
@@ -118,6 +124,7 @@
 		0220CB4E182C977F006C10A8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0220CB7A183DCCF4006C10A8 /* Music720.jpg */,
 				0220CB4F182C977F006C10A8 /* Music Project-Info.plist */,
 				0220CB50182C977F006C10A8 /* InfoPlist.strings */,
 				0220CB53182C977F006C10A8 /* main.m */,
@@ -220,7 +227,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				0220CB52182C977F006C10A8 /* InfoPlist.strings in Resources */,
+				0220CB7B183DCCF4006C10A8 /* Music720.jpg in Resources */,
 				0220CB5A182C977F006C10A8 /* Images.xcassets in Resources */,
+				0220CB79183DCA2B006C10A8 /* Storyboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -229,6 +238,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0220CB6B182C977F006C10A8 /* InfoPlist.strings in Resources */,
+				0220CB7C183DCE13006C10A8 /* Storyboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
