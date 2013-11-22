@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0219FCE2183EF1560080A1F1 /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0219FCE1183EF1560080A1F1 /* HelpViewController.m */; };
+		0219FCE3183EF1560080A1F1 /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0219FCE1183EF1560080A1F1 /* HelpViewController.m */; };
+		0219FCE6183EFBF80080A1F1 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0219FCE5183EFBF80080A1F1 /* ProfileViewController.m */; };
+		0219FCE7183EFBF80080A1F1 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0219FCE5183EFBF80080A1F1 /* ProfileViewController.m */; };
+		0219FCEA183EFE2D0080A1F1 /* JoinRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0219FCE9183EFE2D0080A1F1 /* JoinRoomViewController.m */; };
+		0219FCEB183EFE2D0080A1F1 /* JoinRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0219FCE9183EFE2D0080A1F1 /* JoinRoomViewController.m */; };
+		0219FCEE183EFEEA0080A1F1 /* CreateRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0219FCED183EFEEA0080A1F1 /* CreateRoomViewController.m */; };
+		0219FCEF183EFEEA0080A1F1 /* CreateRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0219FCED183EFEEA0080A1F1 /* CreateRoomViewController.m */; };
 		0220CB48182C977F006C10A8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0220CB47182C977F006C10A8 /* Foundation.framework */; };
 		0220CB4A182C977F006C10A8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0220CB49182C977F006C10A8 /* CoreGraphics.framework */; };
 		0220CB4C182C977F006C10A8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0220CB4B182C977F006C10A8 /* UIKit.framework */; };
@@ -37,6 +45,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0219FCE0183EF1560080A1F1 /* HelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HelpViewController.h; path = ../HelpViewController.h; sourceTree = "<group>"; };
+		0219FCE1183EF1560080A1F1 /* HelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HelpViewController.m; path = ../HelpViewController.m; sourceTree = "<group>"; };
+		0219FCE4183EFBF80080A1F1 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		0219FCE5183EFBF80080A1F1 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		0219FCE8183EFE2D0080A1F1 /* JoinRoomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JoinRoomViewController.h; sourceTree = "<group>"; };
+		0219FCE9183EFE2D0080A1F1 /* JoinRoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JoinRoomViewController.m; sourceTree = "<group>"; };
+		0219FCEC183EFEEA0080A1F1 /* CreateRoomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateRoomViewController.h; sourceTree = "<group>"; };
+		0219FCED183EFEEA0080A1F1 /* CreateRoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateRoomViewController.m; sourceTree = "<group>"; };
 		0220CB44182C977F006C10A8 /* Music Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Music Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0220CB47182C977F006C10A8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0220CB49182C977F006C10A8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -56,7 +72,7 @@
 		0220CB7A183DCCF4006C10A8 /* Music720.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Music720.jpg; path = ../../Music720.jpg; sourceTree = "<group>"; };
 		0220CB7D183DD50F006C10A8 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		0220CB7E183DD50F006C10A8 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
-		0220CB81183DE675006C10A8 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
+		0220CB81183DE675006C10A8 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = MainStoryboard.storyboard; path = ../MainStoryboard.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,7 +102,6 @@
 		0220CB3B182C977F006C10A8 = {
 			isa = PBXGroup;
 			children = (
-				0220CB81183DE675006C10A8 /* MainStoryboard.storyboard */,
 				0220CB4D182C977F006C10A8 /* Music Project */,
 				0220CB66182C977F006C10A8 /* Music ProjectTests */,
 				0220CB46182C977F006C10A8 /* Frameworks */,
@@ -117,12 +132,21 @@
 		0220CB4D182C977F006C10A8 /* Music Project */ = {
 			isa = PBXGroup;
 			children = (
+				0220CB81183DE675006C10A8 /* MainStoryboard.storyboard */,
+				0219FCEC183EFEEA0080A1F1 /* CreateRoomViewController.h */,
+				0219FCED183EFEEA0080A1F1 /* CreateRoomViewController.m */,
+				0219FCE8183EFE2D0080A1F1 /* JoinRoomViewController.h */,
+				0219FCE9183EFE2D0080A1F1 /* JoinRoomViewController.m */,
+				0219FCE0183EF1560080A1F1 /* HelpViewController.h */,
+				0219FCE1183EF1560080A1F1 /* HelpViewController.m */,
 				0220CB56182C977F006C10A8 /* AppDelegate.h */,
 				0220CB57182C977F006C10A8 /* AppDelegate.m */,
 				0220CB59182C977F006C10A8 /* Images.xcassets */,
 				0220CB4E182C977F006C10A8 /* Supporting Files */,
 				0220CB7D183DD50F006C10A8 /* MainViewController.h */,
 				0220CB7E183DD50F006C10A8 /* MainViewController.m */,
+				0219FCE4183EFBF80080A1F1 /* ProfileViewController.h */,
+				0219FCE5183EFBF80080A1F1 /* ProfileViewController.m */,
 			);
 			path = "Music Project";
 			sourceTree = "<group>";
@@ -258,6 +282,10 @@
 				0220CB58182C977F006C10A8 /* AppDelegate.m in Sources */,
 				0220CB7F183DD50F006C10A8 /* MainViewController.m in Sources */,
 				0220CB54182C977F006C10A8 /* main.m in Sources */,
+				0219FCEA183EFE2D0080A1F1 /* JoinRoomViewController.m in Sources */,
+				0219FCEE183EFEEA0080A1F1 /* CreateRoomViewController.m in Sources */,
+				0219FCE2183EF1560080A1F1 /* HelpViewController.m in Sources */,
+				0219FCE6183EFBF80080A1F1 /* ProfileViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,7 +294,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				0220CB6D182C977F006C10A8 /* Music_ProjectTests.m in Sources */,
+				0219FCEF183EFEEA0080A1F1 /* CreateRoomViewController.m in Sources */,
+				0219FCE3183EF1560080A1F1 /* HelpViewController.m in Sources */,
+				0219FCE7183EFBF80080A1F1 /* ProfileViewController.m in Sources */,
 				0220CB80183DD50F006C10A8 /* MainViewController.m in Sources */,
+				0219FCEB183EFE2D0080A1F1 /* JoinRoomViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -459,6 +491,7 @@
 				0220CB72182C977F006C10A8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0220CB73182C977F006C10A8 /* Build configuration list for PBXNativeTarget "Music ProjectTests" */ = {
 			isa = XCConfigurationList;
@@ -467,6 +500,7 @@
 				0220CB75182C977F006C10A8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
