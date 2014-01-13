@@ -11,6 +11,7 @@
 
 @interface ViewController ()<MCBrowserViewControllerDelegate, MCSessionDelegate, UITextFieldDelegate>
 
+
 @property (nonatomic, strong) MCBrowserViewController *browserVC;
 @property (nonatomic, strong) MCAdvertiserAssistant *advertiser;
 @property (nonatomic, strong) MCSession *mySession;
@@ -24,6 +25,8 @@
 @end
 
 @implementation ViewController
+
+@synthesize returnButton;
 
 - (void)viewDidLoad
 {
