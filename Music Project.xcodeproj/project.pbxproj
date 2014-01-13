@@ -32,6 +32,9 @@
 		0220CB80183DD50F006C10A8 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0220CB7E183DD50F006C10A8 /* MainViewController.m */; };
 		0220CB82183DE675006C10A8 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0220CB81183DE675006C10A8 /* MainStoryboard.storyboard */; };
 		0220CB83183DE675006C10A8 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0220CB81183DE675006C10A8 /* MainStoryboard.storyboard */; };
+		02CBB022188382C8008AF034 /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02CBB021188382C8008AF034 /* MultipeerConnectivity.framework */; };
+		02CBB02518838817008AF034 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CBB02418838817008AF034 /* ViewController.m */; };
+		02CBB02618838817008AF034 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CBB02418838817008AF034 /* ViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +76,9 @@
 		0220CB7D183DD50F006C10A8 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		0220CB7E183DD50F006C10A8 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		0220CB81183DE675006C10A8 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = MainStoryboard.storyboard; path = ../MainStoryboard.storyboard; sourceTree = "<group>"; };
+		02CBB021188382C8008AF034 /* MultipeerConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultipeerConnectivity.framework; path = System/Library/Frameworks/MultipeerConnectivity.framework; sourceTree = SDKROOT; };
+		02CBB0231883880B008AF034 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		02CBB02418838817008AF034 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02CBB022188382C8008AF034 /* MultipeerConnectivity.framework in Frameworks */,
 				0220CB4A182C977F006C10A8 /* CoreGraphics.framework in Frameworks */,
 				0220CB4C182C977F006C10A8 /* UIKit.framework in Frameworks */,
 				0220CB48182C977F006C10A8 /* Foundation.framework in Frameworks */,
@@ -121,6 +128,7 @@
 		0220CB46182C977F006C10A8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				02CBB021188382C8008AF034 /* MultipeerConnectivity.framework */,
 				0220CB47182C977F006C10A8 /* Foundation.framework */,
 				0220CB49182C977F006C10A8 /* CoreGraphics.framework */,
 				0220CB4B182C977F006C10A8 /* UIKit.framework */,
@@ -137,6 +145,8 @@
 				0219FCED183EFEEA0080A1F1 /* CreateRoomViewController.m */,
 				0219FCE8183EFE2D0080A1F1 /* JoinRoomViewController.h */,
 				0219FCE9183EFE2D0080A1F1 /* JoinRoomViewController.m */,
+				02CBB0231883880B008AF034 /* ViewController.h */,
+				02CBB02418838817008AF034 /* ViewController.m */,
 				0219FCE0183EF1560080A1F1 /* HelpViewController.h */,
 				0219FCE1183EF1560080A1F1 /* HelpViewController.m */,
 				0220CB56182C977F006C10A8 /* AppDelegate.h */,
@@ -284,6 +294,7 @@
 			files = (
 				0220CB58182C977F006C10A8 /* AppDelegate.m in Sources */,
 				0220CB7F183DD50F006C10A8 /* MainViewController.m in Sources */,
+				02CBB02518838817008AF034 /* ViewController.m in Sources */,
 				0220CB54182C977F006C10A8 /* main.m in Sources */,
 				0219FCEA183EFE2D0080A1F1 /* JoinRoomViewController.m in Sources */,
 				0219FCEE183EFEEA0080A1F1 /* CreateRoomViewController.m in Sources */,
@@ -296,6 +307,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02CBB02618838817008AF034 /* ViewController.m in Sources */,
 				0220CB6D182C977F006C10A8 /* Music_ProjectTests.m in Sources */,
 				0219FCEF183EFEEA0080A1F1 /* CreateRoomViewController.m in Sources */,
 				0219FCE3183EF1560080A1F1 /* HelpViewController.m in Sources */,

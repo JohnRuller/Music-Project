@@ -60,6 +60,16 @@
                                 <rect key="frame" x="40" y="87" width="240" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="etv-z7-dM4">
+                                <rect key="frame" x="144" y="383" width="33" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Chat">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="cSQ-Xm-JWQ" kind="modal" id="xt5-a4-iVe"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -69,6 +79,7 @@
                         <outlet property="editProfileButton" destination="YrF-5c-gzh" id="7Vx-uE-YXc"/>
                         <outlet property="helpButton" destination="Kc4-Ec-LJd" id="fgN-Q6-wFw"/>
                         <outlet property="joinRoomButton" destination="Jpg-Qi-Gm2" id="vak-3s-Cey"/>
+                        <outlet property="viewButton" destination="etv-z7-dM4" id="mgW-9k-wzd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TD7-iX-GcD" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -307,6 +318,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YvZ-43-s2z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1364" y="618"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="kkC-St-SHe">
+            <objects>
+                <viewController id="cSQ-Xm-JWQ" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Itv-1b-MwR"/>
+                        <viewControllerLayoutGuide type="bottom" id="v2a-w9-ToJ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="HVd-Wj-XgZ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Cku-uL-pPm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="581" y="-746"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="pYL-wU-TJd">

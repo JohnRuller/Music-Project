@@ -15,6 +15,7 @@
 @synthesize joinRoomButton;
 @synthesize editProfileButton;
 @synthesize helpButton;
+@synthesize viewButton;
 
 - (void)viewDidLoad
 {

@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *joinRoomButton;
 @property (weak, nonatomic) IBOutlet UIButton *editProfileButton;
 @property (weak, nonatomic) IBOutlet UIButton *helpButton;
+@property (weak, nonatomic) IBOutlet UIButton *viewButton;
 
 
 
