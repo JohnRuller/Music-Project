@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface CreateRoomViewController : UIViewController
+@property (nonatomic, weak) NSString *thisRoomName;
 
 @end

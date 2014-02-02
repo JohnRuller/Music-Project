@@ -29,11 +29,24 @@
 		0220CB6D182C977F006C10A8 /* Music_ProjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0220CB6C182C977F006C10A8 /* Music_ProjectTests.m */; };
 		0220CB7F183DD50F006C10A8 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0220CB7E183DD50F006C10A8 /* MainViewController.m */; };
 		0220CB80183DD50F006C10A8 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0220CB7E183DD50F006C10A8 /* MainViewController.m */; };
-		0220CB82183DE675006C10A8 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0220CB81183DE675006C10A8 /* MainStoryboard.storyboard */; };
-		0220CB83183DE675006C10A8 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0220CB81183DE675006C10A8 /* MainStoryboard.storyboard */; };
 		02CBB022188382C8008AF034 /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02CBB021188382C8008AF034 /* MultipeerConnectivity.framework */; };
 		02CBB02518838817008AF034 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CBB02418838817008AF034 /* ViewController.m */; };
 		02CBB02618838817008AF034 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CBB02418838817008AF034 /* ViewController.m */; };
+		945B78431895812500C26AAA /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 945B78421895812500C26AAA /* MainStoryboard.storyboard */; };
+		945B78621895822E00C26AAA /* NSMutableArray+QueueMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 945B78471895822E00C26AAA /* NSMutableArray+QueueMethods.m */; };
+		945B78631895822E00C26AAA /* TDAudioFileStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 945B784A1895822E00C26AAA /* TDAudioFileStream.m */; };
+		945B78641895822E00C26AAA /* TDAudioQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 945B784C1895822E00C26AAA /* TDAudioQueue.m */; };
+		945B78651895822E00C26AAA /* TDAudioQueueBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 945B784E1895822E00C26AAA /* TDAudioQueueBuffer.m */; };
+		945B78661895822E00C26AAA /* TDAudioQueueBufferManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 945B78501895822E00C26AAA /* TDAudioQueueBufferManager.m */; };
+		945B78671895822E00C26AAA /* TDAudioQueueController.m in Sources */ = {isa = PBXBuildFile; fileRef = 945B78521895822E00C26AAA /* TDAudioQueueController.m */; };
+		945B78681895822E00C26AAA /* TDAudioQueueFiller.m in Sources */ = {isa = PBXBuildFile; fileRef = 945B78541895822E00C26AAA /* TDAudioQueueFiller.m */; };
+		945B78691895822E00C26AAA /* TDAudioStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 945B78561895822E00C26AAA /* TDAudioStream.m */; };
+		945B786A1895822E00C26AAA /* TDAudioInputStreamer.m in Sources */ = {isa = PBXBuildFile; fileRef = 945B78581895822E00C26AAA /* TDAudioInputStreamer.m */; };
+		945B786B1895822E00C26AAA /* TDAudioOutputStreamer.m in Sources */ = {isa = PBXBuildFile; fileRef = 945B785A1895822E00C26AAA /* TDAudioOutputStreamer.m */; };
+		945B786C1895822E00C26AAA /* TDAudioStreamer.m in Sources */ = {isa = PBXBuildFile; fileRef = 945B785C1895822E00C26AAA /* TDAudioStreamer.m */; };
+		945B786D1895822E00C26AAA /* TDAudioStreamerConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 945B785E1895822E00C26AAA /* TDAudioStreamerConstants.m */; };
+		945B786E1895822E00C26AAA /* TDSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 945B78611895822E00C26AAA /* TDSession.m */; };
+		945B78711895829C00C26AAA /* CreateRoomMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 945B786F1895829C00C26AAA /* CreateRoomMenuViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,10 +86,38 @@
 		0220CB6C182C977F006C10A8 /* Music_ProjectTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Music_ProjectTests.m; sourceTree = "<group>"; };
 		0220CB7D183DD50F006C10A8 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		0220CB7E183DD50F006C10A8 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
-		0220CB81183DE675006C10A8 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = MainStoryboard.storyboard; path = ../MainStoryboard.storyboard; sourceTree = "<group>"; };
 		02CBB021188382C8008AF034 /* MultipeerConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultipeerConnectivity.framework; path = System/Library/Frameworks/MultipeerConnectivity.framework; sourceTree = SDKROOT; };
 		02CBB0231883880B008AF034 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		02CBB02418838817008AF034 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		945B78421895812500C26AAA /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
+		945B78461895822E00C26AAA /* NSMutableArray+QueueMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+QueueMethods.h"; sourceTree = "<group>"; };
+		945B78471895822E00C26AAA /* NSMutableArray+QueueMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+QueueMethods.m"; sourceTree = "<group>"; };
+		945B78491895822E00C26AAA /* TDAudioFileStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDAudioFileStream.h; sourceTree = "<group>"; };
+		945B784A1895822E00C26AAA /* TDAudioFileStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDAudioFileStream.m; sourceTree = "<group>"; };
+		945B784B1895822E00C26AAA /* TDAudioQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDAudioQueue.h; sourceTree = "<group>"; };
+		945B784C1895822E00C26AAA /* TDAudioQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDAudioQueue.m; sourceTree = "<group>"; };
+		945B784D1895822E00C26AAA /* TDAudioQueueBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDAudioQueueBuffer.h; sourceTree = "<group>"; };
+		945B784E1895822E00C26AAA /* TDAudioQueueBuffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDAudioQueueBuffer.m; sourceTree = "<group>"; };
+		945B784F1895822E00C26AAA /* TDAudioQueueBufferManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDAudioQueueBufferManager.h; sourceTree = "<group>"; };
+		945B78501895822E00C26AAA /* TDAudioQueueBufferManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDAudioQueueBufferManager.m; sourceTree = "<group>"; };
+		945B78511895822E00C26AAA /* TDAudioQueueController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDAudioQueueController.h; sourceTree = "<group>"; };
+		945B78521895822E00C26AAA /* TDAudioQueueController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDAudioQueueController.m; sourceTree = "<group>"; };
+		945B78531895822E00C26AAA /* TDAudioQueueFiller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDAudioQueueFiller.h; sourceTree = "<group>"; };
+		945B78541895822E00C26AAA /* TDAudioQueueFiller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDAudioQueueFiller.m; sourceTree = "<group>"; };
+		945B78551895822E00C26AAA /* TDAudioStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDAudioStream.h; sourceTree = "<group>"; };
+		945B78561895822E00C26AAA /* TDAudioStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDAudioStream.m; sourceTree = "<group>"; };
+		945B78571895822E00C26AAA /* TDAudioInputStreamer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDAudioInputStreamer.h; sourceTree = "<group>"; };
+		945B78581895822E00C26AAA /* TDAudioInputStreamer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDAudioInputStreamer.m; sourceTree = "<group>"; };
+		945B78591895822E00C26AAA /* TDAudioOutputStreamer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDAudioOutputStreamer.h; sourceTree = "<group>"; };
+		945B785A1895822E00C26AAA /* TDAudioOutputStreamer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDAudioOutputStreamer.m; sourceTree = "<group>"; };
+		945B785B1895822E00C26AAA /* TDAudioStreamer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDAudioStreamer.h; sourceTree = "<group>"; };
+		945B785C1895822E00C26AAA /* TDAudioStreamer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDAudioStreamer.m; sourceTree = "<group>"; };
+		945B785D1895822E00C26AAA /* TDAudioStreamerConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDAudioStreamerConstants.h; sourceTree = "<group>"; };
+		945B785E1895822E00C26AAA /* TDAudioStreamerConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDAudioStreamerConstants.m; sourceTree = "<group>"; };
+		945B78601895822E00C26AAA /* TDSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDSession.h; sourceTree = "<group>"; };
+		945B78611895822E00C26AAA /* TDSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDSession.m; sourceTree = "<group>"; };
+		945B786F1895829C00C26AAA /* CreateRoomMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CreateRoomMenuViewController.m; path = ../CreateRoomMenuViewController.m; sourceTree = "<group>"; };
+		945B78701895829C00C26AAA /* CreateRoomMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CreateRoomMenuViewController.h; path = ../CreateRoomMenuViewController.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,23 +179,13 @@
 		0220CB4D182C977F006C10A8 /* Music Project */ = {
 			isa = PBXGroup;
 			children = (
-				0220CB81183DE675006C10A8 /* MainStoryboard.storyboard */,
-				0219FCEC183EFEEA0080A1F1 /* CreateRoomViewController.h */,
-				0219FCED183EFEEA0080A1F1 /* CreateRoomViewController.m */,
-				0219FCE8183EFE2D0080A1F1 /* JoinRoomViewController.h */,
-				0219FCE9183EFE2D0080A1F1 /* JoinRoomViewController.m */,
-				02CBB0231883880B008AF034 /* ViewController.h */,
-				02CBB02418838817008AF034 /* ViewController.m */,
-				0219FCE0183EF1560080A1F1 /* HelpViewController.h */,
-				0219FCE1183EF1560080A1F1 /* HelpViewController.m */,
+				945B78441895822E00C26AAA /* AudioStreamer */,
+				945B78411895809E00C26AAA /* Views */,
+				945B78421895812500C26AAA /* MainStoryboard.storyboard */,
 				0220CB56182C977F006C10A8 /* AppDelegate.h */,
 				0220CB57182C977F006C10A8 /* AppDelegate.m */,
 				0220CB59182C977F006C10A8 /* Images.xcassets */,
 				0220CB4E182C977F006C10A8 /* Supporting Files */,
-				0220CB7D183DD50F006C10A8 /* MainViewController.h */,
-				0220CB7E183DD50F006C10A8 /* MainViewController.m */,
-				0219FCE4183EFBF80080A1F1 /* ProfileViewController.h */,
-				0219FCE5183EFBF80080A1F1 /* ProfileViewController.m */,
 			);
 			path = "Music Project";
 			sourceTree = "<group>";
@@ -186,6 +217,85 @@
 				0220CB69182C977F006C10A8 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		945B78411895809E00C26AAA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				945B78701895829C00C26AAA /* CreateRoomMenuViewController.h */,
+				945B786F1895829C00C26AAA /* CreateRoomMenuViewController.m */,
+				0219FCEC183EFEEA0080A1F1 /* CreateRoomViewController.h */,
+				0219FCED183EFEEA0080A1F1 /* CreateRoomViewController.m */,
+				0219FCE0183EF1560080A1F1 /* HelpViewController.h */,
+				0219FCE1183EF1560080A1F1 /* HelpViewController.m */,
+				0219FCE8183EFE2D0080A1F1 /* JoinRoomViewController.h */,
+				0219FCE9183EFE2D0080A1F1 /* JoinRoomViewController.m */,
+				0220CB7D183DD50F006C10A8 /* MainViewController.h */,
+				0220CB7E183DD50F006C10A8 /* MainViewController.m */,
+				0219FCE4183EFBF80080A1F1 /* ProfileViewController.h */,
+				0219FCE5183EFBF80080A1F1 /* ProfileViewController.m */,
+				02CBB0231883880B008AF034 /* ViewController.h */,
+				02CBB02418838817008AF034 /* ViewController.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		945B78441895822E00C26AAA /* AudioStreamer */ = {
+			isa = PBXGroup;
+			children = (
+				945B785F1895822E00C26AAA /* Classes */,
+				945B78451895822E00C26AAA /* Categories */,
+				945B78481895822E00C26AAA /* Classes */,
+				945B78571895822E00C26AAA /* TDAudioInputStreamer.h */,
+				945B78581895822E00C26AAA /* TDAudioInputStreamer.m */,
+				945B78591895822E00C26AAA /* TDAudioOutputStreamer.h */,
+				945B785A1895822E00C26AAA /* TDAudioOutputStreamer.m */,
+				945B785B1895822E00C26AAA /* TDAudioStreamer.h */,
+				945B785C1895822E00C26AAA /* TDAudioStreamer.m */,
+				945B785D1895822E00C26AAA /* TDAudioStreamerConstants.h */,
+				945B785E1895822E00C26AAA /* TDAudioStreamerConstants.m */,
+			);
+			path = AudioStreamer;
+			sourceTree = "<group>";
+		};
+		945B78451895822E00C26AAA /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				945B78461895822E00C26AAA /* NSMutableArray+QueueMethods.h */,
+				945B78471895822E00C26AAA /* NSMutableArray+QueueMethods.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		945B78481895822E00C26AAA /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				945B78491895822E00C26AAA /* TDAudioFileStream.h */,
+				945B784A1895822E00C26AAA /* TDAudioFileStream.m */,
+				945B784B1895822E00C26AAA /* TDAudioQueue.h */,
+				945B784C1895822E00C26AAA /* TDAudioQueue.m */,
+				945B784D1895822E00C26AAA /* TDAudioQueueBuffer.h */,
+				945B784E1895822E00C26AAA /* TDAudioQueueBuffer.m */,
+				945B784F1895822E00C26AAA /* TDAudioQueueBufferManager.h */,
+				945B78501895822E00C26AAA /* TDAudioQueueBufferManager.m */,
+				945B78511895822E00C26AAA /* TDAudioQueueController.h */,
+				945B78521895822E00C26AAA /* TDAudioQueueController.m */,
+				945B78531895822E00C26AAA /* TDAudioQueueFiller.h */,
+				945B78541895822E00C26AAA /* TDAudioQueueFiller.m */,
+				945B78551895822E00C26AAA /* TDAudioStream.h */,
+				945B78561895822E00C26AAA /* TDAudioStream.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		945B785F1895822E00C26AAA /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				945B78601895822E00C26AAA /* TDSession.h */,
+				945B78611895822E00C26AAA /* TDSession.m */,
+			);
+			name = Classes;
+			path = ../Classes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -236,7 +346,7 @@
 				ORGANIZATIONNAME = "John Ruller";
 				TargetAttributes = {
 					0220CB43182C977F006C10A8 = {
-						DevelopmentTeam = 3UVA6AL657;
+						DevelopmentTeam = 3Y9N4UBV8R;
 					};
 					0220CB5E182C977F006C10A8 = {
 						TestTargetID = 0220CB43182C977F006C10A8;
@@ -267,7 +377,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0220CB52182C977F006C10A8 /* InfoPlist.strings in Resources */,
-				0220CB82183DE675006C10A8 /* MainStoryboard.storyboard in Resources */,
+				945B78431895812500C26AAA /* MainStoryboard.storyboard in Resources */,
 				0220CB5A182C977F006C10A8 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -276,7 +386,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0220CB83183DE675006C10A8 /* MainStoryboard.storyboard in Resources */,
 				0220CB6B182C977F006C10A8 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -288,13 +397,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				945B78691895822E00C26AAA /* TDAudioStream.m in Sources */,
 				0220CB58182C977F006C10A8 /* AppDelegate.m in Sources */,
+				945B786E1895822E00C26AAA /* TDSession.m in Sources */,
+				945B78661895822E00C26AAA /* TDAudioQueueBufferManager.m in Sources */,
+				945B78671895822E00C26AAA /* TDAudioQueueController.m in Sources */,
 				0220CB7F183DD50F006C10A8 /* MainViewController.m in Sources */,
+				945B78631895822E00C26AAA /* TDAudioFileStream.m in Sources */,
+				945B786B1895822E00C26AAA /* TDAudioOutputStreamer.m in Sources */,
+				945B78711895829C00C26AAA /* CreateRoomMenuViewController.m in Sources */,
 				02CBB02518838817008AF034 /* ViewController.m in Sources */,
 				0220CB54182C977F006C10A8 /* main.m in Sources */,
 				0219FCEA183EFE2D0080A1F1 /* JoinRoomViewController.m in Sources */,
+				945B78681895822E00C26AAA /* TDAudioQueueFiller.m in Sources */,
 				0219FCEE183EFEEA0080A1F1 /* CreateRoomViewController.m in Sources */,
+				945B78621895822E00C26AAA /* NSMutableArray+QueueMethods.m in Sources */,
+				945B78651895822E00C26AAA /* TDAudioQueueBuffer.m in Sources */,
+				945B78641895822E00C26AAA /* TDAudioQueue.m in Sources */,
+				945B786D1895822E00C26AAA /* TDAudioStreamerConstants.m in Sources */,
 				0219FCE2183EF1560080A1F1 /* HelpViewController.m in Sources */,
+				945B786C1895822E00C26AAA /* TDAudioStreamer.m in Sources */,
+				945B786A1895822E00C26AAA /* TDAudioInputStreamer.m in Sources */,
 				0219FCE6183EFBF80080A1F1 /* ProfileViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
