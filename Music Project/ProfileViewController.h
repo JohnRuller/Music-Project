@@ -7,7 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MobileCoreServices/MobileCoreServices.h>
 
-@interface ProfileViewController : UIViewController
+@interface ProfileViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+
+@property (nonatomic, strong) NSURL *fileURL;
+
+- (IBAction)writeArchivedData:(id)sender;
+- (IBAction)readArchivedData:(id)sender;
+
+
+//camera functionality propertires
+@property (strong, nonatomic) IBOutlet UIImageView *imageView;
+- (IBAction)takePhoto:(UIButton *)sender;
+- (IBAction)selectPhoto:(UIButton *)sender;
+
 
 @end
