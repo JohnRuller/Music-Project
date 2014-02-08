@@ -27,7 +27,7 @@
 @property (strong, nonatomic) TDAudioInputStreamer *inputStream;
 
 @property (strong,nonatomic) NSMutableArray *songQueue;
-@property int locationInSongQueue; //-1 the current position is the current song.
+@property NSInteger locationInSongQueue; //-1 the current position is the current song.
 
 @property (nonatomic, strong)IBOutlet UITextField *chatBox;
 @property (nonatomic, strong)IBOutlet UITextView *textBox;
@@ -73,13 +73,18 @@
     self.nextSongArtist.text = @"";
     self.nextSongTitle.text = @"";
     
-    
+    [self updatePeersWhatsPlaying];
 }
 
 //controls the play button
 //sends data to start the player
+
+
+
+//DATA NEEDS TO BE CHANGED TO THE USERNAME OF WHOEVER IS TO PLAY THE NEXT SONG
 - (IBAction)playButton:(id)sender
 {
+    //NSString *data = self.songQueue;
     NSString *data = @"PLAY";
     [self.session sendData:[NSKeyedArchiver archivedDataWithRootObject:[data copy]]];
     [self updateWhatsPlaying];
@@ -90,8 +95,10 @@
 {
     [self.songQueue addObject:info];
     [self updateWhatsNext];
+    [self updatePeersWhatsPlaying];
 }
 
+//updates the local device on what the next song is
 - (void)updateWhatsNext
 {
     //currently playing song -1
@@ -102,8 +109,7 @@
         self.nextSongTitle.text = nil;
         self.nextSongArtist.text = nil;
         self.nextAlbumImage.image = nil;
-    }else //otherwise, update with the next information
-    {
+    } else { //otherwise, update with the next information
         NSDictionary *nextSong = [self.songQueue objectAtIndex:self.locationInSongQueue];
         //NSString *username = nextSong[@"username"];
         //NSString *recordType = nextSong[@"type"];
@@ -140,6 +146,8 @@
      self.nextAlbumImage.image= nil;*/
 }
 
+//updates the current song thats playing on the device
+//creats a NSDictionary with all the info of the currentSong
 -(void)updateWhatsPlaying
 {
     NSDictionary *currentSong = [self.songQueue objectAtIndex:self.locationInSongQueue];
@@ -161,31 +169,19 @@
     
     NSLog(@"Ok were about to go");
     [self updateWhatsNext];
-    //[self updatePeersWhatsPlaying];
-    //[self updatePeersWhatsNext];
 }
 
+//update all peers with current playlist
 - (void)updatePeersWhatsPlaying
 {
     NSLog(@"Ok we got here");
+    NSArray *array = [self.songQueue copy];
+    NSNumber *num = [[NSNumber alloc] initWithInteger:self.locationInSongQueue];
     
-    NSMutableDictionary *currentSong = [self.songQueue objectAtIndex:self.locationInSongQueue-1];
-    NSLog(@"Ok we got here 2");
-    [currentSong setObject:@"current" forKey:@"type"];
-    NSLog(@"current song dictionary created");
-    [self.session sendData:[NSKeyedArchiver archivedDataWithRootObject:[currentSong copy]]];
+    [self.session sendData:[NSKeyedArchiver archivedDataWithRootObject:[num copy]]];
+    [self.session sendData:[NSKeyedArchiver archivedDataWithRootObject:[array copy]]];
 }
 
-- (void) updatePeersWhatsNext
-{
-    if (self.locationInSongQueue <= [self.songQueue count])
-    {
-        NSMutableDictionary *nextSong = [self.songQueue objectAtIndex:self.locationInSongQueue];
-        [nextSong setObject:@"next" forKey:@"type"];
-        NSLog(@"next song dictionary created");
-        [self.session sendData:[NSKeyedArchiver archivedDataWithRootObject:[nextSong copy]]];
-    }
-}
 
 #pragma mark - TDSessionDelegate
 
@@ -198,14 +194,14 @@
     if ([myobject isKindOfClass:[NSDictionary class]])
     {
         NSDictionary *info = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-        if ([[info objectForKey:@"type"] isEqualToString:@"next"])
-        {
-            [self performSelectorOnMainThread:@selector(addToList:) withObject:info waitUntilDone:NO];
-        }
+        //if ([[info objectForKey:@"type"] isEqualToString:@"next"])
+        //{
+        [self performSelectorOnMainThread:@selector(addToList:) withObject:info waitUntilDone:NO];
+        /*}
         else if ([[info objectForKey:@"type"] isEqualToString:@"current"])
         {
             [self performSelectorOnMainThread:@selector(changeSongInfo:) withObject:info waitUntilDone:NO];
-        }
+        }*/
     }
 }
 
