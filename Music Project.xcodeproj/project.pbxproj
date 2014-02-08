@@ -35,6 +35,7 @@
 		02CBB022188382C8008AF034 /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02CBB021188382C8008AF034 /* MultipeerConnectivity.framework */; };
 		02CBB02518838817008AF034 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CBB02418838817008AF034 /* ViewController.m */; };
 		02CBB02618838817008AF034 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CBB02418838817008AF034 /* ViewController.m */; };
+		02F3028518A6C9A3004F2AE8 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 02F3028418A6C9A3004F2AE8 /* Default.png */; };
 		945B78431895812500C26AAA /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 945B78421895812500C26AAA /* MainStoryboard.storyboard */; };
 		945B78621895822E00C26AAA /* NSMutableArray+QueueMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 945B78471895822E00C26AAA /* NSMutableArray+QueueMethods.m */; };
 		945B78631895822E00C26AAA /* TDAudioFileStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 945B784A1895822E00C26AAA /* TDAudioFileStream.m */; };
@@ -94,6 +95,7 @@
 		02CBB021188382C8008AF034 /* MultipeerConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultipeerConnectivity.framework; path = System/Library/Frameworks/MultipeerConnectivity.framework; sourceTree = SDKROOT; };
 		02CBB0231883880B008AF034 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		02CBB02418838817008AF034 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		02F3028418A6C9A3004F2AE8 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		945B78421895812500C26AAA /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
 		945B78461895822E00C26AAA /* NSMutableArray+QueueMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+QueueMethods.h"; sourceTree = "<group>"; };
 		945B78471895822E00C26AAA /* NSMutableArray+QueueMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+QueueMethods.m"; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 		0220CB3B182C977F006C10A8 = {
 			isa = PBXGroup;
 			children = (
+				02F3028418A6C9A3004F2AE8 /* Default.png */,
 				0220CB4D182C977F006C10A8 /* Music Project */,
 				0220CB66182C977F006C10A8 /* Music ProjectTests */,
 				0220CB46182C977F006C10A8 /* Frameworks */,
@@ -388,6 +391,7 @@
 				0220CB52182C977F006C10A8 /* InfoPlist.strings in Resources */,
 				945B78431895812500C26AAA /* MainStoryboard.storyboard in Resources */,
 				0220CB5A182C977F006C10A8 /* Images.xcassets in Resources */,
+				02F3028518A6C9A3004F2AE8 /* Default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
