@@ -88,6 +88,10 @@
     NSString *data = @"PLAY";
     [self.session sendData:[NSKeyedArchiver archivedDataWithRootObject:[data copy]]];
     [self updateWhatsPlaying];
+    self.locationInSongQueue++;
+    [self updateWhatsNext];
+    [self updatePeersWhatsPlaying];
+    
 }
 
 //updates the  list
@@ -96,6 +100,7 @@
     [self.songQueue addObject:info];
     [self updateWhatsNext];
     [self updatePeersWhatsPlaying];
+    
 }
 
 //updates the local device on what the next song is
@@ -148,6 +153,7 @@
 
 //updates the current song thats playing on the device
 //creats a NSDictionary with all the info of the currentSong
+//
 -(void)updateWhatsPlaying
 {
     NSDictionary *currentSong = [self.songQueue objectAtIndex:self.locationInSongQueue];
@@ -164,17 +170,13 @@
         self.albumImage.image = bigArt;
     else
         self.albumImage.image = nil;
-    
-    self.locationInSongQueue++;
-    
     NSLog(@"Ok were about to go");
-    [self updateWhatsNext];
 }
 
 //update all peers with current playlist
 - (void)updatePeersWhatsPlaying
 {
-    NSLog(@"Ok we got here");
+    NSLog(@"Updating Peers Whats Playing");
     NSArray *array = [self.songQueue copy];
     NSNumber *num = [[NSNumber alloc] initWithInteger:self.locationInSongQueue];
     

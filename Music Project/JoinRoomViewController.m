@@ -26,6 +26,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *nextSongArtist;
 
 @property (strong, nonatomic) MPMediaItem *song;
+@property (strong, nonatomic) NSMutableArray *localSongQueue;
+@property NSInteger locationInLocalSongQueue;
 @property (strong, nonatomic) TDAudioOutputStreamer *outputStreamer;    // dont need for now
 @property (strong, nonatomic) TDSession *session;                       // dont need for now
 @property (strong, nonatomic) AVPlayer *player;
@@ -48,6 +50,8 @@
 	self.session = [[TDSession alloc] initWithPeerDisplayName:[UIDevice currentDevice].name];
     [self presentViewController:[self.session browserViewControllerForSeriviceType:@"dance-party"] animated:YES completion:nil];
     self.session.delegate = self;
+    self.localSongQueue = [[NSMutableArray alloc] init];
+    self.locationInLocalSongQueue = 0;
 }
 
 #pragma mark - Media Picker delegate
@@ -58,6 +62,7 @@
     [self dismissViewControllerAnimated:YES completion:nil];
     if (self.outputStreamer) return;
     self.song = mediaItemCollection.items[0];
+    [self.localSongQueue addObject:self.song];
     
     //get variables from the song
     NSString *username = [UIDevice currentDevice].name;
@@ -130,38 +135,62 @@
     NSArray *peers = [self.session connectedPeers];
     
     if (peers.count) {
+        self.song = [self.localSongQueue objectAtIndex:self.locationInLocalSongQueue];
+        self.locationInLocalSongQueue++;
         self.outputStreamer = [[TDAudioOutputStreamer alloc] initWithOutputStream:[self.session outputStreamForPeer:peers[0]]];
         [self.outputStreamer streamAudioFromURL:[self.song valueForProperty:MPMediaItemPropertyAssetURL]];
         [self.outputStreamer start];
     }
+    [self updateCurrentandNext:Nil];
 }
 
 - (void) updateCurrentandNext:(NSDictionary *) dic
 {
-    
+    NSLog(@"Updating Current and Next Song");
     //updates the current song
-    NSLog(@"updateCurrent");
-    NSDictionary *currentSong = [self.songQueue objectAtIndex:self.locationInSongQueue-1];
-    //NSString *username = dic[@"username"];
-    //NSString *recordType = dic[@"type"];
-    NSString *songTitle = currentSong[@"title"];
-    NSString *artist = currentSong[@"artist"];
-    UIImage *bigArt = currentSong[@"bigArt"];
-    //UIImage *smallArt = dic[@"smallArt"];
-    
-    self.songTitle.text = songTitle;
-    self.songArtist.text = artist;
-    if (bigArt)
-        self.albumImage.image = bigArt;
-    else
-        self.albumImage.image = nil;
-    
-    //updates the next song
-    if ([self.songQueue count] == self.locationInSongQueue)
+    if (self.locationInSongQueue != 0)
     {
-        self.nextSongTitle.text = @"";
-        self.nextSongArtist.text = @"";
-        self.nextAlbumImage.image = Nil;
+        NSLog(@"Updating Current and Next Song");
+        NSDictionary *currentSong = [self.songQueue objectAtIndex:self.locationInSongQueue-1];
+        //NSString *username = dic[@"username"];
+        //NSString *recordType = dic[@"type"];
+        NSString *songTitle = currentSong[@"title"];
+        NSString *artist = currentSong[@"artist"];
+        UIImage *bigArt = currentSong[@"bigArt"];
+        //UIImage *smallArt = dic[@"smallArt"];
+        
+        self.songTitle.text = songTitle;
+        self.songArtist.text = artist;
+        if (bigArt)
+            self.albumImage.image = bigArt;
+        else
+            self.albumImage.image = nil;
+        
+        //updates the next song
+        if ([self.songQueue count] == self.locationInSongQueue)
+        {
+            self.nextSongTitle.text = @"";
+            self.nextSongArtist.text = @"";
+            self.nextAlbumImage.image = Nil;
+        }
+        else
+        {
+            NSLog(@"andNext");
+            NSDictionary *nextSong = [self.songQueue objectAtIndex:self.locationInSongQueue];
+            //NSString *username = nextSong[@"username"];
+            //NSString *recordType = nextSong[@"type"];
+            NSString *nextSongTitle = nextSong[@"title"];
+            NSString *nextArtist = nextSong[@"artist"];
+            //UIImage *bigArt = nextSong[@"bigArt"];
+            UIImage *nextSmallArt = nextSong[@"smallArt"];
+            
+            self.nextSongTitle.text = nextSongTitle;
+            self.nextSongArtist.text = nextArtist;
+            if (nextSmallArt)
+                self.nextAlbumImage.image = nextSmallArt;
+            else
+                self.nextAlbumImage.image = nil;
+        }
     }
     else
     {
@@ -240,6 +269,7 @@
     {
         NSLog(@"updating location in queue");
         self.locationInSongQueue = [myobject integerValue];
+        NSLog(@"%d",self.locationInSongQueue);
     }
     
     /*if ([myobject isKindOfClass:[NSDictionary class]])
