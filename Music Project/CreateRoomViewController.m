@@ -85,11 +85,20 @@
 - (IBAction)playButton:(id)sender
 {
     //NSString *data = self.songQueue;
-    NSString *data = @"PLAY";
+    //Gets the data from the current song to send to the other devices
+    NSDictionary *currentSong = [self.songQueue objectAtIndex:self.locationInSongQueue];
+    NSString *data = currentSong[@"userName"];
+    NSLog(@"%@",data);
+    
+    //sends it to the other devices to begin playback
     [self.session sendData:[NSKeyedArchiver archivedDataWithRootObject:[data copy]]];
+    
+    //updates local playlist
     [self updateWhatsPlaying];
     self.locationInSongQueue++;
     [self updateWhatsNext];
+    
+    //updates peer playlists
     [self updatePeersWhatsPlaying];
     
 }

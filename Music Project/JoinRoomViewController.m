@@ -260,7 +260,8 @@
     if ([myobject isKindOfClass:[NSString class]])
      {
          NSString *message = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-         if ([message isEqualToString:@"PLAY"])
+         NSString *deviceName = [UIDevice currentDevice].name;
+         if ([message isEqualToString:deviceName])
          {
              [self performSelectorOnMainThread:@selector(startPlaying:) withObject:message waitUntilDone:NO];
          }
@@ -269,7 +270,7 @@
     {
         NSLog(@"updating location in queue");
         self.locationInSongQueue = [myobject integerValue];
-        NSLog(@"%d",self.locationInSongQueue);
+        NSLog(@"%ld",(long)self.locationInSongQueue);
     }
     
     /*if ([myobject isKindOfClass:[NSDictionary class]])
