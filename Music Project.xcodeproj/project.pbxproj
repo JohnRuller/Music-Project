@@ -35,6 +35,10 @@
 		02CBB022188382C8008AF034 /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02CBB021188382C8008AF034 /* MultipeerConnectivity.framework */; };
 		02CBB02518838817008AF034 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CBB02418838817008AF034 /* ViewController.m */; };
 		02CBB02618838817008AF034 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CBB02418838817008AF034 /* ViewController.m */; };
+		02E8C75618A86713007AA6A3 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02E8C75518A86713007AA6A3 /* CoreData.framework */; };
+		02E8C75918A869DD007AA6A3 /* MusicProject.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 02E8C75718A869DD007AA6A3 /* MusicProject.xcdatamodeld */; };
+		02E8C75C18A8A83E007AA6A3 /* EditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02E8C75B18A8A83E007AA6A3 /* EditProfileViewController.m */; };
+		02E8C75D18A8A83E007AA6A3 /* EditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02E8C75B18A8A83E007AA6A3 /* EditProfileViewController.m */; };
 		02F3028518A6C9A3004F2AE8 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 02F3028418A6C9A3004F2AE8 /* Default.png */; };
 		945B78431895812500C26AAA /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 945B78421895812500C26AAA /* MainStoryboard.storyboard */; };
 		945B78621895822E00C26AAA /* NSMutableArray+QueueMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 945B78471895822E00C26AAA /* NSMutableArray+QueueMethods.m */; };
@@ -95,6 +99,10 @@
 		02CBB021188382C8008AF034 /* MultipeerConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultipeerConnectivity.framework; path = System/Library/Frameworks/MultipeerConnectivity.framework; sourceTree = SDKROOT; };
 		02CBB0231883880B008AF034 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		02CBB02418838817008AF034 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		02E8C75518A86713007AA6A3 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		02E8C75818A869DD007AA6A3 /* MusicProject.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MusicProject.xcdatamodel; sourceTree = "<group>"; };
+		02E8C75A18A8A83E007AA6A3 /* EditProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProfileViewController.h; sourceTree = "<group>"; };
+		02E8C75B18A8A83E007AA6A3 /* EditProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditProfileViewController.m; sourceTree = "<group>"; };
 		02F3028418A6C9A3004F2AE8 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		945B78421895812500C26AAA /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
 		945B78461895822E00C26AAA /* NSMutableArray+QueueMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+QueueMethods.h"; sourceTree = "<group>"; };
@@ -132,6 +140,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02E8C75618A86713007AA6A3 /* CoreData.framework in Frameworks */,
 				023D1A5518A056A3009CA940 /* MobileCoreServices.framework in Frameworks */,
 				02CBB022188382C8008AF034 /* MultipeerConnectivity.framework in Frameworks */,
 				0220CB4A182C977F006C10A8 /* CoreGraphics.framework in Frameworks */,
@@ -176,6 +185,7 @@
 		0220CB46182C977F006C10A8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				02E8C75518A86713007AA6A3 /* CoreData.framework */,
 				023D1A5418A056A3009CA940 /* MobileCoreServices.framework */,
 				02CBB021188382C8008AF034 /* MultipeerConnectivity.framework */,
 				0220CB47182C977F006C10A8 /* Foundation.framework */,
@@ -196,6 +206,7 @@
 				0220CB57182C977F006C10A8 /* AppDelegate.m */,
 				0220CB59182C977F006C10A8 /* Images.xcassets */,
 				0220CB4E182C977F006C10A8 /* Supporting Files */,
+				02E8C75718A869DD007AA6A3 /* MusicProject.xcdatamodeld */,
 			);
 			path = "Music Project";
 			sourceTree = "<group>";
@@ -233,6 +244,8 @@
 		945B78411895809E00C26AAA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				02E8C75A18A8A83E007AA6A3 /* EditProfileViewController.h */,
+				02E8C75B18A8A83E007AA6A3 /* EditProfileViewController.m */,
 				945B78701895829C00C26AAA /* CreateRoomMenuViewController.h */,
 				945B786F1895829C00C26AAA /* CreateRoomMenuViewController.m */,
 				0219FCEC183EFEEA0080A1F1 /* CreateRoomViewController.h */,
@@ -357,7 +370,7 @@
 				ORGANIZATIONNAME = "John Ruller";
 				TargetAttributes = {
 					0220CB43182C977F006C10A8 = {
-						DevelopmentTeam = 3Y9N4UBV8R;
+						DevelopmentTeam = 3UVA6AL657;
 					};
 					0220CB5E182C977F006C10A8 = {
 						TestTargetID = 0220CB43182C977F006C10A8;
@@ -429,7 +442,9 @@
 				945B78651895822E00C26AAA /* TDAudioQueueBuffer.m in Sources */,
 				945B78641895822E00C26AAA /* TDAudioQueue.m in Sources */,
 				945B786D1895822E00C26AAA /* TDAudioStreamerConstants.m in Sources */,
+				02E8C75918A869DD007AA6A3 /* MusicProject.xcdatamodeld in Sources */,
 				0219FCE2183EF1560080A1F1 /* HelpViewController.m in Sources */,
+				02E8C75C18A8A83E007AA6A3 /* EditProfileViewController.m in Sources */,
 				945B786C1895822E00C26AAA /* TDAudioStreamer.m in Sources */,
 				945B786A1895822E00C26AAA /* TDAudioInputStreamer.m in Sources */,
 				0219FCE6183EFBF80080A1F1 /* ProfileViewController.m in Sources */,
@@ -444,6 +459,7 @@
 				0220CB6D182C977F006C10A8 /* Music_ProjectTests.m in Sources */,
 				0219FCEF183EFEEA0080A1F1 /* CreateRoomViewController.m in Sources */,
 				0219FCE3183EF1560080A1F1 /* HelpViewController.m in Sources */,
+				02E8C75D18A8A83E007AA6A3 /* EditProfileViewController.m in Sources */,
 				0219FCE7183EFBF80080A1F1 /* ProfileViewController.m in Sources */,
 				0220CB80183DD50F006C10A8 /* MainViewController.m in Sources */,
 				0219FCEB183EFE2D0080A1F1 /* JoinRoomViewController.m in Sources */,
@@ -657,6 +673,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		02E8C75718A869DD007AA6A3 /* MusicProject.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				02E8C75818A869DD007AA6A3 /* MusicProject.xcdatamodel */,
+			);
+			currentVersion = 02E8C75818A869DD007AA6A3 /* MusicProject.xcdatamodel */;
+			path = MusicProject.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 0220CB3C182C977F006C10A8 /* Project object */;
 }

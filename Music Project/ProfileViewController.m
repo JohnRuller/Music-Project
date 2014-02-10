@@ -8,6 +8,7 @@
 
 #import "ProfileViewController.h"
 @interface ProfileViewController (CameraDelegateMethods)
+@property (strong) NSMutableArray *profiles;
 
 @end
 
@@ -16,12 +17,37 @@
 
 @synthesize fileURL = _fileURL;
 
+@synthesize nameLabel;
+
+- (NSManagedObjectContext *)managedObjectContext
+{
+    NSManagedObjectContext *context = nil;
+    id delegate = [[UIApplication sharedApplication] delegate];
+    if ([delegate performSelector:@selector(managedObjectContext)]) {
+        context = [delegate managedObjectContext];
+    }
+    return context;
+}
+
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    // Fetch the devices from persistent data store
+    NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Profile"];
+    //self.profiles = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
+    
+    //[self.View reloadData];
+}
+
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    self.title = @"Profile";
+    //self.title = @"Profile";
     
     NSArray *urls = [[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask];
     self.fileURL = [[urls lastObject] URLByAppendingPathComponent:@"Test"];
@@ -38,6 +64,11 @@
         [myAlertView show];
         
     }
+    
+    nameLabel.text = @"test";
+
+    
+    
 
 }
 
@@ -81,6 +112,10 @@
     
     [self presentViewController:picker animated:YES completion:NULL];
 
+}
+
+- (IBAction)back:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 //
