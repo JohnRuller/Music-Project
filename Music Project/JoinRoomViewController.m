@@ -266,6 +266,7 @@
              [self performSelectorOnMainThread:@selector(startPlaying:) withObject:message waitUntilDone:NO];
          }
      }
+    
     if ([myobject isKindOfClass:[NSNumber class]])
     {
         NSLog(@"updating location in queue");
