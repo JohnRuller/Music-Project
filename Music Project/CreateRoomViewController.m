@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *nextAlbumImage;
 @property (weak, nonatomic) IBOutlet UILabel *nextSongTitle;
 @property (weak, nonatomic) IBOutlet UILabel *nextSongArtist;
+@property (weak, nonatomic) IBOutlet UILabel *viewList;
 
 @property (strong, nonatomic) TDSession *session;
 @property (strong, nonatomic) TDAudioInputStreamer *inputStream;
