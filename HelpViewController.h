@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HelpViewController : UIViewController
+@interface HelpViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+
+- (IBAction)backButton:(id)sender;
 
 @end
