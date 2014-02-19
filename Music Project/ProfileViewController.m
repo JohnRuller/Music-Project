@@ -8,7 +8,7 @@
 
 #import "ProfileViewController.h"
 #import "EditProfileViewController.h"
-@interface ProfileViewController () //CameraDelegateMethods)
+@interface ProfileViewController ()//CameraDelegateMethods)
 @property (strong) NSMutableArray *profiles;
 
 @end
@@ -56,7 +56,7 @@
 	// Do any additional setup after loading the view.
     //self.title = @"Profile";
     
-    /*
+    
     
     //error handler for when device does not have camera
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
@@ -70,9 +70,6 @@
         [myAlertView show];
         
     }
-    
-
-    */
     
 
 }
@@ -93,10 +90,11 @@
     }
 }
 
-/*
-
 //uses camera to take photo
 - (IBAction)takePhoto:(UIButton *)sender {
+    
+    
+    
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
     picker.allowsEditing = YES;
@@ -108,6 +106,7 @@
 
 //uses photo from library
 - (IBAction)selectPhoto:(UIButton *)sender {
+    
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
     picker.allowsEditing = YES;
@@ -119,7 +118,7 @@
 
 
 
-//
+
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
@@ -139,6 +138,6 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}*/
+}
 
 @end
