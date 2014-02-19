@@ -14,4 +14,7 @@
 - (IBAction)cancel:(id)sender;
 - (IBAction)save:(id)sender;
 
+@property (strong) NSManagedObject *profile;
+
+
 @end

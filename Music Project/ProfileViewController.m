@@ -7,17 +7,16 @@
 //
 
 #import "ProfileViewController.h"
-@interface ProfileViewController (CameraDelegateMethods)
+#import "EditProfileViewController.h"
+@interface ProfileViewController () //CameraDelegateMethods)
 @property (strong) NSMutableArray *profiles;
 
 @end
 
 @implementation ProfileViewController
 
-
-@synthesize fileURL = _fileURL;
-
 @synthesize nameLabel;
+@synthesize taglineLabel;
 
 - (NSManagedObjectContext *)managedObjectContext
 {
@@ -37,9 +36,17 @@
     // Fetch the devices from persistent data store
     NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Profile"];
-    //self.profiles = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
+    self.profiles = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
     
-    //[self.View reloadData];
+    if([self.profiles count] != 0)
+    {
+        
+        NSManagedObject *profile = [self.profiles objectAtIndex:0];
+        
+        nameLabel.text = [NSString stringWithFormat:@"%@",[profile valueForKey:@"name"]];
+        taglineLabel.text = [NSString stringWithFormat:@"%@",[profile valueForKey:@"tagline"]];
+        
+    }
 }
 
 
@@ -49,8 +56,7 @@
 	// Do any additional setup after loading the view.
     //self.title = @"Profile";
     
-    NSArray *urls = [[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask];
-    self.fileURL = [[urls lastObject] URLByAppendingPathComponent:@"Test"];
+    /*
     
     //error handler for when device does not have camera
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
@@ -65,32 +71,29 @@
         
     }
     
-    nameLabel.text = @"test";
 
-    
+    */
     
 
 }
 
--(IBAction)writeArchivedData:(id)sender {
-    
-    NSMutableArray *items = [NSMutableArray array];
-    
-    [items addObject:@"Hello"];
-    [items addObject:[NSDate date]];
-    [items addObject:[NSNumber numberWithFloat:12.0]];
-    
-    
-    NSData *fileData = [NSKeyedArchiver archivedDataWithRootObject:items];
-    [fileData writeToURL:self.fileURL atomically:YES];
+- (IBAction)back:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
--(IBAction)readArchivedData:(id)sender {
-	NSData *data = [NSData dataWithContentsOfURL:self.fileURL];
-	NSMutableArray *items = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-	NSLog(@"%@", items);
+#pragma mark - Segue
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    
+    if ([[segue identifier] isEqualToString:@"UpdateProfile"] && [self.profiles count] != 0) {
+        NSManagedObject *selectedProfile = [self.profiles objectAtIndex:0];
+        EditProfileViewController *destViewController = segue.destinationViewController;
+        destViewController.profile = selectedProfile;
+    }
 }
 
+/*
 
 //uses camera to take photo
 - (IBAction)takePhoto:(UIButton *)sender {
@@ -114,9 +117,7 @@
 
 }
 
-- (IBAction)back:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
+
 
 //
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
@@ -138,6 +139,6 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
+}*/
 
 @end

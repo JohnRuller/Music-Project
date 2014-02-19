@@ -240,30 +240,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HOe-Zp-AXl">
-                                <rect key="frame" x="20" y="237" width="85" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Use Camera">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="takePhoto:" destination="Vj7-4c-Tud" eventType="touchUpInside" id="DZV-T7-YuC"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ODz-S5-ryz">
-                                <rect key="frame" x="113" y="237" width="88" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Select Photo">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="selectPhoto:" destination="Vj7-4c-Tud" eventType="touchUpInside" id="Wfr-bj-Fws"/>
-                                </connections>
-                            </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Qa-7F-tDg">
-                                <rect key="frame" x="20" y="113" width="148" height="126"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F9w-bz-wf6">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
@@ -291,7 +267,7 @@
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
-                                                    <segue destination="iYy-14-XSd" kind="modal" id="2JR-Nl-xis"/>
+                                                    <segue destination="iYy-14-XSd" kind="modal" identifier="UpdateProfile" id="2JR-Nl-xis"/>
                                                 </connections>
                                             </button>
                                         </barButtonItem>
@@ -303,7 +279,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="nhA-CD-rkT"/>
                     <connections>
-                        <outlet property="imageView" destination="2Qa-7F-tDg" id="Y3Q-xE-8LT"/>
                         <outlet property="nameLabel" destination="mf4-Xd-KPZ" id="Ja5-mo-rS5"/>
                         <outlet property="taglineLabel" destination="rDL-kB-see" id="Y0C-ax-aAo"/>
                     </connections>

@@ -14,6 +14,8 @@
 
 @implementation EditProfileViewController
 
+@synthesize profile;
+
 - (NSManagedObjectContext *)managedObjectContext {
     NSManagedObjectContext *context = nil;
     id delegate = [[UIApplication sharedApplication] delegate];
@@ -36,6 +38,11 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    if (self.profile) {
+        [self.nameTextField setText:[self.profile valueForKey:@"name"]];
+        [self.taglineTextField setText:[self.profile valueForKey:@"tagline"]];
+    }
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -51,10 +58,18 @@
 - (IBAction)save:(id)sender {
     NSManagedObjectContext *context = [self managedObjectContext];
     
-    // Create a new managed object
-    NSManagedObject *newDevice = [NSEntityDescription insertNewObjectForEntityForName:@"Profile" inManagedObjectContext:context];
-    [newDevice setValue:self.nameTextField.text forKey:@"name"];
-    [newDevice setValue:self.taglineTextField.text forKey:@"tagline"];
+    
+    if(self.profile) {
+        //update existing profile
+        [self.profile setValue:self.nameTextField.text forKey:@"name"];
+        [self.profile setValue:self.taglineTextField.text forKey:@"tagline"];
+    } else {
+        // Create a new managed object
+        NSManagedObject *newProfile = [NSEntityDescription insertNewObjectForEntityForName:@"Profile" inManagedObjectContext:context];
+        [newProfile setValue:self.nameTextField.text forKey:@"name"];
+        [newProfile setValue:self.taglineTextField.text forKey:@"tagline"];
+        
+    }
     
     NSError *error = nil;
     // Save the object to persistent store
