@@ -8,16 +8,21 @@
 
 #import "ProfileViewController.h"
 #import "EditProfileViewController.h"
-@interface ProfileViewController ()//CameraDelegateMethods)
+
+@interface ProfileViewController ()
+
+//array to store managedObjects for core data
 @property (strong) NSMutableArray *profiles;
 
 @end
 
 @implementation ProfileViewController
 
+//labels
 @synthesize nameLabel;
 @synthesize taglineLabel;
 
+//managedObject for core data
 - (NSManagedObjectContext *)managedObjectContext
 {
     NSManagedObjectContext *context = nil;
@@ -38,13 +43,18 @@
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Profile"];
     self.profiles = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
     
+    //set the name/tagline/image with data from the model
     if([self.profiles count] != 0)
     {
-        
         NSManagedObject *profile = [self.profiles objectAtIndex:0];
         
+        //labels
         nameLabel.text = [NSString stringWithFormat:@"%@",[profile valueForKey:@"name"]];
         taglineLabel.text = [NSString stringWithFormat:@"%@",[profile valueForKey:@"tagline"]];
+        
+        //image
+        UIImage *image = [UIImage imageWithData:[profile valueForKey:@"photo"]];
+        self.imageView.image = image;
         
     }
 }
@@ -55,8 +65,6 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     //self.title = @"Profile";
-    
-    
     
     //error handler for when device does not have camera
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
@@ -74,12 +82,20 @@
 
 }
 
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+//back button
 - (IBAction)back:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - Segue
 
+//passing profile managedObject to edit profile view
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     
@@ -90,10 +106,10 @@
     }
 }
 
+#pragma mark - Camera
+
 //uses camera to take photo
 - (IBAction)takePhoto:(UIButton *)sender {
-    
-    
     
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
@@ -116,13 +132,18 @@
 
 }
 
-
-
-
+//camera delegate functions
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
-    self.imageView.image = chosenImage;
+    NSData *imageData = UIImagePNGRepresentation(chosenImage);
+    
+    //storing photo in core data
+    NSManagedObject *imageProfile = [self.profiles objectAtIndex:0];
+    [imageProfile setValue:imageData forKey:@"photo"];
+    
+    //this would set the image view to the chosen imgae
+    //self.imageView.image = chosenImage;
     
     [picker dismissViewControllerAnimated:YES completion:NULL];
     
@@ -134,10 +155,5 @@
     
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 @end

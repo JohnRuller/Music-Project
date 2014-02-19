@@ -9,11 +9,15 @@
 #import <UIKit/UIKit.h>
 
 @interface EditProfileViewController : UIViewController
+//text fields
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *taglineTextField;
+
+//buttons
 - (IBAction)cancel:(id)sender;
 - (IBAction)save:(id)sender;
 
+//managed object for core data
 @property (strong) NSManagedObject *profile;
 
 

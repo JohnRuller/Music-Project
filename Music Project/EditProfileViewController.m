@@ -14,8 +14,10 @@
 
 @implementation EditProfileViewController
 
+//managed object for core data
 @synthesize profile;
 
+//managed object for core data
 - (NSManagedObjectContext *)managedObjectContext {
     NSManagedObjectContext *context = nil;
     id delegate = [[UIApplication sharedApplication] delegate];
@@ -25,14 +27,6 @@
     return context;
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
@@ -51,14 +45,16 @@
     // Dispose of any resources that can be recreated.
 }
 
+//buttons
 - (IBAction)cancel:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)save:(id)sender {
+    
     NSManagedObjectContext *context = [self managedObjectContext];
     
-    
+    //either set data for existing object, or create new one
     if(self.profile) {
         //update existing profile
         [self.profile setValue:self.nameTextField.text forKey:@"name"];

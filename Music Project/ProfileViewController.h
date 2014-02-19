@@ -16,6 +16,7 @@
 - (IBAction)takePhoto:(UIButton *)sender;
 - (IBAction)selectPhoto:(UIButton *)sender;
 
+//buttons
 - (IBAction)back:(id)sender;
 
 //labels
