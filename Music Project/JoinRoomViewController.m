@@ -24,7 +24,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *nextAlbumImage;
 @property (weak, nonatomic) IBOutlet UILabel *nextSongTitle;
 @property (weak, nonatomic) IBOutlet UILabel *nextSongArtist;
-@property (strong, nonatomic) IBOutlet UIButton *viewList;
+@property (weak, nonatomic) IBOutlet UILabel *viewList;
 
 
 @property (strong, nonatomic) MPMediaItem *song;
