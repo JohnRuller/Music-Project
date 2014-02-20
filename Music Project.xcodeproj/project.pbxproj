@@ -55,7 +55,11 @@
 		945B786D1895822E00C26AAA /* TDAudioStreamerConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 945B785E1895822E00C26AAA /* TDAudioStreamerConstants.m */; };
 		945B786E1895822E00C26AAA /* TDSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 945B78611895822E00C26AAA /* TDSession.m */; };
 		945B78711895829C00C26AAA /* CreateRoomMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 945B786F1895829C00C26AAA /* CreateRoomMenuViewController.m */; };
+		949ABA2018B6923000D159A0 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 949ABA1F18B6923000D159A0 /* ChatViewController.m */; };
 		94BB70EC18B53129003ED058 /* GuestsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94BB70EB18B53129003ED058 /* GuestsViewController.m */; };
+		94D3AE3018B6A84300495CAD /* PlaylistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94D3AE2F18B6A84300495CAD /* PlaylistViewController.m */; };
+		94E3105318B68825001DC113 /* MPCConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E3105218B68825001DC113 /* MPCConnection.m */; };
+		94E3105818B68D7C001DC113 /* ConnectionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E3105718B68D7C001DC113 /* ConnectionsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -134,8 +138,16 @@
 		945B78611895822E00C26AAA /* TDSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDSession.m; sourceTree = "<group>"; };
 		945B786F1895829C00C26AAA /* CreateRoomMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CreateRoomMenuViewController.m; path = ../CreateRoomMenuViewController.m; sourceTree = "<group>"; };
 		945B78701895829C00C26AAA /* CreateRoomMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CreateRoomMenuViewController.h; path = ../CreateRoomMenuViewController.h; sourceTree = "<group>"; };
+		949ABA1E18B6923000D159A0 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
+		949ABA1F18B6923000D159A0 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
 		94BB70EA18B53129003ED058 /* GuestsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuestsViewController.h; sourceTree = "<group>"; };
 		94BB70EB18B53129003ED058 /* GuestsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuestsViewController.m; sourceTree = "<group>"; };
+		94D3AE2E18B6A84300495CAD /* PlaylistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaylistViewController.h; sourceTree = "<group>"; };
+		94D3AE2F18B6A84300495CAD /* PlaylistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaylistViewController.m; sourceTree = "<group>"; };
+		94E3105118B68825001DC113 /* MPCConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPCConnection.h; sourceTree = "<group>"; };
+		94E3105218B68825001DC113 /* MPCConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPCConnection.m; sourceTree = "<group>"; };
+		94E3105618B68D7C001DC113 /* ConnectionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectionsViewController.h; sourceTree = "<group>"; };
+		94E3105718B68D7C001DC113 /* ConnectionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectionsViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,6 +214,8 @@
 		0220CB4D182C977F006C10A8 /* Music Project */ = {
 			isa = PBXGroup;
 			children = (
+				94E3105518B68837001DC113 /* New Classes */,
+				94E3105018B687F9001DC113 /* New Views */,
 				945B78441895822E00C26AAA /* AudioStreamer */,
 				945B78411895809E00C26AAA /* Views */,
 				945B78421895812500C26AAA /* MainStoryboard.storyboard */,
@@ -327,6 +341,28 @@
 			path = ../Classes;
 			sourceTree = "<group>";
 		};
+		94E3105018B687F9001DC113 /* New Views */ = {
+			isa = PBXGroup;
+			children = (
+				94E3105618B68D7C001DC113 /* ConnectionsViewController.h */,
+				94E3105718B68D7C001DC113 /* ConnectionsViewController.m */,
+				949ABA1E18B6923000D159A0 /* ChatViewController.h */,
+				949ABA1F18B6923000D159A0 /* ChatViewController.m */,
+				94D3AE2E18B6A84300495CAD /* PlaylistViewController.h */,
+				94D3AE2F18B6A84300495CAD /* PlaylistViewController.m */,
+			);
+			name = "New Views";
+			sourceTree = "<group>";
+		};
+		94E3105518B68837001DC113 /* New Classes */ = {
+			isa = PBXGroup;
+			children = (
+				94E3105118B68825001DC113 /* MPCConnection.h */,
+				94E3105218B68825001DC113 /* MPCConnection.m */,
+			);
+			name = "New Classes";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -437,10 +473,13 @@
 				0220CB7F183DD50F006C10A8 /* MainViewController.m in Sources */,
 				945B78631895822E00C26AAA /* TDAudioFileStream.m in Sources */,
 				945B786B1895822E00C26AAA /* TDAudioOutputStreamer.m in Sources */,
+				94D3AE3018B6A84300495CAD /* PlaylistViewController.m in Sources */,
 				945B78711895829C00C26AAA /* CreateRoomMenuViewController.m in Sources */,
 				02CBB02518838817008AF034 /* ViewController.m in Sources */,
 				94BB70EC18B53129003ED058 /* GuestsViewController.m in Sources */,
 				0220CB54182C977F006C10A8 /* main.m in Sources */,
+				94E3105318B68825001DC113 /* MPCConnection.m in Sources */,
+				94E3105818B68D7C001DC113 /* ConnectionsViewController.m in Sources */,
 				0219FCEA183EFE2D0080A1F1 /* JoinRoomViewController.m in Sources */,
 				945B78681895822E00C26AAA /* TDAudioQueueFiller.m in Sources */,
 				0219FCEE183EFEEA0080A1F1 /* CreateRoomViewController.m in Sources */,
@@ -453,6 +492,7 @@
 				02E8C75C18A8A83E007AA6A3 /* EditProfileViewController.m in Sources */,
 				945B786C1895822E00C26AAA /* TDAudioStreamer.m in Sources */,
 				945B786A1895822E00C26AAA /* TDAudioInputStreamer.m in Sources */,
+				949ABA2018B6923000D159A0 /* ChatViewController.m in Sources */,
 				0219FCE6183EFBF80080A1F1 /* ProfileViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -12,6 +12,9 @@
 
 @interface CreateRoomMenuViewController ()
 @property (weak,nonatomic) IBOutlet UITextField *myTextField;
+
+- (IBAction)createRoom:(id)sender;
+
 @end
 
 @implementation CreateRoomMenuViewController
@@ -43,5 +46,7 @@
 {
     
 }
+
+
 
 @end

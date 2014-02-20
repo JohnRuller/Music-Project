@@ -20,6 +20,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    _mpcController = [[MPCConnection alloc] init];
+
     return YES;
 }
 

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MPCConnection.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -16,7 +17,12 @@
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
+@property (strong, nonatomic) MPCConnection *mpcController;
+
+
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
+
+
 
 @end
