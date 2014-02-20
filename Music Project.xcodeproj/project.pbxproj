@@ -55,6 +55,7 @@
 		945B786D1895822E00C26AAA /* TDAudioStreamerConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 945B785E1895822E00C26AAA /* TDAudioStreamerConstants.m */; };
 		945B786E1895822E00C26AAA /* TDSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 945B78611895822E00C26AAA /* TDSession.m */; };
 		945B78711895829C00C26AAA /* CreateRoomMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 945B786F1895829C00C26AAA /* CreateRoomMenuViewController.m */; };
+		94BB70EC18B53129003ED058 /* GuestsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94BB70EB18B53129003ED058 /* GuestsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -133,6 +134,8 @@
 		945B78611895822E00C26AAA /* TDSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDSession.m; sourceTree = "<group>"; };
 		945B786F1895829C00C26AAA /* CreateRoomMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CreateRoomMenuViewController.m; path = ../CreateRoomMenuViewController.m; sourceTree = "<group>"; };
 		945B78701895829C00C26AAA /* CreateRoomMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CreateRoomMenuViewController.h; path = ../CreateRoomMenuViewController.h; sourceTree = "<group>"; };
+		94BB70EA18B53129003ED058 /* GuestsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuestsViewController.h; sourceTree = "<group>"; };
+		94BB70EB18B53129003ED058 /* GuestsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuestsViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -244,6 +247,8 @@
 		945B78411895809E00C26AAA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				94BB70EA18B53129003ED058 /* GuestsViewController.h */,
+				94BB70EB18B53129003ED058 /* GuestsViewController.m */,
 				02E8C75A18A8A83E007AA6A3 /* EditProfileViewController.h */,
 				02E8C75B18A8A83E007AA6A3 /* EditProfileViewController.m */,
 				945B78701895829C00C26AAA /* CreateRoomMenuViewController.h */,
@@ -434,6 +439,7 @@
 				945B786B1895822E00C26AAA /* TDAudioOutputStreamer.m in Sources */,
 				945B78711895829C00C26AAA /* CreateRoomMenuViewController.m in Sources */,
 				02CBB02518838817008AF034 /* ViewController.m in Sources */,
+				94BB70EC18B53129003ED058 /* GuestsViewController.m in Sources */,
 				0220CB54182C977F006C10A8 /* main.m in Sources */,
 				0219FCEA183EFE2D0080A1F1 /* JoinRoomViewController.m in Sources */,
 				945B78681895822E00C26AAA /* TDAudioQueueFiller.m in Sources */,
