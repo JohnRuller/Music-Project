@@ -26,8 +26,6 @@
 
 @implementation ViewController
 
-@synthesize returnButton;
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
