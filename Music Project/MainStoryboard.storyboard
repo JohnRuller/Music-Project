@@ -249,6 +249,7 @@
         <!--Table View Controller - Whose Who at the Zoo-->
         <scene sceneID="yeT-Is-K3T">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1qw-Os-1cj" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="net-5k-n4h" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Rch-B4-ypZ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -271,13 +272,13 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Whose Who at the Zoo" id="WR8-oJ-yRO"/>
                 </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1qw-Os-1cj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1633" y="860"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="iAA-2m-JD0">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZuS-cE-zPh" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="8gR-3e-2As" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="1fC-SB-oLr">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -299,7 +300,6 @@
                         </connections>
                     </tableView>
                 </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ZuS-cE-zPh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1986" y="433"/>
         </scene>
@@ -735,7 +735,7 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="2QN-L3-u5o"/>
-        <segue reference="7w8-I7-5O6"/>
-        <segue reference="unr-4Q-4cF"/>
+        <segue reference="zve-x4-ht0"/>
+        <segue reference="dVl-sC-7IM"/>
     </inferredMetricsTieBreakers>
 </document>
