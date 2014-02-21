@@ -32,6 +32,9 @@
                                 <state key="normal" title="Join Room">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="Mxd-hb-0op" kind="push" id="yfQ-Fw-Wlz"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YrF-5c-gzh">
                                 <rect key="frame" x="133" y="307" width="44" height="30"/>
@@ -235,7 +238,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qet-1r-Jwa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1222" y="654"/>
+            <point key="canvasLocation" x="550" y="1486"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="V7C-IL-1u3">
@@ -560,6 +563,12 @@
                                     <action selector="send:" destination="Li5-EP-eGG" eventType="touchUpInside" id="0v1-Z0-Das"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Queued" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y8T-7S-nzv">
+                                <rect key="frame" x="14" y="81" width="61" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -586,10 +595,10 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
+                        <segue destination="Jua-LZ-9Nd" kind="relationship" relationship="viewControllers" id="hBT-17-et5"/>
                         <segue destination="Li5-EP-eGG" kind="relationship" relationship="viewControllers" id="Xua-lg-XGL"/>
                         <segue destination="xNL-nD-tLm" kind="relationship" relationship="viewControllers" id="Idc-gK-iiZ"/>
                         <segue destination="gkZ-gW-ng5" kind="relationship" relationship="viewControllers" id="aWz-tv-wXf"/>
-                        <segue destination="Jua-LZ-9Nd" kind="relationship" relationship="viewControllers" id="hBT-17-et5"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S8z-RT-UE1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -661,6 +670,12 @@
                                     <action selector="browseForDevices:" destination="Jua-LZ-9Nd" eventType="touchUpInside" id="Eip-Nh-a1c"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X2m-Zn-4Ph">
+                                <rect key="frame" x="153" y="76" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -668,6 +683,7 @@
                     <connections>
                         <outlet property="btnDisconnect" destination="FJa-il-yO4" id="vCz-vH-GQU"/>
                         <outlet property="tblConnectedDevices" destination="loD-6z-Tts" id="jGJ-Gc-y8V"/>
+                        <outlet property="testLabel" destination="X2m-Zn-4Ph" id="ooZ-yf-MTv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7ic-Fk-XqO" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -794,5 +810,6 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="2QN-L3-u5o"/>
+        <segue reference="3qS-0v-OrW"/>
     </inferredMetricsTieBreakers>
 </document>

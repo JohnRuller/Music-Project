@@ -12,7 +12,7 @@
 @interface ConnectionsViewController ()
 @property (nonatomic, strong) AppDelegate *appDelegate;
 @property (nonatomic, strong) NSMutableArray *arrConnectedDevices;
-
+@property (nonatomic, weak) IBOutlet UILabel *testLabel;
 
 @end
 
@@ -31,6 +31,17 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    MyManager *sharedManager = [MyManager sharedManager];
+    if ([sharedManager.someProperty isEqualToString:@"YES"])
+    {
+        _testLabel.text = @"YAY";
+        _hostName = [UIDevice currentDevice].name;
+        NSLog(@"%@", _hostName);
+    }
+    else{
+        _testLabel.text = @"NAY";
+    }
     
     _appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     [[_appDelegate mpcController] setupPeerAndSessionWithDisplayName:[UIDevice currentDevice].name];
@@ -65,8 +76,8 @@
 }
 
 
-
-/*- (IBAction)toggleVisibility:(id)sender {
+/*- (void)toggleVisibility
+{
     [_appDelegate.mpcController advertiseSelf:YES];
 }*/
 
@@ -84,10 +95,21 @@
 
 -(void)browserViewControllerDidFinish:(MCBrowserViewController *)browserViewController{
     [_appDelegate.mpcController.browser dismissViewControllerAnimated:YES completion:nil];
+    
+    NSString *message = @"WhoseHost?";
+    NSString *returnTo = [UIDevice currentDevice].name;
+    NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
+    NSError *error;
+    
+    [_appDelegate.mpcController.session sendData:dataToSend
+                                         toPeers:allPeers
+                                        withMode:MCSessionSendDataReliable
+                                           error:&error];
 }
 
 
 -(void)browserViewControllerWasCancelled:(MCBrowserViewController *)browserViewController{
+    
     [_appDelegate.mpcController.browser dismissViewControllerAnimated:YES completion:nil];
 }
 

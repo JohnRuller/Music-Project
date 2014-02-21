@@ -19,7 +19,15 @@
 @property (strong, nonatomic) IBOutlet UILabel *artist;
 @property (strong, nonatomic) IBOutlet UILabel *albumName;
 
+@property (strong, nonatomic) NSString *songNameString;
+@property (strong, nonatomic) NSString *artistNameString;
+@property (strong, nonatomic) NSString *albumNameString;
+@property (strong, nonatomic) UIImage *albumArtImage;
+
+
+
 @property (strong, nonatomic) NSURL *assetURL;
+
 
 
 
@@ -42,10 +50,15 @@
     
     _assetURL = [_song valueForProperty: MPMediaItemPropertyAssetURL];
     
-    _songName.text = [self.song valueForProperty:MPMediaItemPropertyTitle] ? [self.song valueForProperty:MPMediaItemPropertyTitle] : @"";
-    _artist.text = [self.song valueForProperty:MPMediaItemPropertyArtist] ? [self.song valueForProperty:MPMediaItemPropertyArtist] : @"";
-    _albumName.text = [self.song valueForProperty:MPMediaItemPropertyAlbumTitle] ? [self.song valueForProperty: MPMediaItemPropertyAlbumTitle] : @"";
-    _albumArt = [self.song valueForProperty:MPMediaItemPropertyArtwork];
+    _songNameString = [self.song valueForProperty:MPMediaItemPropertyTitle] ? [self.song valueForProperty:MPMediaItemPropertyTitle] : @"";
+    _artistNameString = [self.song valueForProperty:MPMediaItemPropertyArtist] ? [self.song valueForProperty:MPMediaItemPropertyArtist] : @"";
+    _albumNameString = [self.song valueForProperty:MPMediaItemPropertyAlbumTitle] ? [self.song valueForProperty: MPMediaItemPropertyAlbumTitle] : @"";
+    _albumArtImage = [self.song valueForProperty:MPMediaItemPropertyArtwork];
+    
+    _songName.text = _songNameString;
+    _artist.text = _artistNameString;
+    _albumName.text = _albumNameString;
+    //_albumArt
 }
 
 - (IBAction)chooseSong:(id)sender
@@ -57,21 +70,39 @@
     [self presentViewController:picker animated:YES completion:nil];
 }
 
+- (void)mediaPickerDidCancel:(MPMediaPickerController *)mediaPicker
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (IBAction)send:(id)sender
 {
     NSLog(@"We are about to be sending the file");
-    //dispatch_async(dispatch_get_main_queue(), ^{
-    NSProgress *progress =
-    [_appDelegate.mpcController.session sendResourceAtURL:_assetURL
-                            withName:@"new song"
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSProgress *progress =
+        [_appDelegate.mpcController.session sendResourceAtURL:_assetURL
+                            withName:_songNameString
                                 toPeer:[[_appDelegate.mpcController.session connectedPeers] objectAtIndex:1]
-                withCompletionHandler:^(NSError *error)
-    {
-    if (error)
-        NSLog(@"[Error] %@", error);
-    }];
+                                withCompletionHandler:^(NSError *error)
+        {
+        if (error)
+            NSLog(@"[Error] %@", error);
+        }];
+        
+        [progress addObserver:self forKeyPath:@"fractionCompleted" options:NSKeyValueObservingOptionNew context:nil];
+        
+        NSLog(@"We should be sending the file");
+    });
+}
+
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
     
-    NSLog(@"We should be sending the file");
+    NSString *sendingMessage = [NSString stringWithFormat:@"%@ - Sending %.f%%",
+                                _song,
+                                [(NSProgress *)object fractionCompleted] * 100
+                                ];
+    
+    _songName.text = sendingMessage;
 }
 
 

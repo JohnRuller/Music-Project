@@ -14,6 +14,7 @@
 @interface PlaylistViewController : UIViewController <MPMediaPickerControllerDelegate>
 
 @property (strong, nonatomic) MPMediaItem *song;
+@property (weak, nonatomic) NSString *isHost;
 
 - (IBAction)chooseSong:(id)sender;
 - (IBAction)send:(id)sender;

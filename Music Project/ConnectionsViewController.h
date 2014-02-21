@@ -8,14 +8,21 @@
 
 #import <UIKit/UIKit.h>
 #import <MultipeerConnectivity/MultipeerConnectivity.h>
+#import "myManager.h"
+
 
 @interface ConnectionsViewController : UIViewController <MCBrowserViewControllerDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tblConnectedDevices;
 @property (weak, nonatomic) IBOutlet UIButton *btnDisconnect;
+@property (nonatomic, strong) NSString *hostName;
+
+
 
 - (IBAction)browseForDevices:(id)sender;
-- (IBAction)toggleVisibility:(id)sender;
+//- (IBAction)toggleVisibility:(id)sender;
 - (IBAction)disconnect:(id)sender;
+
+
 
 @end

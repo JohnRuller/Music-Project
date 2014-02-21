@@ -55,6 +55,7 @@
 		945B786D1895822E00C26AAA /* TDAudioStreamerConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 945B785E1895822E00C26AAA /* TDAudioStreamerConstants.m */; };
 		945B786E1895822E00C26AAA /* TDSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 945B78611895822E00C26AAA /* TDSession.m */; };
 		945B78711895829C00C26AAA /* CreateRoomMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 945B786F1895829C00C26AAA /* CreateRoomMenuViewController.m */; };
+		946243B618B7022D00F5D0C6 /* myManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 946243B518B7022D00F5D0C6 /* myManager.m */; };
 		949ABA2018B6923000D159A0 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 949ABA1F18B6923000D159A0 /* ChatViewController.m */; };
 		94BB70EC18B53129003ED058 /* GuestsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94BB70EB18B53129003ED058 /* GuestsViewController.m */; };
 		94D3AE3018B6A84300495CAD /* PlaylistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94D3AE2F18B6A84300495CAD /* PlaylistViewController.m */; };
@@ -138,6 +139,8 @@
 		945B78611895822E00C26AAA /* TDSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDSession.m; sourceTree = "<group>"; };
 		945B786F1895829C00C26AAA /* CreateRoomMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CreateRoomMenuViewController.m; path = ../CreateRoomMenuViewController.m; sourceTree = "<group>"; };
 		945B78701895829C00C26AAA /* CreateRoomMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CreateRoomMenuViewController.h; path = ../CreateRoomMenuViewController.h; sourceTree = "<group>"; };
+		946243B418B7022D00F5D0C6 /* myManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myManager.h; sourceTree = "<group>"; };
+		946243B518B7022D00F5D0C6 /* myManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myManager.m; sourceTree = "<group>"; };
 		949ABA1E18B6923000D159A0 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
 		949ABA1F18B6923000D159A0 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
 		94BB70EA18B53129003ED058 /* GuestsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuestsViewController.h; sourceTree = "<group>"; };
@@ -359,6 +362,8 @@
 			children = (
 				94E3105118B68825001DC113 /* MPCConnection.h */,
 				94E3105218B68825001DC113 /* MPCConnection.m */,
+				946243B418B7022D00F5D0C6 /* myManager.h */,
+				946243B518B7022D00F5D0C6 /* myManager.m */,
 			);
 			name = "New Classes";
 			sourceTree = "<group>";
@@ -482,6 +487,7 @@
 				94E3105818B68D7C001DC113 /* ConnectionsViewController.m in Sources */,
 				0219FCEA183EFE2D0080A1F1 /* JoinRoomViewController.m in Sources */,
 				945B78681895822E00C26AAA /* TDAudioQueueFiller.m in Sources */,
+				946243B618B7022D00F5D0C6 /* myManager.m in Sources */,
 				0219FCEE183EFEEA0080A1F1 /* CreateRoomViewController.m in Sources */,
 				945B78621895822E00C26AAA /* NSMutableArray+QueueMethods.m in Sources */,
 				945B78651895822E00C26AAA /* TDAudioQueueBuffer.m in Sources */,

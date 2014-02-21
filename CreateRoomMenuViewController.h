@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CreateRoomViewController.h"
+//#import "CreateRoomViewController.h"
+#import "ConnectionsViewController.h"
+#import "myManager.h"
 
 @interface CreateRoomMenuViewController : UIViewController
 @property (nonatomic, weak) NSString *roomName;
+@property (weak, nonatomic) NSString *isHost;
 @end

@@ -27,4 +27,20 @@
 	viewLogo.image = logoImage;
 }
 
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    //self.roomName = self.myTextField.text;
+    //_isHost = @"YES";
+    MyManager *sharedManager = [MyManager sharedManager];
+    sharedManager.someProperty = @"NO";
+    
+    /*if([segue.identifier isEqualToString:@"showDetailSegue"]){
+     //CreateRoomViewController *controller = (CreateRoomViewController *)segue.destinationViewController;
+     //controller.thisRoomName = self.roomName;
+     UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
+     ConnectionsViewController *controller = (ConnectionsViewController *)navController.topViewController;
+     controller.isHost = @"YES";
+     }*/
+}
+
 @end
