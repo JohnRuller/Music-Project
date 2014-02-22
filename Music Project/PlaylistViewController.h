@@ -13,8 +13,11 @@
 
 @interface PlaylistViewController : UIViewController <MPMediaPickerControllerDelegate, AVAudioPlayerDelegate>
 
-@property (strong, nonatomic) MPMediaItem *song;
-@property (nonatomic, strong) AVAudioPlayer *player;
+//@property (strong, nonatomic) MPMediaItem *song;
+//@property (nonatomic, strong) AVAudioPlayer *player;
+@property (nonatomic, strong) MPMusicPlayerController *player;
+@property (nonatomic, strong) MPMediaItemCollection *allSongs;
+
 
 - (IBAction)chooseSong:(id)sender;
 - (IBAction)send:(id)sender;

@@ -25,13 +25,16 @@
 @property (strong, nonatomic) NSString *artistNameString;
 @property (strong, nonatomic) NSString *albumNameString;
 @property (strong, nonatomic) UIImage *albumArtImage;
+@property (strong, nonatomic) MPMediaItem *song;
 
 @property (strong, nonatomic) NSURL *assetURL;
-@property (strong, nonatomic) MPMediaItemCollection *songQueue;
-@property (strong, nonatomic) NSMutableArray *urlQueue;
+@property (strong, nonatomic) NSMutableArray *songQueue;
+@property (strong, nonatomic) NSMutableArray *playlistInfo;
+@property (strong, nonatomic) NSString *hostName;
+//@property NSInteger *locationInSongQueue;
 
 -(void)didReceiveDataWithNotification:(NSNotification *)notification;
-
+-(void)nowPlayingChanged:(NSNotification *)notification;
 
 @end
 
@@ -44,6 +47,10 @@
     [super viewDidLoad];
     
     _appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    _songQueue = [[NSMutableArray alloc] init];
+    _playlistInfo = [[NSMutableArray alloc] init];
+    _hostName = [[NSString alloc] init];
+
     
     MyManager *sharedManager = [MyManager sharedManager];
     if ([sharedManager.someProperty isEqualToString:@"YES"])
@@ -62,16 +69,26 @@
                                                  name:@"MCDidReceiveDataNotification"
                                                object:nil];
     
+    
+    [[NSNotificationCenter defaultCenter] addObserver: self
+                                             selector: @selector (nowPlayingChanged:)
+                                                 name: MPMusicPlayerControllerNowPlayingItemDidChangeNotification
+                                               object: self.player];
+
 	// Do any additional setup after loading the view.
 }
 
 - (IBAction)play:(id)sender
 {
-    NSLog(@"playing");
-    MPMusicPlayerController* appMusicPlayer = [MPMusicPlayerController applicationMusicPlayer];
+    NSLog(@"play");
+   // MPMusicPlayerController* appMusicPlayer = [MPMusicPlayerController applicationMusicPlayer];
     
-    [appMusicPlayer setQueueWithItemCollection:_songQueue];
-    [appMusicPlayer play];
+    MPMediaItemCollection *songs = [[MPMediaItemCollection alloc] initWithItems:_songQueue];
+    MPMusicPlayerController *newPlayer = [MPMusicPlayerController applicationMusicPlayer];
+    [newPlayer setQueueWithItemCollection:songs];
+    [newPlayer beginGeneratingPlaybackNotifications];
+    [newPlayer play];
+
     
 //    AVAudioPlayer *newPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL: _assetURL
 //                                                                      error: nil];
@@ -86,16 +103,53 @@
 
 - (void)mediaPicker:(MPMediaPickerController *)mediaPicker didPickMediaItems:(MPMediaItemCollection *)mediaItemCollection
 {
+    NSLog(@"mediaPicker");
+
     //get the song
     [self dismissViewControllerAnimated:YES completion:nil];
-    self.song = [mediaItemCollection.items objectAtIndex: 0];
+    NSMutableDictionary *item = [[NSMutableDictionary alloc] init];
     
-    _songQueue = [mediaItemCollection copy];
+    //self.song = [mediaItemCollection.items objectAtIndex: 0];
     
-    _assetURL = [_song valueForProperty: MPMediaItemPropertyAssetURL];
+//    _songQueue = [mediaItemCollection copy];
     
-    NSAssert(_assetURL, @"URL is valid.");
-    NSLog(@"%@", [_assetURL absoluteString]);
+    NSInteger MPcount = [mediaItemCollection count];
+    NSInteger SQcount = [_songQueue count];
+    
+    NSLog(@"MediaPicker MPCount: %zd", MPcount);
+    NSLog(@"MediaPicker SQCount 1: %zd", SQcount);
+
+    for (NSInteger i = 0; i < MPcount; i++)
+    {
+        _song = [mediaItemCollection.items objectAtIndex:i];
+        [_songQueue addObject:_song];
+        
+        _songNameString = [self.song valueForProperty:MPMediaItemPropertyTitle] ? [self.song valueForProperty:MPMediaItemPropertyTitle] : @"";
+        _artistNameString = [self.song valueForProperty:MPMediaItemPropertyArtist] ? [self.song valueForProperty:MPMediaItemPropertyArtist] : @"";
+        _albumNameString = [self.song valueForProperty:MPMediaItemPropertyAlbumTitle] ? [self.song valueForProperty: MPMediaItemPropertyAlbumTitle] : @"";
+        _albumArtImage = [self.song valueForProperty:MPMediaItemPropertyArtwork];
+        
+        [item removeAllObjects];
+        [item setObject:_songNameString forKey:@"songTitle"];
+        [item setObject:_artistNameString forKey:@"artistName"];
+        [item setObject:_albumNameString forKey:@"albumName"];
+        
+        [_playlistInfo addObject:item];
+    }
+    
+    SQcount = [_songQueue count];
+    NSLog(@"MediaPicker SQCount 2: %tu", SQcount);
+    
+    NSInteger PLcount = [_playlistInfo count];
+    NSLog(@"MediaPicker PLCount: %tu", PLcount);
+
+    
+    
+
+//    _assetURL = [_song valueForProperty: MPMediaItemPropertyAssetURL];
+//    
+//    NSAssert(_assetURL, @"URL is valid.");
+//    NSLog(@"%@", [_assetURL absoluteString]);
     
     
 //    NSURL *url = [item valueForProperty:MPMediaItemPropertyAssetURL];
@@ -119,20 +173,24 @@
 //	else
 //		[player play];
 //    
-//    
-    _songNameString = [self.song valueForProperty:MPMediaItemPropertyTitle] ? [self.song valueForProperty:MPMediaItemPropertyTitle] : @"";
-    _artistNameString = [self.song valueForProperty:MPMediaItemPropertyArtist] ? [self.song valueForProperty:MPMediaItemPropertyArtist] : @"";
-    _albumNameString = [self.song valueForProperty:MPMediaItemPropertyAlbumTitle] ? [self.song valueForProperty: MPMediaItemPropertyAlbumTitle] : @"";
-    _albumArtImage = [self.song valueForProperty:MPMediaItemPropertyArtwork];
+//
     
-    _songName.text = _songNameString;
-    _artist.text = _artistNameString;
-    _albumName.text = _albumNameString;
-    //_albumArt
+    
+//    _songNameString = [self.song valueForProperty:MPMediaItemPropertyTitle] ? [self.song valueForProperty:MPMediaItemPropertyTitle] : @"";
+//    _artistNameString = [self.song valueForProperty:MPMediaItemPropertyArtist] ? [self.song valueForProperty:MPMediaItemPropertyArtist] : @"";
+//    _albumNameString = [self.song valueForProperty:MPMediaItemPropertyAlbumTitle] ? [self.song valueForProperty: MPMediaItemPropertyAlbumTitle] : @"";
+//    _albumArtImage = [self.song valueForProperty:MPMediaItemPropertyArtwork];
+//    
+//    _songName.text = _songNameString;
+//    _artist.text = _artistNameString;
+//    _albumName.text = _albumNameString;
+//    //_albumArt
 }
 
 - (IBAction)chooseSong:(id)sender
 {
+    NSLog(@"chooseSong");
+
     MPMediaPickerController *picker = [[MPMediaPickerController alloc] initWithMediaTypes:MPMediaTypeMusic];
     picker.delegate = self;
     picker.allowsPickingMultipleItems = NO;
@@ -238,13 +296,36 @@
 
 -(void)didReceiveDataWithNotification:(NSNotification *)notification
 {
+    NSLog(@"didReceiveDataWithNotification");
+
     MCPeerID *peerID = [[notification userInfo] objectForKey:@"peerID"];
     NSString *peerDisplayName = peerID.displayName;
     
     NSData *receivedData = [[notification userInfo] objectForKey:@"data"];
     NSLog(@"ugh");
     
-    NSString *filelocation = NSTemporaryDirectory();
+    NSDictionary *info = [[NSMutableDictionary alloc] init];
+    
+    id myobject = [NSKeyedUnarchiver unarchiveObjectWithData:receivedData];
+    NSLog(@"got object ID");
+    
+    if ([myobject isKindOfClass:[NSArray class]])
+    {
+        NSLog(@"got array");
+        _playlistInfo = [myobject copy];
+        
+        info = [_playlistInfo objectAtIndex:0];
+        
+        _songName.text = [info objectForKey:@"songTitle"];
+        _artist.text = [info objectForKey:@"artistName"];
+        _albumName.text = [info objectForKey:@"albumName"];
+        
+        _hostName = peerDisplayName;
+    }
+    
+    
+    
+    /*NSString *filelocation = NSTemporaryDirectory();
     NSURL *url = [[NSURL alloc] initWithString:filelocation];
     [filelocation writeToURL:url atomically:YES];
     
@@ -294,9 +375,41 @@
 //    NSError *error;
 //    
 //    self.player=[[AVAudioPlayer alloc] initWithData:wavDATA error:&error];
-//    [self.player play];
+//    [self.player play];*/
     
+}
 
+-(void)nowPlayingChanged:(NSNotification *)notification
+{
+    NSLog(@"nowPlayingChanged");
+    NSInteger SQcount = [_songQueue count];
+    NSLog(@"nowPlayingChanged SQCount 1: %tu", SQcount);
+    
+    NSDictionary *info = [[NSDictionary alloc] init];
+    info = [_playlistInfo objectAtIndex:0];
+    
+    
+    _songName.text = [info objectForKey:@"songTitle"];
+    _artist.text = [info objectForKey:@"artistName"];
+    _albumName.text = [info objectForKey:@"albumName"];
+    
+    NSData *toBeSent = [NSKeyedArchiver archivedDataWithRootObject:_playlistInfo];
+    NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
+    NSError *error;
+    
+    NSLog(@"Sending");
+    [_appDelegate.mpcController.session sendData:toBeSent
+                                         toPeers:allPeers
+                                        withMode:MCSessionSendDataReliable
+                                           error:&error];
+    
+    //[_playlistInfo removeObjectAtIndex:0];
+    //[_songQueue removeObjectAtIndex:0];
+    
+    SQcount = [_songQueue count];
+    NSLog(@"nowPlayingChanged SQCount 2: %tu", SQcount);
+    
+    
 }
 
 
@@ -304,18 +417,6 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void) audioPlayerDidFinishPlaying: (AVAudioPlayer *) player
-
-                        successfully: (BOOL) completed {
-    
-    if (completed == YES) {
-        
-        //[self.button setTitle: @"Play" forState: UIControlStateNormal];
-        
-    }
-    
 }
 
 @end
