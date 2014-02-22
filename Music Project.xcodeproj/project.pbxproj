@@ -57,6 +57,7 @@
 		945B786E1895822E00C26AAA /* TDSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 945B78611895822E00C26AAA /* TDSession.m */; };
 		945B78711895829C00C26AAA /* CreateRoomMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 945B786F1895829C00C26AAA /* CreateRoomMenuViewController.m */; };
 		946243B618B7022D00F5D0C6 /* myManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 946243B518B7022D00F5D0C6 /* myManager.m */; };
+		9466556318B93325009061C5 /* AnarchyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9466556218B93325009061C5 /* AnarchyViewController.m */; };
 		949ABA2018B6923000D159A0 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 949ABA1F18B6923000D159A0 /* ChatViewController.m */; };
 		94BB70EC18B53129003ED058 /* GuestsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94BB70EB18B53129003ED058 /* GuestsViewController.m */; };
 		94D3AE3018B6A84300495CAD /* PlaylistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94D3AE2F18B6A84300495CAD /* PlaylistViewController.m */; };
@@ -144,6 +145,8 @@
 		945B78701895829C00C26AAA /* CreateRoomMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CreateRoomMenuViewController.h; path = ../CreateRoomMenuViewController.h; sourceTree = "<group>"; };
 		946243B418B7022D00F5D0C6 /* myManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myManager.h; sourceTree = "<group>"; };
 		946243B518B7022D00F5D0C6 /* myManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myManager.m; sourceTree = "<group>"; };
+		9466556118B93325009061C5 /* AnarchyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnarchyViewController.h; sourceTree = "<group>"; };
+		9466556218B93325009061C5 /* AnarchyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnarchyViewController.m; sourceTree = "<group>"; };
 		947BB78818B7E014008099BE /* 1-02 Always On My Mind.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "1-02 Always On My Mind.m4a"; sourceTree = "<group>"; };
 		949ABA1E18B6923000D159A0 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
 		949ABA1F18B6923000D159A0 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
@@ -360,6 +363,8 @@
 				94D3AE2F18B6A84300495CAD /* PlaylistViewController.m */,
 				9435283918B7AB5000AC7B32 /* PlayerViewController.h */,
 				9435283A18B7AB5000AC7B32 /* PlayerViewController.m */,
+				9466556118B93325009061C5 /* AnarchyViewController.h */,
+				9466556218B93325009061C5 /* AnarchyViewController.m */,
 			);
 			name = "New Views";
 			sourceTree = "<group>";
@@ -423,7 +428,7 @@
 				ORGANIZATIONNAME = "John Ruller";
 				TargetAttributes = {
 					0220CB43182C977F006C10A8 = {
-						DevelopmentTeam = 3UVA6AL657;
+						DevelopmentTeam = 3Y9N4UBV8R;
 					};
 					0220CB5E182C977F006C10A8 = {
 						TestTargetID = 0220CB43182C977F006C10A8;
@@ -500,6 +505,7 @@
 				945B78651895822E00C26AAA /* TDAudioQueueBuffer.m in Sources */,
 				945B78641895822E00C26AAA /* TDAudioQueue.m in Sources */,
 				9435283B18B7AB5000AC7B32 /* PlayerViewController.m in Sources */,
+				9466556318B93325009061C5 /* AnarchyViewController.m in Sources */,
 				945B786D1895822E00C26AAA /* TDAudioStreamerConstants.m in Sources */,
 				02E8C75918A869DD007AA6A3 /* MusicProject.xcdatamodeld in Sources */,
 				0219FCE2183EF1560080A1F1 /* HelpViewController.m in Sources */,

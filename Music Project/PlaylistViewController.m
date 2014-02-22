@@ -15,7 +15,7 @@
 
 @property (nonatomic, strong) AppDelegate *appDelegate;
 
-@property (strong, nonatomic) IBOutlet UIImage *albumArt;
+@property (strong, nonatomic) IBOutlet UIImageView *albumArt;
 @property (strong, nonatomic) IBOutlet UILabel *songName;
 @property (strong, nonatomic) IBOutlet UILabel *artist;
 @property (strong, nonatomic) IBOutlet UILabel *albumName;
@@ -75,8 +75,10 @@
                                                  name: MPMusicPlayerControllerNowPlayingItemDidChangeNotification
                                                object: self.player];
 
-	// Do any additional setup after loading the view.
-}
+    [_playlistTable setDelegate:self];
+    [_playlistTable setDataSource:self];
+    
+    [_playlistTable reloadData];}
 
 - (IBAction)play:(id)sender
 {
@@ -133,9 +135,12 @@
         [item setObject:_songNameString forKey:@"songTitle"];
         [item setObject:_artistNameString forKey:@"artistName"];
         [item setObject:_albumNameString forKey:@"albumName"];
+        [item setObject:_albumArt forKey:@"albumArt"];
         
         [_playlistInfo addObject:item];
     }
+    
+    [_playlistTable reloadData];
     
     SQcount = [_songQueue count];
     NSLog(@"MediaPicker SQCount 2: %tu", SQcount);
@@ -211,7 +216,7 @@
     
     const uint32_t sampleRate = 16000; // 16k sample/sec
     const uint16_t bitDepth = 16; // 16 bit/sample/channel
-    const uint16_t channels = 2; // 2 channel/sample (stereo)
+//    const uint16_t channels = 2; // 2 channel/sample (stereo)
     
     NSDictionary *opts = [NSDictionary dictionary];
     AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:_assetURL options:opts];
@@ -392,6 +397,7 @@
     _songName.text = [info objectForKey:@"songTitle"];
     _artist.text = [info objectForKey:@"artistName"];
     _albumName.text = [info objectForKey:@"albumName"];
+    //_albumArt.image = [info objectForKey:@"albumArt"];
     
     NSData *toBeSent = [NSKeyedArchiver archivedDataWithRootObject:_playlistInfo];
     NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
@@ -418,5 +424,45 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark - table stuff
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
+}
+
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return [_playlistInfo count];
+}
+
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    NSLog(@"reload table data");
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellIdentifier"];
+    
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CellIdentifier"];
+    }
+    
+    NSDictionary *info = [[NSDictionary alloc] init];
+    info = [_playlistInfo objectAtIndex:indexPath.row];
+    
+    cell.textLabel.text = [info objectForKey:@"songTitle"];
+    cell.detailTextLabel.text = [info objectForKey:@"artistName"];
+    
+    //NSString *path = [[NSBundle mainBundle] pathForResource:[info objectForKey:@"albumArt"] ofType:@"png"];
+    //UIImage *theImage = [UIImage imageWithContentsOfFile:path];
+    //cell.imageView.image = theImage;
+    
+    return cell;
+}
+
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 60.0;
+}
+
 
 @end
