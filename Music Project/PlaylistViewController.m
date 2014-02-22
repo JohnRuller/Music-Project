@@ -8,6 +8,7 @@
 
 #import "PlaylistViewController.h"
 #import "AppDelegate.h"
+#import "myManager.h"
 
 
 @interface PlaylistViewController ()
@@ -18,6 +19,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *songName;
 @property (strong, nonatomic) IBOutlet UILabel *artist;
 @property (strong, nonatomic) IBOutlet UILabel *albumName;
+@property (strong, nonatomic) IBOutlet UIButton *chooseSong;
 
 @property (strong, nonatomic) NSString *songNameString;
 @property (strong, nonatomic) NSString *artistNameString;
@@ -25,6 +27,8 @@
 @property (strong, nonatomic) UIImage *albumArtImage;
 
 @property (strong, nonatomic) NSURL *assetURL;
+@property (strong, nonatomic) MPMediaItemCollection *songQueue;
+@property (strong, nonatomic) NSMutableArray *urlQueue;
 
 -(void)didReceiveDataWithNotification:(NSNotification *)notification;
 
@@ -41,6 +45,18 @@
     
     _appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
+    MyManager *sharedManager = [MyManager sharedManager];
+    if ([sharedManager.someProperty isEqualToString:@"YES"])
+    {
+        _chooseSong.enabled = YES;
+        _chooseSong.hidden = NO;
+    }
+    else{
+        _chooseSong.enabled = NO;
+        _chooseSong.hidden = YES;
+    }
+    
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(didReceiveDataWithNotification:)
                                                  name:@"MCDidReceiveDataNotification"
@@ -51,7 +67,11 @@
 
 - (IBAction)play:(id)sender
 {
-
+    NSLog(@"playing");
+    MPMusicPlayerController* appMusicPlayer = [MPMusicPlayerController applicationMusicPlayer];
+    
+    [appMusicPlayer setQueueWithItemCollection:_songQueue];
+    [appMusicPlayer play];
     
 //    AVAudioPlayer *newPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL: _assetURL
 //                                                                      error: nil];
@@ -70,11 +90,13 @@
     [self dismissViewControllerAnimated:YES completion:nil];
     self.song = [mediaItemCollection.items objectAtIndex: 0];
     
+    _songQueue = [mediaItemCollection copy];
+    
     _assetURL = [_song valueForProperty: MPMediaItemPropertyAssetURL];
     
     NSAssert(_assetURL, @"URL is valid.");
     NSLog(@"%@", [_assetURL absoluteString]);
-
+    
     
 //    NSURL *url = [item valueForProperty:MPMediaItemPropertyAssetURL];
 //    

@@ -586,6 +586,7 @@
                     <connections>
                         <outlet property="albumName" destination="F6K-Aq-yqx" id="ZhX-vy-brT"/>
                         <outlet property="artist" destination="rrr-uS-x5l" id="b34-iA-vyX"/>
+                        <outlet property="chooseSong" destination="aTI-nc-VnA" id="SI5-Yx-Ke9"/>
                         <outlet property="songName" destination="k90-9N-HmX" id="Ayr-m0-uyu"/>
                     </connections>
                 </viewController>

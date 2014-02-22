@@ -30,6 +30,8 @@
     
     _txtMessage.delegate = self;
     
+    
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(didReceiveDataWithNotification:)
                                                  name:@"MCDidReceiveDataNotification"
