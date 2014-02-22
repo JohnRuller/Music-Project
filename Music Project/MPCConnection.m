@@ -68,6 +68,7 @@
 
 
 -(void)session:(MCSession *)session didReceiveData:(NSData *)data fromPeer:(MCPeerID *)peerID{
+    NSLog(@"Receiving data");
     NSDictionary *dict = @{@"data": data,
                            @"peerID": peerID
                            };
@@ -79,12 +80,13 @@
 
 
 -(void)session:(MCSession *)session didStartReceivingResourceWithName:(NSString *)resourceName fromPeer:(MCPeerID *)peerID withProgress:(NSProgress *)progress{
-    NSLog(@"Receiving Song");
+    NSLog(@"Receiving File");
 
 }
 
 
 -(void)session:(MCSession *)session didFinishReceivingResourceWithName:(NSString *)resourceName fromPeer:(MCPeerID *)peerID atURL:(NSURL *)localURL withError:(NSError *)error{
+    NSLog(@"Received File");
 
     
 }

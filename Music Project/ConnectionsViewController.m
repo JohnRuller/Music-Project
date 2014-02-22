@@ -96,6 +96,17 @@
 -(void)browserViewControllerDidFinish:(MCBrowserViewController *)browserViewController{
     [_appDelegate.mpcController.browser dismissViewControllerAnimated:YES completion:nil];
     
+    MyManager *sharedManager = [MyManager sharedManager];
+    if ([sharedManager.someProperty isEqualToString:@"YES"])
+    {
+        [_appDelegate.mpcController advertiseSelf:YES];
+
+    }
+    else{
+        [_appDelegate.mpcController advertiseSelf:NO];
+    }
+
+    /*
     NSString *message = @"WhoseHost?";
     NSString *returnTo = [UIDevice currentDevice].name;
     NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
@@ -104,7 +115,7 @@
     [_appDelegate.mpcController.session sendData:dataToSend
                                          toPeers:allPeers
                                         withMode:MCSessionSendDataReliable
-                                           error:&error];
+                                           error:&error];*/
 }
 
 

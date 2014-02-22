@@ -40,6 +40,7 @@
 		02E8C75C18A8A83E007AA6A3 /* EditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02E8C75B18A8A83E007AA6A3 /* EditProfileViewController.m */; };
 		02E8C75D18A8A83E007AA6A3 /* EditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02E8C75B18A8A83E007AA6A3 /* EditProfileViewController.m */; };
 		02F3028518A6C9A3004F2AE8 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 02F3028418A6C9A3004F2AE8 /* Default.png */; };
+		9435283B18B7AB5000AC7B32 /* PlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9435283A18B7AB5000AC7B32 /* PlayerViewController.m */; };
 		945B78431895812500C26AAA /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 945B78421895812500C26AAA /* MainStoryboard.storyboard */; };
 		945B78621895822E00C26AAA /* NSMutableArray+QueueMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 945B78471895822E00C26AAA /* NSMutableArray+QueueMethods.m */; };
 		945B78631895822E00C26AAA /* TDAudioFileStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 945B784A1895822E00C26AAA /* TDAudioFileStream.m */; };
@@ -110,6 +111,8 @@
 		02E8C75A18A8A83E007AA6A3 /* EditProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProfileViewController.h; sourceTree = "<group>"; };
 		02E8C75B18A8A83E007AA6A3 /* EditProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditProfileViewController.m; sourceTree = "<group>"; };
 		02F3028418A6C9A3004F2AE8 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		9435283918B7AB5000AC7B32 /* PlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerViewController.h; sourceTree = "<group>"; };
+		9435283A18B7AB5000AC7B32 /* PlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerViewController.m; sourceTree = "<group>"; };
 		945B78421895812500C26AAA /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
 		945B78461895822E00C26AAA /* NSMutableArray+QueueMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+QueueMethods.h"; sourceTree = "<group>"; };
 		945B78471895822E00C26AAA /* NSMutableArray+QueueMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+QueueMethods.m"; sourceTree = "<group>"; };
@@ -141,6 +144,7 @@
 		945B78701895829C00C26AAA /* CreateRoomMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CreateRoomMenuViewController.h; path = ../CreateRoomMenuViewController.h; sourceTree = "<group>"; };
 		946243B418B7022D00F5D0C6 /* myManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myManager.h; sourceTree = "<group>"; };
 		946243B518B7022D00F5D0C6 /* myManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myManager.m; sourceTree = "<group>"; };
+		947BB78818B7E014008099BE /* 1-02 Always On My Mind.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "1-02 Always On My Mind.m4a"; sourceTree = "<group>"; };
 		949ABA1E18B6923000D159A0 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
 		949ABA1F18B6923000D159A0 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
 		94BB70EA18B53129003ED058 /* GuestsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuestsViewController.h; sourceTree = "<group>"; };
@@ -234,6 +238,7 @@
 		0220CB4E182C977F006C10A8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				947BB78818B7E014008099BE /* 1-02 Always On My Mind.m4a */,
 				0220CB4F182C977F006C10A8 /* Music Project-Info.plist */,
 				0220CB50182C977F006C10A8 /* InfoPlist.strings */,
 				0220CB53182C977F006C10A8 /* main.m */,
@@ -353,6 +358,8 @@
 				949ABA1F18B6923000D159A0 /* ChatViewController.m */,
 				94D3AE2E18B6A84300495CAD /* PlaylistViewController.h */,
 				94D3AE2F18B6A84300495CAD /* PlaylistViewController.m */,
+				9435283918B7AB5000AC7B32 /* PlayerViewController.h */,
+				9435283A18B7AB5000AC7B32 /* PlayerViewController.m */,
 			);
 			name = "New Views";
 			sourceTree = "<group>";
@@ -492,6 +499,7 @@
 				945B78621895822E00C26AAA /* NSMutableArray+QueueMethods.m in Sources */,
 				945B78651895822E00C26AAA /* TDAudioQueueBuffer.m in Sources */,
 				945B78641895822E00C26AAA /* TDAudioQueue.m in Sources */,
+				9435283B18B7AB5000AC7B32 /* PlayerViewController.m in Sources */,
 				945B786D1895822E00C26AAA /* TDAudioStreamerConstants.m in Sources */,
 				02E8C75918A869DD007AA6A3 /* MusicProject.xcdatamodeld in Sources */,
 				0219FCE2183EF1560080A1F1 /* HelpViewController.m in Sources */,
