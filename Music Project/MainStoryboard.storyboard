@@ -60,16 +60,6 @@
                                 <rect key="frame" x="40" y="87" width="240" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="etv-z7-dM4">
-                                <rect key="frame" x="144" y="383" width="33" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Chat">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="cSQ-Xm-JWQ" kind="modal" id="xt5-a4-iVe"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -79,7 +69,6 @@
                         <outlet property="editProfileButton" destination="YrF-5c-gzh" id="7Vx-uE-YXc"/>
                         <outlet property="helpButton" destination="Kc4-Ec-LJd" id="fgN-Q6-wFw"/>
                         <outlet property="joinRoomButton" destination="Jpg-Qi-Gm2" id="vak-3s-Cey"/>
-                        <outlet property="viewButton" destination="etv-z7-dM4" id="mgW-9k-wzd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TD7-iX-GcD" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -838,7 +827,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="yfQ-Fw-Wlz"/>
         <segue reference="2QN-L3-u5o"/>
-        <segue reference="3qS-0v-OrW"/>
     </inferredMetricsTieBreakers>
 </document>
