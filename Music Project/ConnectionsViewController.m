@@ -71,7 +71,6 @@
                                                  name:@"MCDidReceiveDataNotification"
                                                object:nil];
     
-    [self sendProfileData];
     
     MyManager *sharedManager = [MyManager sharedManager];
     if ([sharedManager.someProperty isEqualToString:@"YES"])
@@ -144,6 +143,10 @@
     [_tblConnectedDevices reloadData];
 }
 
+- (IBAction)sendDataButton:(id)sender {
+    [self sendProfileData];
+}
+
 
 #pragma mark - MCBrowserViewControllerDelegate method implementation
 
@@ -212,9 +215,12 @@
     if ([myObject isKindOfClass:[NSArray class]]){
         
         //Handle
-        NSManagedObject *profile = [myObject objectAtIndex:0];
+        //NSManagedObject *profile = [myObject objectAtIndex:0];
         
-        NSString *tagline = [NSString stringWithFormat:@"%@",[profile valueForKey:@"tagline"]];
+        //NSString *tagline = [NSString stringWithFormat:@"%@",[profile valueForKey:@"tagline"]];
+        
+        NSLog(@"if array");
+
         
 
     }

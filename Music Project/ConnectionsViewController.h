@@ -23,6 +23,7 @@
 - (IBAction)browseForDevices:(id)sender;
 //- (IBAction)toggleVisibility:(id)sender;
 - (IBAction)disconnect:(id)sender;
+- (IBAction)sendDataButton:(id)sender;
 
 
 
