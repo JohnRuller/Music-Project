@@ -11,13 +11,14 @@
 #import <AVFoundation/AVFoundation.h>
 @import MediaPlayer;
 
-@interface PlaylistViewController : UIViewController <MPMediaPickerControllerDelegate, AVAudioPlayerDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface PlaylistViewController : UIViewController <MPMediaPickerControllerDelegate, AVAudioPlayerDelegate, UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate>
 
 //@property (strong, nonatomic) MPMediaItem *song;
 //@property (nonatomic, strong) AVAudioPlayer *player;
 @property (nonatomic, strong) MPMusicPlayerController *player;
 @property (nonatomic, strong) MPMediaItemCollection *allSongs;
-@property (nonatomic, weak) UITableView *playlistTable;
+@property (nonatomic, weak) IBOutlet UITableView *playlistTable;
+
 
 
 - (IBAction)chooseSong:(id)sender;

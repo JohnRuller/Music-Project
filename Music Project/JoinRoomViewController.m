@@ -288,7 +288,6 @@
         NSLog(@"got array");
         self.songQueue = [myobject copy];
         [self performSelectorOnMainThread:@selector(updateCurrentandNext:) withObject:Nil waitUntilDone:NO];
-
     }
 }
 

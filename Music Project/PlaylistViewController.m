@@ -31,6 +31,9 @@
 @property (strong, nonatomic) NSMutableArray *songQueue;
 @property (strong, nonatomic) NSMutableArray *playlistInfo;
 @property (strong, nonatomic) NSString *hostName;
+
+@property (nonatomic) NSInteger location;
+
 //@property NSInteger *locationInSongQueue;
 
 -(void)didReceiveDataWithNotification:(NSNotification *)notification;
@@ -57,6 +60,7 @@
     {
         _chooseSong.enabled = YES;
         _chooseSong.hidden = NO;
+        
     }
     else{
         _chooseSong.enabled = NO;
@@ -129,13 +133,15 @@
         _songNameString = [self.song valueForProperty:MPMediaItemPropertyTitle] ? [self.song valueForProperty:MPMediaItemPropertyTitle] : @"";
         _artistNameString = [self.song valueForProperty:MPMediaItemPropertyArtist] ? [self.song valueForProperty:MPMediaItemPropertyArtist] : @"";
         _albumNameString = [self.song valueForProperty:MPMediaItemPropertyAlbumTitle] ? [self.song valueForProperty: MPMediaItemPropertyAlbumTitle] : @"";
-        _albumArtImage = [self.song valueForProperty:MPMediaItemPropertyArtwork];
+        MPMediaItemArtwork *art = [self.song valueForProperty:MPMediaItemPropertyArtwork];
         
+        NSNumber *nada = [[NSNumber alloc] initWithInt:0];
         [item removeAllObjects];
         [item setObject:_songNameString forKey:@"songTitle"];
         [item setObject:_artistNameString forKey:@"artistName"];
         [item setObject:_albumNameString forKey:@"albumName"];
-        [item setObject:_albumArt forKey:@"albumArt"];
+        [item setObject:art forKey:@"albumArt"];
+        [item setObject:nada forKey:@"votes"];
         
         [_playlistInfo addObject:item];
     }
@@ -198,7 +204,7 @@
 
     MPMediaPickerController *picker = [[MPMediaPickerController alloc] initWithMediaTypes:MPMediaTypeMusic];
     picker.delegate = self;
-    picker.allowsPickingMultipleItems = NO;
+    picker.allowsPickingMultipleItems = YES;
     picker.showsCloudItems = NO;
     [self presentViewController:picker animated:YES completion:nil];
 }
@@ -258,6 +264,8 @@
                                                error:nil];
     });
     NSLog(@"sending?");
+    
+    
     
 //    NSArray *allpeers = _appDelegate.mpcController.session.connectedPeers;
 //
@@ -321,13 +329,54 @@
         
         info = [_playlistInfo objectAtIndex:0];
         
-        _songName.text = [info objectForKey:@"songTitle"];
+        /*_songName.text = [info objectForKey:@"songTitle"];
         _artist.text = [info objectForKey:@"artistName"];
         _albumName.text = [info objectForKey:@"albumName"];
         
+        MPMediaItemArtwork *theImage = [info objectForKey:@"albumArt"];
+        UIImage *art = [theImage imageWithSize:_albumArt.frame.size];
+        _albumArt.image = art;*/
+        
         _hostName = peerDisplayName;
+        
+        [_playlistTable reloadData];
     }
     
+    /*if ([myobject isKindOfClass:[NSDictionary class]])
+    {
+        NSLog(@"Received dictionary");
+        NSNumber *replace;
+        
+        NSDictionary *info = [NSKeyedUnarchiver unarchiveObjectWithData:receivedData];
+        NSString *whatKind = [info objectForKey:@"type"];
+        
+        int loc = [[info objectForKey:@"integer"] intValue];
+        NSMutableDictionary *songInfo = [_playlistInfo objectAtIndex:loc];
+        
+        if ([whatKind isEqualToString:@"Upvotes!"])
+        {
+            NSLog(@"Upvote!");
+            replace = [NSNumber numberWithInt:[[info objectForKey:@"where"] intValue] + 1];
+            [songInfo setObject:replace forKey:@"votes"];
+            
+            NSLog(@"Remove!");
+            [_playlistInfo replaceObjectAtIndex:_location withObject:info];
+            [_playlistInfo exchangeObjectAtIndex:_location withObjectAtIndex:_location-1];
+        }
+        
+        if ([whatKind isEqualToString:@"Downboat!"])
+        {
+            NSLog(@"Downvote!");
+            replace = [NSNumber numberWithInt:[[info objectForKey:@"where"] intValue] - 1];
+            [songInfo setObject:replace forKey:@"votes"];
+            
+            NSLog(@"Remove!");
+            [_playlistInfo replaceObjectAtIndex:_location withObject:info];
+            [_playlistInfo exchangeObjectAtIndex:_location withObjectAtIndex:_location + 1];
+        }
+    }*/
+
+
     
     
     /*NSString *filelocation = NSTemporaryDirectory();
@@ -414,8 +463,6 @@
     
     SQcount = [_songQueue count];
     NSLog(@"nowPlayingChanged SQCount 2: %tu", SQcount);
-    
-    
 }
 
 
@@ -452,9 +499,9 @@
     cell.textLabel.text = [info objectForKey:@"songTitle"];
     cell.detailTextLabel.text = [info objectForKey:@"artistName"];
     
-    //NSString *path = [[NSBundle mainBundle] pathForResource:[info objectForKey:@"albumArt"] ofType:@"png"];
-    //UIImage *theImage = [UIImage imageWithContentsOfFile:path];
-    //cell.imageView.image = theImage;
+    MPMediaItemArtwork *theImage = [info objectForKey:@"albumArt"];
+    UIImage *art = [theImage imageWithSize:cell.imageView.frame.size];
+    cell.imageView.image = art;
     
     return cell;
 }
@@ -462,6 +509,108 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 60.0;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    _location = indexPath.row;
+    NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
+    info = [_playlistInfo objectAtIndex:indexPath.row];
+    
+    UIActionSheet *chooseUpOrDown = [[UIActionSheet alloc] initWithTitle:[info objectForKey:@"songTitle"]
+                                                                delegate:self
+                                                       cancelButtonTitle:nil
+                                                  destructiveButtonTitle:nil
+                                                       otherButtonTitles:nil];
+    
+    [chooseUpOrDown addButtonWithTitle:@"Upvote!"];
+    [chooseUpOrDown addButtonWithTitle:@"Downboat!"];
+    [chooseUpOrDown setCancelButtonIndex:[chooseUpOrDown addButtonWithTitle:@"Cancel"]];
+    [chooseUpOrDown showInView:self.view];
+}
+
+
+#pragma mark - action sheet
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    
+    NSString *buttonTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
+
+    NSLog(@"Host");
+    NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
+    info = [_playlistInfo objectAtIndex:_location];
+    NSNumber *cool = [info objectForKey:@"votes"];
+    NSNumber *replace;
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    NSString *type;
+    NSNumber *loc = [[NSNumber alloc] initWithLong:_location];
+    
+    if ([buttonTitle isEqualToString:@"Upvote!"])
+    {
+        NSLog(@"Upvote!");
+        replace = [NSNumber numberWithInt:[cool intValue] + 1];
+        [info setObject:replace forKey:@"votes"];
+    
+        NSLog(@"Remove!");
+        [_playlistInfo replaceObjectAtIndex:_location withObject:info];
+        [_playlistInfo exchangeObjectAtIndex:_location withObjectAtIndex:_location-1];
+        
+        //prepare dictionary to be sent to peers
+        type = @"Upvote";
+        [dic setObject:type forKey:@"type"];
+        [dic setObject:loc forKey:@"where"];
+        
+    } else if ([buttonTitle isEqualToString:@"Downboat!"])
+    {
+        NSLog(@"Downvote!");
+        replace = [NSNumber numberWithInt:[cool intValue] - 1];
+        [info setObject:replace forKey:@"votes"];
+
+        [_playlistInfo replaceObjectAtIndex:_location withObject:info];
+        [_playlistInfo exchangeObjectAtIndex:_location withObjectAtIndex:_location+1];
+        
+        //prepare dictionary to be sent to peers
+        type = @"Downvote";
+        [dic setObject:type forKey:@"type"];
+        [dic setObject:loc forKey:@"where"];
+        
+    } else
+    {
+        NSLog(@"Cancel!");
+        return;
+    }
+        
+    [_playlistTable reloadData];
+    
+    NSLog(@"send to Guests");
+        
+//    if ([buttonTitle isEqualToString:@"Upvote!"])
+//    {
+//        NSLog(@"Upvote!");
+//        type = @"Upvote";
+//            
+//        [dic setObject:type forKey:@"type"];
+//        [dic setObject:loc forKey:@"where"];
+//    }
+//        
+//    if (buttonIndex == 1)
+//    {
+//            type = @"Downvote";
+//            
+//            [dic setObject:type forKey:@"type"];
+//            [dic setObject:loc forKey:@"where"];
+//        }
+    
+    NSData *toBeSent = [NSKeyedArchiver archivedDataWithRootObject:dic];
+    NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
+    NSError *error;
+    
+    NSLog(@"Sending");
+    [_appDelegate.mpcController.session sendData:toBeSent
+                                         toPeers:allPeers
+                                        withMode:MCSessionSendDataReliable
+                                           error:&error];
+
 }
 
 
