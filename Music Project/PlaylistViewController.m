@@ -121,6 +121,7 @@
     
     NSInteger MPcount = [mediaItemCollection count];
     NSInteger SQcount = [_songQueue count];
+    NSInteger INCount;
     
     NSLog(@"MediaPicker MPCount: %zd", MPcount);
     NSLog(@"MediaPicker SQCount 1: %zd", SQcount);
@@ -133,30 +134,64 @@
         _songNameString = [self.song valueForProperty:MPMediaItemPropertyTitle] ? [self.song valueForProperty:MPMediaItemPropertyTitle] : @"";
         _artistNameString = [self.song valueForProperty:MPMediaItemPropertyArtist] ? [self.song valueForProperty:MPMediaItemPropertyArtist] : @"";
         _albumNameString = [self.song valueForProperty:MPMediaItemPropertyAlbumTitle] ? [self.song valueForProperty: MPMediaItemPropertyAlbumTitle] : @"";
-        MPMediaItemArtwork *art = [self.song valueForProperty:MPMediaItemPropertyArtwork];
+        MPMediaItemArtwork *artz = [self.song valueForProperty:MPMediaItemPropertyArtwork];
+        UIImage *art = [artz imageWithSize:_albumArt.frame.size];
+        //UIImage *smallArt = [artz imageWithSize:self.albumImage.frame.size];
+
         
         NSNumber *nada = [[NSNumber alloc] initWithInt:0];
         [item removeAllObjects];
         [item setObject:_songNameString forKey:@"songTitle"];
+        INCount = [item count];
+
         [item setObject:_artistNameString forKey:@"artistName"];
+        NSLog(@"INCount: %tu", INCount);
+        INCount = [item count];
+
         [item setObject:_albumNameString forKey:@"albumName"];
+        NSLog(@"INCount: %tu", INCount);
+        INCount = [item count];
+
         [item setObject:art forKey:@"albumArt"];
+        NSLog(@"INCount: %tu", INCount);
+        INCount = [item count];
+
         [item setObject:nada forKey:@"votes"];
+        NSLog(@"INCount: %tu", INCount);
+        INCount = [item count];
         
         [_playlistInfo addObject:item];
     }
     
-    [_playlistTable reloadData];
+    INCount = [_songQueue count];
+    NSLog(@"INCount: %tu", INCount);
+    
+    //NSLog(@")
     
     SQcount = [_songQueue count];
     NSLog(@"MediaPicker SQCount 2: %tu", SQcount);
     
     NSInteger PLcount = [_playlistInfo count];
     NSLog(@"MediaPicker PLCount: %tu", PLcount);
+    
+    NSLog(@"Closing media thing and sending");
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:[_playlistInfo copy]];
+    NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
+    NSError *error;
+    
+    //NSInteger = [_playlistInfo ]
+    
+    NSLog(@"Sending");
+    [_appDelegate.mpcController.session sendData:data
+                                         toPeers:allPeers
+                                        withMode:MCSessionSendDataReliable
+                                           error:&error];
+    
+    [_playlistTable reloadData];
 
     
     
-
+/*
 //    _assetURL = [_song valueForProperty: MPMediaItemPropertyAssetURL];
 //    
 //    NSAssert(_assetURL, @"URL is valid.");
@@ -195,7 +230,7 @@
 //    _songName.text = _songNameString;
 //    _artist.text = _artistNameString;
 //    _albumName.text = _albumNameString;
-//    //_albumArt
+//    //_albumArt*/
 }
 
 - (IBAction)chooseSong:(id)sender
@@ -204,7 +239,7 @@
 
     MPMediaPickerController *picker = [[MPMediaPickerController alloc] initWithMediaTypes:MPMediaTypeMusic];
     picker.delegate = self;
-    picker.allowsPickingMultipleItems = YES;
+    picker.allowsPickingMultipleItems = NO;
     picker.showsCloudItems = NO;
     [self presentViewController:picker animated:YES completion:nil];
 }
@@ -314,12 +349,20 @@
     MCPeerID *peerID = [[notification userInfo] objectForKey:@"peerID"];
     NSString *peerDisplayName = peerID.displayName;
     
-    NSData *receivedData = [[notification userInfo] objectForKey:@"data"];
     NSLog(@"ugh");
+    //id myobject = [NSKeyedUnarchiver unarchiveObjectWithData:[[notification userInfo] objectForKey:@"data"]];
     
-    NSDictionary *info = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
+
+    
+    NSData *receivedData = [[notification userInfo] objectForKey:@"data"];
+    //NSLog(@"ugh");
+    
+    // NSDictionary *info = [[NSMutableDictionary alloc] init];
+    
     
     id myobject = [NSKeyedUnarchiver unarchiveObjectWithData:receivedData];
+    
     NSLog(@"got object ID");
     
     if ([myobject isKindOfClass:[NSArray class]])
@@ -329,13 +372,14 @@
         
         info = [_playlistInfo objectAtIndex:0];
         
-        /*_songName.text = [info objectForKey:@"songTitle"];
+        _songName.text = [info objectForKey:@"songTitle"];
         _artist.text = [info objectForKey:@"artistName"];
         _albumName.text = [info objectForKey:@"albumName"];
         
-        MPMediaItemArtwork *theImage = [info objectForKey:@"albumArt"];
-        UIImage *art = [theImage imageWithSize:_albumArt.frame.size];
-        _albumArt.image = art;*/
+        //MPMediaItemArtwork *theImage = [info objectForKey:@"albumArt"];
+        //UIImage *art = [theImage imageWithSize:_albumArt.frame.size];
+        _albumArt.image = [info objectForKey:@"art"];
+        //_albumArt.image = art;*/
         
         _hostName = peerDisplayName;
         
@@ -439,7 +483,7 @@
     NSInteger SQcount = [_songQueue count];
     NSLog(@"nowPlayingChanged SQCount 1: %tu", SQcount);
     
-    NSDictionary *info = [[NSDictionary alloc] init];
+    NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
     info = [_playlistInfo objectAtIndex:0];
     
     
@@ -493,15 +537,16 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CellIdentifier"];
     }
     
-    NSDictionary *info = [[NSDictionary alloc] init];
+    NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
     info = [_playlistInfo objectAtIndex:indexPath.row];
     
     cell.textLabel.text = [info objectForKey:@"songTitle"];
     cell.detailTextLabel.text = [info objectForKey:@"artistName"];
+    cell.imageView.image = [info objectForKey:@"art"];
     
-    MPMediaItemArtwork *theImage = [info objectForKey:@"albumArt"];
-    UIImage *art = [theImage imageWithSize:cell.imageView.frame.size];
-    cell.imageView.image = art;
+    //MPMediaItemArtwork *theImage = [info objectForKey:@"albumArt"];
+    //UIImage *art = [theImage imageWithSize:cell.imageView.frame.size];
+    //cell.imageView.image = art;
     
     return cell;
 }
@@ -554,6 +599,7 @@
         NSLog(@"Remove!");
         [_playlistInfo replaceObjectAtIndex:_location withObject:info];
         [_playlistInfo exchangeObjectAtIndex:_location withObjectAtIndex:_location-1];
+        [_songQueue exchangeObjectAtIndex:_location withObjectAtIndex:_location-1];
         
         //prepare dictionary to be sent to peers
         type = @"Upvote";
@@ -568,6 +614,7 @@
 
         [_playlistInfo replaceObjectAtIndex:_location withObject:info];
         [_playlistInfo exchangeObjectAtIndex:_location withObjectAtIndex:_location+1];
+        [_songQueue exchangeObjectAtIndex:_location withObjectAtIndex:_location+1];
         
         //prepare dictionary to be sent to peers
         type = @"Downvote";
@@ -601,7 +648,7 @@
 //            [dic setObject:loc forKey:@"where"];
 //        }
     
-    NSData *toBeSent = [NSKeyedArchiver archivedDataWithRootObject:dic];
+    NSData *toBeSent = [NSKeyedArchiver archivedDataWithRootObject:_playlistInfo];
     NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
     NSError *error;
     
