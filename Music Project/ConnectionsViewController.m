@@ -16,6 +16,12 @@
 
 //array to store managedObjects for core data
 @property (strong) NSMutableArray *profiles;
+@property (strong) NSMutableArray *test;
+
+
+-(void)sendProfileData;
+-(void)didReceiveDataWithNotification:(NSNotification *)notification;
+
 
 @end
 
@@ -49,7 +55,23 @@
     // Fetch the devices from persistent data store
     NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Profile"];
+    self.profiles = [[NSMutableArray alloc]init];
+    //[[self.profiles addObject:[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy]];
     self.profiles = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
+    
+    self.test = [[NSMutableArray alloc]init];
+    NSString *testString = @"test";
+    [self.test addObject:testString];
+
+
+    
+    //profile observer
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(didReceiveDataWithNotification:)
+                                                 name:@"MCDidReceiveDataNotification"
+                                               object:nil];
+    
+    [self sendProfileData];
     
     MyManager *sharedManager = [MyManager sharedManager];
     if ([sharedManager.someProperty isEqualToString:@"YES"])
@@ -159,6 +181,46 @@
 
 #pragma mark - Private method implementation
 
+//send profile data over
+-(void)sendProfileData{
+    NSData *dataToSend = [NSKeyedArchiver archivedDataWithRootObject:self.test];
+    NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
+    NSError *error;
+    
+    [_appDelegate.mpcController.session sendData:dataToSend
+                                         toPeers:allPeers
+                                        withMode:MCSessionSendDataReliable
+                                           error:&error];
+    
+    NSLog(@"sending profile");
+
+    
+    if (error) {
+        NSLog(@"%@", [error localizedDescription]);
+    }
+}
+
+-(void)didReceiveDataWithNotification:(NSNotification *)notification{
+    MCPeerID *peerID = [[notification userInfo] objectForKey:@"peerID"];
+    NSString *peerDisplayName = peerID.displayName;
+    
+    NSData *receivedData = [[notification userInfo] objectForKey:@"data"];
+    id myObject = [NSKeyedUnarchiver unarchiveObjectWithData:receivedData];
+    
+    NSLog(@"receiving profile");
+    
+    if ([myObject isKindOfClass:[NSArray class]]){
+        
+        //Handle
+        NSManagedObject *profile = [myObject objectAtIndex:0];
+        
+        NSString *tagline = [NSString stringWithFormat:@"%@",[profile valueForKey:@"tagline"]];
+        
+
+    }
+
+}
+
 -(void)peerDidChangeStateWithNotification:(NSNotification *)notification{
     MCPeerID *peerID = [[notification userInfo] objectForKey:@"peerID"];
     NSString *peerDisplayName = peerID.displayName;
@@ -202,6 +264,11 @@
     }
     
     cell.textLabel.text = [_arrConnectedDevices objectAtIndex:indexPath.row];
+    
+    NSManagedObject *profile = [self.profiles objectAtIndex:0];
+    UIImage *image = [UIImage imageWithData:[profile valueForKey:@"photo"]];
+    cell.imageView.image = image;
+
     
     return cell;
 }
