@@ -14,9 +14,23 @@
 @property (nonatomic, strong) NSMutableArray *arrConnectedDevices;
 @property (nonatomic, weak) IBOutlet UILabel *testLabel;
 
+//array to store managedObjects for core data
+@property (strong) NSMutableArray *profiles;
+
 @end
 
 @implementation ConnectionsViewController
+
+//managedObject for core data
+- (NSManagedObjectContext *)managedObjectContext
+{
+    NSManagedObjectContext *context = nil;
+    id delegate = [[UIApplication sharedApplication] delegate];
+    if ([delegate performSelector:@selector(managedObjectContext)]) {
+        context = [delegate managedObjectContext];
+    }
+    return context;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -32,6 +46,11 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+    // Fetch the devices from persistent data store
+    NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Profile"];
+    self.profiles = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
+    
     MyManager *sharedManager = [MyManager sharedManager];
     if ([sharedManager.someProperty isEqualToString:@"YES"])
     {
@@ -44,7 +63,20 @@
     }
     
     _appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    [[_appDelegate mpcController] setupPeerAndSessionWithDisplayName:[UIDevice currentDevice].name];
+    
+    //set the name
+    if([self.profiles count] != 0)
+    {
+        NSManagedObject *profile = [self.profiles objectAtIndex:0];
+        [[_appDelegate mpcController] setupPeerAndSessionWithDisplayName:[profile valueForKey:@"name"]];
+
+    }
+    else{
+        [[_appDelegate mpcController] setupPeerAndSessionWithDisplayName:[UIDevice currentDevice].name];
+
+        
+    }
+    
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(peerDidChangeStateWithNotification:)

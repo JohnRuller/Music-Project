@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0209B7F918B907960072B2FA /* MediaAccessibility.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0209B7F818B907960072B2FA /* MediaAccessibility.framework */; };
+		0209B7FB18B907B70072B2FA /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0209B7FA18B907B70072B2FA /* CoreMedia.framework */; };
+		0209B7FD18B9080E0072B2FA /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0209B7FC18B9080E0072B2FA /* MediaPlayer.framework */; };
 		0219FCE2183EF1560080A1F1 /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0219FCE1183EF1560080A1F1 /* HelpViewController.m */; };
 		0219FCE3183EF1560080A1F1 /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0219FCE1183EF1560080A1F1 /* HelpViewController.m */; };
 		0219FCE6183EFBF80080A1F1 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0219FCE5183EFBF80080A1F1 /* ProfileViewController.m */; };
@@ -76,6 +79,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0209B7F818B907960072B2FA /* MediaAccessibility.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaAccessibility.framework; path = System/Library/Frameworks/MediaAccessibility.framework; sourceTree = SDKROOT; };
+		0209B7FA18B907B70072B2FA /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		0209B7FC18B9080E0072B2FA /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		0219FCE0183EF1560080A1F1 /* HelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HelpViewController.h; path = ../HelpViewController.h; sourceTree = "<group>"; };
 		0219FCE1183EF1560080A1F1 /* HelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HelpViewController.m; path = ../HelpViewController.m; sourceTree = "<group>"; };
 		0219FCE4183EFBF80080A1F1 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
@@ -165,6 +171,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0209B7FD18B9080E0072B2FA /* MediaPlayer.framework in Frameworks */,
+				0209B7FB18B907B70072B2FA /* CoreMedia.framework in Frameworks */,
+				0209B7F918B907960072B2FA /* MediaAccessibility.framework in Frameworks */,
 				02E8C75618A86713007AA6A3 /* CoreData.framework in Frameworks */,
 				023D1A5518A056A3009CA940 /* MobileCoreServices.framework in Frameworks */,
 				02CBB022188382C8008AF034 /* MultipeerConnectivity.framework in Frameworks */,
@@ -210,6 +219,9 @@
 		0220CB46182C977F006C10A8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0209B7FC18B9080E0072B2FA /* MediaPlayer.framework */,
+				0209B7FA18B907B70072B2FA /* CoreMedia.framework */,
+				0209B7F818B907960072B2FA /* MediaAccessibility.framework */,
 				02E8C75518A86713007AA6A3 /* CoreData.framework */,
 				023D1A5418A056A3009CA940 /* MobileCoreServices.framework */,
 				02CBB021188382C8008AF034 /* MultipeerConnectivity.framework */,

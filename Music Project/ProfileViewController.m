@@ -8,11 +8,17 @@
 
 #import "ProfileViewController.h"
 #import "EditProfileViewController.h"
+#import <MediaPlayer/MPMediaQuery.h>
+#import <MediaPlayer/MPMediaItem.h>
+#import <MediaPlayer/MPMediaItemCollection.h>
 
 @interface ProfileViewController ()
 
 //array to store managedObjects for core data
 @property (strong) NSMutableArray *profiles;
+
+//array for artists
+@property (strong) NSArray *artistsArray;
 
 @end
 
@@ -78,6 +84,10 @@
         [myAlertView show];
         
     }
+    
+    //artists table stuff
+    MPMediaQuery *artistsQuery = [MPMediaQuery artistsQuery];
+    self.artistsArray = artistsQuery.collections;
     
 
 }
@@ -153,6 +163,28 @@
     
     [picker dismissViewControllerAnimated:YES completion:NULL];
     
+}
+
+#pragma mark - Artists
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.artistsArray.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ArtistsCell"];
+
+    MPMediaItemCollection *artistCollection = self.artistsArray[indexPath.row];
+    NSString *artistTitle = [[artistCollection representativeItem] valueForProperty:MPMediaItemPropertyArtist];
+    
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ArtistsCell"];
+    }
+    
+    cell.textLabel.text = artistTitle;
+    return cell;
 }
 
 

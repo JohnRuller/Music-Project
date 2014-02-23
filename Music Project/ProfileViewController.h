@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <MobileCoreServices/MobileCoreServices.h>
 
-@interface ProfileViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface ProfileViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDelegate, UITableViewDataSource>
 
 //camera functionality propertires
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;

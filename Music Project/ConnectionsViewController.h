@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <MultipeerConnectivity/MultipeerConnectivity.h>
+#import <MobileCoreServices/MobileCoreServices.h>
 #import "myManager.h"
 
 
