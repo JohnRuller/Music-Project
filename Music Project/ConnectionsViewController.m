@@ -1,3 +1,5 @@
+
+
 //
 //  ConnectionsViewController.m
 //  Music Project
@@ -18,7 +20,9 @@
 @property (strong) NSMutableArray *profiles;
 @property (strong) NSMutableArray *test;
 
-
+/**
+ *  Sends Profile Data to Peers
+ */
 -(void)sendProfileData;
 -(void)didReceiveDataWithNotification:(NSNotification *)notification;
 @property (strong) NSDictionary *profileData;
