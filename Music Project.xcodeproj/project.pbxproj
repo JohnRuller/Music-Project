@@ -44,6 +44,7 @@
 		02E8C75D18A8A83E007AA6A3 /* EditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02E8C75B18A8A83E007AA6A3 /* EditProfileViewController.m */; };
 		02F3028518A6C9A3004F2AE8 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 02F3028418A6C9A3004F2AE8 /* Default.png */; };
 		9435283B18B7AB5000AC7B32 /* PlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9435283A18B7AB5000AC7B32 /* PlayerViewController.m */; };
+		9445D0EA18BA628800BAFF5F /* ChooseSongViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9445D0E918BA628800BAFF5F /* ChooseSongViewController.m */; };
 		945B78431895812500C26AAA /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 945B78421895812500C26AAA /* MainStoryboard.storyboard */; };
 		945B78621895822E00C26AAA /* NSMutableArray+QueueMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 945B78471895822E00C26AAA /* NSMutableArray+QueueMethods.m */; };
 		945B78631895822E00C26AAA /* TDAudioFileStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 945B784A1895822E00C26AAA /* TDAudioFileStream.m */; };
@@ -120,6 +121,8 @@
 		02F3028418A6C9A3004F2AE8 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		9435283918B7AB5000AC7B32 /* PlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerViewController.h; sourceTree = "<group>"; };
 		9435283A18B7AB5000AC7B32 /* PlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerViewController.m; sourceTree = "<group>"; };
+		9445D0E818BA628800BAFF5F /* ChooseSongViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseSongViewController.h; sourceTree = "<group>"; };
+		9445D0E918BA628800BAFF5F /* ChooseSongViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseSongViewController.m; sourceTree = "<group>"; };
 		945B78421895812500C26AAA /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
 		945B78461895822E00C26AAA /* NSMutableArray+QueueMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+QueueMethods.h"; sourceTree = "<group>"; };
 		945B78471895822E00C26AAA /* NSMutableArray+QueueMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+QueueMethods.m"; sourceTree = "<group>"; };
@@ -377,6 +380,8 @@
 				9435283A18B7AB5000AC7B32 /* PlayerViewController.m */,
 				9466556118B93325009061C5 /* AnarchyViewController.h */,
 				9466556218B93325009061C5 /* AnarchyViewController.m */,
+				9445D0E818BA628800BAFF5F /* ChooseSongViewController.h */,
+				9445D0E918BA628800BAFF5F /* ChooseSongViewController.m */,
 			);
 			name = "New Views";
 			sourceTree = "<group>";
@@ -440,7 +445,7 @@
 				ORGANIZATIONNAME = "John Ruller";
 				TargetAttributes = {
 					0220CB43182C977F006C10A8 = {
-						DevelopmentTeam = 3UVA6AL657;
+						DevelopmentTeam = 3Y9N4UBV8R;
 					};
 					0220CB5E182C977F006C10A8 = {
 						TestTargetID = 0220CB43182C977F006C10A8;
@@ -517,6 +522,7 @@
 				945B78651895822E00C26AAA /* TDAudioQueueBuffer.m in Sources */,
 				945B78641895822E00C26AAA /* TDAudioQueue.m in Sources */,
 				9435283B18B7AB5000AC7B32 /* PlayerViewController.m in Sources */,
+				9445D0EA18BA628800BAFF5F /* ChooseSongViewController.m in Sources */,
 				9466556318B93325009061C5 /* AnarchyViewController.m in Sources */,
 				945B786D1895822E00C26AAA /* TDAudioStreamerConstants.m in Sources */,
 				02E8C75918A869DD007AA6A3 /* MusicProject.xcdatamodeld in Sources */,

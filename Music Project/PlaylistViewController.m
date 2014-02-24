@@ -34,6 +34,8 @@
 
 @property (nonatomic) NSInteger location;
 
+@property NSDate *startTime;
+
 //@property NSInteger *locationInSongQueue;
 
 -(void)didReceiveDataWithNotification:(NSNotification *)notification;
@@ -53,6 +55,7 @@
     _songQueue = [[NSMutableArray alloc] init];
     _playlistInfo = [[NSMutableArray alloc] init];
     _hostName = [[NSString alloc] init];
+    _startTime = [NSDate date];
 
     
     MyManager *sharedManager = [MyManager sharedManager];
@@ -142,23 +145,10 @@
         NSNumber *nada = [[NSNumber alloc] initWithInt:0];
         [item removeAllObjects];
         [item setObject:_songNameString forKey:@"songTitle"];
-        INCount = [item count];
-
         [item setObject:_artistNameString forKey:@"artistName"];
-        NSLog(@"INCount: %tu", INCount);
-        INCount = [item count];
-
         [item setObject:_albumNameString forKey:@"albumName"];
-        NSLog(@"INCount: %tu", INCount);
-        INCount = [item count];
-
         [item setObject:art forKey:@"albumArt"];
-        NSLog(@"INCount: %tu", INCount);
-        INCount = [item count];
-
         [item setObject:nada forKey:@"votes"];
-        NSLog(@"INCount: %tu", INCount);
-        INCount = [item count];
         
         [_playlistInfo addObject:item];
     }
@@ -251,54 +241,66 @@
 
 - (IBAction)send:(id)sender
 {
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:[_songQueue objectAtIndex:0]];
+    NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
+    NSError *error;
     
-    // Get raw PCM data from the track
-    NSMutableData *data = [[NSMutableData alloc] init];
+    //NSInteger = [_playlistInfo ]
     
-    const uint32_t sampleRate = 16000; // 16k sample/sec
-    const uint16_t bitDepth = 16; // 16 bit/sample/channel
-//    const uint16_t channels = 2; // 2 channel/sample (stereo)
+    NSLog(@"Sending");
+    [_appDelegate.mpcController.session sendData:data
+                                         toPeers:allPeers
+                                        withMode:MCSessionSendDataReliable
+                                           error:&error];
     
-    NSDictionary *opts = [NSDictionary dictionary];
-    AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:_assetURL options:opts];
-    AVAssetReader *reader = [[AVAssetReader alloc] initWithAsset:asset error:NULL];
-    NSDictionary *settings = [NSDictionary dictionaryWithObjectsAndKeys:
-                              [NSNumber numberWithInt:kAudioFormatLinearPCM], AVFormatIDKey,
-                              [NSNumber numberWithFloat:(float)sampleRate], AVSampleRateKey,
-                              [NSNumber numberWithInt:bitDepth], AVLinearPCMBitDepthKey,
-                              [NSNumber numberWithBool:NO], AVLinearPCMIsNonInterleaved,
-                              [NSNumber numberWithBool:NO], AVLinearPCMIsFloatKey,
-                              [NSNumber numberWithBool:NO], AVLinearPCMIsBigEndianKey, nil];
     
-    AVAssetReaderTrackOutput *output = [[AVAssetReaderTrackOutput alloc] initWithTrack:        [[asset tracks] objectAtIndex:0] outputSettings:settings];
-    [reader addOutput:output];
-    [reader startReading];
-    
-    // read the samples from the asset and append them subsequently
-    while ([reader status] != AVAssetReaderStatusCompleted) {
-        CMSampleBufferRef buffer = [output copyNextSampleBuffer];
-        if (buffer == NULL) continue;
-        
-        CMBlockBufferRef blockBuffer = CMSampleBufferGetDataBuffer(buffer);
-        size_t size = CMBlockBufferGetDataLength(blockBuffer);
-        uint8_t *outBytes = malloc(size);
-        CMBlockBufferCopyDataBytes(blockBuffer, 0, size, outBytes);
-        CMSampleBufferInvalidate(buffer);
-        CFRelease(buffer);
-        [data appendBytes:outBytes length:size];
-        free(outBytes);
-    }
-    
-    NSArray *allpeers = _appDelegate.mpcController.session.connectedPeers;
-    //NSError *error;
-
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [_appDelegate.mpcController.session sendData:data
-                                             toPeers:allpeers
-                                            withMode:MCSessionSendDataReliable
-                                               error:nil];
-    });
-    NSLog(@"sending?");
+//    // Get raw PCM data from the track
+//    NSMutableData *data = [[NSMutableData alloc] init];
+//    
+//    const uint32_t sampleRate = 16000; // 16k sample/sec
+//    const uint16_t bitDepth = 16; // 16 bit/sample/channel
+////    const uint16_t channels = 2; // 2 channel/sample (stereo)
+//    
+//    NSDictionary *opts = [NSDictionary dictionary];
+//    AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:_assetURL options:opts];
+//    AVAssetReader *reader = [[AVAssetReader alloc] initWithAsset:asset error:NULL];
+//    NSDictionary *settings = [NSDictionary dictionaryWithObjectsAndKeys:
+//                              [NSNumber numberWithInt:kAudioFormatLinearPCM], AVFormatIDKey,
+//                              [NSNumber numberWithFloat:(float)sampleRate], AVSampleRateKey,
+//                              [NSNumber numberWithInt:bitDepth], AVLinearPCMBitDepthKey,
+//                              [NSNumber numberWithBool:NO], AVLinearPCMIsNonInterleaved,
+//                              [NSNumber numberWithBool:NO], AVLinearPCMIsFloatKey,
+//                              [NSNumber numberWithBool:NO], AVLinearPCMIsBigEndianKey, nil];
+//    
+//    AVAssetReaderTrackOutput *output = [[AVAssetReaderTrackOutput alloc] initWithTrack:        [[asset tracks] objectAtIndex:0] outputSettings:settings];
+//    [reader addOutput:output];
+//    [reader startReading];
+//    
+//    // read the samples from the asset and append them subsequently
+//    while ([reader status] != AVAssetReaderStatusCompleted) {
+//        CMSampleBufferRef buffer = [output copyNextSampleBuffer];
+//        if (buffer == NULL) continue;
+//        
+//        CMBlockBufferRef blockBuffer = CMSampleBufferGetDataBuffer(buffer);
+//        size_t size = CMBlockBufferGetDataLength(blockBuffer);
+//        uint8_t *outBytes = malloc(size);
+//        CMBlockBufferCopyDataBytes(blockBuffer, 0, size, outBytes);
+//        CMSampleBufferInvalidate(buffer);
+//        CFRelease(buffer);
+//        [data appendBytes:outBytes length:size];
+//        free(outBytes);
+//    }
+//    
+//    NSArray *allpeers = _appDelegate.mpcController.session.connectedPeers;
+//    //NSError *error;
+//
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        [_appDelegate.mpcController.session sendData:data
+//                                             toPeers:allpeers
+//                                            withMode:MCSessionSendDataReliable
+//                                               error:nil];
+//    });
+//    NSLog(@"sending?");
     
     
     
@@ -384,6 +386,17 @@
         _hostName = peerDisplayName;
         
         [_playlistTable reloadData];
+    }
+    
+    if ([myobject isKindOfClass:[MPMediaItem class]])
+    {
+        //MPMediaItem *song = myobject;
+        //save it somewhere
+        //get url
+        
+        //AVPlayerItem *playerItem = [[AVPlayerItem alloc] initWithAsset:<#(AVAsset *)#>:url];
+        //AVPlayer *player = [[AVPlayer alloc] initWithPlayerItem:playerItem];
+        //[player play];
     }
     
     /*if ([myobject isKindOfClass:[NSDictionary class]])
@@ -480,33 +493,56 @@
 -(void)nowPlayingChanged:(NSNotification *)notification
 {
     NSLog(@"nowPlayingChanged");
-    NSInteger SQcount = [_songQueue count];
-    NSLog(@"nowPlayingChanged SQCount 1: %tu", SQcount);
     
-    NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
-    info = [_playlistInfo objectAtIndex:0];
+    _startTime = [NSDate date];
+    //[NSThread sleepForTimeInterval:1.0];
     
+    NSTimeInterval elapsedTime = [_startTime timeIntervalSinceNow];
+    NSLog([NSString stringWithFormat:@"Elapsed time interval: %f", -elapsedTime]);
+    int time = round(elapsedTime);
+    NSLog(@"Elapsed time: %tu", -time);
+
     
-    _songName.text = [info objectForKey:@"songTitle"];
-    _artist.text = [info objectForKey:@"artistName"];
-    _albumName.text = [info objectForKey:@"albumName"];
-    //_albumArt.image = [info objectForKey:@"albumArt"];
-    
-    NSData *toBeSent = [NSKeyedArchiver archivedDataWithRootObject:_playlistInfo];
-    NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
-    NSError *error;
-    
-    NSLog(@"Sending");
-    [_appDelegate.mpcController.session sendData:toBeSent
-                                         toPeers:allPeers
-                                        withMode:MCSessionSendDataReliable
-                                           error:&error];
-    
-    //[_playlistInfo removeObjectAtIndex:0];
-    //[_songQueue removeObjectAtIndex:0];
-    
-    SQcount = [_songQueue count];
-    NSLog(@"nowPlayingChanged SQCount 2: %tu", SQcount);
+    if (time < 1)
+    {
+        _startTime = [NSDate date];
+        NSLog(@"nowPlayingChanged in loop");
+        NSInteger SQcount = [_songQueue count];
+        NSLog(@"nowPlayingChanged SQCount 1: %tu", SQcount);
+        
+        NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
+        info = [_playlistInfo objectAtIndex:0];
+        
+        
+        _songName.text = [info objectForKey:@"songTitle"];
+        _artist.text = [info objectForKey:@"artistName"];
+        _albumName.text = [info objectForKey:@"albumName"];
+        //_albumArt.image = [info objectForKey:@"albumArt"];
+        
+        NSData *toBeSent = [NSKeyedArchiver archivedDataWithRootObject:_playlistInfo];
+        NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
+        NSError *error;
+        
+        NSLog(@"Sending");
+        [_appDelegate.mpcController.session sendData:toBeSent
+                                             toPeers:allPeers
+                                            withMode:MCSessionSendDataReliable
+                                               error:&error];
+        
+        //[_playlistInfo removeObjectAtIndex:0];
+        //[_songQueue removeObjectAtIndex:0];
+        [_playlistTable reloadData];
+        
+        SQcount = [_songQueue count];
+        NSLog(@"nowPlayingChanged SQCount 2: %tu", SQcount);
+        
+        _startTime = [NSDate date];
+        
+        NSTimeInterval elapsedTime = [_startTime timeIntervalSinceNow];
+        NSLog([NSString stringWithFormat:@"Elapsed time interval: %f", -elapsedTime]);
+        int time = round(elapsedTime);
+        NSLog(@"Elapsed time: %tu", -time);
+    }
 }
 
 
