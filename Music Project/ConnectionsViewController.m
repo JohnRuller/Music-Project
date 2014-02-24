@@ -21,6 +21,8 @@
 
 -(void)sendProfileData;
 -(void)didReceiveDataWithNotification:(NSNotification *)notification;
+@property (strong) NSDictionary *profileData;
+@property (strong) NSDictionary *guestProfiles;
 
 
 @end
@@ -55,9 +57,21 @@
     // Fetch the devices from persistent data store
     NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Profile"];
-    self.profiles = [[NSMutableArray alloc]init];
+    //self.profiles = [[NSMutableArray alloc]init];
     //[[self.profiles addObject:[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy]];
     self.profiles = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
+    NSManagedObject *profile = [self.profiles objectAtIndex:0];
+
+    NSString *name = [NSString stringWithFormat:@"%@",[profile valueForKey:@"name"]];
+    NSString *tagline = [NSString stringWithFormat:@"%@",[profile valueForKey:@"tagline"]];
+    UIImage *image = [UIImage imageWithData:[profile valueForKey:@"photo"]];
+    
+    self.profileData = [NSDictionary dictionaryWithObjectsAndKeys: name, @"name", tagline, @"tagline", image, @"image", nil];
+    
+    //NSLog([self.profileData objectForKey: @"name"]);
+    //NSLog([self.profileData objectForKey: @"tagline"]);
+
+    
     
     self.test = [[NSMutableArray alloc]init];
     NSString *testString = @"test";
@@ -186,7 +200,7 @@
 
 //send profile data over
 -(void)sendProfileData{
-    NSData *dataToSend = [NSKeyedArchiver archivedDataWithRootObject:self.test];
+    NSData *dataToSend = [NSKeyedArchiver archivedDataWithRootObject:self.profileData];
     NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
     NSError *error;
     
@@ -212,7 +226,7 @@
     
     NSLog(@"receiving profile");
     
-    if ([myObject isKindOfClass:[NSArray class]]){
+    if ([myObject isKindOfClass:[NSDictionary class]]){
         
         //Handle
         //NSManagedObject *profile = [myObject objectAtIndex:0];
