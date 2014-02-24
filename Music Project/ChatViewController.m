@@ -67,7 +67,9 @@
 #pragma mark - Private method implementation
 
 -(void)sendMyMessage{
-    NSData *dataToSend = [_txtMessage.text dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *textString = _txtMessage.text;
+    //NSData *dataToSend = [_txtMessage.text dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *dataToSend = [NSKeyedArchiver archivedDataWithRootObject:[textString copy]];
     NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
     NSError *error;
     
@@ -91,9 +93,17 @@
     NSString *peerDisplayName = peerID.displayName;
     
     NSData *receivedData = [[notification userInfo] objectForKey:@"data"];
-    NSString *receivedText = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
+    id myobject = [NSKeyedUnarchiver unarchiveObjectWithData:receivedData];
     
-    [_tvChat performSelectorOnMainThread:@selector(setText:) withObject:[_tvChat.text stringByAppendingString:[NSString stringWithFormat:@"%@ wrote:\n%@\n\n", peerDisplayName, receivedText]] waitUntilDone:NO];
+    
+    if ([myobject isKindOfClass:[NSString class]])
+    {
+        NSLog(@"out");
+        NSString *receivedText = [[NSString alloc] initWithString:myobject];
+        [_tvChat performSelectorOnMainThread:@selector(setText:) withObject:[_tvChat.text stringByAppendingString:[NSString stringWithFormat:@"%@ wrote:\n%@\n\n", peerDisplayName, receivedText]] waitUntilDone:NO];
+    }
+         
+    //NSString *receivedText = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
 }
 
 @end

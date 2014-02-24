@@ -32,7 +32,7 @@
 @property (strong, nonatomic) NSMutableArray *playlistInfo;
 @property (strong, nonatomic) NSString *hostName;
 
-@property (nonatomic) NSInteger location;
+@property (nonatomic) NSUInteger location;
 
 @property NSDate *startTime;
 
@@ -55,7 +55,7 @@
     _songQueue = [[NSMutableArray alloc] init];
     _playlistInfo = [[NSMutableArray alloc] init];
     _hostName = [[NSString alloc] init];
-    _startTime = [NSDate date];
+    //_startTime = [NSDate date];
 
     
     MyManager *sharedManager = [MyManager sharedManager];
@@ -372,6 +372,8 @@
         NSLog(@"got array");
         _playlistInfo = [myobject copy];
         
+        
+        
         info = [_playlistInfo objectAtIndex:0];
         
         _songName.text = [info objectForKey:@"songTitle"];
@@ -388,16 +390,73 @@
         [_playlistTable reloadData];
     }
     
+    
+    MyManager *sharedManager = [MyManager sharedManager];
+    if ([sharedManager.someProperty isEqualToString:@"YES"])
+    {
+        if ([myobject isKindOfClass:[NSDictionary class]])
+        {
+            NSDictionary *dic = [myobject copy];
+            NSString *type = [dic objectForKey:@"type"];
+            NSNumber *where = [dic objectForKey:@"where"];
+            NSNumber *replace;
+            
+            
+            NSInteger loc = [where integerValue];
+            
+            
+            
+            if ([type isEqualToString:@"upvote"])
+            {
+                //replace = [NSNumber numberWithInt:[cool intValue] + 1]
+                
+                [_playlistInfo exchangeObjectAtIndex:loc withObjectAtIndex:loc-1];
+                [_songQueue exchangeObjectAtIndex:loc withObjectAtIndex:loc-1];
+                
+                NSData *toBeSent = [NSKeyedArchiver archivedDataWithRootObject:_playlistInfo];
+                NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
+                NSError *error;
+                
+                NSLog(@"Sending");
+                [_appDelegate.mpcController.session sendData:toBeSent
+                                                     toPeers:allPeers
+                                                    withMode:MCSessionSendDataReliable
+                                                       error:&error];
+            }
+            
+            if ([type isEqualToString:@"downvote"])
+            {
+                //replace = [NSNumber numberWithInt:[cool intValue] + 1]
+                
+                [_playlistInfo exchangeObjectAtIndex:loc withObjectAtIndex:loc+1];
+                [_songQueue exchangeObjectAtIndex:loc withObjectAtIndex:loc+1];
+                
+                NSData *toBeSent = [NSKeyedArchiver archivedDataWithRootObject:_playlistInfo];
+                NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
+                NSError *error;
+                
+                NSLog(@"Sending");
+                [_appDelegate.mpcController.session sendData:toBeSent
+                                                     toPeers:allPeers
+                                                    withMode:MCSessionSendDataReliable
+                                                       error:&error];
+            }
+        }
+    }
+    
     if ([myobject isKindOfClass:[MPMediaItem class]])
     {
         //MPMediaItem *song = myobject;
         //save it somewhere
         //get url
         
-        //AVPlayerItem *playerItem = [[AVPlayerItem alloc] initWithAsset:<#(AVAsset *)#>:url];
+        //AVPlayerItem *playerItem = [[AVPlayerItem alloc] initWithAsset:CVX :url];
         //AVPlayer *player = [[AVPlayer alloc] initWithPlayerItem:playerItem];
         //[player play];
     }
+    
+    [_playlistTable reloadData];
+
     
     /*if ([myobject isKindOfClass:[NSDictionary class]])
     {
@@ -494,7 +553,7 @@
 {
     NSLog(@"nowPlayingChanged");
     
-    _startTime = [NSDate date];
+    //_startTime = [NSDate date];
     //[NSThread sleepForTimeInterval:1.0];
     
     NSTimeInterval elapsedTime = [_startTime timeIntervalSinceNow];
@@ -503,8 +562,6 @@
     NSLog(@"Elapsed time: %tu", -time);
 
     
-    if (time < 1)
-    {
         _startTime = [NSDate date];
         NSLog(@"nowPlayingChanged in loop");
         NSInteger SQcount = [_songQueue count];
@@ -538,11 +595,10 @@
         
         _startTime = [NSDate date];
         
-        NSTimeInterval elapsedTime = [_startTime timeIntervalSinceNow];
-        NSLog([NSString stringWithFormat:@"Elapsed time interval: %f", -elapsedTime]);
-        int time = round(elapsedTime);
-        NSLog(@"Elapsed time: %tu", -time);
-    }
+//        NSTimeInterval elapsedTime = [_startTime timeIntervalSinceNow];
+//        NSLog([NSString stringWithFormat:@"Elapsed time interval: %f", -elapsedTime]);
+//        int time = round(elapsedTime);
+//        NSLog(@"Elapsed time: %tu", -time);
 }
 
 
@@ -626,42 +682,90 @@
     NSString *type;
     NSNumber *loc = [[NSNumber alloc] initWithLong:_location];
     
-    if ([buttonTitle isEqualToString:@"Upvote!"])
+    MyManager *sharedManager = [MyManager sharedManager];
+    if ([sharedManager.someProperty isEqualToString:@"YES"])
     {
-        NSLog(@"Upvote!");
-        replace = [NSNumber numberWithInt:[cool intValue] + 1];
-        [info setObject:replace forKey:@"votes"];
-    
-        NSLog(@"Remove!");
-        [_playlistInfo replaceObjectAtIndex:_location withObject:info];
-        [_playlistInfo exchangeObjectAtIndex:_location withObjectAtIndex:_location-1];
-        [_songQueue exchangeObjectAtIndex:_location withObjectAtIndex:_location-1];
+        if ([buttonTitle isEqualToString:@"Upvote!"])
+        {
+            NSLog(@"Upvote!");
+            replace = [NSNumber numberWithInt:[cool intValue] + 1];
+            [info setObject:replace forKey:@"votes"];
+            
+            NSLog(@"replace! Location: %ld", (long)_location);
+            NSLog(@"count %lu", (unsigned long)[_playlistInfo count]);
+            
+            [_playlistInfo replaceObjectAtIndex:_location withObject:info];
+            NSLog(@"exchange!");
+            [_playlistInfo exchangeObjectAtIndex:_location withObjectAtIndex:_location-1];
+            [_songQueue exchangeObjectAtIndex:_location withObjectAtIndex:_location-1];
+            
+            //prepare dictionary to be sent to peers
+            type = @"Upvote";
+            [dic setObject:type forKey:@"type"];
+            [dic setObject:loc forKey:@"where"];
+            
+        } else if ([buttonTitle isEqualToString:@"Downboat!"])
+        {
+            NSLog(@"Downvote!");
+            replace = [NSNumber numberWithInt:[cool intValue] - 1];
+            [info setObject:replace forKey:@"votes"];
+            
+            
+            
+            [_playlistInfo replaceObjectAtIndex:_location withObject:info];
+            [_playlistInfo exchangeObjectAtIndex:_location withObjectAtIndex:_location+1];
+            [_songQueue exchangeObjectAtIndex:_location withObjectAtIndex:_location+1];
+            
+            //prepare dictionary to be sent to peers
+            type = @"Downvote";
+            [dic setObject:type forKey:@"type"];
+            [dic setObject:loc forKey:@"where"];
+            
+        } else
+        {
+            NSLog(@"Cancel!");
+            return;
+        }
         
-        //prepare dictionary to be sent to peers
-        type = @"Upvote";
-        [dic setObject:type forKey:@"type"];
-        [dic setObject:loc forKey:@"where"];
+        NSData *toBeSent = [NSKeyedArchiver archivedDataWithRootObject:_playlistInfo];
+        NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
+        NSError *error;
         
-    } else if ([buttonTitle isEqualToString:@"Downboat!"])
-    {
-        NSLog(@"Downvote!");
-        replace = [NSNumber numberWithInt:[cool intValue] - 1];
-        [info setObject:replace forKey:@"votes"];
-
-        [_playlistInfo replaceObjectAtIndex:_location withObject:info];
-        [_playlistInfo exchangeObjectAtIndex:_location withObjectAtIndex:_location+1];
-        [_songQueue exchangeObjectAtIndex:_location withObjectAtIndex:_location+1];
+        NSLog(@"Sending");
+        [_appDelegate.mpcController.session sendData:toBeSent
+                                             toPeers:allPeers
+                                            withMode:MCSessionSendDataReliable
+                                               error:&error];
+    }else{
+        NSLog(@"Guest");
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+        [dic setObject:@"upvote" forKey:@"type"];
         
-        //prepare dictionary to be sent to peers
-        type = @"Downvote";
-        [dic setObject:type forKey:@"type"];
-        [dic setObject:loc forKey:@"where"];
+        if ([buttonTitle isEqualToString:@"Upvote!"])
+        {
+            [dic setObject:@"upvote" forKey:@"type"];
+            [dic setObject:loc forKey:@"where"];
+            
+        } else if ([buttonTitle isEqualToString:@"Downboat!"])
+        {
+            [dic setObject:@"downvote" forKey:@"type"];
+            [dic setObject:loc forKey:@"where"];
+        } else
+        {
+            NSLog(@"Cancel!");
+            return;
+        }
+        NSData *toBeSent = [NSKeyedArchiver archivedDataWithRootObject:dic];
+        NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
+        NSError *error;
         
-    } else
-    {
-        NSLog(@"Cancel!");
-        return;
+        NSLog(@"Sending");
+        [_appDelegate.mpcController.session sendData:toBeSent
+                                             toPeers:allPeers
+                                            withMode:MCSessionSendDataReliable
+                                               error:&error];
     }
+    
         
     [_playlistTable reloadData];
     
@@ -684,15 +788,7 @@
 //            [dic setObject:loc forKey:@"where"];
 //        }
     
-    NSData *toBeSent = [NSKeyedArchiver archivedDataWithRootObject:_playlistInfo];
-    NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
-    NSError *error;
-    
-    NSLog(@"Sending");
-    [_appDelegate.mpcController.session sendData:toBeSent
-                                         toPeers:allPeers
-                                        withMode:MCSessionSendDataReliable
-                                           error:&error];
+
 
 }
 

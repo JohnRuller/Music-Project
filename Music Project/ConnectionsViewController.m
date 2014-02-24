@@ -226,11 +226,11 @@
     NSString *peerDisplayName = peerID.displayName;
     
     NSData *receivedData = [[notification userInfo] objectForKey:@"data"];
-    id myObject = [NSKeyedUnarchiver unarchiveObjectWithData:receivedData];
+    //id myObject = [NSKeyedUnarchiver unarchiveObjectWithData:receivedData];
     
     NSLog(@"receiving profile");
     
-    if ([myObject isKindOfClass:[NSDictionary class]]){
+   // if ([myObject isKindOfClass:[NSDictionary class]]){
         
         //Handle
         //NSManagedObject *profile = [myObject objectAtIndex:0];
@@ -241,7 +241,7 @@
 
         
 
-    }
+    //}
 
 }
 
