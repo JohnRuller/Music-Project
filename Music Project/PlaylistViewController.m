@@ -711,7 +711,6 @@
             [info setObject:replace forKey:@"votes"];
             
             
-            
             [_playlistInfo replaceObjectAtIndex:_location withObject:info];
             [_playlistInfo exchangeObjectAtIndex:_location withObjectAtIndex:_location+1];
             [_songQueue exchangeObjectAtIndex:_location withObjectAtIndex:_location+1];

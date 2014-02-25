@@ -18,7 +18,6 @@
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 @property (strong, nonatomic) MPCConnection *mpcController;
-@property (nonatomic, assign) BOOL *isHost;
 
 
 
