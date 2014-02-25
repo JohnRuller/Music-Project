@@ -26,7 +26,10 @@
 -(void)sendProfileData;
 -(void)didReceiveDataWithNotification:(NSNotification *)notification;
 @property (strong) NSDictionary *profileData;
-@property (strong) NSDictionary *guestProfiles;
+@property (strong) NSMutableArray *guestProfiles;
+
+-(bool)hasProfileData:(NSString *)name;
+-(int)profileIndex:(NSString *)name;
 
 
 @end
@@ -74,6 +77,8 @@
     
     //NSLog([self.profileData objectForKey: @"name"]);
     //NSLog([self.profileData objectForKey: @"tagline"]);
+    
+    self.guestProfiles = [[NSMutableArray alloc] init];
 
     
     
@@ -127,6 +132,8 @@
     [_tblConnectedDevices setDelegate:self];
     [_tblConnectedDevices setDataSource:self];
     [_appDelegate.mpcController advertiseSelf:YES];
+    
+    [_tblConnectedDevices reloadData];
 
 }
 
@@ -237,12 +244,39 @@
         
         //NSString *tagline = [NSString stringWithFormat:@"%@",[profile valueForKey:@"tagline"]];
         
+        [self.guestProfiles addObject:myObject];
+        
         NSLog(@"if array");
+        NSLog([[self.guestProfiles objectAtIndex:0] objectForKey:@"tagline"]);
 
         
 
     //}
 
+}
+
+-(bool)hasProfileData:(NSString *)name{
+    for(int i=0; i<[self.guestProfiles count]; i++)
+    {
+        if([[self.guestProfiles objectAtIndex:i] objectForKey:@"name"] == name) {
+            return true;
+        }
+        
+    }
+    return false;
+    
+}
+
+-(int)profileIndex:(NSString *)name{
+    for(int i=0; i<[self.guestProfiles count]; i++)
+    {
+        if([[self.guestProfiles objectAtIndex:i] objectForKey:@"name"] == name) {
+            return i;
+        }
+        
+    }
+    
+    return -1;
 }
 
 -(void)peerDidChangeStateWithNotification:(NSNotification *)notification{
@@ -253,6 +287,7 @@
     if (state != MCSessionStateConnecting) {
         if (state == MCSessionStateConnected) {
             [_arrConnectedDevices addObject:peerDisplayName];
+            [self sendProfileData];
         }
         else if (state == MCSessionStateNotConnected){
             if ([_arrConnectedDevices count] > 0) {
@@ -289,9 +324,19 @@
     
     cell.textLabel.text = [_arrConnectedDevices objectAtIndex:indexPath.row];
     
-    NSManagedObject *profile = [self.profiles objectAtIndex:0];
-    UIImage *image = [UIImage imageWithData:[profile valueForKey:@"photo"]];
-    cell.imageView.image = image;
+    //cell.imageView.image = [[self.guestProfiles objectAtIndex:0] objectForKey:@"image"];
+
+    
+    if([self hasProfileData:[_arrConnectedDevices objectAtIndex:indexPath.row]])
+    {
+        NSLog(@"set photo");
+        int index = [self profileIndex:cell.textLabel.text];
+        cell.imageView.image = [[self.guestProfiles objectAtIndex:index] objectForKey:@"image"];
+        
+    }
+    
+    
+    
 
     
     return cell;
