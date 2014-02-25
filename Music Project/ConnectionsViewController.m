@@ -244,10 +244,10 @@
         
         //NSString *tagline = [NSString stringWithFormat:@"%@",[profile valueForKey:@"tagline"]];
         
-        [self.guestProfiles addObject:myObject];
+        //[self.guestProfiles addObject:myObject];
         
         NSLog(@"if array");
-        NSLog([[self.guestProfiles objectAtIndex:0] objectForKey:@"tagline"]);
+        //NSLog([[self.guestProfiles objectAtIndex:0] objectForKey:@"tagline"]);
 
         
 
