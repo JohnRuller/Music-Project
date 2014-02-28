@@ -38,6 +38,7 @@
 		02CBB022188382C8008AF034 /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02CBB021188382C8008AF034 /* MultipeerConnectivity.framework */; };
 		02CBB02518838817008AF034 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CBB02418838817008AF034 /* ViewController.m */; };
 		02CBB02618838817008AF034 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CBB02418838817008AF034 /* ViewController.m */; };
+		02E5363218C1143000CC53B3 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02E5363118C1143000CC53B3 /* Default@2x.png */; };
 		02E8C75618A86713007AA6A3 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02E8C75518A86713007AA6A3 /* CoreData.framework */; };
 		02E8C75918A869DD007AA6A3 /* MusicProject.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 02E8C75718A869DD007AA6A3 /* MusicProject.xcdatamodeld */; };
 		02E8C75C18A8A83E007AA6A3 /* EditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02E8C75B18A8A83E007AA6A3 /* EditProfileViewController.m */; };
@@ -114,11 +115,12 @@
 		02CBB021188382C8008AF034 /* MultipeerConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultipeerConnectivity.framework; path = System/Library/Frameworks/MultipeerConnectivity.framework; sourceTree = SDKROOT; };
 		02CBB0231883880B008AF034 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		02CBB02418838817008AF034 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		02E5363118C1143000CC53B3 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../../Default@2x.png"; sourceTree = "<group>"; };
 		02E8C75518A86713007AA6A3 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		02E8C75818A869DD007AA6A3 /* MusicProject.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MusicProject.xcdatamodel; sourceTree = "<group>"; };
 		02E8C75A18A8A83E007AA6A3 /* EditProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProfileViewController.h; sourceTree = "<group>"; };
 		02E8C75B18A8A83E007AA6A3 /* EditProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditProfileViewController.m; sourceTree = "<group>"; };
-		02F3028418A6C9A3004F2AE8 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		02F3028418A6C9A3004F2AE8 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
 		9435283918B7AB5000AC7B32 /* PlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerViewController.h; sourceTree = "<group>"; };
 		9435283A18B7AB5000AC7B32 /* PlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerViewController.m; sourceTree = "<group>"; };
 		9445D0E818BA628800BAFF5F /* ChooseSongViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseSongViewController.h; sourceTree = "<group>"; };
@@ -202,7 +204,6 @@
 		0220CB3B182C977F006C10A8 = {
 			isa = PBXGroup;
 			children = (
-				02F3028418A6C9A3004F2AE8 /* Default.png */,
 				0220CB4D182C977F006C10A8 /* Music Project */,
 				0220CB66182C977F006C10A8 /* Music ProjectTests */,
 				0220CB46182C977F006C10A8 /* Frameworks */,
@@ -246,7 +247,6 @@
 				945B78421895812500C26AAA /* MainStoryboard.storyboard */,
 				0220CB56182C977F006C10A8 /* AppDelegate.h */,
 				0220CB57182C977F006C10A8 /* AppDelegate.m */,
-				0220CB59182C977F006C10A8 /* Images.xcassets */,
 				0220CB4E182C977F006C10A8 /* Supporting Files */,
 				02E8C75718A869DD007AA6A3 /* MusicProject.xcdatamodeld */,
 			);
@@ -256,6 +256,7 @@
 		0220CB4E182C977F006C10A8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				02E5363518C13B5D00CC53B3 /* Images */,
 				947BB78818B7E014008099BE /* 1-02 Always On My Mind.m4a */,
 				0220CB4F182C977F006C10A8 /* Music Project-Info.plist */,
 				0220CB50182C977F006C10A8 /* InfoPlist.strings */,
@@ -282,6 +283,32 @@
 				0220CB69182C977F006C10A8 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		02E5363318C13B3200CC53B3 /* LaunchImages */ = {
+			isa = PBXGroup;
+			children = (
+				02E5363118C1143000CC53B3 /* Default@2x.png */,
+				02F3028418A6C9A3004F2AE8 /* Default.png */,
+			);
+			name = LaunchImages;
+			sourceTree = "<group>";
+		};
+		02E5363418C13B4400CC53B3 /* AppIcons */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = AppIcons;
+			sourceTree = "<group>";
+		};
+		02E5363518C13B5D00CC53B3 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				0220CB59182C977F006C10A8 /* Images.xcassets */,
+				02E5363318C13B3200CC53B3 /* LaunchImages */,
+				02E5363418C13B4400CC53B3 /* AppIcons */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 		945B78411895809E00C26AAA /* Views */ = {
@@ -475,6 +502,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02E5363218C1143000CC53B3 /* Default@2x.png in Resources */,
 				023D1A5218A0127B009CA940 /* Icon.png in Resources */,
 				0220CB52182C977F006C10A8 /* InfoPlist.strings in Resources */,
 				945B78431895812500C26AAA /* MainStoryboard.storyboard in Resources */,
