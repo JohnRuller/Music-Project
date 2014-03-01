@@ -20,6 +20,7 @@
                                 <rect key="frame" x="115" y="231" width="91" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Create Room">
+                                    <color key="titleColor" red="1" green="0.1895486329683157" blue="0.023297710193703858" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -30,6 +31,7 @@
                                 <rect key="frame" x="123" y="269" width="74" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Join Room">
+                                    <color key="titleColor" red="1" green="0.18954863299999999" blue="0.023297710190000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -40,6 +42,7 @@
                                 <rect key="frame" x="133" y="307" width="44" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Profile">
+                                    <color key="titleColor" red="1" green="0.18954863299999999" blue="0.023297710190000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -50,14 +53,15 @@
                                 <rect key="frame" x="131" y="345" width="58" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Help Me">
+                                    <color key="titleColor" red="1" green="0.18954863299999999" blue="0.023297710190000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <segue destination="5kL-Rc-z9t" kind="modal" id="zDt-5y-oF0"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Music720.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="XGz-fH-ooS">
-                                <rect key="frame" x="40" y="87" width="240" height="128"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="PeerAudio.png" translatesAutoresizingMaskIntoConstraints="NO" id="XGz-fH-ooS">
+                                <rect key="frame" x="63" y="87" width="185" height="146"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
@@ -841,7 +845,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Music720.jpg" width="30" height="30"/>
+        <image name="PeerAudio.png" width="300" height="250"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
