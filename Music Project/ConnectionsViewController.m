@@ -10,6 +10,8 @@
 #import "AppDelegate.h"
 
 @interface ConnectionsViewController ()
+
+//multipeer stuff
 @property (nonatomic, strong) AppDelegate *appDelegate;
 @property (nonatomic, strong) NSMutableArray *arrConnectedDevices;
 @property (nonatomic, weak) IBOutlet UILabel *testLabel;
@@ -18,17 +20,13 @@
 @property (strong) NSMutableArray *profiles;
 @property (strong) NSMutableArray *test;
 
-/**
- *  Sends Profile Data to Peers
- */
+//profile data stuff
 -(void)sendProfileData;
 -(void)didReceiveDataWithNotification:(NSNotification *)notification;
-@property (strong) NSDictionary *profileData;
-@property (strong) NSMutableArray *guestProfiles;
-
 -(bool)hasProfileData:(NSString *)name;
 -(int)profileIndex:(NSString *)name;
-
+@property (strong) NSDictionary *profileData;
+@property (strong) NSMutableArray *guestProfiles;
 
 @end
 
@@ -62,37 +60,31 @@
     // Fetch the devices from persistent data store
     NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Profile"];
-    //self.profiles = [[NSMutableArray alloc]init];
-    //[[self.profiles addObject:[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy]];
     self.profiles = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
     NSManagedObject *profile = [self.profiles objectAtIndex:0];
-
+    
+    //store values from profile managed object
     NSString *name = [NSString stringWithFormat:@"%@",[profile valueForKey:@"name"]];
     NSString *tagline = [NSString stringWithFormat:@"%@",[profile valueForKey:@"tagline"]];
     UIImage *image = [UIImage imageWithData:[profile valueForKey:@"photo"]];
     
+    //pass profile data into dictionary
     self.profileData = [NSDictionary dictionaryWithObjectsAndKeys: name, @"name", tagline, @"tagline", image, @"image", nil];
     
-    //NSLog([self.profileData objectForKey: @"name"]);
-    //NSLog([self.profileData objectForKey: @"tagline"]);
+    NSLog(@"profile data stuff");
+    NSLog([self.profileData objectForKey: @"name"]);
+    NSLog([self.profileData objectForKey: @"tagline"]);
     
+    //init guest profiles array
     self.guestProfiles = [[NSMutableArray alloc] init];
 
-    
-    
-    self.test = [[NSMutableArray alloc]init];
-    NSString *testString = @"test";
-    [self.test addObject:testString];
-
-
-    
     //profile observer
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(didReceiveDataWithNotification:)
                                                  name:@"MCDidReceiveDataNotification"
                                                object:nil];
     
-    
+    //setup mymanager
     MyManager *sharedManager = [MyManager sharedManager];
     if ([sharedManager.someProperty isEqualToString:@"YES"])
     {
@@ -167,7 +159,16 @@
 }
 
 - (IBAction)sendDataButton:(id)sender {
-    [self sendProfileData];
+    bool isProfile;
+    isProfile = [self hasProfileData:[_arrConnectedDevices objectAtIndex:0]];
+    NSLog([_arrConnectedDevices objectAtIndex:0]);
+    if(isProfile)
+        NSLog(@"has profile data");
+    else
+        NSLog(@"does nothave profile data");
+    
+    [_tblConnectedDevices reloadData];
+
 }
 
 
@@ -231,32 +232,34 @@
     NSString *peerDisplayName = peerID.displayName;
     
     NSData *receivedData = [[notification userInfo] objectForKey:@"data"];
-    //id myObject = [NSKeyedUnarchiver unarchiveObjectWithData:receivedData];
+    id myObject = [NSKeyedUnarchiver unarchiveObjectWithData:receivedData];
     
     NSLog(@"receiving profile");
     
-   // if ([myObject isKindOfClass:[NSDictionary class]]){
+   if ([myObject isKindOfClass:[NSDictionary class]]){
         
-        //Handle
-        //NSManagedObject *profile = [myObject objectAtIndex:0];
-        
-        //NSString *tagline = [NSString stringWithFormat:@"%@",[profile valueForKey:@"tagline"]];
-        
-        //[self.guestProfiles addObject:myObject];
+       //Handle
+       [self.guestProfiles addObject:myObject];
         
         NSLog(@"if array");
-        //NSLog([[self.guestProfiles objectAtIndex:0] objectForKey:@"tagline"]);
+        //NSLog([myObject objectForKey: @"name"]);
+        //NSLog([myObject objectForKey: @"tagline"]);
+        NSLog([[self.guestProfiles objectAtIndex:0] objectForKey:@"name"]);
+        NSLog([[self.guestProfiles objectAtIndex:0] objectForKey:@"tagline"]);
 
-        
-
-    //}
+    }
 
 }
 
 -(bool)hasProfileData:(NSString *)name{
     for(int i=0; i<[self.guestProfiles count]; i++)
     {
-        if([[self.guestProfiles objectAtIndex:i] objectForKey:@"name"] == name) {
+        NSLog(@"comparing");
+        NSLog([[self.guestProfiles objectAtIndex:i] objectForKey:@"name"]);
+        NSLog(name);
+        
+        if([[[self.guestProfiles objectAtIndex:i] objectForKey:@"name"] isEqualToString:name]) {
+            
             return true;
         }
         
@@ -268,7 +271,7 @@
 -(int)profileIndex:(NSString *)name{
     for(int i=0; i<[self.guestProfiles count]; i++)
     {
-        if([[self.guestProfiles objectAtIndex:i] objectForKey:@"name"] == name) {
+        if([[[self.guestProfiles objectAtIndex:i] objectForKey:@"name"] isEqualToString:name]) {
             return i;
         }
         
@@ -321,9 +324,6 @@
     }
     
     cell.textLabel.text = [_arrConnectedDevices objectAtIndex:indexPath.row];
-    
-    //cell.imageView.image = [[self.guestProfiles objectAtIndex:0] objectForKey:@"image"];
-
     
     if([self hasProfileData:[_arrConnectedDevices objectAtIndex:indexPath.row]])
     {
