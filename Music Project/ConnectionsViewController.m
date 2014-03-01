@@ -313,6 +313,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return [_arrConnectedDevices count];
+    //comment
 }
     
 
