@@ -56,6 +56,7 @@
     _songQueue = [[NSMutableArray alloc] init];
     _playlistInfo = [[NSMutableArray alloc] init];
     _hostName = [[NSString alloc] init];
+    
     //_startTime = [NSDate date];
 
     
@@ -86,6 +87,7 @@
 
     [_playlistTable setDelegate:self];
     [_playlistTable setDataSource:self];
+    [_coolPlayer setDelegate:self];
     
     [_playlistTable reloadData];}
 
@@ -99,8 +101,12 @@
 //    newPlayer = [MPMusicPlayerController applicationMusicPlayer];
 //    [newPlayer setQueueWithItemCollection:songs];
 //    [newPlayer beginGeneratingPlaybackNotifications];
-    _coolPlayer = [[AVAudioPlayer alloc]initWithData:[_songQueue objectAtIndex:0] error:&error];
-
+    
+    
+    
+    
+    AVAudioPlayer *neatPlayer = [[AVAudioPlayer alloc]initWithData:[_songQueue objectAtIndex:0] error:&error];
+    _coolPlayer = neatPlayer;
     [_coolPlayer play];
 }
 
@@ -141,7 +147,7 @@
         [item setObject:_songNameString forKey:@"songTitle"];
         [item setObject:_artistNameString forKey:@"artistName"];
         [item setObject:_albumNameString forKey:@"albumName"];
-        [item setObject:art forKey:@"albumArt"];
+        //[item setObject:art forKey:@"albumArt"];
         [item setObject:nada forKey:@"votes"];
         
         [_playlistInfo addObject:item];
@@ -368,91 +374,6 @@
                  }
              }
          }];
-    
-    
-    
-    
-    
-    
-    
-//    // Get raw PCM data from the track
-//    NSMutableData *data = [[NSMutableData alloc] init];
-//
-//    const uint32_t sampleRate = 16000; // 16k sample/sec
-//    const uint16_t bitDepth = 16; // 16 bit/sample/channel
-////    const uint16_t channels = 2; // 2 channel/sample (stereo)
-//    
-//    NSDictionary *opts = [NSDictionary dictionary];
-//    AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:_assetURL options:opts];
-//    AVAssetReader *reader = [[AVAssetReader alloc] initWithAsset:asset error:NULL];
-//    NSDictionary *settings = [NSDictionary dictionaryWithObjectsAndKeys:
-//                              [NSNumber numberWithInt:kAudioFormatLinearPCM], AVFormatIDKey,
-//                              [NSNumber numberWithFloat:(float)sampleRate], AVSampleRateKey,
-//                              [NSNumber numberWithInt:bitDepth], AVLinearPCMBitDepthKey,
-//                              [NSNumber numberWithBool:NO], AVLinearPCMIsNonInterleaved,
-//                              [NSNumber numberWithBool:NO], AVLinearPCMIsFloatKey,
-//                              [NSNumber numberWithBool:NO], AVLinearPCMIsBigEndianKey, nil];
-//    
-//    AVAssetReaderTrackOutput *output = [[AVAssetReaderTrackOutput alloc] initWithTrack:        [[asset tracks] objectAtIndex:0] outputSettings:settings];
-//    [reader addOutput:output];
-//    [reader startReading];
-//    
-//    // read the samples from the asset and append them subsequently
-//    while ([reader status] != AVAssetReaderStatusCompleted) {
-//        CMSampleBufferRef buffer = [output copyNextSampleBuffer];
-//        if (buffer == NULL) continue;
-//        
-//        CMBlockBufferRef blockBuffer = CMSampleBufferGetDataBuffer(buffer);
-//        size_t size = CMBlockBufferGetDataLength(blockBuffer);
-//        uint8_t *outBytes = malloc(size);
-//        CMBlockBufferCopyDataBytes(blockBuffer, 0, size, outBytes);
-//        CMSampleBufferInvalidate(buffer);
-//        CFRelease(buffer);
-//        [data appendBytes:outBytes length:size];
-//        free(outBytes);
-//    }
-//    
-//    NSArray *allpeers = _appDelegate.mpcController.session.connectedPeers;
-//    //NSError *error;
-//
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//        [_appDelegate.mpcController.session sendData:data
-//                                             toPeers:allpeers
-//                                            withMode:MCSessionSendDataReliable
-//                                               error:nil];
-//    });
-//    NSLog(@"sending?");
-    
-    
-    
-//    NSArray *allpeers = _appDelegate.mpcController.session.connectedPeers;
-//
-//    NSLog(@"We are about to be sending the file");
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//        NSProgress *progress =
-//        [_appDelegate.mpcController.session sendResourceAtURL:_assetURL
-//                            withName:_songNameString
-//                                toPeer:allpeers
-//                                withCompletionHandler:^(NSError *error)
-//        {
-//        if (error)
-//            NSLog(@"[Error] %@", error);
-//        }];
-//        
-//        [progress addObserver:self forKeyPath:@"fractionCompleted" options:NSKeyValueObservingOptionNew context:nil];
-//        
-//        NSLog(@"We should be sending the file");
-//    });
-    
-    /*NSData *dataToSend = [_song];
-    NSArray *allpeers = _appDelegate.mpcController.session.connectedPeers;
-    NSError *error;
-
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [_appDelegate.mpcController.session sendData:_song toPeers:allpeers withMode:MCSessionSendDataReliable error:&error];
-    });*/
-        
-
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
@@ -516,6 +437,8 @@
         NSLog(@"nsdata received");
         NSData *newSong = [myobject copy];
         [_songQueue addObject:newSong];
+        
+
         
         //_coolPlayer =[[AVAudioPlayer alloc] initWithData:newSong error:&error];
         //[_coolPlayer play];
@@ -776,8 +699,24 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - table stuff
+#pragma mark - AVPlayerDelegate
+- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
+{
+    NSLog(@"didFinish");
+    if (flag == YES)
+    {
+        NSError *error = nil;
+        [_songQueue removeObject:0];
+        AVAudioPlayer *neatPlayer = [[AVAudioPlayer alloc]initWithData:[_songQueue objectAtIndex:0] error:&error];
+        _coolPlayer = neatPlayer;
+        [_coolPlayer prepareToPlay];
+        [_coolPlayer setDelegate:self];
+        [_coolPlayer play];
+    }
+    
+}
 
+#pragma mark - table stuff
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
@@ -937,23 +876,6 @@
     [_playlistTable reloadData];
     
     NSLog(@"send to Guests");
-        
-//    if ([buttonTitle isEqualToString:@"Upvote!"])
-//    {
-//        NSLog(@"Upvote!");
-//        type = @"Upvote";
-//            
-//        [dic setObject:type forKey:@"type"];
-//        [dic setObject:loc forKey:@"where"];
-//    }
-//        
-//    if (buttonIndex == 1)
-//    {
-//            type = @"Downvote";
-//            
-//            [dic setObject:type forKey:@"type"];
-//            [dic setObject:loc forKey:@"where"];
-//        }
     
 
 
