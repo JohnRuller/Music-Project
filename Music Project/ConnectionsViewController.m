@@ -250,9 +250,11 @@
     NSString *peerDisplayName = peerID.displayName;
     MCSessionState state = [[[notification userInfo] objectForKey:@"state"] intValue];
     
-    if (state != MCSessionStateConnecting) {
+    if (state != MCSessionStateConnecting)
+    {
         if (state == MCSessionStateConnected) {
             [_arrConnectedDevices addObject:peerDisplayName];
+            [_tblConnectedDevices reloadData];
         }
         else if (state == MCSessionStateNotConnected){
             if ([_arrConnectedDevices count] > 0) {

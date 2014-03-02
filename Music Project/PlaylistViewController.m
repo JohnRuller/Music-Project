@@ -32,7 +32,10 @@
 @property (strong, nonatomic) NSMutableArray *playlistInfo;
 @property (strong, nonatomic) NSString *hostName;
 
+//@property (strong, nonatomic) MPMusicPlayerController *newPlayer;
+
 @property (nonatomic) NSUInteger location;
+@property (nonatomic, strong) AVAudioPlayer *coolPlayer;
 
 @property NSDate *startTime;
 
@@ -90,24 +93,14 @@
 - (IBAction)play:(id)sender
 {
     NSLog(@"play");
-   // MPMusicPlayerController* appMusicPlayer = [MPMusicPlayerController applicationMusicPlayer];
     
+    
+    MPMusicPlayerController *newPlayer;
     MPMediaItemCollection *songs = [[MPMediaItemCollection alloc] initWithItems:_songQueue];
-    MPMusicPlayerController *newPlayer = [MPMusicPlayerController applicationMusicPlayer];
+    newPlayer = [MPMusicPlayerController applicationMusicPlayer];
     [newPlayer setQueueWithItemCollection:songs];
     [newPlayer beginGeneratingPlaybackNotifications];
     [newPlayer play];
-
-    
-//    AVAudioPlayer *newPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL: _assetURL
-//                                                                      error: nil];
-//    
-//    //[_assetURL release];
-//    
-//    self.player = newPlayer;
-//    //[newPlayer release];
-//    [player prepareToPlay];
-//    [player setDelegate: self];
 }
 
 - (void)mediaPicker:(MPMediaPickerController *)mediaPicker didPickMediaItems:(MPMediaItemCollection *)mediaItemCollection
@@ -241,22 +234,149 @@
 
 - (IBAction)send:(id)sender
 {
-    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:[_songQueue objectAtIndex:0]];
-    NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
-    NSError *error;
+//    
+//    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:[_songQueue objectAtIndex:0]];
+//    NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
+//    NSError *error;
+//    
+//    //NSInteger = [_playlistInfo ]
+//    
+//    NSLog(@"Sending");
+//    [_appDelegate.mpcController.session sendData:data
+//                                         toPeers:allPeers
+//                                        withMode:MCSessionSendDataReliable
+//                                           error:&error];
     
-    //NSInteger = [_playlistInfo ]
     
-    NSLog(@"Sending");
-    [_appDelegate.mpcController.session sendData:data
-                                         toPeers:allPeers
-                                        withMode:MCSessionSendDataReliable
-                                           error:&error];
+    
+    
+    
+    
+    
+    
+    
+    
+    
+//    //MPMediaItem *curItem = [_songQueue objectAtIndex:0];
+//    NSURL *url = [[_songQueue objectAtIndex:0] valueForProperty: MPMediaItemPropertyAssetURL];
+//    AVURLAsset *songAsset = [AVURLAsset URLAssetWithURL: url options:nil];
+//    AVAssetExportSession *exporter = [[AVAssetExportSession alloc] initWithAsset: songAsset
+//                                                                      presetName: AVAssetExportPresetAppleM4A];
+//    NSString *urlString = [url absoluteString];
+//    NSLog(@"%@", urlString);
+//    
+//    
+//    
+//    // Implement in your project the media item picker
+//    exporter.outputFileType = @"public.mpeg-4";
+//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//    NSString *documentsPath = [paths objectAtIndex:0]; //Get the docs directory
+//    NSString *exportFile = [documentsPath stringByAppendingPathComponent:
+//                            @"exported.mp4"];
+//    
+//    NSURL *exportURL = [NSURL fileURLWithPath:exportFile];
+//    exporter.outputURL = exportURL;
+
+    
+    
+    
+    
+        NSURL *url = [[_songQueue objectAtIndex:0] valueForProperty: MPMediaItemPropertyAssetURL];
+        AVURLAsset *songAsset = [AVURLAsset URLAssetWithURL: url options:nil];
+        AVAssetExportSession *exporter = [[AVAssetExportSession alloc] initWithAsset: songAsset
+                                                                          presetName:AVAssetExportPresetAppleM4A];
+        exporter.outputFileType =   @"com.apple.m4a-audio";
+        
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString * myDocumentsDirectory = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
+        
+        [[NSDate date] timeIntervalSince1970];
+        NSTimeInterval seconds = [[NSDate date] timeIntervalSince1970];
+        NSString *intervalSeconds = [NSString stringWithFormat:@"%0.0f",seconds];
+        NSString * fileName = [NSString stringWithFormat:@"%@.m4a",intervalSeconds];
+        NSString *exportFile = [myDocumentsDirectory stringByAppendingPathComponent:fileName];
+        
+        NSURL *exportURL = [NSURL fileURLWithPath:exportFile];
+        exporter.outputURL = exportURL;
+        
+        // do the export
+        // (completion handler block omitted)
+        [exporter exportAsynchronouslyWithCompletionHandler:
+         ^{
+             long int exportStatus = exporter.status;
+             
+             switch (exportStatus)
+             {
+                 case AVAssetExportSessionStatusFailed:
+                 {
+                     NSError *exportError = exporter.error;
+                     NSLog (@"AVAssetExportSessionStatusFailed: %@", exportError);
+                     break;
+                 }
+                 case AVAssetExportSessionStatusCompleted:
+                 {
+                     NSLog (@"AVAssetExportSessionStatusCompleted");
+                     
+                     NSData *data = [NSData dataWithContentsOfFile: [myDocumentsDirectory
+                                                                     stringByAppendingPathComponent:fileName]];
+                     
+                     NSError *error = nil;
+                     
+                     NSLog(@"Please play");
+                     //_coolPlayer =[[AVAudioPlayer alloc] initWithData:data error:&error];
+                     //[_coolPlayer play];
+                     
+                     NSLog(@"%@", [error localizedDescription]);
+
+                     
+                     
+                     NSData *toBeSent = [NSKeyedArchiver archivedDataWithRootObject:data];
+//
+//                     
+                     NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
+//
+                     NSLog(@"Sending");
+                     [_appDelegate.mpcController.session sendData:toBeSent
+                                                          toPeers:allPeers
+                                                         withMode:MCSessionSendDataReliable
+                                                            error:&error];
+                     
+                     //DLog(@"Data %@",data);
+                     data = nil;
+                     break;
+                 }
+                 case AVAssetExportSessionStatusUnknown:
+                 {
+                     NSLog (@"AVAssetExportSessionStatusUnknown"); break;
+                 }
+                 case AVAssetExportSessionStatusExporting:
+                 {
+                     NSLog (@"AVAssetExportSessionStatusExporting"); break;
+                 }
+                 case AVAssetExportSessionStatusCancelled:
+                 {
+                     NSLog (@"AVAssetExportSessionStatusCancelled"); break;
+                 }
+                 case AVAssetExportSessionStatusWaiting:
+                 {
+                     NSLog (@"AVAssetExportSessionStatusWaiting"); break;
+                 }
+                 default:
+                 {
+                     NSLog (@"didn't get export status"); break;
+                 }
+             }
+         }];
+    
+    
+    
+    
+    
     
     
 //    // Get raw PCM data from the track
 //    NSMutableData *data = [[NSMutableData alloc] init];
-//    
+//
 //    const uint32_t sampleRate = 16000; // 16k sample/sec
 //    const uint16_t bitDepth = 16; // 16 bit/sample/channel
 ////    const uint16_t channels = 2; // 2 channel/sample (stereo)
@@ -390,56 +510,110 @@
         [_playlistTable reloadData];
     }
     
+    if ([myobject isKindOfClass:[NSData class]])
+    {
+        NSLog(@"nsdata received");
+        NSData *newSong = [myobject copy];
+        NSURL *tmpDirURL = [NSURL fileURLWithPath:NSTemporaryDirectory() isDirectory:YES];
+        
+        NSURL *fileURL = [[tmpDirURL URLByAppendingPathComponent:@"exported"] URLByAppendingPathExtension:@"m4a"];
+        [newSong writeToURL:tmpDirURL atomically:YES];
+        
+        
+        NSData *wavDATA = [NSData dataWithContentsOfURL:fileURL];
+        NSError *error;
+        
+        _coolPlayer =[[AVAudioPlayer alloc] initWithData:newSong error:&error];
+        [_coolPlayer play];
+    }
+    
     
     MyManager *sharedManager = [MyManager sharedManager];
     if ([sharedManager.someProperty isEqualToString:@"YES"])
     {
+
+        
         if ([myobject isKindOfClass:[NSDictionary class]])
         {
             NSDictionary *dic = [myobject copy];
             NSString *type = [dic objectForKey:@"type"];
-            NSNumber *where = [dic objectForKey:@"where"];
-            NSNumber *replace;
+            //NSNumber *replace;
             
-            
-            NSInteger loc = [where integerValue];
-            
-            
-            
-            if ([type isEqualToString:@"upvote"])
+            if (type != nil)
             {
-                //replace = [NSNumber numberWithInt:[cool intValue] + 1]
+                if ([type isEqualToString:@"upvote"])
+                {
+                    NSNumber *where = [dic objectForKey:@"where"];
+                    NSInteger loc = [where integerValue];
+                    //replace = [NSNumber numberWithInt:[cool intValue] + 1]
+                    
+                    [_playlistInfo exchangeObjectAtIndex:loc withObjectAtIndex:loc-1];
+                    [_songQueue exchangeObjectAtIndex:loc withObjectAtIndex:loc-1];
+                    
+                    NSData *toBeSent = [NSKeyedArchiver archivedDataWithRootObject:_playlistInfo];
+                    NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
+                    NSError *error;
+                    
+                    NSLog(@"Sending");
+                    [_appDelegate.mpcController.session sendData:toBeSent
+                                                         toPeers:allPeers
+                                                        withMode:MCSessionSendDataReliable
+                                                           error:&error];
+                }
                 
-                [_playlistInfo exchangeObjectAtIndex:loc withObjectAtIndex:loc-1];
-                [_songQueue exchangeObjectAtIndex:loc withObjectAtIndex:loc-1];
+                if ([type isEqualToString:@"downvote"])
+                {
+                    NSNumber *where = [dic objectForKey:@"where"];
+                    NSInteger loc = [where integerValue];
+                    //replace = [NSNumber numberWithInt:[cool intValue] + 1]
+                    
+                    [_playlistInfo exchangeObjectAtIndex:loc withObjectAtIndex:loc+1];
+                    [_songQueue exchangeObjectAtIndex:loc withObjectAtIndex:loc+1];
+                    
+                    NSData *toBeSent = [NSKeyedArchiver archivedDataWithRootObject:_playlistInfo];
+                    NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
+                    NSError *error;
+                    
+                    NSLog(@"Sending");
+                    [_appDelegate.mpcController.session sendData:toBeSent
+                                                         toPeers:allPeers
+                                                        withMode:MCSessionSendDataReliable
+                                                           error:&error];
+                }
                 
-                NSData *toBeSent = [NSKeyedArchiver archivedDataWithRootObject:_playlistInfo];
-                NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
-                NSError *error;
-                
-                NSLog(@"Sending");
-                [_appDelegate.mpcController.session sendData:toBeSent
-                                                     toPeers:allPeers
-                                                    withMode:MCSessionSendDataReliable
-                                                       error:&error];
-            }
-            
-            if ([type isEqualToString:@"downvote"])
-            {
-                //replace = [NSNumber numberWithInt:[cool intValue] + 1]
-                
-                [_playlistInfo exchangeObjectAtIndex:loc withObjectAtIndex:loc+1];
-                [_songQueue exchangeObjectAtIndex:loc withObjectAtIndex:loc+1];
-                
-                NSData *toBeSent = [NSKeyedArchiver archivedDataWithRootObject:_playlistInfo];
-                NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
-                NSError *error;
-                
-                NSLog(@"Sending");
-                [_appDelegate.mpcController.session sendData:toBeSent
-                                                     toPeers:allPeers
-                                                    withMode:MCSessionSendDataReliable
-                                                       error:&error];
+                if ([type isEqualToString:@"anarchy"])
+                {
+                    NSString *kind = [dic objectForKey:@"kind"];
+                    if ([kind isEqualToString:@"play"])
+                    {
+                        //[_newPlayer play];
+                        //[_newPlayer pause];
+                    }
+                    if ([kind isEqualToString:@"stop"])
+                    {
+                        //[_newPlayer pause];
+                    }
+                    if ([kind isEqualToString:@"anarchy"])
+                    {
+                        
+                    }
+                    if ([kind isEqualToString:@"skip"])
+                    {
+                        //[_newPlayer skipToNextItem];
+                    }
+                    if ([kind isEqualToString:@"playbackSlow"])
+                    {
+                        //[_newPlayer currentPlaybackRate];
+                    }
+                    if ([kind isEqualToString:@"playbackFaster"])
+                    {
+                        
+                    }
+                    if([kind isEqualToString:@"playbackNormal"])
+                    {
+                        
+                    }
+                }
             }
         }
     }

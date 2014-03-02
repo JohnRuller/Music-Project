@@ -10,4 +10,18 @@
 
 @interface AnarchyViewController : UIViewController
 
+@property (nonatomic, strong) IBOutlet UIButton *play;
+@property (nonatomic, strong) IBOutlet UIButton *stop;
+@property (nonatomic, strong) IBOutlet UIButton *skip;
+@property (nonatomic, strong) IBOutlet UIButton *anarchy;
+
+- (IBAction)play:(id)sender;
+- (IBAction)stop:(id)sender;
+- (IBAction)skip:(id)sender;
+- (IBAction)anarchy:(id)sender;
+
+
+
+
+
 @end
