@@ -166,7 +166,6 @@
 		946243B518B7022D00F5D0C6 /* myManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myManager.m; sourceTree = "<group>"; };
 		9466556118B93325009061C5 /* AnarchyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnarchyViewController.h; sourceTree = "<group>"; };
 		9466556218B93325009061C5 /* AnarchyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnarchyViewController.m; sourceTree = "<group>"; };
-		947BB78818B7E014008099BE /* 1-02 Always On My Mind.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "1-02 Always On My Mind.m4a"; sourceTree = "<group>"; };
 		949ABA1E18B6923000D159A0 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
 		949ABA1F18B6923000D159A0 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
 		94BB70EA18B53129003ED058 /* GuestsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuestsViewController.h; sourceTree = "<group>"; };
@@ -265,7 +264,6 @@
 			isa = PBXGroup;
 			children = (
 				02E5363518C13B5D00CC53B3 /* Images */,
-				947BB78818B7E014008099BE /* 1-02 Always On My Mind.m4a */,
 				0220CB4F182C977F006C10A8 /* Music Project-Info.plist */,
 				0220CB50182C977F006C10A8 /* InfoPlist.strings */,
 				0220CB53182C977F006C10A8 /* main.m */,
@@ -484,7 +482,7 @@
 				ORGANIZATIONNAME = "John Ruller";
 				TargetAttributes = {
 					0220CB43182C977F006C10A8 = {
-						DevelopmentTeam = 3UVA6AL657;
+						DevelopmentTeam = 3Y9N4UBV8R;
 					};
 					0220CB5E182C977F006C10A8 = {
 						TestTargetID = 0220CB43182C977F006C10A8;
