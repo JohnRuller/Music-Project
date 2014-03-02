@@ -18,13 +18,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnDisconnect;
 @property (nonatomic, strong) NSString *hostName;
 
-
-
 - (IBAction)browseForDevices:(id)sender;
 //- (IBAction)toggleVisibility:(id)sender;
 - (IBAction)disconnect:(id)sender;
 - (IBAction)sendDataButton:(id)sender;
-
-
 
 @end
