@@ -32,8 +32,6 @@
 @property (strong, nonatomic) NSMutableArray *playlistInfo;
 @property (strong, nonatomic) NSString *hostName;
 
-//@property (strong, nonatomic) MPMusicPlayerController *newPlayer;
-
 @property (nonatomic) NSUInteger location;
 @property (nonatomic, strong) AVAudioPlayer *coolPlayer;
 
@@ -61,17 +59,18 @@
     //_startTime = [NSDate date];
 
     
-    MyManager *sharedManager = [MyManager sharedManager];
-    if ([sharedManager.someProperty isEqualToString:@"YES"])
-    {
-        _chooseSong.enabled = YES;
-        _chooseSong.hidden = NO;
-        
-    }
-    else{
-        _chooseSong.enabled = NO;
-        _chooseSong.hidden = YES;
-    }
+    
+//    MyManager *sharedManager = [MyManager sharedManager];
+//    if ([sharedManager.someProperty isEqualToString:@"YES"])
+//    {
+//        _chooseSong.enabled = YES;
+//        _chooseSong.hidden = NO;
+//        
+//    }
+//    else{
+//        _chooseSong.enabled = NO;
+//        _chooseSong.hidden = YES;
+//    }
     
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -94,13 +93,15 @@
 {
     NSLog(@"play");
     
-    
-    MPMusicPlayerController *newPlayer;
-    MPMediaItemCollection *songs = [[MPMediaItemCollection alloc] initWithItems:_songQueue];
-    newPlayer = [MPMusicPlayerController applicationMusicPlayer];
-    [newPlayer setQueueWithItemCollection:songs];
-    [newPlayer beginGeneratingPlaybackNotifications];
-    [newPlayer play];
+    NSError *error;
+//    MPMusicPlayerController *newPlayer;
+//    MPMediaItemCollection *songs = [[MPMediaItemCollection alloc] initWithItems:_songQueue];
+//    newPlayer = [MPMusicPlayerController applicationMusicPlayer];
+//    [newPlayer setQueueWithItemCollection:songs];
+//    [newPlayer beginGeneratingPlaybackNotifications];
+    _coolPlayer = [[AVAudioPlayer alloc]initWithData:[_songQueue objectAtIndex:0] error:&error];
+
+    [_coolPlayer play];
 }
 
 - (void)mediaPicker:(MPMediaPickerController *)mediaPicker didPickMediaItems:(MPMediaItemCollection *)mediaItemCollection
@@ -514,17 +515,10 @@
     {
         NSLog(@"nsdata received");
         NSData *newSong = [myobject copy];
-        NSURL *tmpDirURL = [NSURL fileURLWithPath:NSTemporaryDirectory() isDirectory:YES];
+        [_songQueue addObject:newSong];
         
-        NSURL *fileURL = [[tmpDirURL URLByAppendingPathComponent:@"exported"] URLByAppendingPathExtension:@"m4a"];
-        [newSong writeToURL:tmpDirURL atomically:YES];
-        
-        
-        NSData *wavDATA = [NSData dataWithContentsOfURL:fileURL];
-        NSError *error;
-        
-        _coolPlayer =[[AVAudioPlayer alloc] initWithData:newSong error:&error];
-        [_coolPlayer play];
+        //_coolPlayer =[[AVAudioPlayer alloc] initWithData:newSong error:&error];
+        //[_coolPlayer play];
     }
     
     
