@@ -10,6 +10,8 @@
 		0209B7F918B907960072B2FA /* MediaAccessibility.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0209B7F818B907960072B2FA /* MediaAccessibility.framework */; };
 		0209B7FB18B907B70072B2FA /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0209B7FA18B907B70072B2FA /* CoreMedia.framework */; };
 		0209B7FD18B9080E0072B2FA /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0209B7FC18B9080E0072B2FA /* MediaPlayer.framework */; };
+		0217EEB018C514D70060DA48 /* profileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0217EEAF18C514D70060DA48 /* profileManager.m */; };
+		0217EEB118C514D70060DA48 /* profileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0217EEAF18C514D70060DA48 /* profileManager.m */; };
 		0219FCE2183EF1560080A1F1 /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0219FCE1183EF1560080A1F1 /* HelpViewController.m */; };
 		0219FCE3183EF1560080A1F1 /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0219FCE1183EF1560080A1F1 /* HelpViewController.m */; };
 		0219FCE6183EFBF80080A1F1 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0219FCE5183EFBF80080A1F1 /* ProfileViewController.m */; };
@@ -89,6 +91,8 @@
 		0209B7F818B907960072B2FA /* MediaAccessibility.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaAccessibility.framework; path = System/Library/Frameworks/MediaAccessibility.framework; sourceTree = SDKROOT; };
 		0209B7FA18B907B70072B2FA /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		0209B7FC18B9080E0072B2FA /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		0217EEAE18C514D70060DA48 /* profileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = profileManager.h; sourceTree = "<group>"; };
+		0217EEAF18C514D70060DA48 /* profileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = profileManager.m; sourceTree = "<group>"; };
 		0219FCE0183EF1560080A1F1 /* HelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HelpViewController.h; path = ../HelpViewController.h; sourceTree = "<group>"; };
 		0219FCE1183EF1560080A1F1 /* HelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HelpViewController.m; path = ../HelpViewController.m; sourceTree = "<group>"; };
 		0219FCE4183EFBF80080A1F1 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
@@ -435,6 +439,8 @@
 				94E3105218B68825001DC113 /* MPCConnection.m */,
 				946243B418B7022D00F5D0C6 /* myManager.h */,
 				946243B518B7022D00F5D0C6 /* myManager.m */,
+				0217EEAE18C514D70060DA48 /* profileManager.h */,
+				0217EEAF18C514D70060DA48 /* profileManager.m */,
 			);
 			name = "New Classes";
 			sourceTree = "<group>";
@@ -560,6 +566,7 @@
 				02CBB02518838817008AF034 /* ViewController.m in Sources */,
 				94BB70EC18B53129003ED058 /* GuestsViewController.m in Sources */,
 				0220CB54182C977F006C10A8 /* main.m in Sources */,
+				0217EEB018C514D70060DA48 /* profileManager.m in Sources */,
 				94E3105318B68825001DC113 /* MPCConnection.m in Sources */,
 				94E3105818B68D7C001DC113 /* ConnectionsViewController.m in Sources */,
 				0219FCEA183EFE2D0080A1F1 /* JoinRoomViewController.m in Sources */,
@@ -595,6 +602,7 @@
 				0219FCE7183EFBF80080A1F1 /* ProfileViewController.m in Sources */,
 				0220CB80183DD50F006C10A8 /* MainViewController.m in Sources */,
 				0219FCEB183EFE2D0080A1F1 /* JoinRoomViewController.m in Sources */,
+				0217EEB118C514D70060DA48 /* profileManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
