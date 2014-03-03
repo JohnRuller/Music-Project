@@ -29,11 +29,13 @@
 
 @property (strong, nonatomic) NSURL *assetURL;
 @property (strong, nonatomic) NSMutableArray *songQueue;
-@property (strong, nonatomic) NSMutableArray *playlistInfo;
 @property (strong, nonatomic) NSString *hostName;
 
 @property (nonatomic) NSUInteger location;
 @property (nonatomic, strong) AVAudioPlayer *coolPlayer;
+
+@property (nonatomic, strong) peerPlaylist *playlistInfo;
+@property (nonatomic, strong) NSData *exportedData;
 
 @property NSDate *startTime;
 
@@ -54,8 +56,10 @@
     
     _appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     _songQueue = [[NSMutableArray alloc] init];
-    _playlistInfo = [[NSMutableArray alloc] init];
+    _playlistInfo = [[peerPlaylist alloc] init];
+    //_playlistInfo = [[NSMutableArray alloc] init];
     _hostName = [[NSString alloc] init];
+    
     
     //_startTime = [NSDate date];
 
@@ -116,111 +120,66 @@
 
     //get the song
     [self dismissViewControllerAnimated:YES completion:nil];
-    NSMutableDictionary *item = [[NSMutableDictionary alloc] init];
+    NSData *data;
     
-    //self.song = [mediaItemCollection.items objectAtIndex: 0];
+    self.song = [mediaItemCollection.items objectAtIndex: 0];
     
-//    _songQueue = [mediaItemCollection copy];
-    
-    NSInteger MPcount = [mediaItemCollection count];
-    NSInteger SQcount = [_songQueue count];
-    NSInteger INCount;
-    
-    NSLog(@"MediaPicker MPCount: %zd", MPcount);
-    NSLog(@"MediaPicker SQCount 1: %zd", SQcount);
-
-    for (NSInteger i = 0; i < MPcount; i++)
+    MyManager *sharedManager = [MyManager sharedManager];
+    if ([sharedManager.someProperty isEqualToString:@"YES"])
     {
-        _song = [mediaItemCollection.items objectAtIndex:i];
-        [_songQueue addObject:_song];
+        //is host
+        //get playlist ready to be sent out
         
-        _songNameString = [self.song valueForProperty:MPMediaItemPropertyTitle] ? [self.song valueForProperty:MPMediaItemPropertyTitle] : @"";
-        _artistNameString = [self.song valueForProperty:MPMediaItemPropertyArtist] ? [self.song valueForProperty:MPMediaItemPropertyArtist] : @"";
-        _albumNameString = [self.song valueForProperty:MPMediaItemPropertyAlbumTitle] ? [self.song valueForProperty: MPMediaItemPropertyAlbumTitle] : @"";
-        MPMediaItemArtwork *artz = [self.song valueForProperty:MPMediaItemPropertyArtwork];
-        UIImage *art = [artz imageWithSize:_albumArt.frame.size];
-        //UIImage *smallArt = [artz imageWithSize:self.albumImage.frame.size];
+        [_playlistInfo addSongFromHost:_song];
+        data = [NSKeyedArchiver archivedDataWithRootObject:[_playlistInfo getArray]];
+        
+        //then add song to queue
+    
+        [self turnSongIntoData:_song];
+        
+        
+        while (_exportedData == nil) {
+        }
+        
+        [_songQueue addObject:_exportedData];
+        _exportedData = nil;
+    }
+    else
+    {
+        //is guest
+        //makes a NSDictionary containing the song file and the playlist information
+        
+        NSMutableDictionary *newSong = [[NSMutableDictionary alloc] init];
+        NSDictionary *info = [_playlistInfo makeDictionaryItem:_song];
+        [self turnSongIntoData:_song];
+        
+        
+        while (_exportedData == nil) {
+        }
+        [newSong setObject:@"songFile" forKey:@"type"];
+        [newSong setObject:info forKey:@"songInfo"];
+        [newSong setObject:_exportedData forKey:@"songData"];
+        
+        data = [NSKeyedArchiver archivedDataWithRootObject:[newSong copy]];
+        _exportedData = nil;
 
-        
-        NSNumber *nada = [[NSNumber alloc] initWithInt:0];
-        [item removeAllObjects];
-        [item setObject:_songNameString forKey:@"songTitle"];
-        [item setObject:_artistNameString forKey:@"artistName"];
-        [item setObject:_albumNameString forKey:@"albumName"];
-        //[item setObject:art forKey:@"albumArt"];
-        [item setObject:nada forKey:@"votes"];
-        
-        [_playlistInfo addObject:item];
+
+        //send actual file as well.
     }
     
-    INCount = [_songQueue count];
-    NSLog(@"INCount: %tu", INCount);
-    
-    //NSLog(@")
-    
-    SQcount = [_songQueue count];
-    NSLog(@"MediaPicker SQCount 2: %tu", SQcount);
-    
-    NSInteger PLcount = [_playlistInfo count];
-    NSLog(@"MediaPicker PLCount: %tu", PLcount);
-    
-    NSLog(@"Closing media thing and sending");
-    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:[_playlistInfo copy]];
+    //NSData *data = [NSKeyedArchiver archivedDataWithRootObject:[_playlistInfo copy]];
     NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
     NSError *error;
     
-    //NSInteger = [_playlistInfo ]
-    
-    NSLog(@"Sending");
+    //    //NSInteger = [_playlistInfo ]
+    //
+    //    NSLog(@"Sending");
     [_appDelegate.mpcController.session sendData:data
-                                         toPeers:allPeers
-                                        withMode:MCSessionSendDataReliable
-                                           error:&error];
+                                            toPeers:allPeers
+                                            withMode:MCSessionSendDataReliable
+                                              error:&error];
     
     [_playlistTable reloadData];
-
-    
-    
-/*
-//    _assetURL = [_song valueForProperty: MPMediaItemPropertyAssetURL];
-//    
-//    NSAssert(_assetURL, @"URL is valid.");
-//    NSLog(@"%@", [_assetURL absoluteString]);
-    
-    
-//    NSURL *url = [item valueForProperty:MPMediaItemPropertyAssetURL];
-//    
-//    // Play the item using AVPlayer
-//    self.avAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
-//    [self.avAudioPlayer play];
-
-    
-//    AVPlayerItem *playerItem = [[AVPlayerItem alloc] initWithURL:_assetURL];
-//    AVPlayer *player = [[AVPlayer alloc] initWithPlayerItem:playerItem];
-//    [player play];
-    
-//    AVURLAsset *songAsset = [AVURLAsset URLAssetWithURL: _assetURL options:nil];
-//    
-//    NSError *error;
-//	player.numberOfLoops = -1;
-//	
-//	if (player == nil)
-//		NSLog([error description]);
-//	else
-//		[player play];
-//    
-//
-    
-    
-//    _songNameString = [self.song valueForProperty:MPMediaItemPropertyTitle] ? [self.song valueForProperty:MPMediaItemPropertyTitle] : @"";
-//    _artistNameString = [self.song valueForProperty:MPMediaItemPropertyArtist] ? [self.song valueForProperty:MPMediaItemPropertyArtist] : @"";
-//    _albumNameString = [self.song valueForProperty:MPMediaItemPropertyAlbumTitle] ? [self.song valueForProperty: MPMediaItemPropertyAlbumTitle] : @"";
-//    _albumArtImage = [self.song valueForProperty:MPMediaItemPropertyArtwork];
-//    
-//    _songName.text = _songNameString;
-//    _artist.text = _artistNameString;
-//    _albumName.text = _albumNameString;
-//    //_albumArt*/
 }
 
 - (IBAction)chooseSong:(id)sender
@@ -394,7 +353,6 @@
     NSString *peerDisplayName = peerID.displayName;
     
     NSLog(@"ugh");
-    //id myobject = [NSKeyedUnarchiver unarchiveObjectWithData:[[notification userInfo] objectForKey:@"data"]];
     
     NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
 
@@ -409,25 +367,31 @@
     
     NSLog(@"got object ID");
     
+    
+    
+    //means that this is a guest, and has received a new
+    //NSArray with the full playlist
     if ([myobject isKindOfClass:[NSArray class]])
     {
         NSLog(@"got array");
-        _playlistInfo = [myobject copy];
+        NSMutableArray *playlist = [myobject copy];
+        //_playlistInfo = [myobject copy];
+        
+        [_playlistInfo updatePlaylist:playlist];
         
         
-        
-        info = [_playlistInfo objectAtIndex:0];
-        
-        _songName.text = [info objectForKey:@"songTitle"];
-        _artist.text = [info objectForKey:@"artistName"];
-        _albumName.text = [info objectForKey:@"albumName"];
-        
-        //MPMediaItemArtwork *theImage = [info objectForKey:@"albumArt"];
-        //UIImage *art = [theImage imageWithSize:_albumArt.frame.size];
-        _albumArt.image = [info objectForKey:@"art"];
-        //_albumArt.image = art;*/
-        
-        _hostName = peerDisplayName;
+//        info = [_playlistInfo objectAtIndex:0];
+//        
+//        _songName.text = [info objectForKey:@"songTitle"];
+//        _artist.text = [info objectForKey:@"artistName"];
+//        _albumName.text = [info objectForKey:@"albumName"];
+//        
+//        //MPMediaItemArtwork *theImage = [info objectForKey:@"albumArt"];
+//        //UIImage *art = [theImage imageWithSize:_albumArt.frame.size];
+//        _albumArt.image = [info objectForKey:@"art"];
+//        //_albumArt.image = art;*/
+//        
+//        _hostName = peerDisplayName;
         
         [_playlistTable reloadData];
     }
@@ -448,8 +412,6 @@
     MyManager *sharedManager = [MyManager sharedManager];
     if ([sharedManager.someProperty isEqualToString:@"YES"])
     {
-
-        
         if ([myobject isKindOfClass:[NSDictionary class]])
         {
             NSDictionary *dic = [myobject copy];
@@ -464,10 +426,11 @@
                     NSInteger loc = [where integerValue];
                     //replace = [NSNumber numberWithInt:[cool intValue] + 1]
                     
-                    [_playlistInfo exchangeObjectAtIndex:loc withObjectAtIndex:loc-1];
-                    [_songQueue exchangeObjectAtIndex:loc withObjectAtIndex:loc-1];
+                    //[_playlistInfo exchangeObjectAtIndex:loc withObjectAtIndex:loc-1];
+                    [_playlistInfo playlistUpvote:loc];
+                    //[_songQueue exchangeObjectAtIndex:loc withObjectAtIndex:loc-1];
                     
-                    NSData *toBeSent = [NSKeyedArchiver archivedDataWithRootObject:_playlistInfo];
+                    NSData *toBeSent = [NSKeyedArchiver archivedDataWithRootObject:[_playlistInfo getArray]];
                     NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
                     NSError *error;
                     
@@ -484,10 +447,50 @@
                     NSInteger loc = [where integerValue];
                     //replace = [NSNumber numberWithInt:[cool intValue] + 1]
                     
-                    [_playlistInfo exchangeObjectAtIndex:loc withObjectAtIndex:loc+1];
-                    [_songQueue exchangeObjectAtIndex:loc withObjectAtIndex:loc+1];
+                    //[_playlistInfo exchangeObjectAtIndex:loc withObjectAtIndex:loc+1];
                     
-                    NSData *toBeSent = [NSKeyedArchiver archivedDataWithRootObject:_playlistInfo];
+                    [_playlistInfo playlistDownvote:loc];
+                    //[_songQueue exchangeObjectAtIndex:loc withObjectAtIndex:loc+1];
+                    
+                    NSData *toBeSent = [NSKeyedArchiver archivedDataWithRootObject:[_playlistInfo getArray]];
+                    NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
+                    NSError *error;
+                    
+                    NSLog(@"Sending");
+                    [_appDelegate.mpcController.session sendData:toBeSent
+                                                         toPeers:allPeers
+                                                        withMode:MCSessionSendDataReliable
+                                                           error:&error];
+                }
+                
+                if ([type isEqualToString:@"newSong"])
+                {
+                    //add file locally
+                    [_playlistInfo addSongFromGuest:dic];
+                    
+                    //send it out
+                    NSData *toBeSent = [NSKeyedArchiver archivedDataWithRootObject:[_playlistInfo getArray]];
+                    NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
+                    NSError *error;
+                    
+                    NSLog(@"Sending");
+                    [_appDelegate.mpcController.session sendData:toBeSent
+                                                         toPeers:allPeers
+                                                        withMode:MCSessionSendDataReliable
+                                                           error:&error];
+                }
+                
+                if ([type isEqualToString:@"songFile"])
+                {
+                    NSLog(@"nsdata received");
+                    
+                    NSData *newSong = [dic objectForKey:@"songData"];
+                    NSDictionary *newSongData = [dic objectForKey:@"songInfo"];
+
+                    [_songQueue addObject:newSong];
+                    [_playlistInfo addSongFromGuest:newSongData];
+                    
+                    NSData *toBeSent = [NSKeyedArchiver archivedDataWithRootObject:[_playlistInfo getArray]];
                     NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
                     NSError *error;
                     
@@ -533,17 +536,6 @@
                 }
             }
         }
-    }
-    
-    if ([myobject isKindOfClass:[MPMediaItem class]])
-    {
-        //MPMediaItem *song = myobject;
-        //save it somewhere
-        //get url
-        
-        //AVPlayerItem *playerItem = [[AVPlayerItem alloc] initWithAsset:CVX :url];
-        //AVPlayer *player = [[AVPlayer alloc] initWithPlayerItem:playerItem];
-        //[player play];
     }
     
     [_playlistTable reloadData];
@@ -640,57 +632,57 @@
     
 }
 
--(void)nowPlayingChanged:(NSNotification *)notification
-{
-    NSLog(@"nowPlayingChanged");
-    
-    //_startTime = [NSDate date];
-    //[NSThread sleepForTimeInterval:1.0];
-    
-    NSTimeInterval elapsedTime = [_startTime timeIntervalSinceNow];
-    NSLog([NSString stringWithFormat:@"Elapsed time interval: %f", -elapsedTime]);
-    int time = round(elapsedTime);
-    NSLog(@"Elapsed time: %tu", -time);
-
-    
-        _startTime = [NSDate date];
-        NSLog(@"nowPlayingChanged in loop");
-        NSInteger SQcount = [_songQueue count];
-        NSLog(@"nowPlayingChanged SQCount 1: %tu", SQcount);
-        
-        NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
-        info = [_playlistInfo objectAtIndex:0];
-        
-        
-        _songName.text = [info objectForKey:@"songTitle"];
-        _artist.text = [info objectForKey:@"artistName"];
-        _albumName.text = [info objectForKey:@"albumName"];
-        //_albumArt.image = [info objectForKey:@"albumArt"];
-        
-        NSData *toBeSent = [NSKeyedArchiver archivedDataWithRootObject:_playlistInfo];
-        NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
-        NSError *error;
-        
-        NSLog(@"Sending");
-        [_appDelegate.mpcController.session sendData:toBeSent
-                                             toPeers:allPeers
-                                            withMode:MCSessionSendDataReliable
-                                               error:&error];
-        
-        //[_playlistInfo removeObjectAtIndex:0];
-        //[_songQueue removeObjectAtIndex:0];
-        [_playlistTable reloadData];
-        
-        SQcount = [_songQueue count];
-        NSLog(@"nowPlayingChanged SQCount 2: %tu", SQcount);
-        
-        _startTime = [NSDate date];
-        
-//        NSTimeInterval elapsedTime = [_startTime timeIntervalSinceNow];
-//        NSLog([NSString stringWithFormat:@"Elapsed time interval: %f", -elapsedTime]);
-//        int time = round(elapsedTime);
-//        NSLog(@"Elapsed time: %tu", -time);
-}
+//-(void)nowPlayingChanged:(NSNotification *)notification
+//{
+//    NSLog(@"nowPlayingChanged");
+//    
+//    //_startTime = [NSDate date];
+//    //[NSThread sleepForTimeInterval:1.0];
+//    
+//    NSTimeInterval elapsedTime = [_startTime timeIntervalSinceNow];
+//    NSLog([NSString stringWithFormat:@"Elapsed time interval: %f", -elapsedTime]);
+//    int time = round(elapsedTime);
+//    NSLog(@"Elapsed time: %tu", -time);
+//
+//    
+//        _startTime = [NSDate date];
+//        NSLog(@"nowPlayingChanged in loop");
+//        NSInteger SQcount = [_songQueue count];
+//        NSLog(@"nowPlayingChanged SQCount 1: %tu", SQcount);
+//        
+//        NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
+//        info = [_playlistInfo objectAtIndex:0];
+//        
+//        
+//        _songName.text = [info objectForKey:@"songTitle"];
+//        _artist.text = [info objectForKey:@"artistName"];
+//        _albumName.text = [info objectForKey:@"albumName"];
+//        //_albumArt.image = [info objectForKey:@"albumArt"];
+//        
+//        NSData *toBeSent = [NSKeyedArchiver archivedDataWithRootObject:_playlistInfo];
+//        NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
+//        NSError *error;
+//        
+//        NSLog(@"Sending");
+//        [_appDelegate.mpcController.session sendData:toBeSent
+//                                             toPeers:allPeers
+//                                            withMode:MCSessionSendDataReliable
+//                                               error:&error];
+//        
+//        //[_playlistInfo removeObjectAtIndex:0];
+//        //[_songQueue removeObjectAtIndex:0];
+//        [_playlistTable reloadData];
+//        
+//        SQcount = [_songQueue count];
+//        NSLog(@"nowPlayingChanged SQCount 2: %tu", SQcount);
+//        
+//        _startTime = [NSDate date];
+//        
+////        NSTimeInterval elapsedTime = [_startTime timeIntervalSinceNow];
+////        NSLog([NSString stringWithFormat:@"Elapsed time interval: %f", -elapsedTime]);
+////        int time = round(elapsedTime);
+////        NSLog(@"Elapsed time: %tu", -time);
+//}
 
 
 - (void)didReceiveMemoryWarning
@@ -723,7 +715,7 @@
 
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [_playlistInfo count];
+    return [_playlistInfo countOfPlaylistInfo];
 }
 
 
@@ -736,16 +728,15 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CellIdentifier"];
     }
     
+    NSMutableArray *play = [_playlistInfo getArray];
     NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
-    info = [_playlistInfo objectAtIndex:indexPath.row];
+    
+    info = [play objectAtIndex:indexPath.row];
     
     cell.textLabel.text = [info objectForKey:@"songTitle"];
     cell.detailTextLabel.text = [info objectForKey:@"artistName"];
     cell.imageView.image = [info objectForKey:@"art"];
-    
-    //MPMediaItemArtwork *theImage = [info objectForKey:@"albumArt"];
-    //UIImage *art = [theImage imageWithSize:cell.imageView.frame.size];
-    //cell.imageView.image = art;
+    //add in who / album art
     
     return cell;
 }
@@ -757,8 +748,10 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     _location = indexPath.row;
+    NSMutableArray *play = [_playlistInfo getArray];
     NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
-    info = [_playlistInfo objectAtIndex:indexPath.row];
+    
+    info = [play objectAtIndex:indexPath.row];
     
     UIActionSheet *chooseUpOrDown = [[UIActionSheet alloc] initWithTitle:[info objectForKey:@"songTitle"]
                                                                 delegate:self
@@ -779,9 +772,10 @@
     
     NSString *buttonTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
 
-    NSLog(@"Host");
     NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
-    info = [_playlistInfo objectAtIndex:_location];
+    NSMutableArray *play = [_playlistInfo getArray];
+
+    info = [play objectAtIndex:_location];
     NSNumber *cool = [info objectForKey:@"votes"];
     NSNumber *replace;
     
@@ -792,6 +786,7 @@
     MyManager *sharedManager = [MyManager sharedManager];
     if ([sharedManager.someProperty isEqualToString:@"YES"])
     {
+        NSLog(@"Host");
         if ([buttonTitle isEqualToString:@"Upvote!"])
         {
             NSLog(@"Upvote!");
@@ -799,12 +794,11 @@
             [info setObject:replace forKey:@"votes"];
             
             NSLog(@"replace! Location: %ld", (long)_location);
-            NSLog(@"count %lu", (unsigned long)[_playlistInfo count]);
             
-            [_playlistInfo replaceObjectAtIndex:_location withObject:info];
+            //[_playlistInfo replaceObjectAtIndex:_location withObject:info];
             NSLog(@"exchange!");
-            [_playlistInfo exchangeObjectAtIndex:_location withObjectAtIndex:_location-1];
-            [_songQueue exchangeObjectAtIndex:_location withObjectAtIndex:_location-1];
+            [_playlistInfo playlistUpvote:_location];
+            //[_songQueue exchangeObjectAtIndex:_location withObjectAtIndex:_location-1];
             
             //prepare dictionary to be sent to peers
             type = @"Upvote";
@@ -818,9 +812,10 @@
             [info setObject:replace forKey:@"votes"];
             
             
-            [_playlistInfo replaceObjectAtIndex:_location withObject:info];
-            [_playlistInfo exchangeObjectAtIndex:_location withObjectAtIndex:_location+1];
-            [_songQueue exchangeObjectAtIndex:_location withObjectAtIndex:_location+1];
+            //[_playlistInfo replaceObjectAtIndex:_location withObject:info];
+            //[_playlistInfo exchangeObjectAtIndex:_location withObjectAtIndex:_location+1];
+            [_playlistInfo playlistDownvote:_location];
+            //[_songQueue exchangeObjectAtIndex:_location withObjectAtIndex:_location+1];
             
             //prepare dictionary to be sent to peers
             type = @"Downvote";
@@ -833,7 +828,7 @@
             return;
         }
         
-        NSData *toBeSent = [NSKeyedArchiver archivedDataWithRootObject:_playlistInfo];
+        NSData *toBeSent = [NSKeyedArchiver archivedDataWithRootObject:[_playlistInfo getArray]];
         NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
         NSError *error;
         
@@ -874,12 +869,117 @@
     
         
     [_playlistTable reloadData];
-    
-    NSLog(@"send to Guests");
-    
-
-
+    //NSLog(@"send to Guests");
 }
 
+- (void)turnSongIntoData:(MPMediaItem *) item
+{
+    //NSURL *url = [[_songQueue objectAtIndex:0] valueForProperty: MPMediaItemPropertyAssetURL];
+    
+    NSURL *url = [item valueForProperty: MPMediaItemPropertyAssetURL];
+    
+    if (url == nil)
+    {
+        NSLog(@"url = nil");
+    }
+    
+    AVURLAsset *songAsset = [AVURLAsset URLAssetWithURL: url options:nil];
+    AVAssetExportSession *exporter = [[AVAssetExportSession alloc] initWithAsset: songAsset
+                                                                      presetName:AVAssetExportPresetAppleM4A];
+    exporter.outputFileType =   @"com.apple.m4a-audio";
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString * myDocumentsDirectory = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
+    
+    [[NSDate date] timeIntervalSince1970];
+    NSTimeInterval seconds = [[NSDate date] timeIntervalSince1970];
+    NSString *intervalSeconds = [NSString stringWithFormat:@"%0.0f",seconds];
+    NSString * fileName = [NSString stringWithFormat:@"%@.m4a",intervalSeconds];
+    NSString *exportFile = [myDocumentsDirectory stringByAppendingPathComponent:fileName];
+    
+    NSURL *exportURL = [NSURL fileURLWithPath:exportFile];
+    exporter.outputURL = exportURL;
+    
+    // do the export
+    // (completion handler block omitted)
+    [exporter exportAsynchronouslyWithCompletionHandler:
+     ^{
+         long int exportStatus = exporter.status;
+         
+         switch (exportStatus)
+         {
+             case AVAssetExportSessionStatusFailed:
+             {
+                 NSError *exportError = exporter.error;
+                 NSLog (@"AVAssetExportSessionStatusFailed: %@", exportError);
+                 break;
+             }
+             case AVAssetExportSessionStatusCompleted:
+             {
+                 NSLog (@"AVAssetExportSessionStatusCompleted");
+                 
+                 
+                 _exportedData = [NSData dataWithContentsOfFile: [myDocumentsDirectory
+                                                               stringByAppendingPathComponent:fileName]];
+                 if (_exportedData == nil)
+                 {
+                     NSLog(@"exported data in thing = nil");
+                 }
+                 
+                 //return data;
+                 
+                 //                 NSError *error = nil;
+                 //
+                 //                 NSLog(@"Please play");
+                 //                 //_coolPlayer =[[AVAudioPlayer alloc] initWithData:data error:&error];
+                 //                 //[_coolPlayer play];
+                 //
+                 //                 NSLog(@"%@", [error localizedDescription]);
+                 //
+                 //
+                 //
+                 //                 NSData *toBeSent = [NSKeyedArchiver archivedDataWithRootObject:data];
+                 //                 //
+                 //                 //
+                 //                 NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
+                 //                 //
+                 //                 NSLog(@"Sending");
+                 //                 [_appDelegate.mpcController.session sendData:toBeSent
+                 //                                                      toPeers:allPeers
+                 //                                                     withMode:MCSessionSendDataReliable
+                 //                                                        error:&error];
+                 //
+                 //                 //DLog(@"Data %@",data);
+                 //                 data = nil;
+                 break;
+             }
+             case AVAssetExportSessionStatusUnknown:
+             {
+                 NSLog (@"AVAssetExportSessionStatusUnknown"); break;
+             }
+             case AVAssetExportSessionStatusExporting:
+             {
+                 NSLog (@"AVAssetExportSessionStatusExporting"); break;
+             }
+             case AVAssetExportSessionStatusCancelled:
+             {
+                 NSLog (@"AVAssetExportSessionStatusCancelled"); break;
+             }
+             case AVAssetExportSessionStatusWaiting:
+             {
+                 NSLog (@"AVAssetExportSessionStatusWaiting"); break;
+             }
+             default:
+             {
+                 NSLog (@"didn't get export status"); break;
+             }
+         }
+     }];
+    [_playlistTable reloadData];
+    
+    //NSData *data = [NSData dataWithContentsOfFile: [myDocumentsDirectory
+    //                                                stringByAppendingPathComponent:fileName]];
+    //return data;
+}
 
 @end

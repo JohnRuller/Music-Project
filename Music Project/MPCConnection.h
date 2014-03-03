@@ -11,6 +11,7 @@
 
 @interface MPCConnection : NSObject <MCSessionDelegate>
 
+
 @property (nonatomic, strong) MCPeerID *peerID;
 @property (nonatomic, strong) MCSession *session;
 @property (nonatomic, strong) MCBrowserViewController *browser;

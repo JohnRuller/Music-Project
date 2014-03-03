@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
+#import "peerPlaylist.h"
 @import MediaPlayer;
 
 @interface PlaylistViewController : UIViewController <MPMediaPickerControllerDelegate, AVAudioPlayerDelegate, UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate>
