@@ -228,8 +228,8 @@
 }
 
 -(void)didReceiveDataWithNotification:(NSNotification *)notification{
-    MCPeerID *peerID = [[notification userInfo] objectForKey:@"peerID"];
-    NSString *peerDisplayName = peerID.displayName;
+    //MCPeerID *peerID = [[notification userInfo] objectForKey:@"peerID"];
+   //NSString *peerDisplayName = peerID.displayName;
     
     NSData *receivedData = [[notification userInfo] objectForKey:@"data"];
     id myObject = [NSKeyedUnarchiver unarchiveObjectWithData:receivedData];

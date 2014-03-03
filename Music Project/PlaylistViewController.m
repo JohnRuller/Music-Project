@@ -42,7 +42,7 @@
 //@property NSInteger *locationInSongQueue;
 
 -(void)didReceiveDataWithNotification:(NSNotification *)notification;
--(void)nowPlayingChanged:(NSNotification *)notification;
+//-(void)nowPlayingChanged:(NSNotification *)notification;
 
 @end
 
@@ -84,10 +84,7 @@
                                                object:nil];
     
     
-    [[NSNotificationCenter defaultCenter] addObserver: self
-                                             selector: @selector (nowPlayingChanged:)
-                                                 name: MPMusicPlayerControllerNowPlayingItemDidChangeNotification
-                                               object: self.player];
+
 
     [_playlistTable setDelegate:self];
     [_playlistTable setDataSource:self];
@@ -354,12 +351,12 @@
 {
     NSLog(@"didReceiveDataWithNotification");
 
-    MCPeerID *peerID = [[notification userInfo] objectForKey:@"peerID"];
-    NSString *peerDisplayName = peerID.displayName;
+    //MCPeerID *peerID = [[notification userInfo] objectForKey:@"peerID"];
+    //NSString *peerDisplayName = peerID.displayName;
     
     NSLog(@"ugh");
     
-    NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
+    //NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
 
     
     NSData *receivedData = [[notification userInfo] objectForKey:@"data"];
@@ -544,99 +541,10 @@
     }
     
     [_playlistTable reloadData];
-
-    
-    /*if ([myobject isKindOfClass:[NSDictionary class]])
-    {
-        NSLog(@"Received dictionary");
-        NSNumber *replace;
-        
-        NSDictionary *info = [NSKeyedUnarchiver unarchiveObjectWithData:receivedData];
-        NSString *whatKind = [info objectForKey:@"type"];
-        
-        int loc = [[info objectForKey:@"integer"] intValue];
-        NSMutableDictionary *songInfo = [_playlistInfo objectAtIndex:loc];
-        
-        if ([whatKind isEqualToString:@"Upvotes!"])
-        {
-            NSLog(@"Upvote!");
-            replace = [NSNumber numberWithInt:[[info objectForKey:@"where"] intValue] + 1];
-            [songInfo setObject:replace forKey:@"votes"];
-            
-            NSLog(@"Remove!");
-            [_playlistInfo replaceObjectAtIndex:_location withObject:info];
-            [_playlistInfo exchangeObjectAtIndex:_location withObjectAtIndex:_location-1];
-        }
-        
-        if ([whatKind isEqualToString:@"Downboat!"])
-        {
-            NSLog(@"Downvote!");
-            replace = [NSNumber numberWithInt:[[info objectForKey:@"where"] intValue] - 1];
-            [songInfo setObject:replace forKey:@"votes"];
-            
-            NSLog(@"Remove!");
-            [_playlistInfo replaceObjectAtIndex:_location withObject:info];
-            [_playlistInfo exchangeObjectAtIndex:_location withObjectAtIndex:_location + 1];
-        }
-    }*/
-
-
-    
-    
-    /*NSString *filelocation = NSTemporaryDirectory();
-    NSURL *url = [[NSURL alloc] initWithString:filelocation];
-    [filelocation writeToURL:url atomically:YES];
-    
-    NSLog(@"ass1");
-    AVAsset *asset = [AVURLAsset URLAssetWithURL:url options:nil];
-    NSLog(@"ass2");
-    AVPlayerItem *anItem = [AVPlayerItem playerItemWithAsset:asset];
-    NSLog(@"ass3");
-
-    player = [AVPlayer playerWithPlayerItem:anItem];
-    NSLog(@"ass4");
-    [player addObserver:self forKeyPath:@"status" options:0 context:nil];
-    NSLog(@"ass5");
-    [player play];
-    NSLog(@"ass6");
-
-    
-    //NSString *tempFile = [tempPath stringByAppendingPathComponent:@”tempFile.txt”];
-
-    
-    //NSMutableDictionary *songCacheDictionary = [[NSMutableDictionary alloc] initWithContentsOfURL:;
-    //[receivedData writeToURL:<#(NSURL *)#> atomically:YES]
-    //AVPlayerItem *player = [AVPlayerItem playerItemWithURL:<#(NSURL *)#>]
-    
-    //NSString *filePath = [NSTemporaryDirectory() stringByAppendingPathComponent:receivedData];
-
-    
-    //AVPlayerItem *player = [[AVPlayerItem alloc] initwithdata:_assetURL];
-    //*player = [[AVPlayer alloc] initWithPlayerItem:playerItem];
-    //[player play];
-    
-//    NSString *urlString = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
-//    NSURL *url = [[NSURL alloc] initWithString:urlString];
-//    self.player = [[AVPlayer alloc] initWithURL:url];
-//    [self.player play];
-    
-    //NSFileManager *fileManager = [NSFileManager defaultManager];
-    //NSString *ful
-    
-    //NSString *filePath = [NSTemporaryDirectory() stringByAppendingPathComponent:receivedData];
-    //NSURL *furl = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingPathComponent:receivedData];
-    
-//    NSString *urlString = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
-//    NSURL *url = [[NSURL alloc] initWithString:urlString];
-//    
-//    NSData *wavDATA = [NSData dataWithContentsOfURL:url];
-//    NSError *error;
-//    
-//    self.player=[[AVAudioPlayer alloc] initWithData:wavDATA error:&error];
-//    [self.player play];*/
     
 }
 
+/*
 //-(void)nowPlayingChanged:(NSNotification *)notification
 //{
 //    NSLog(@"nowPlayingChanged");
@@ -687,7 +595,7 @@
 ////        NSLog([NSString stringWithFormat:@"Elapsed time interval: %f", -elapsedTime]);
 ////        int time = round(elapsedTime);
 ////        NSLog(@"Elapsed time: %tu", -time);
-//}
+//}*/
 
 
 - (void)didReceiveMemoryWarning
