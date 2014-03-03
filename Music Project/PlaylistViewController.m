@@ -21,8 +21,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *albumName;
 @property (strong, nonatomic) IBOutlet UIButton *chooseSong;
 
-
-
 @property (strong, nonatomic) NSString *songNameString;
 @property (strong, nonatomic) NSString *artistNameString;
 @property (strong, nonatomic) NSString *albumNameString;
@@ -126,11 +124,10 @@
 {
     NSLog(@"mediaPicker");
 
-    //get the song
     [self dismissViewControllerAnimated:YES completion:nil];
-    NSData *data;
     
-    self.song = [mediaItemCollection.items objectAtIndex: 0];
+    NSData *data;
+    MPMediaItem *song = [mediaItemCollection.items objectAtIndex: 0];
     
     MyManager *sharedManager = [MyManager sharedManager];
     if ([sharedManager.someProperty isEqualToString:@"YES"])
@@ -138,12 +135,12 @@
         //is host
         //get playlist ready to be sent out
         
-        [_playlistInfo addSongFromHost:_song];
+        [_playlistInfo addSongFromHost:song];
         data = [NSKeyedArchiver archivedDataWithRootObject:[_playlistInfo getArray]];
         
         //then add song to queue
     
-        [self turnSongIntoData:_song];
+        [self turnSongIntoData:song];
         
         
         while (_exportedData == nil) {
@@ -158,8 +155,8 @@
         //makes a NSDictionary containing the song file and the playlist information
         
         NSMutableDictionary *newSong = [[NSMutableDictionary alloc] init];
-        NSDictionary *info = [_playlistInfo makeDictionaryItem:_song];
-        [self turnSongIntoData:_song];
+        NSDictionary *info = [_playlistInfo makeDictionaryItem:song];
+        [self turnSongIntoData:song];
         
         
         while (_exportedData == nil) {

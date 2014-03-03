@@ -253,7 +253,7 @@
 				94E3105518B68837001DC113 /* New Classes */,
 				94E3105018B687F9001DC113 /* New Views */,
 				945B78441895822E00C26AAA /* AudioStreamer */,
-				945B78411895809E00C26AAA /* Views */,
+				945B78411895809E00C26AAA /* Old Views */,
 				945B78421895812500C26AAA /* MainStoryboard.storyboard */,
 				0220CB56182C977F006C10A8 /* AppDelegate.h */,
 				0220CB57182C977F006C10A8 /* AppDelegate.m */,
@@ -324,29 +324,21 @@
 			name = Images;
 			sourceTree = "<group>";
 		};
-		945B78411895809E00C26AAA /* Views */ = {
+		945B78411895809E00C26AAA /* Old Views */ = {
 			isa = PBXGroup;
 			children = (
 				94BB70EA18B53129003ED058 /* GuestsViewController.h */,
 				94BB70EB18B53129003ED058 /* GuestsViewController.m */,
-				02E8C75A18A8A83E007AA6A3 /* EditProfileViewController.h */,
-				02E8C75B18A8A83E007AA6A3 /* EditProfileViewController.m */,
 				945B78701895829C00C26AAA /* CreateRoomMenuViewController.h */,
 				945B786F1895829C00C26AAA /* CreateRoomMenuViewController.m */,
 				0219FCEC183EFEEA0080A1F1 /* CreateRoomViewController.h */,
 				0219FCED183EFEEA0080A1F1 /* CreateRoomViewController.m */,
-				0219FCE0183EF1560080A1F1 /* HelpViewController.h */,
-				0219FCE1183EF1560080A1F1 /* HelpViewController.m */,
 				0219FCE8183EFE2D0080A1F1 /* JoinRoomViewController.h */,
 				0219FCE9183EFE2D0080A1F1 /* JoinRoomViewController.m */,
-				0220CB7D183DD50F006C10A8 /* MainViewController.h */,
-				0220CB7E183DD50F006C10A8 /* MainViewController.m */,
-				0219FCE4183EFBF80080A1F1 /* ProfileViewController.h */,
-				0219FCE5183EFBF80080A1F1 /* ProfileViewController.m */,
 				02CBB0231883880B008AF034 /* ViewController.h */,
 				02CBB02418838817008AF034 /* ViewController.m */,
 			);
-			name = Views;
+			name = "Old Views";
 			sourceTree = "<group>";
 		};
 		945B78441895822E00C26AAA /* AudioStreamer */ = {
@@ -410,18 +402,26 @@
 		94E3105018B687F9001DC113 /* New Views */ = {
 			isa = PBXGroup;
 			children = (
-				94E3105618B68D7C001DC113 /* ConnectionsViewController.h */,
-				94E3105718B68D7C001DC113 /* ConnectionsViewController.m */,
-				949ABA1E18B6923000D159A0 /* ChatViewController.h */,
-				949ABA1F18B6923000D159A0 /* ChatViewController.m */,
-				94D3AE2E18B6A84300495CAD /* PlaylistViewController.h */,
-				94D3AE2F18B6A84300495CAD /* PlaylistViewController.m */,
-				9435283918B7AB5000AC7B32 /* PlayerViewController.h */,
-				9435283A18B7AB5000AC7B32 /* PlayerViewController.m */,
 				9466556118B93325009061C5 /* AnarchyViewController.h */,
 				9466556218B93325009061C5 /* AnarchyViewController.m */,
+				949ABA1E18B6923000D159A0 /* ChatViewController.h */,
+				949ABA1F18B6923000D159A0 /* ChatViewController.m */,
 				9445D0E818BA628800BAFF5F /* ChooseSongViewController.h */,
 				9445D0E918BA628800BAFF5F /* ChooseSongViewController.m */,
+				94E3105618B68D7C001DC113 /* ConnectionsViewController.h */,
+				94E3105718B68D7C001DC113 /* ConnectionsViewController.m */,
+				02E8C75A18A8A83E007AA6A3 /* EditProfileViewController.h */,
+				02E8C75B18A8A83E007AA6A3 /* EditProfileViewController.m */,
+				0219FCE0183EF1560080A1F1 /* HelpViewController.h */,
+				0219FCE1183EF1560080A1F1 /* HelpViewController.m */,
+				0220CB7D183DD50F006C10A8 /* MainViewController.h */,
+				0220CB7E183DD50F006C10A8 /* MainViewController.m */,
+				9435283918B7AB5000AC7B32 /* PlayerViewController.h */,
+				9435283A18B7AB5000AC7B32 /* PlayerViewController.m */,
+				94D3AE2E18B6A84300495CAD /* PlaylistViewController.h */,
+				94D3AE2F18B6A84300495CAD /* PlaylistViewController.m */,
+				0219FCE4183EFBF80080A1F1 /* ProfileViewController.h */,
+				0219FCE5183EFBF80080A1F1 /* ProfileViewController.m */,
 			);
 			name = "New Views";
 			sourceTree = "<group>";

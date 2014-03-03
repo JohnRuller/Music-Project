@@ -25,6 +25,4 @@
 - (void)playlistDownvote:(NSInteger)loc;
 - (NSInteger)countOfPlaylistInfo;
 
-
-
 @end
