@@ -1,5 +1,3 @@
-
-
 //
 //  ConnectionsViewController.m
 //  Music Project
@@ -29,6 +27,10 @@
 -(int)profileIndex:(NSString *)name;
 @property (strong) NSDictionary *profileData;
 @property (strong) NSMutableArray *guestProfiles;
+
+//refresh property
+@property (nonatomic,retain) UIRefreshControl *refreshControl;
+-(void)refreshTable;
 
 @end
 
@@ -120,6 +122,14 @@
     [_tblConnectedDevices setDelegate:self];
     [_tblConnectedDevices setDataSource:self];
     [_appDelegate.mpcController advertiseSelf:YES];
+    
+    //refresh stuff
+    UITableViewController *tableViewController = [[UITableViewController alloc] init];
+    tableViewController.tableView = self.tblConnectedDevices;
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(refreshTable) forControlEvents:UIControlEventValueChanged];
+    tableViewController.refreshControl = self.refreshControl;
+
 
 }
 
@@ -129,6 +139,13 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)refreshTable
+{
+    [_tblConnectedDevices reloadData];
+    
+    [self.refreshControl performSelector:@selector(endRefreshing)];
+    
+}
 
 
 #pragma mark - Public method implementation
@@ -151,10 +168,6 @@
     [_appDelegate.mpcController.session disconnect];
     
     [_arrConnectedDevices removeAllObjects];
-    [_tblConnectedDevices reloadData];
-}
-
-- (IBAction)sendDataButton:(id)sender {
     [_tblConnectedDevices reloadData];
 }
 
@@ -307,15 +320,24 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CellIdentifier"];
     }
     
-    cell.textLabel.text = [_arrConnectedDevices objectAtIndex:indexPath.row];
+    NSString *peerID = [_arrConnectedDevices objectAtIndex:indexPath.row];
+    UILabel *profileNameLabel = (UILabel *)[cell.contentView viewWithTag:101];
+
+    //profileNameLabel.text = [_arrConnectedDevices objectAtIndex:indexPath.row];
+    [profileNameLabel setText:[_arrConnectedDevices objectAtIndex:indexPath.row]];
     
     if([self hasProfileData:[_arrConnectedDevices objectAtIndex:indexPath.row]])
            {
                     NSLog(@"set photo");
-                    int index = [self profileIndex:cell.textLabel.text];
-                    cell.imageView.image = [[self.guestProfiles objectAtIndex:index] objectForKey:@"image"];
+                    int profileIndex = [self profileIndex:peerID];
                
-                }
+                    UIImageView *profileImageView = (UIImageView *)[cell viewWithTag:100];
+                    profileImageView.image = [[self.guestProfiles objectAtIndex:profileIndex] objectForKey:@"image"];
+               
+                    UILabel *profileTaglineLabel = (UILabel *)[cell viewWithTag:102];
+                    [profileTaglineLabel setText:[[self.guestProfiles objectAtIndex:profileIndex] objectForKey:@"tagline"]];
+
+            }
 
     
     return cell;
