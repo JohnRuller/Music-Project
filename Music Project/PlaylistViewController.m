@@ -21,6 +21,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *albumName;
 @property (strong, nonatomic) IBOutlet UIButton *chooseSong;
 
+
+
 @property (strong, nonatomic) NSString *songNameString;
 @property (strong, nonatomic) NSString *artistNameString;
 @property (strong, nonatomic) NSString *albumNameString;
@@ -65,17 +67,17 @@
 
     
     
-//    MyManager *sharedManager = [MyManager sharedManager];
-//    if ([sharedManager.someProperty isEqualToString:@"YES"])
-//    {
-//        _chooseSong.enabled = YES;
-//        _chooseSong.hidden = NO;
-//        
-//    }
-//    else{
-//        _chooseSong.enabled = NO;
-//        _chooseSong.hidden = YES;
-//    }
+    MyManager *sharedManager = [MyManager sharedManager];
+    if ([sharedManager.someProperty isEqualToString:@"YES"])
+    {
+        _buttonPlay.enabled = YES;
+        _buttonPlay.hidden = NO;
+        
+    }
+    else{
+        _buttonPlay.enabled = NO;
+        _buttonPlay.hidden = YES;
+    }
     
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -100,18 +102,24 @@
     NSLog(@"play");
     
     NSError *error;
-//    MPMusicPlayerController *newPlayer;
-//    MPMediaItemCollection *songs = [[MPMediaItemCollection alloc] initWithItems:_songQueue];
-//    newPlayer = [MPMusicPlayerController applicationMusicPlayer];
-//    [newPlayer setQueueWithItemCollection:songs];
-//    [newPlayer beginGeneratingPlaybackNotifications];
     
-    
-    
-    
-    AVAudioPlayer *neatPlayer = [[AVAudioPlayer alloc]initWithData:[_songQueue objectAtIndex:0] error:&error];
-    _coolPlayer = neatPlayer;
-    [_coolPlayer play];
+    if ([_songQueue count] != 0)
+    {
+        AVAudioPlayer *neatPlayer = [[AVAudioPlayer alloc]initWithData:[_songQueue objectAtIndex:0] error:&error];
+        _coolPlayer = neatPlayer;
+        [_coolPlayer prepareToPlay];
+        [_coolPlayer setDelegate:self];
+        [_coolPlayer play];
+    }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No Songs in Queue"
+                                                        message:@"Please add a Song!"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"Ok"
+                                              otherButtonTitles:nil];
+        [alert show];
+    }
 }
 
 - (void)mediaPicker:(MPMediaPickerController *)mediaPicker didPickMediaItems:(MPMediaItemCollection *)mediaItemCollection
@@ -691,20 +699,43 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - AVPlayerDelegate
+#pragma mark - AVAudioPlayerDelegate
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
 {
     NSLog(@"didFinish");
-    if (flag == YES)
+
+    NSError *error = nil;
+    
+    
+    [_songQueue removeObjectAtIndex:0];
+    [_playlistInfo removeSong:0];
+
+    
+    if ([_songQueue count] != 0)
     {
-        NSError *error = nil;
-        [_songQueue removeObject:0];
+        NSLog(@"Play next");
         AVAudioPlayer *neatPlayer = [[AVAudioPlayer alloc]initWithData:[_songQueue objectAtIndex:0] error:&error];
         _coolPlayer = neatPlayer;
         [_coolPlayer prepareToPlay];
         [_coolPlayer setDelegate:self];
         [_coolPlayer play];
     }
+    else
+    {
+        NSLog(@"Stop");
+    }
+    
+    [_playlistTable reloadData];
+    
+    NSData *toBeSent = [NSKeyedArchiver archivedDataWithRootObject:[_playlistInfo getArray]];
+    NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
+    
+    NSLog(@"Sending");
+    [_appDelegate.mpcController.session sendData:toBeSent
+                                         toPeers:allPeers
+                                        withMode:MCSessionSendDataReliable
+                                           error:&error];
+
     
 }
 
@@ -798,7 +829,7 @@
             //[_playlistInfo replaceObjectAtIndex:_location withObject:info];
             NSLog(@"exchange!");
             [_playlistInfo playlistUpvote:_location];
-            //[_songQueue exchangeObjectAtIndex:_location withObjectAtIndex:_location-1];
+            [_songQueue exchangeObjectAtIndex:_location withObjectAtIndex:_location-1];
             
             //prepare dictionary to be sent to peers
             type = @"Upvote";
@@ -815,7 +846,7 @@
             //[_playlistInfo replaceObjectAtIndex:_location withObject:info];
             //[_playlistInfo exchangeObjectAtIndex:_location withObjectAtIndex:_location+1];
             [_playlistInfo playlistDownvote:_location];
-            //[_songQueue exchangeObjectAtIndex:_location withObjectAtIndex:_location+1];
+            [_songQueue exchangeObjectAtIndex:_location withObjectAtIndex:_location+1];
             
             //prepare dictionary to be sent to peers
             type = @"Downvote";

@@ -19,6 +19,7 @@
 @property (nonatomic, strong) MPMusicPlayerController *player;
 @property (nonatomic, strong) MPMediaItemCollection *allSongs;
 @property (nonatomic, weak) IBOutlet UITableView *playlistTable;
+@property (nonatomic, strong) IBOutlet UIButton *buttonPlay;
 
 
 
