@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
 #import "MPCConnection.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>

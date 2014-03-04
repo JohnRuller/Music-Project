@@ -18,6 +18,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *helpButton;
 @property (weak, nonatomic) IBOutlet UIButton *viewButton;
 
+- (IBAction)createRoom:(id)sender;
+- (IBAction)joinRoom:(id)sender;
 
 
 @end

@@ -24,7 +24,8 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="CSg-Fc-L9F" kind="push" id="aKb-cc-Emm"/>
+                                    <action selector="createRoom:" destination="MBE-Et-hUL" eventType="touchUpInside" id="Rqh-f3-piC"/>
+                                    <segue destination="Mxd-hb-0op" kind="push" identifier="createRoom" id="S1w-qm-9tg"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jpg-Qi-Gm2">
@@ -35,7 +36,8 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="Mxd-hb-0op" kind="push" id="yfQ-Fw-Wlz"/>
+                                    <action selector="joinRoom:" destination="MBE-Et-hUL" eventType="touchUpInside" id="qDB-S9-GhV"/>
+                                    <segue destination="Mxd-hb-0op" kind="push" identifier="joinRoom" id="yfQ-Fw-Wlz"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YrF-5c-gzh">
@@ -491,9 +493,6 @@
                                 <state key="normal" title="Create">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <segue destination="Mxd-hb-0op" kind="push" id="3qS-0v-OrW"/>
-                                </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>
@@ -503,7 +502,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qj8-HI-Aii" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1128" y="-137"/>
+            <point key="canvasLocation" x="1114" y="-137"/>
         </scene>
         <!--Anarchy View Controller - Anarchy-->
         <scene sceneID="IE2-tP-O0M">

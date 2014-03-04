@@ -27,6 +27,27 @@
 	viewLogo.image = logoImage;
 }
 
+- (IBAction)createRoom:(id)sender
+{/*
+    MyManager *sharedManager = [MyManager sharedManager];
+    sharedManager.someProperty = @"YES";
+    
+    UIAlertView* dialog = [[UIAlertView alloc] initWithTitle:@"Enter Room Name"
+                                                     message:nil
+                                                    delegate:self
+                                           cancelButtonTitle:@"Cancel"
+                                           otherButtonTitles:@"OK", nil];
+    
+    dialog.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [dialog show];*/
+}
+
+- (void)joinRoom:(id)sender
+{
+
+}
+
+/*
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     //self.roomName = self.myTextField.text;
@@ -41,6 +62,32 @@
      ConnectionsViewController *controller = (ConnectionsViewController *)navController.topViewController;
      controller.isHost = @"YES";
      }*/
+//}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"createRoom"])
+    {
+        NSLog(@"is Host");
+        MyManager *sharedManager = [MyManager sharedManager];
+        sharedManager.someProperty = @"YES";
+    }
+    
+    if ([segue.identifier isEqualToString:@"joinRoom"])
+    {
+        NSLog(@"is guest");
+        MyManager *sharedManager = [MyManager sharedManager];
+        sharedManager.someProperty = @"NO";
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+
+{
+    if (buttonIndex == 1) {
+
+        NSLog(@":%@",[[alertView textFieldAtIndex:0] text]);
+    }
 }
 
 @end

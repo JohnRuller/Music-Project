@@ -50,7 +50,6 @@
 		02E8C75918A869DD007AA6A3 /* MusicProject.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 02E8C75718A869DD007AA6A3 /* MusicProject.xcdatamodeld */; };
 		02E8C75C18A8A83E007AA6A3 /* EditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02E8C75B18A8A83E007AA6A3 /* EditProfileViewController.m */; };
 		02E8C75D18A8A83E007AA6A3 /* EditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02E8C75B18A8A83E007AA6A3 /* EditProfileViewController.m */; };
-		9435283B18B7AB5000AC7B32 /* PlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9435283A18B7AB5000AC7B32 /* PlayerViewController.m */; };
 		9445D0EA18BA628800BAFF5F /* ChooseSongViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9445D0E918BA628800BAFF5F /* ChooseSongViewController.m */; };
 		945B78431895812500C26AAA /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 945B78421895812500C26AAA /* MainStoryboard.storyboard */; };
 		945B78621895822E00C26AAA /* NSMutableArray+QueueMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 945B78471895822E00C26AAA /* NSMutableArray+QueueMethods.m */; };
@@ -134,8 +133,6 @@
 		02E8C75818A869DD007AA6A3 /* MusicProject.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MusicProject.xcdatamodel; sourceTree = "<group>"; };
 		02E8C75A18A8A83E007AA6A3 /* EditProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProfileViewController.h; sourceTree = "<group>"; };
 		02E8C75B18A8A83E007AA6A3 /* EditProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditProfileViewController.m; sourceTree = "<group>"; };
-		9435283918B7AB5000AC7B32 /* PlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerViewController.h; sourceTree = "<group>"; };
-		9435283A18B7AB5000AC7B32 /* PlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerViewController.m; sourceTree = "<group>"; };
 		9445D0E818BA628800BAFF5F /* ChooseSongViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseSongViewController.h; sourceTree = "<group>"; };
 		9445D0E918BA628800BAFF5F /* ChooseSongViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseSongViewController.m; sourceTree = "<group>"; };
 		945B78421895812500C26AAA /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
@@ -420,8 +417,6 @@
 				0219FCE1183EF1560080A1F1 /* HelpViewController.m */,
 				0220CB7D183DD50F006C10A8 /* MainViewController.h */,
 				0220CB7E183DD50F006C10A8 /* MainViewController.m */,
-				9435283918B7AB5000AC7B32 /* PlayerViewController.h */,
-				9435283A18B7AB5000AC7B32 /* PlayerViewController.m */,
 				94D3AE2E18B6A84300495CAD /* PlaylistViewController.h */,
 				94D3AE2F18B6A84300495CAD /* PlaylistViewController.m */,
 				0219FCE4183EFBF80080A1F1 /* ProfileViewController.h */,
@@ -493,7 +488,7 @@
 				ORGANIZATIONNAME = "John Ruller";
 				TargetAttributes = {
 					0220CB43182C977F006C10A8 = {
-						DevelopmentTeam = 3UVA6AL657;
+						DevelopmentTeam = 3Y9N4UBV8R;
 					};
 					0220CB5E182C977F006C10A8 = {
 						TestTargetID = 0220CB43182C977F006C10A8;
@@ -576,7 +571,6 @@
 				945B78621895822E00C26AAA /* NSMutableArray+QueueMethods.m in Sources */,
 				945B78651895822E00C26AAA /* TDAudioQueueBuffer.m in Sources */,
 				945B78641895822E00C26AAA /* TDAudioQueue.m in Sources */,
-				9435283B18B7AB5000AC7B32 /* PlayerViewController.m in Sources */,
 				9445D0EA18BA628800BAFF5F /* ChooseSongViewController.m in Sources */,
 				9466556318B93325009061C5 /* AnarchyViewController.m in Sources */,
 				945B786D1895822E00C26AAA /* TDAudioStreamerConstants.m in Sources */,
