@@ -27,9 +27,11 @@
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:&error];
     [[AVAudioSession sharedInstance] setActive:YES error:&error];
     
-//    UInt32 sessionCategory = kAudioSessionCategory_MediaPlayback;
-//    AudioSessionSetProperty(kAudioSessionProperty_AudioCategory, sizeof(sessionCategory), &sessionCategory);
-//    [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
+    //UInt32 sessionCategory = kAudioSessionCategory_MediaPlayback;
+
+    
+    //AudioSessionSetProperty(kAudioSessionProperty_AudioCategory, sizeof(sessionCategory), &sessionCategory);
+    [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
     
     return YES;
 }
