@@ -79,7 +79,8 @@
 
 -(void)playlistUpvote:(NSInteger)loc
 {
-    [_playlistInfo exchangeObjectAtIndex:loc withObjectAtIndex:loc-1];
+
+        [_playlistInfo exchangeObjectAtIndex:loc withObjectAtIndex:loc-1];
 }
 
 -(void)playlistDownvote:(NSInteger)loc
@@ -91,6 +92,7 @@
 {
     return [_playlistInfo count];
 }
+
 
 @end
 

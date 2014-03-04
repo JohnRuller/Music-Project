@@ -164,9 +164,8 @@
         
         data = [NSKeyedArchiver archivedDataWithRootObject:[newSong copy]];
         _exportedData = nil;
-
-
-        //send actual file as well.
+        
+        //add file sending to local table.
     }
     
     //NSData *data = [NSKeyedArchiver archivedDataWithRootObject:[_playlistInfo copy]];
@@ -200,7 +199,7 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (IBAction)send:(id)sender
+/*- (IBAction)send:(id)sender
 {
 //    
 //    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:[_songQueue objectAtIndex:0]];
@@ -335,7 +334,7 @@
                  }
              }
          }];
-}
+}*/
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
     
@@ -380,7 +379,6 @@
         //_playlistInfo = [myobject copy];
         
         [_playlistInfo updatePlaylist:playlist];
-        
         
 //        info = [_playlistInfo objectAtIndex:0];
 //        
@@ -503,7 +501,7 @@
                                                            error:&error];
                 }
                 
-                if ([type isEqualToString:@"anarchy"])
+                /*if ([type isEqualToString:@"anarchy"])
                 {
                     NSString *kind = [dic objectForKey:@"kind"];
                     if ([kind isEqualToString:@"play"])
@@ -535,7 +533,7 @@
                     {
                         
                     }
-                }
+                }*/
             }
         }
     }
@@ -861,7 +859,7 @@
                  {
                      NSLog(@"exported data in thing = nil");
                  }
-                 
+                 /*
                  //return data;
                  
                  //                 NSError *error = nil;
@@ -887,6 +885,7 @@
                  //
                  //                 //DLog(@"Data %@",data);
                  //                 data = nil;
+                  */
                  break;
              }
              case AVAssetExportSessionStatusUnknown:
