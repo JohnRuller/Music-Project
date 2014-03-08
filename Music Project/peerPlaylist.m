@@ -39,13 +39,18 @@
     NSString *albumNameString = [song valueForProperty:MPMediaItemPropertyAlbumTitle] ? [song valueForProperty: MPMediaItemPropertyAlbumTitle] : @"";
     
     MPMediaItemArtwork *artz = [song valueForProperty:MPMediaItemPropertyArtwork];
-    if (artz)
+    UIImage *art = NULL;
+    
+    if (artz != nil)
     {
-        //UIImage *art = [artz imageWithSize:_albumArt.frame.size];
+        art = [artz imageWithSize:CGSizeMake(90.0, 90.0)];
         
     }
-    //UIImage *smallArt = [artz imageWithSize:self.albumImage.frame.size];
     
+    if (!art) {
+        NSLog(@"No ALBUM ARTWORK");
+        art = [UIImage imageNamed:@"penguin.png"];
+    }
     
     NSNumber *nada = [[NSNumber alloc] initWithInt:0];
     NSMutableDictionary *newSong = [[NSMutableDictionary alloc] init];
@@ -55,7 +60,7 @@
     [newSong setObject:artistNameString forKey:@"artistName"];
     [newSong setObject:albumNameString forKey:@"albumName"];
     //another one that gets the device name
-    //[newSong setObject:art forKey:@"albumArt"];
+    [newSong setObject:art forKey:@"albumArt"];
     [newSong setObject:nada forKey:@"votes"];
     [newSong setObject:@"newSong" forKey:@"type"];
     

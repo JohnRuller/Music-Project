@@ -656,10 +656,10 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     NSLog(@"reload table data");
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellIdentifier"];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"newCell"];
     
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CellIdentifier"];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"newCell"];
     }
     
     NSMutableArray *play = [_playlistInfo getArray];
@@ -667,18 +667,30 @@
     
     info = [play objectAtIndex:indexPath.row];
     
-    cell.textLabel.text = [info objectForKey:@"songTitle"];
-    cell.detailTextLabel.text = [info objectForKey:@"artistName"];
-    cell.imageView.image = [info objectForKey:@"art"];
-    //add in who / album art
+    UILabel *songTitle = (UILabel *)[cell.contentView viewWithTag:111];
+    [songTitle setText:[info objectForKey:@"songTitle"]];
+    
+    UILabel *artist = (UILabel *)[cell.contentView viewWithTag:112];
+    [artist setText:[info objectForKey:@"artistName"]];
+
+    UILabel *albumName = (UILabel *)[cell.contentView viewWithTag:113];
+    [albumName setText:[info objectForKey:@"albumName"]];
+    
+    UIImageView *profileImageView = (UIImageView *)[cell viewWithTag:110];
+    profileImageView.image = [info objectForKey:@"albumArt"];
+
+    
+    
+
+//    cell.textLabel.text = [info objectForKey:@"songTitle"];
+//    cell.detailTextLabel.text = [info objectForKey:@"artistName"];
+//    cell.imageView.image = [info objectForKey:@"art"];
+    
+    
     
     return cell;
 }
 
-
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 60.0;
-}
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     _location = indexPath.row;
