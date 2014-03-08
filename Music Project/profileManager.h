@@ -8,8 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
-@interface profileManager : NSObject {
-    
-}
+@interface profileManager : NSObject
+
+//array to store managedObjects for core data
+@property (strong) NSMutableArray *profiles;
+
+//profile data
+@property (strong) NSString *name;
+@property (strong) NSString *tagline;
+@property (strong) UIImage *profilePhoto;
+@property (strong) NSArray *artistsArray;
 
 @end
