@@ -43,11 +43,14 @@
     
     if (artz != nil)
     {
-        art = [artz imageWithSize:];
+        art = [artz imageWithSize:CGSizeMake(90.0, 90.0)];
         
     }
-    UIImage *smallArt = [artz imageWithSize:self.albumImage.frame.size];
     
+    if (!art) {
+        NSLog(@"No ALBUM ARTWORK");
+        art = [UIImage imageNamed:@"penguin.png"];
+    }
     
     NSNumber *nada = [[NSNumber alloc] initWithInt:0];
     NSMutableDictionary *newSong = [[NSMutableDictionary alloc] init];
