@@ -39,12 +39,14 @@
     NSString *albumNameString = [song valueForProperty:MPMediaItemPropertyAlbumTitle] ? [song valueForProperty: MPMediaItemPropertyAlbumTitle] : @"";
     
     MPMediaItemArtwork *artz = [song valueForProperty:MPMediaItemPropertyArtwork];
-    if (artz)
+    UIImage *art = NULL;
+    
+    if (artz != nil)
     {
-        //UIImage *art = [artz imageWithSize:_albumArt.frame.size];
+        art = [artz imageWithSize:];
         
     }
-    //UIImage *smallArt = [artz imageWithSize:self.albumImage.frame.size];
+    UIImage *smallArt = [artz imageWithSize:self.albumImage.frame.size];
     
     
     NSNumber *nada = [[NSNumber alloc] initWithInt:0];
@@ -55,7 +57,7 @@
     [newSong setObject:artistNameString forKey:@"artistName"];
     [newSong setObject:albumNameString forKey:@"albumName"];
     //another one that gets the device name
-    //[newSong setObject:art forKey:@"albumArt"];
+    [newSong setObject:art forKey:@"albumArt"];
     [newSong setObject:nada forKey:@"votes"];
     [newSong setObject:@"newSong" forKey:@"type"];
     
