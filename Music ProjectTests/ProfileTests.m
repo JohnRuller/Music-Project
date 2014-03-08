@@ -7,8 +7,13 @@
 //
 
 #import <XCTest/XCTest.h>
+#import <UIKit/UIKit.h>
+#import "profileManager.h"
 
-@interface ProfileTests : XCTestCase
+@interface ProfileTests : XCTestCase {
+    profileManager *profile;
+    
+}
 
 @end
 
@@ -16,18 +21,22 @@
 
 - (void)setUp
 {
-    [super setUp];
-    // Put setup code here; it will be run once, before the first test case.
+    profile = [[profileManager alloc] init];
 }
 
 - (void)tearDown
 {
-    // Put teardown code here; it will be run once, after the last test case.
-    [super tearDown];
+    profile = nil;
 }
 
-- (void)testThatUnitTestWorks {
-    XCTAssertTrue(YES, @"XCTest should pass this test.");
+- (void)testThatProfileClassExists {
+    XCTAssertNotNil(profile, @"should be able to create a profile instance.");
+}
+
+- (void)testThatProfileDataExists {
+    bool profileData = profile.hasProfileData;
+    XCTAssertTrue(profileData, @"should have profile data.");
+    
 }
 
 @end

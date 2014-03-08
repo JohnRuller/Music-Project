@@ -32,9 +32,9 @@
 		0220CB62182C977F006C10A8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0220CB47182C977F006C10A8 /* Foundation.framework */; };
 		0220CB63182C977F006C10A8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0220CB4B182C977F006C10A8 /* UIKit.framework */; };
 		0220CB6B182C977F006C10A8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0220CB69182C977F006C10A8 /* InfoPlist.strings */; };
-		0220CB6D182C977F006C10A8 /* Music_ProjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0220CB6C182C977F006C10A8 /* Music_ProjectTests.m */; };
 		0220CB7F183DD50F006C10A8 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0220CB7E183DD50F006C10A8 /* MainViewController.m */; };
 		0220CB80183DD50F006C10A8 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0220CB7E183DD50F006C10A8 /* MainViewController.m */; };
+		02397E4B18CBC7B700B6F9A9 /* defaultProfile.png in Resources */ = {isa = PBXBuildFile; fileRef = 02397E4A18CBC7B700B6F9A9 /* defaultProfile.png */; };
 		023D1A5218A0127B009CA940 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 023D1A5118A0127B009CA940 /* Icon.png */; };
 		023D1A5318A0127B009CA940 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 023D1A5118A0127B009CA940 /* Icon.png */; };
 		023D1A5518A056A3009CA940 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 023D1A5418A056A3009CA940 /* MobileCoreServices.framework */; };
@@ -117,9 +117,9 @@
 		0220CB60182C977F006C10A8 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		0220CB68182C977F006C10A8 /* Music ProjectTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Music ProjectTests-Info.plist"; sourceTree = "<group>"; };
 		0220CB6A182C977F006C10A8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		0220CB6C182C977F006C10A8 /* Music_ProjectTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Music_ProjectTests.m; sourceTree = "<group>"; };
 		0220CB7D183DD50F006C10A8 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		0220CB7E183DD50F006C10A8 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		02397E4A18CBC7B700B6F9A9 /* defaultProfile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defaultProfile.png; sourceTree = SOURCE_ROOT; };
 		023D1A5118A0127B009CA940 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		023D1A5418A056A3009CA940 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		02CBB021188382C8008AF034 /* MultipeerConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultipeerConnectivity.framework; path = System/Library/Frameworks/MultipeerConnectivity.framework; sourceTree = SDKROOT; };
@@ -282,7 +282,6 @@
 			isa = PBXGroup;
 			children = (
 				0217EEB418C62A230060DA48 /* ProfileTests.m */,
-				0220CB6C182C977F006C10A8 /* Music_ProjectTests.m */,
 				0220CB67182C977F006C10A8 /* Supporting Files */,
 			);
 			path = "Music ProjectTests";
@@ -320,6 +319,7 @@
 		02E5363518C13B5D00CC53B3 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				02397E4A18CBC7B700B6F9A9 /* defaultProfile.png */,
 				02E5368F18C2BE1C00CC53B3 /* PeerAudio.png */,
 				0220CB59182C977F006C10A8 /* Images.xcassets */,
 				02E5363318C13B3200CC53B3 /* LaunchImages */,
@@ -491,7 +491,7 @@
 				ORGANIZATIONNAME = "John Ruller";
 				TargetAttributes = {
 					0220CB43182C977F006C10A8 = {
-						DevelopmentTeam = 3Y9N4UBV8R;
+						DevelopmentTeam = 3UVA6AL657;
 					};
 					0220CB5E182C977F006C10A8 = {
 						TestTargetID = 0220CB43182C977F006C10A8;
@@ -526,6 +526,7 @@
 				02E5369018C2BE1D00CC53B3 /* PeerAudio.png in Resources */,
 				02E5368818C2BDA500CC53B3 /* Icon-60@2x.png in Resources */,
 				02E5368C18C2BDA500CC53B3 /* Default@2x.png in Resources */,
+				02397E4B18CBC7B700B6F9A9 /* defaultProfile.png in Resources */,
 				02E5368B18C2BDA500CC53B3 /* Default.png in Resources */,
 				0220CB52182C977F006C10A8 /* InfoPlist.strings in Resources */,
 				945B78431895812500C26AAA /* MainStoryboard.storyboard in Resources */,
@@ -592,7 +593,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				02CBB02618838817008AF034 /* ViewController.m in Sources */,
-				0220CB6D182C977F006C10A8 /* Music_ProjectTests.m in Sources */,
 				0219FCEF183EFEEA0080A1F1 /* CreateRoomViewController.m in Sources */,
 				0219FCE3183EF1560080A1F1 /* HelpViewController.m in Sources */,
 				02E8C75D18A8A83E007AA6A3 /* EditProfileViewController.m in Sources */,

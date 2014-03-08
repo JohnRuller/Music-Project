@@ -19,4 +19,10 @@
 @property (strong) UIImage *profilePhoto;
 @property (strong) NSArray *artistsArray;
 
+//functions
+-(bool) hasProfileData;
+-(NSMutableArray*)fetchArray;
+
+
+
 @end
