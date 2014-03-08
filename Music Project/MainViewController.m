@@ -7,6 +7,7 @@
 //
 
 #import "MainViewController.h"
+#import "profileManager.h"
 
 @implementation MainViewController
 
@@ -25,6 +26,9 @@
     
     UIImage *logoImage = [UIImage imageNamed:@"Music720"];
 	viewLogo.image = logoImage;
+    
+    profileManager *profile;
+    profile = [[profileManager alloc] init];
 }
 
 - (IBAction)createRoom:(id)sender

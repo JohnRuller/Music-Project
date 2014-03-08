@@ -48,14 +48,16 @@
         //set default profile data is none already exists
         if (![self hasProfileData]) {
             
-            //
+            //setup default image
+            UIImage *defaultImage = [UIImage imageNamed:@"defaultProfile.png"];
+            NSData *imageData = UIImagePNGRepresentation(defaultImage);
             
             // Create a new managed object
             NSManagedObjectContext *context = [self managedObjectContext];
             NSManagedObject *newProfile = [NSEntityDescription insertNewObjectForEntityForName:@"Profile" inManagedObjectContext:context];
             [newProfile setValue:[UIDevice currentDevice].name forKey:@"name"];
             [newProfile setValue:@"I like music!" forKey:@"tagline"];
-            [newProfile setValue:[UIImage imageNamed:@"defaultProfile.png"] forKey:@"photo"];
+            [newProfile setValue:imageData forKey:@"photo"];
             
             }
         
