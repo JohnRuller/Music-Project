@@ -17,10 +17,6 @@
 @property (nonatomic, strong) NSMutableArray *arrConnectedDevices;
 @property (nonatomic, weak) IBOutlet UILabel *testLabel;
 
-//array to store managedObjects for core data
-@property (strong) NSMutableArray *profiles;
-@property (strong) NSMutableArray *test;
-
 //profile data stuff
 -(void)sendProfileData;
 -(void)didReceiveDataWithNotification:(NSNotification *)notification;
@@ -39,17 +35,6 @@
 
 profileManager *userProfile;
 
-//managedObject for core data
-- (NSManagedObjectContext *)managedObjectContext
-{
-    NSManagedObjectContext *context = nil;
-    id delegate = [[UIApplication sharedApplication] delegate];
-    if ([delegate performSelector:@selector(managedObjectContext)]) {
-        context = [delegate managedObjectContext];
-    }
-    return context;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -57,16 +42,10 @@ profileManager *userProfile;
     
     userProfile = [[profileManager alloc] init];
     
-    // Fetch the devices from persistent data store
-    NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Profile"];
-    self.profiles = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
-    NSManagedObject *profile = [self.profiles objectAtIndex:0];
-    
     //store values from profile managed object
-    NSString *name = [NSString stringWithFormat:@"%@",[profile valueForKey:@"name"]];
-    NSString *tagline = [NSString stringWithFormat:@"%@",[profile valueForKey:@"tagline"]];
-    UIImage *image = [UIImage imageWithData:[profile valueForKey:@"photo"]];
+    NSString *name = [NSString stringWithFormat:@"%@",userProfile.name];
+    NSString *tagline = [NSString stringWithFormat:@"%@",userProfile.tagline];
+    UIImage *image = [UIImage imageWithData:userProfile.profilePhoto];
     
     //pass profile data into dictionary
     self.profileData = [NSDictionary dictionaryWithObjectsAndKeys: name, @"name", tagline, @"tagline", image, @"image", nil];
@@ -95,10 +74,9 @@ profileManager *userProfile;
     _appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     //set the name
-    if([self.profiles count] != 0)
+    if([userProfile hasProfileData])
     {
-        NSManagedObject *profile = [self.profiles objectAtIndex:0];
-        [[_appDelegate mpcController] setupPeerAndSessionWithDisplayName:[profile valueForKey:@"name"]];
+        [[_appDelegate mpcController] setupPeerAndSessionWithDisplayName:userProfile.name];
 
     }
     else{

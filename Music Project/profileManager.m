@@ -241,6 +241,15 @@
 }
 
 -(NSString *) getCompatabilityRating:(NSArray *)guestArtists {
+    
+    float percentage = 0;
+    int matchingArtists = [self getCompatabilityInt:guestArtists];
+    int totalArtists = [artistsArray count] + [guestArtists count] - matchingArtists;
+    
+    percentage = matchingArtists/totalArtists;
+    
+    if(percentage >= 0 && percentage <= .25)
+        return @"Low compatability";
     return @"test";
 }
 
