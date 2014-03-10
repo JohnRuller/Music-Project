@@ -644,16 +644,32 @@
 
 #pragma mark - table stuff
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 1;
+    return 2;
 }
 
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [_playlistInfo countOfPlaylistInfo];
+    if (section == 0)
+    {
+        return 1;
+    }
+    else {
+        return [_playlistInfo countOfPlaylistInfo]-1;
+    }
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    if (section == 0) {
+        return @"Now Playing";
+    }
+    else {
+        return @"Up Next";
+    }
 }
 
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
     
     NSLog(@"reload table data");
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"newCell"];
@@ -662,26 +678,26 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"newCell"];
     }
     
-    NSMutableArray *play = [_playlistInfo getArray];
-    NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
+        if ([indexPath section] == 0)
+        {
+            NSMutableArray *play = [_playlistInfo getArray];
+            NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
+            
+            info = [play objectAtIndex:indexPath.row];
+            
+            UILabel *songTitle = (UILabel *)[cell.contentView viewWithTag:111];
+            [songTitle setText:[info objectForKey:@"songTitle"]];
+            
+            UILabel *artist = (UILabel *)[cell.contentView viewWithTag:112];
+            [artist setText:[info objectForKey:@"artistName"]];
+            
+            UILabel *albumName = (UILabel *)[cell.contentView viewWithTag:113];
+            [albumName setText:[info objectForKey:@"albumName"]];
+            
+            UIImageView *profileImageView = (UIImageView *)[cell viewWithTag:110];
+            profileImageView.image = [info objectForKey:@"albumArt"];
+        }
     
-    info = [play objectAtIndex:indexPath.row];
-    
-    UILabel *songTitle = (UILabel *)[cell.contentView viewWithTag:111];
-    [songTitle setText:[info objectForKey:@"songTitle"]];
-    
-    UILabel *artist = (UILabel *)[cell.contentView viewWithTag:112];
-    [artist setText:[info objectForKey:@"artistName"]];
-
-    UILabel *albumName = (UILabel *)[cell.contentView viewWithTag:113];
-    [albumName setText:[info objectForKey:@"albumName"]];
-    
-    UIImageView *profileImageView = (UIImageView *)[cell viewWithTag:110];
-    profileImageView.image = [info objectForKey:@"albumArt"];
-
-    
-    
-
 //    cell.textLabel.text = [info objectForKey:@"songTitle"];
 //    cell.detailTextLabel.text = [info objectForKey:@"artistName"];
 //    cell.imageView.image = [info objectForKey:@"art"];
