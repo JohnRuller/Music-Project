@@ -635,14 +635,18 @@
     NSMutableArray *play = [_playlistInfo getArray];
     NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
     
-    
-    NSString *writer = [info objectForKey:@"artistName"];
+    /*NSString *writer = [info objectForKey:@"artistName"];
     NSString *album = [info objectForKey:@"albumName"];
     NSString *middle = @" - ";
     
-    NSString *final = [NSString stringWithFormat:@"%@%@%@", writer, middle, album];
-
+    NSString *final = @"";
     NSLog(@"%@", final);
+    final = [final stringByAppendingString:writer];
+    NSLog(@"%@", final);
+    final = [final stringByAppendingString:middle];
+    NSLog(@"%@", final);
+    final = [final stringByAppendingString:album];
+    NSLog(@"%@", final);*/
     
     info = [play objectAtIndex:indexPath.row];
     
@@ -650,10 +654,10 @@
     [songTitle setText:[info objectForKey:@"songTitle"]];
     
     UILabel *artist = (UILabel *)[cell.contentView viewWithTag:112];
-    [artist setText:final];
+    [artist setText:[info objectForKey:@"artistName"]];
     
-    //UILabel *albumName = (UILabel *)[cell.contentView viewWithTag:113];
-    //[albumName setText:[info objectForKey:@"albumName"]];
+    UILabel *albumName = (UILabel *)[cell.contentView viewWithTag:113];
+    [albumName setText:[info objectForKey:@"albumName"]];
     
     UIImageView *profileImageView = (UIImageView *)[cell viewWithTag:110];
     profileImageView.image = [info objectForKey:@"albumArt"];

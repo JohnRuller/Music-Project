@@ -654,12 +654,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F6K-Aq-yqx">
-                                <rect key="frame" x="95" y="161" width="205" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wJ6-0K-KtY">
                                 <rect key="frame" x="145" y="157" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -747,7 +741,6 @@
                     <tabBarItem key="tabBarItem" title="Playlist" id="RH2-yP-zsI"/>
                     <connections>
                         <outlet property="albumArt" destination="B0K-QG-OfB" id="84Q-Tl-Q5J"/>
-                        <outlet property="albumName" destination="F6K-Aq-yqx" id="ZhX-vy-brT"/>
                         <outlet property="artist" destination="rrr-uS-x5l" id="b34-iA-vyX"/>
                         <outlet property="buttonPlay" destination="wJ6-0K-KtY" id="39l-U4-mcO"/>
                         <outlet property="chooseSong" destination="aTI-nc-VnA" id="SI5-Yx-Ke9"/>
