@@ -7,6 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <MediaPlayer/MPMediaQuery.h>
+#import <MediaPlayer/MPMediaItem.h>
+#import <MediaPlayer/MPMediaItemCollection.h>
 
 @interface profileManager : NSObject
 
@@ -21,7 +24,22 @@
 
 //functions
 -(bool) hasProfileData;
--(NSMutableArray*)fetchArray;
+-(void)fetchArray;
+
+-(NSString*)name;
+-(NSString*)tagline;
+-(UIImage*)profilePhoto;
+-(NSArray*)artistsArray;
+
+-(void) setName:(NSString *)newName;
+-(void) setTagline:(NSString *)newTagline;
+-(void) setProfilePhoto:(UIImage *)newProfilePhoto;
+-(void) setArtistsArray:(NSArray *)newArtistsArray;
+-(void) setupArtistsArray;
+
+
+-(NSDictionary*)getProfileDictionary;
+
 
 
 

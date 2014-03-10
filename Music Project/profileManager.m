@@ -27,12 +27,12 @@
     return context;
 }
 
--(NSMutableArray*)fetchArray
+-(void)fetchArray
 {
     // Fetch the devices from persistent data store
     NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Profile"];
-    return [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
+    profiles = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
 }
 
 - (id)init {
@@ -50,14 +50,20 @@
             
             //setup default image
             UIImage *defaultImage = [UIImage imageNamed:@"defaultProfile.png"];
-            NSData *imageData = UIImagePNGRepresentation(defaultImage);
             
             // Create a new managed object
             NSManagedObjectContext *context = [self managedObjectContext];
-            NSManagedObject *newProfile = [NSEntityDescription insertNewObjectForEntityForName:@"Profile" inManagedObjectContext:context];
-            [newProfile setValue:[UIDevice currentDevice].name forKey:@"name"];
-            [newProfile setValue:@"I like music!" forKey:@"tagline"];
-            [newProfile setValue:imageData forKey:@"photo"];
+            [NSEntityDescription insertNewObjectForEntityForName:@"Profile" inManagedObjectContext:context];
+            
+            //using setters
+            [self setName:[UIDevice currentDevice].name];
+            [self setTagline:@"Music is cool!"];
+            [self setProfilePhoto:defaultImage];
+            
+            //manual setting
+            //[newProfile setValue:[UIDevice currentDevice].name forKey:@"name"];
+            //[newProfile setValue:@"I like music!" forKey:@"tagline"];
+            //[newProfile setValue:imageData forKey:@"photo"];
             
             }
         
@@ -68,10 +74,10 @@
 
 -(bool) hasProfileData {
     
-    //fecth data
-    profiles = [self fetchArray];
+    //update profiles
+    [self fetchArray];
     
-    if([self.profiles count] != 0)
+    if([profiles count] != 0)
     {
         return YES;
         
@@ -80,5 +86,90 @@
         return NO;
     }
 }
+
+-(NSString*)name {
+    return name;
+}
+
+-(NSString*)tagline {
+    return tagline;
+}
+
+-(UIImage*)profilePhoto {
+    return profilePhoto;
+}
+
+-(NSArray*)artistsArray {
+    return artistsArray;
+}
+
+-(void) setName:(NSString *)newName {
+    
+    name = newName;
+    
+    //update profiles
+    [self fetchArray];
+    
+    if([profiles count] != 0) {
+        
+        NSManagedObject *profile = [self.profiles objectAtIndex:0];
+        [profile setValue:name forKey:@"name"];
+    }
+}
+
+-(void) setTagline:(NSString *)newTagline {
+    
+    tagline = newTagline;
+    
+    //update profiles
+    [self fetchArray];
+    
+    if([profiles count] != 0) {
+        
+        NSManagedObject *profile = [self.profiles objectAtIndex:0];
+        [profile setValue:tagline forKey:@"tagline"];
+    }
+    
+}
+-(void) setProfilePhoto:(UIImage *)newProfilePhoto {
+    
+    profilePhoto = newProfilePhoto;
+    
+    //update profiles
+    [self fetchArray];
+    
+    if([profiles count] != 0) {
+        
+        NSManagedObject *profile = [self.profiles objectAtIndex:0];
+        NSData *imageData = UIImagePNGRepresentation(newProfilePhoto);
+        [profile setValue:imageData forKey:@"photo"];
+    }
+    
+}
+-(void) setArtistsArray:(NSArray *)newArtistsArray {
+    
+    //don't acutally ever want to manually set the artists array
+    
+}
+
+-(void) setupArtistsArray {
+    
+    //artists table stuff
+    MPMediaQuery *artistsQuery = [MPMediaQuery artistsQuery];
+    artistsArray = artistsQuery.collections;
+    
+    if([artistsArray count] == 0) {
+        NSMutableArray *emptyArtists = [[NSMutableArray alloc] init];
+        [emptyArtists addObject:@"There are no artists on this device"];
+        artistsArray = emptyArtists;
+    }
+    
+}
+
+-(NSDictionary*)getProfileDictionary {
+    NSDictionary *nsd = [[NSDictionary alloc] init];
+    return nsd;
+}
+
 
 @end
