@@ -42,7 +42,7 @@
 -(int) getCompatabilityInt:(NSArray *)guestArtists;
 -(NSString *) getCompatabilityRating:(NSArray *)guestArtists;
 
--(NSDictionary*)getProfileDictionary;
+-(NSDictionary*)getArtistsDictionary:(NSArray *)guestArtists;
 
 
 

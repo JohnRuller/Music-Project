@@ -46,9 +46,12 @@ profileManager *userProfile;
     NSString *name = [NSString stringWithFormat:@"%@",userProfile.name];
     NSString *tagline = [NSString stringWithFormat:@"%@",userProfile.tagline];
     UIImage *image = [UIImage imageWithData:userProfile.profilePhoto];
+    NSArray *artistsArray = [[NSArray alloc] init];
+    artistsArray = userProfile.artistsArray;
     
     //pass profile data into dictionary
-    self.profileData = [NSDictionary dictionaryWithObjectsAndKeys: name, @"name", tagline, @"tagline", image, @"image", nil];
+    self.profileData = [[NSDictionary alloc] init];
+    self.profileData = [NSDictionary dictionaryWithObjectsAndKeys: name, @"name", tagline, @"tagline", image, @"image", artistsArray, @"artists", nil];
     
     //init array
     self.guestProfiles = [[NSMutableArray alloc] init];

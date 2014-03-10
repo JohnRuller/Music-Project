@@ -127,10 +127,6 @@
     return profilePhoto;
 }
 
--(NSArray*)artistsArray {
-    return artistsArray;
-}
-
 -(void) setName:(NSString *)newName {
     
     name = newName;
@@ -180,11 +176,6 @@
     
 }
 
--(NSDictionary*)getProfileDictionary {
-    NSDictionary *nsd = [[NSDictionary alloc] init];
-    return nsd;
-}
-
 -(void) saveData {
     
     NSManagedObjectContext *context = [self managedObjectContext];
@@ -198,6 +189,13 @@
 }
 
 #pragma mark - Artist array functions
+
+-(NSArray*)artistsArray {
+    
+    [self setupArtistsArray];
+    
+    return artistsArray;
+}
 
 -(void) setArtistsArray:(NSArray *)newArtistsArray {
     
@@ -251,6 +249,53 @@
     if(percentage >= 0 && percentage <= .25)
         return @"Low compatability";
     return @"test";
+}
+
+-(NSDictionary*)getArtistsDictionary:(NSArray *)guestArtists {
+    
+    //setup
+    NSDictionary *compatabilityDictionary = [[NSDictionary alloc] init];
+    NSMutableArray *matchingArtists = [[NSMutableArray alloc] init];
+    
+    //refresh artists
+    [self setupArtistsArray];
+    
+    //find matching artists
+    for(int i=0; i<[artistsArray count]; i++)
+    {
+        for(int j=0; j<[guestArtists count]; j++)
+        {
+            if([[artistsArray objectAtIndex:i] isEqualToString:[guestArtists objectAtIndex:j]]) {
+                
+                [matchingArtists addObject:[artistsArray objectAtIndex:i]];
+                
+            }
+        }
+    }
+    
+    //determine percentage
+    float percentage = 0;
+    int numMatchingArtists = [matchingArtists count];
+    int totalArtists = [artistsArray count] + [guestArtists count] - numMatchingArtists;
+    
+    percentage = numMatchingArtists/totalArtists;
+    
+    //set compatability ratings
+    NSString *compatabilityRating = [[NSString alloc] init];
+    
+    if(percentage >= 0 && percentage <= .33)
+        compatabilityRating = @"Low compatability";
+    else if(percentage > .33 && percentage <= .66)
+        compatabilityRating = @"Medium compatability";
+    else if(percentage > .66 && percentage <= 1.00)
+        compatabilityRating = @"High compatability";
+    else
+        compatabilityRating = @"Rating could not be determined";
+    
+    //set dictionary values
+    compatabilityDictionary = [NSDictionary dictionaryWithObjectsAndKeys: matchingArtists, @"artists", compatabilityRating, "rating", nil];
+    
+    return compatabilityDictionary;
 }
 
 @end
