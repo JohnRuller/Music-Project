@@ -17,17 +17,6 @@
 
 profileManager *userProfile;
 
-//managedObject for core data
-- (NSManagedObjectContext *)managedObjectContext
-{
-    NSManagedObjectContext *context = nil;
-    id delegate = [[UIApplication sharedApplication] delegate];
-    if ([delegate performSelector:@selector(managedObjectContext)]) {
-        context = [delegate managedObjectContext];
-    }
-    return context;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -75,14 +64,6 @@ profileManager *userProfile;
     [userProfile setName:self.nameTextField.text];
     [userProfile setTagline:self.taglineTextField.text];
     [userProfile setProfilePhoto:self.imageView.image];
-    
-    NSManagedObjectContext *context = [self managedObjectContext];
-    
-    NSError *error = nil;
-    // Save the object to persistent store
-    if (![context save:&error]) {
-        NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
-    }
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }

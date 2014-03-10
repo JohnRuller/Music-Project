@@ -64,6 +64,8 @@
             [self setTagline:@"Music is cool!"];
             [self setProfilePhoto:defaultImage];
             
+            [self saveData];
+            
             //manual setting
             //[newProfile setValue:[UIDevice currentDevice].name forKey:@"name"];
             //[newProfile setValue:@"I like music!" forKey:@"tagline"];
@@ -140,6 +142,7 @@
         
         NSManagedObject *profile = [self.profiles objectAtIndex:0];
         [profile setValue:name forKey:@"name"];
+        [self saveData];
     }
 }
 
@@ -154,6 +157,8 @@
         
         NSManagedObject *profile = [self.profiles objectAtIndex:0];
         [profile setValue:tagline forKey:@"tagline"];
+        [self saveData];
+
     }
     
 }
@@ -169,6 +174,8 @@
         
         NSManagedObject *profile = [self.profiles objectAtIndex:0];
         [profile setValue:imageData forKey:@"photo"];
+        [self saveData];
+
     }
     
 }
@@ -195,6 +202,18 @@
 -(NSDictionary*)getProfileDictionary {
     NSDictionary *nsd = [[NSDictionary alloc] init];
     return nsd;
+}
+
+-(void) saveData {
+    
+    NSManagedObjectContext *context = [self managedObjectContext];
+    
+    NSError *error = nil;
+    // Save the object to persistent store
+    if (![context save:&error]) {
+        NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
+    }
+    
 }
 
 

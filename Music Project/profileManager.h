@@ -37,6 +37,8 @@
 -(void) setArtistsArray:(NSArray *)newArtistsArray;
 -(void) setupArtistsArray;
 
+-(void) saveData;
+
 
 -(NSDictionary*)getProfileDictionary;
 
