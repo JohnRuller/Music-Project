@@ -35,6 +35,10 @@ profileManager *userProfile;
         
         [myAlertView show];
         
+        //hide take photo button if camera doesn't exist on device
+        _takePhotoButton.enabled = NO;
+        _takePhotoButton.hidden = YES;
+        
     }
     
     //set text fields

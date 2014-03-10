@@ -21,6 +21,8 @@
 - (IBAction)takePhoto:(UIButton *)sender;
 - (IBAction)selectPhoto:(UIButton *)sender;
 
+@property (nonatomic, strong) IBOutlet UIButton *takePhotoButton;
+
 //buttons
 - (IBAction)cancel:(id)sender;
 - (IBAction)save:(id)sender;
