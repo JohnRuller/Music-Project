@@ -8,88 +8,52 @@
 
 #import "ProfileViewController.h"
 #import "EditProfileViewController.h"
+#import "profileManager.h"
 #import <MediaPlayer/MPMediaQuery.h>
 #import <MediaPlayer/MPMediaItem.h>
 #import <MediaPlayer/MPMediaItemCollection.h>
 
 @interface ProfileViewController ()
 
-//array to store managedObjects for core data
-@property (strong) NSMutableArray *profiles;
-
-//array for artists
-@property (strong) NSArray *artistsArray;
-
 @end
 
 @implementation ProfileViewController
+
+profileManager *userProfile;
 
 //labels
 @synthesize nameLabel;
 @synthesize taglineLabel;
 
-//managedObject for core data
-- (NSManagedObjectContext *)managedObjectContext
-{
-    NSManagedObjectContext *context = nil;
-    id delegate = [[UIApplication sharedApplication] delegate];
-    if ([delegate performSelector:@selector(managedObjectContext)]) {
-        context = [delegate managedObjectContext];
-    }
-    return context;
-}
-
-
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     
-    // Fetch the devices from persistent data store
-    NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Profile"];
-    self.profiles = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
+    //labels
+    nameLabel.text = [NSString stringWithFormat:@"%@",userProfile.name];
+    taglineLabel.text = [NSString stringWithFormat:@"%@",userProfile.tagline];
     
-    //set the name/tagline/image with data from the model
-    if([self.profiles count] != 0)
-    {
-        NSManagedObject *profile = [self.profiles objectAtIndex:0];
-        
-        //labels
-        nameLabel.text = [NSString stringWithFormat:@"%@",[profile valueForKey:@"name"]];
-        taglineLabel.text = [NSString stringWithFormat:@"%@",[profile valueForKey:@"tagline"]];
-        
-        //image
-        UIImage *image = [UIImage imageWithData:[profile valueForKey:@"photo"]];
-        self.imageView.image = image;
-        
-    }
+    //image
+    UIImage *image = [UIImage imageWithData:userProfile.profilePhoto];
+    self.imageView.image = image;
 }
-
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    //self.title = @"Profile";
-    
-    //error handler for when device does not have camera
-    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        
-        UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                              message:@"Device has no camera"
-                                                             delegate:nil
-                                                    cancelButtonTitle:@"OK"
-                                                    otherButtonTitles: nil];
-        
-        [myAlertView show];
-        
-    }
-    
-    //artists table stuff
-    MPMediaQuery *artistsQuery = [MPMediaQuery artistsQuery];
-    self.artistsArray = artistsQuery.collections;
-    
 
+    userProfile = [[profileManager alloc] init];
+    
+    //labels
+    nameLabel.text = [NSString stringWithFormat:@"%@",userProfile.name];
+    taglineLabel.text = [NSString stringWithFormat:@"%@",userProfile.tagline];
+    
+    //image
+    UIImage *image = [UIImage imageWithData:userProfile.profilePhoto];
+    self.imageView.image = image;
+    
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -104,7 +68,7 @@
 }
 
 #pragma mark - Segue
-
+/*
 //passing profile managedObject to edit profile view
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -115,68 +79,20 @@
         destViewController.profile = selectedProfile;
     }
 }
-
-#pragma mark - Camera
-
-//uses camera to take photo
-- (IBAction)takePhoto:(UIButton *)sender {
-    
-    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-    picker.delegate = self;
-    picker.allowsEditing = YES;
-    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-    
-    [self presentViewController:picker animated:YES completion:NULL];
-    
-}
-
-//uses photo from library
-- (IBAction)selectPhoto:(UIButton *)sender {
-    
-    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-    picker.delegate = self;
-    picker.allowsEditing = YES;
-    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    
-    [self presentViewController:picker animated:YES completion:NULL];
-
-}
-
-//camera delegate functions
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    
-    UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
-    NSData *imageData = UIImagePNGRepresentation(chosenImage);
-    
-    //storing photo in core data
-    NSManagedObject *imageProfile = [self.profiles objectAtIndex:0];
-    [imageProfile setValue:imageData forKey:@"photo"];
-    
-    //this would set the image view to the chosen imgae
-    //self.imageView.image = chosenImage;
-    
-    [picker dismissViewControllerAnimated:YES completion:NULL];
-    
-}
-
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
-    
-    [picker dismissViewControllerAnimated:YES completion:NULL];
-    
-}
+ */
 
 #pragma mark - Artists
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.artistsArray.count;
+    return userProfile.artistsArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ArtistsCell"];
 
-    MPMediaItemCollection *artistCollection = self.artistsArray[indexPath.row];
+    MPMediaItemCollection *artistCollection = userProfile.artistsArray[indexPath.row];
     NSString *artistTitle = [[artistCollection representativeItem] valueForProperty:MPMediaItemPropertyArtist];
     
     if (cell == nil) {

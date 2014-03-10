@@ -7,19 +7,23 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MobileCoreServices/MobileCoreServices.h>
 #import <CoreData/CoreData.h>
 
-@interface EditProfileViewController : UIViewController
+@interface EditProfileViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+
 //text fields
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *taglineTextField;
 
+//camera functionality propertires
+@property (strong, nonatomic) IBOutlet UIImageView *imageView;
+- (IBAction)takePhoto:(UIButton *)sender;
+- (IBAction)selectPhoto:(UIButton *)sender;
+
 //buttons
 - (IBAction)cancel:(id)sender;
 - (IBAction)save:(id)sender;
-
-//managed object for core data
-@property (strong) NSManagedObject *profile;
 
 
 @end

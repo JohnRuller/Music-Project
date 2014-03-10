@@ -7,6 +7,7 @@
 //
 
 #import "EditProfileViewController.h"
+#import "profileManager.h"
 
 @interface EditProfileViewController ()
 
@@ -14,11 +15,11 @@
 
 @implementation EditProfileViewController
 
-//managed object for core data
-@synthesize profile;
+profileManager *userProfile;
 
-//managed object for core data
-- (NSManagedObjectContext *)managedObjectContext {
+//managedObject for core data
+- (NSManagedObjectContext *)managedObjectContext
+{
     NSManagedObjectContext *context = nil;
     id delegate = [[UIApplication sharedApplication] delegate];
     if ([delegate performSelector:@selector(managedObjectContext)]) {
@@ -27,15 +28,33 @@
     return context;
 }
 
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    if (self.profile) {
-        [self.nameTextField setText:[self.profile valueForKey:@"name"]];
-        [self.taglineTextField setText:[self.profile valueForKey:@"tagline"]];
+    
+    userProfile = [[profileManager alloc] init];
+    
+    //error handler for when device does not have camera
+    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        
+        UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                              message:@"Device has no camera"
+                                                             delegate:nil
+                                                    cancelButtonTitle:@"OK"
+                                                    otherButtonTitles: nil];
+        
+        [myAlertView show];
+        
     }
+    
+    //set text fields
+    [self.nameTextField setText:userProfile.name];
+    [self.taglineTextField setText:userProfile.tagline];
+    
+    //set image
+    UIImage *image = [UIImage imageWithData:userProfile.profilePhoto];
+    self.imageView.image = image;
 
 }
 
@@ -45,27 +64,19 @@
     // Dispose of any resources that can be recreated.
 }
 
-//buttons
+#pragma mark - Buttons
+
 - (IBAction)cancel:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)save:(id)sender {
+
+    [userProfile setName:self.nameTextField.text];
+    [userProfile setTagline:self.taglineTextField.text];
+    [userProfile setProfilePhoto:self.imageView.image];
     
     NSManagedObjectContext *context = [self managedObjectContext];
-    
-    //either set data for existing object, or create new one
-    if(self.profile) {
-        //update existing profile
-        [self.profile setValue:self.nameTextField.text forKey:@"name"];
-        [self.profile setValue:self.taglineTextField.text forKey:@"tagline"];
-    } else {
-        // Create a new managed object
-        NSManagedObject *newProfile = [NSEntityDescription insertNewObjectForEntityForName:@"Profile" inManagedObjectContext:context];
-        [newProfile setValue:self.nameTextField.text forKey:@"name"];
-        [newProfile setValue:self.taglineTextField.text forKey:@"tagline"];
-        
-    }
     
     NSError *error = nil;
     // Save the object to persistent store
@@ -74,5 +85,49 @@
     }
     
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - Camera
+
+//uses camera to take photo
+- (IBAction)takePhoto:(UIButton *)sender {
+    
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    picker.allowsEditing = YES;
+    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    
+    [self presentViewController:picker animated:YES completion:NULL];
+    
+}
+
+//uses photo from library
+- (IBAction)selectPhoto:(UIButton *)sender {
+    
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    picker.allowsEditing = YES;
+    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    
+    [self presentViewController:picker animated:YES completion:NULL];
+    
+}
+
+//camera delegate functions
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    
+    UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
+    
+    //this would set the image view to the chosen imgae
+    self.imageView.image = chosenImage;
+    
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+    
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+    
 }
 @end

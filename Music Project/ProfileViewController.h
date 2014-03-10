@@ -7,14 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <MobileCoreServices/MobileCoreServices.h>
 
-@interface ProfileViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface ProfileViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 //camera functionality propertires
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
-- (IBAction)takePhoto:(UIButton *)sender;
-- (IBAction)selectPhoto:(UIButton *)sender;
 
 //buttons
 - (IBAction)back:(id)sender;

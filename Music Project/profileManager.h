@@ -19,7 +19,7 @@
 //profile data
 @property (strong) NSString *name;
 @property (strong) NSString *tagline;
-@property (strong) UIImage *profilePhoto;
+@property (strong) NSData *profilePhoto;
 @property (strong) NSArray *artistsArray;
 
 //functions
@@ -28,7 +28,7 @@
 
 -(NSString*)name;
 -(NSString*)tagline;
--(UIImage*)profilePhoto;
+-(NSData*)profilePhoto;
 -(NSArray*)artistsArray;
 
 -(void) setName:(NSString *)newName;

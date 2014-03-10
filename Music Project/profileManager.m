@@ -41,12 +41,16 @@
         //inits
         name = [[NSString alloc] init];
         tagline = [[NSString alloc] init];
-        profilePhoto = [[UIImage alloc] init];
+        profilePhoto = [[NSData alloc] init];
         artistsArray = [[NSArray alloc] init];
         profiles = [[NSMutableArray alloc] init];
         
+        [self setupArtistsArray];
+        
         //set default profile data is none already exists
         if (![self hasProfileData]) {
+            
+            NSLog(@"Creating a default profile for user");
             
             //setup default image
             UIImage *defaultImage = [UIImage imageNamed:@"defaultProfile.png"];
@@ -64,6 +68,27 @@
             //[newProfile setValue:[UIDevice currentDevice].name forKey:@"name"];
             //[newProfile setValue:@"I like music!" forKey:@"tagline"];
             //[newProfile setValue:imageData forKey:@"photo"];
+            
+            }
+        
+        else {
+            
+            NSLog(@"Update existing profile data");
+            
+            //update profiles
+            [self fetchArray];
+            
+            NSManagedObject *profile = [self.profiles objectAtIndex:0];
+           
+            name = [profile valueForKey:@"name"];
+            tagline = [profile valueForKey:@"tagline"];
+            profilePhoto = [profile valueForKey:@"photo"];
+            
+            /*
+             [self setName:[profile valueForKey:@"name"]];
+             [self setTagline:[profile valueForKey:@"tagline"]];
+             [self setProfilePhoto:[profile valueForKey:@"photo"]];
+            */
             
             }
         
@@ -88,6 +113,7 @@
 }
 
 -(NSString*)name {
+    
     return name;
 }
 
@@ -95,7 +121,7 @@
     return tagline;
 }
 
--(UIImage*)profilePhoto {
+-(NSData*)profilePhoto {
     return profilePhoto;
 }
 
@@ -133,7 +159,8 @@
 }
 -(void) setProfilePhoto:(UIImage *)newProfilePhoto {
     
-    profilePhoto = newProfilePhoto;
+    NSData *imageData = UIImagePNGRepresentation(newProfilePhoto);
+    profilePhoto = imageData;
     
     //update profiles
     [self fetchArray];
@@ -141,7 +168,6 @@
     if([profiles count] != 0) {
         
         NSManagedObject *profile = [self.profiles objectAtIndex:0];
-        NSData *imageData = UIImagePNGRepresentation(newProfilePhoto);
         [profile setValue:imageData forKey:@"photo"];
     }
     
@@ -158,11 +184,11 @@
     MPMediaQuery *artistsQuery = [MPMediaQuery artistsQuery];
     artistsArray = artistsQuery.collections;
     
-    if([artistsArray count] == 0) {
+    /*if([artistsArray count] == 0) {
         NSMutableArray *emptyArtists = [[NSMutableArray alloc] init];
         [emptyArtists addObject:@"There are no artists on this device"];
         artistsArray = emptyArtists;
-    }
+    }*/
     
 }
 
