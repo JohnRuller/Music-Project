@@ -8,6 +8,7 @@
 
 #import "ConnectionsViewController.h"
 #import "AppDelegate.h"
+#import "profileManager.h"
 
 @interface ConnectionsViewController ()
 
@@ -36,6 +37,8 @@
 
 @implementation ConnectionsViewController
 
+profileManager *userProfile;
+
 //managedObject for core data
 - (NSManagedObjectContext *)managedObjectContext
 {
@@ -47,19 +50,12 @@
     return context;
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    userProfile = [[profileManager alloc] init];
     
     // Fetch the devices from persistent data store
     NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
@@ -283,7 +279,7 @@
                             return true;
                         }
             
-                }
+            }
         return false;
     
     }
@@ -295,7 +291,7 @@
                             return i;
                         }
                 
-                }
+            }
     
         return -1;
     }

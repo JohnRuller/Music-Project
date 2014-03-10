@@ -179,6 +179,26 @@
     }
     
 }
+
+-(NSDictionary*)getProfileDictionary {
+    NSDictionary *nsd = [[NSDictionary alloc] init];
+    return nsd;
+}
+
+-(void) saveData {
+    
+    NSManagedObjectContext *context = [self managedObjectContext];
+    
+    NSError *error = nil;
+    // Save the object to persistent store
+    if (![context save:&error]) {
+        NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
+    }
+    
+}
+
+#pragma mark - Artist array functions
+
 -(void) setArtistsArray:(NSArray *)newArtistsArray {
     
     //don't acutally ever want to manually set the artists array
@@ -199,22 +219,29 @@
     
 }
 
--(NSDictionary*)getProfileDictionary {
-    NSDictionary *nsd = [[NSDictionary alloc] init];
-    return nsd;
-}
-
--(void) saveData {
+-(int) getCompatabilityInt:(NSArray *)guestArtists {
     
-    NSManagedObjectContext *context = [self managedObjectContext];
+    int count = 0;
     
-    NSError *error = nil;
-    // Save the object to persistent store
-    if (![context save:&error]) {
-        NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
+    [self setupArtistsArray];
+    
+    for(int i=0; i<[artistsArray count]; i++)
+    {
+        for(int j=0; j<[guestArtists count]; j++)
+        {
+            if([[artistsArray objectAtIndex:i] isEqualToString:[guestArtists objectAtIndex:j]]) {
+                count++;
+            }
+            
+        }
     }
     
+    NSLog(@"artists count = %d", count);
+    return count;
 }
 
+-(NSString *) getCompatabilityRating:(NSArray *)guestArtists {
+    return @"test";
+}
 
 @end
