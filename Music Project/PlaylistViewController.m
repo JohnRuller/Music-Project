@@ -95,14 +95,8 @@
 - (IBAction)play:(id)sender
 {
     NSLog(@"play");
-    NSError *error;
     
-    NSMutableArray *playlist = [_playlistInfo getArray];
-    NSDictionary *firstSong = [playlist objectAtIndex:0];
-    _songName.text = [firstSong objectForKey:@"songTitle"];
-    _artist.text = [firstSong objectForKey:@"artistName"];
-    _albumName.text = [firstSong objectForKey:@"albumName"];
-    _albumArt.image = [firstSong objectForKey:@"albumArt"];
+    NSError *error;
     
     if ([_songQueue count] != 0)
     {
@@ -238,6 +232,7 @@
  //
  // NSURL *exportURL = [NSURL fileURLWithPath:exportFile];
  // exporter.outputURL = exportURL;
+ 
  NSURL *url = [[_songQueue objectAtIndex:0] valueForProperty: MPMediaItemPropertyAssetURL];
  AVURLAsset *songAsset = [AVURLAsset URLAssetWithURL: url options:nil];
  AVAssetExportSession *exporter = [[AVAssetExportSession alloc] initWithAsset: songAsset
@@ -275,6 +270,7 @@
  //_coolPlayer =[[AVAudioPlayer alloc] initWithData:data error:&error];
  //[_coolPlayer play];
  NSLog(@"%@", [error localizedDescription]);
+ 
  NSData *toBeSent = [NSKeyedArchiver archivedDataWithRootObject:data];
  //
  //
@@ -580,20 +576,16 @@
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
 {
     NSLog(@"didFinish");
+    
     NSError *error = nil;
+    
     
     [_songQueue removeObjectAtIndex:0];
     [_playlistInfo removeSong:0];
     
+    
     if ([_songQueue count] != 0)
     {
-        NSMutableArray *playlist = [_playlistInfo getArray];
-        NSDictionary *firstSong = [playlist objectAtIndex:0];
-        _songName.text = [firstSong objectForKey:@"songTitle"];
-        _artist.text = [firstSong objectForKey:@"artistName"];
-        _albumName.text = [firstSong objectForKey:@"albumName"];
-        _albumArt.image = [firstSong objectForKey:@"albumArt"];
-        
         NSLog(@"Play next");
         AVAudioPlayer *neatPlayer = [[AVAudioPlayer alloc]initWithData:[_songQueue objectAtIndex:0] error:&error];
         _coolPlayer = neatPlayer;
@@ -610,8 +602,6 @@
     
     NSData *toBeSent = [NSKeyedArchiver archivedDataWithRootObject:[_playlistInfo getArray]];
     NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
-    
-    
     
     NSLog(@"Sending");
     [_appDelegate.mpcController.session sendData:toBeSent
@@ -645,17 +635,14 @@
     NSMutableArray *play = [_playlistInfo getArray];
     NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
     
-    /*NSString *writer = [info objectForKey:@"artistName"];
-     NSString *album = [info objectForKey:@"albumName"];
-     NSString *middle = @" - ";
-     NSString *final = @"";
-     NSLog(@"%@", final);
-     final = [final stringByAppendingString:writer];
-     NSLog(@"%@", final);
-     final = [final stringByAppendingString:middle];
-     NSLog(@"%@", final);
-     final = [final stringByAppendingString:album];
-     NSLog(@"%@", final);*/
+    
+    NSString *writer = [info objectForKey:@"artistName"];
+    NSString *album = [info objectForKey:@"albumName"];
+    NSString *middle = @" - ";
+    
+    NSString *final = [NSString stringWithFormat:@"%@%@%@", writer, middle, album];
+
+    NSLog(@"%@", final);
     
     info = [play objectAtIndex:indexPath.row];
     
@@ -663,10 +650,10 @@
     [songTitle setText:[info objectForKey:@"songTitle"]];
     
     UILabel *artist = (UILabel *)[cell.contentView viewWithTag:112];
-    [artist setText:[info objectForKey:@"artistName"]];
+    [artist setText:final];
     
-    UILabel *albumName = (UILabel *)[cell.contentView viewWithTag:113];
-    [albumName setText:[info objectForKey:@"albumName"]];
+    //UILabel *albumName = (UILabel *)[cell.contentView viewWithTag:113];
+    //[albumName setText:[info objectForKey:@"albumName"]];
     
     UIImageView *profileImageView = (UIImageView *)[cell viewWithTag:110];
     profileImageView.image = [info objectForKey:@"albumArt"];
@@ -705,9 +692,11 @@
 
 
 #pragma mark - action sheet
--(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    
     NSString *buttonTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
+    
     NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
     NSMutableArray *play = [_playlistInfo getArray];
     
@@ -726,16 +715,13 @@
         if ([buttonTitle isEqualToString:@"Upvote!"])
         {
             NSLog(@"Upvote!");
-            
             replace = [NSNumber numberWithInt:[cool intValue] + 1];
             [info setObject:replace forKey:@"votes"];
             
             NSLog(@"replace! Location: %ld", (long)_location);
             
             //[_playlistInfo replaceObjectAtIndex:_location withObject:info];
-            //NSLog(@"exchange!");
-            
-            
+            NSLog(@"exchange!");
             [_playlistInfo playlistUpvote:_location];
             [_songQueue exchangeObjectAtIndex:_location withObjectAtIndex:_location-1];
             
