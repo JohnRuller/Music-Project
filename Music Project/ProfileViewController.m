@@ -92,8 +92,7 @@ profileManager *userProfile;
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ArtistsCell"];
 
-    MPMediaItemCollection *artistCollection = userProfile.artistsArray[indexPath.row];
-    NSString *artistTitle = [[artistCollection representativeItem] valueForProperty:MPMediaItemPropertyArtist];
+    NSString *artistTitle = userProfile.artistsArray[indexPath.row];
     
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ArtistsCell"];
