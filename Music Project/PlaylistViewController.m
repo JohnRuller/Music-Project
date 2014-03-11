@@ -205,8 +205,7 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-/*
- - (IBAction)send:(id)sender
+/*- (IBAction)send:(id)sender
  {
  //
  // NSData *data = [NSKeyedArchiver archivedDataWithRootObject:[_songQueue objectAtIndex:0]];
@@ -312,8 +311,7 @@
  }
  }
  }];
- }
- */
+ }*/
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
     
@@ -480,8 +478,7 @@
                                                            error:&error];
                 }
                 
-                /*
-                 if ([type isEqualToString:@"anarchy"])
+                /*if ([type isEqualToString:@"anarchy"])
                  {
                  NSString *kind = [dic objectForKey:@"kind"];
                  if ([kind isEqualToString:@"play"])
@@ -510,8 +507,7 @@
                  if([kind isEqualToString:@"playbackNormal"])
                  {
                  }
-                 }
-                 */
+                 }*/
             }
         }
     }
@@ -571,8 +567,7 @@
  //// NSLog([NSString stringWithFormat:@"Elapsed time interval: %f", -elapsedTime]);
  //// int time = round(elapsedTime);
  //// NSLog(@"Elapsed time: %tu", -time);
- //}
- */
+ //}*/
 
 
 - (void)didReceiveMemoryWarning
@@ -713,15 +708,16 @@
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     NSString *buttonTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
-    //NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
-    //NSMutableArray *play = [_playlistInfo getArray];
+    NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
+    NSMutableArray *play = [_playlistInfo getArray];
     
-    //info = [play objectAtIndex:_location];
-    //NSNumber *cool = [info objectForKey:@"votes"];
-    //NSNumber *replace;
+    info = [play objectAtIndex:_location];
+    NSNumber *cool = [info objectForKey:@"votes"];
+    NSNumber *replace;
     
-    //NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-    //NSString *type;
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    NSString *type;
+    NSNumber *loc = [[NSNumber alloc] initWithLong:_location];
     
     MyManager *sharedManager = [MyManager sharedManager];
     if ([sharedManager.someProperty isEqualToString:@"YES"])
@@ -731,8 +727,8 @@
         {
             NSLog(@"Upvote!");
             
-            //replace = [NSNumber numberWithInt:[cool intValue] + 1];
-            //[info setObject:replace forKey:@"votes"];
+            replace = [NSNumber numberWithInt:[cool intValue] + 1];
+            [info setObject:replace forKey:@"votes"];
             
             NSLog(@"replace! Location: %ld", (long)_location);
             
@@ -744,15 +740,15 @@
             [_songQueue exchangeObjectAtIndex:_location withObjectAtIndex:_location-1];
             
             //prepare dictionary to be sent to peers
-            //type = @"Upvote";
-            //[dic setObject:type forKey:@"type"];
-            //[dic setObject:loc forKey:@"where"];
+            type = @"Upvote";
+            [dic setObject:type forKey:@"type"];
+            [dic setObject:loc forKey:@"where"];
             
         } else if ([buttonTitle isEqualToString:@"Downboat!"])
         {
             NSLog(@"Downvote!");
-            //replace = [NSNumber numberWithInt:[cool intValue] - 1];
-            //[info setObject:replace forKey:@"votes"];
+            replace = [NSNumber numberWithInt:[cool intValue] - 1];
+            [info setObject:replace forKey:@"votes"];
             
             
             //[_playlistInfo replaceObjectAtIndex:_location withObject:info];
@@ -761,9 +757,9 @@
             [_songQueue exchangeObjectAtIndex:_location withObjectAtIndex:_location+1];
             
             //prepare dictionary to be sent to peers
-            //type = @"Downvote";
-            //[dic setObject:type forKey:@"type"];
-            //[dic setObject:loc forKey:@"where"];
+            type = @"Downvote";
+            [dic setObject:type forKey:@"type"];
+            [dic setObject:loc forKey:@"where"];
             
         } else
         {
@@ -781,24 +777,15 @@
                                             withMode:MCSessionSendDataReliable
                                                error:&error];
     }else{
-        
         NSLog(@"Guest");
-        NSNumber *loc = [[NSNumber alloc] initWithLong:_location];
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
         [dic setObject:@"upvote" forKey:@"type"];
         
-        //upvote first
         if ([buttonTitle isEqualToString:@"Upvote!"])
         {
-            if (_location != 0)
-            {
-                [dic setObject:@"upvote" forKey:@"type"];
-                [dic setObject:loc forKey:@"where"];
-            }else
-            {
-                NSLog(@"Show message that you cannot upvote it anymore");
-            }
-        //downvote second
+            [dic setObject:@"upvote" forKey:@"type"];
+            [dic setObject:loc forKey:@"where"];
+            
         } else if ([buttonTitle isEqualToString:@"Downboat!"])
         {
             [dic setObject:@"downvote" forKey:@"type"];
@@ -808,12 +795,11 @@
             NSLog(@"Cancel!");
             return;
         }
-        
         NSData *toBeSent = [NSKeyedArchiver archivedDataWithRootObject:dic];
         NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
         NSError *error;
         
-        NSLog(@"Vote Sending");
+        NSLog(@"Sending");
         [_appDelegate.mpcController.session sendData:toBeSent
                                              toPeers:allPeers
                                             withMode:MCSessionSendDataReliable
