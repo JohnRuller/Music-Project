@@ -69,6 +69,7 @@
 		945B78711895829C00C26AAA /* CreateRoomMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 945B786F1895829C00C26AAA /* CreateRoomMenuViewController.m */; };
 		946243B618B7022D00F5D0C6 /* myManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 946243B518B7022D00F5D0C6 /* myManager.m */; };
 		9466556318B93325009061C5 /* AnarchyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9466556218B93325009061C5 /* AnarchyViewController.m */; };
+		946C897518CEB299005F76D8 /* penguin.png in Resources */ = {isa = PBXBuildFile; fileRef = 946C897418CEB299005F76D8 /* penguin.png */; };
 		948E7FD718C3DC1700842EDB /* peerPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = 948E7FD618C3DC1700842EDB /* peerPlaylist.m */; };
 		949ABA2018B6923000D159A0 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 949ABA1F18B6923000D159A0 /* ChatViewController.m */; };
 		94BB70EC18B53129003ED058 /* GuestsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94BB70EB18B53129003ED058 /* GuestsViewController.m */; };
@@ -170,6 +171,7 @@
 		946243B518B7022D00F5D0C6 /* myManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myManager.m; sourceTree = "<group>"; };
 		9466556118B93325009061C5 /* AnarchyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnarchyViewController.h; sourceTree = "<group>"; };
 		9466556218B93325009061C5 /* AnarchyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnarchyViewController.m; sourceTree = "<group>"; };
+		946C897418CEB299005F76D8 /* penguin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = penguin.png; sourceTree = "<group>"; };
 		948E7FD518C3DC1700842EDB /* peerPlaylist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = peerPlaylist.h; sourceTree = "<group>"; };
 		948E7FD618C3DC1700842EDB /* peerPlaylist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = peerPlaylist.m; sourceTree = "<group>"; };
 		949ABA1E18B6923000D159A0 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
@@ -320,6 +322,7 @@
 			isa = PBXGroup;
 			children = (
 				02397E4A18CBC7B700B6F9A9 /* defaultProfile.png */,
+				946C897418CEB299005F76D8 /* penguin.png */,
 				02E5368F18C2BE1C00CC53B3 /* PeerAudio.png */,
 				0220CB59182C977F006C10A8 /* Images.xcassets */,
 				02E5363318C13B3200CC53B3 /* LaunchImages */,
@@ -521,6 +524,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				946C897518CEB299005F76D8 /* penguin.png in Resources */,
 				023D1A5218A0127B009CA940 /* Icon.png in Resources */,
 				02E5368918C2BDA500CC53B3 /* Icon-Small-40@2x.png in Resources */,
 				02E5369018C2BE1D00CC53B3 /* PeerAudio.png in Resources */,
