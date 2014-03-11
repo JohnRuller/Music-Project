@@ -336,6 +336,10 @@ profileManager *userProfile;
         compatabilityDictionary = [userProfile getArtistsDictionary:guestArtists];
         [profileCompatabilityRating setText:[compatabilityDictionary objectForKey:@"rating"]];
         
+        UIImageView *compBarImageView = (UIImageView *)[cell viewWithTag:105];
+        compBarImageView.image = [compatabilityDictionary objectForKey:@"compBar"];
+        
+        
         
     }
     

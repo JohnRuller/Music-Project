@@ -305,7 +305,7 @@
     
     
     //set dictionary values
-    compatabilityDictionary = [NSDictionary dictionaryWithObjectsAndKeys: matchingArtists, @"artists", compatabilityRating, @"rating", nil];
+    compatabilityDictionary = [NSDictionary dictionaryWithObjectsAndKeys: matchingArtists, @"artists", compatabilityRating, @"rating", compBar, @"compBar", nil];
     
     return compatabilityDictionary;
 }
