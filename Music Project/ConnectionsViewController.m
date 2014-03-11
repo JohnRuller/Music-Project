@@ -49,22 +49,13 @@ profileManager *userProfile;
     NSArray *artistsArray = [[NSArray alloc] init];
     artistsArray = userProfile.artistsArray;
     
-    NSLog(@"Artists array count in connections: %lu", (unsigned long)[artistsArray count]);
-    
-    
     //pass profile data into dictionary
     self.profileData = [[NSDictionary alloc] init];
     self.profileData = [NSDictionary dictionaryWithObjectsAndKeys: name, @"name", tagline, @"tagline", image, @"image", artistsArray, @"artists", nil];
     
-    NSArray *guestArtists2 = [[NSArray alloc] init];
-    guestArtists2 = [self.profileData objectForKey:@"artists"];
-    NSLog(@"Guest Artists 2 array count in connections: %lu", (unsigned long)[guestArtists2 count]);
-    
-    [userProfile getArtistsDictionary:guestArtists2];
-    
     //init array
     self.guestProfiles = [[NSMutableArray alloc] init];
-    
+
     //profile observer
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(didReceiveDataWithNotification:)
@@ -89,11 +80,11 @@ profileManager *userProfile;
     if([userProfile hasProfileData])
     {
         [[_appDelegate mpcController] setupPeerAndSessionWithDisplayName:userProfile.name];
-        
+
     }
     else{
         [[_appDelegate mpcController] setupPeerAndSessionWithDisplayName:[UIDevice currentDevice].name];
-        
+
         
     }
     
@@ -115,8 +106,8 @@ profileManager *userProfile;
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(refreshTable) forControlEvents:UIControlEventValueChanged];
     tableViewController.refreshControl = self.refreshControl;
-    
-    
+
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -144,9 +135,9 @@ profileManager *userProfile;
 
 
 /*- (void)toggleVisibility
- {
- [_appDelegate.mpcController advertiseSelf:YES];
- }*/
+{
+    [_appDelegate.mpcController advertiseSelf:YES];
+}*/
 
 
 
@@ -167,22 +158,22 @@ profileManager *userProfile;
     if ([sharedManager.someProperty isEqualToString:@"YES"])
     {
         [_appDelegate.mpcController advertiseSelf:YES];
-        
+
     }
     else{
         [_appDelegate.mpcController advertiseSelf:NO];
     }
-    
+
     /*
-     NSString *message = @"WhoseHost?";
-     NSString *returnTo = [UIDevice currentDevice].name;
-     NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
-     NSError *error;
-     
-     [_appDelegate.mpcController.session sendData:dataToSend
-     toPeers:allPeers
-     withMode:MCSessionSendDataReliable
-     error:&error];*/
+    NSString *message = @"WhoseHost?";
+    NSString *returnTo = [UIDevice currentDevice].name;
+    NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
+    NSError *error;
+    
+    [_appDelegate.mpcController.session sendData:dataToSend
+                                         toPeers:allPeers
+                                        withMode:MCSessionSendDataReliable
+                                           error:&error];*/
 }
 
 
@@ -206,7 +197,7 @@ profileManager *userProfile;
                                            error:&error];
     
     NSLog(@"sending profile");
-    
+
     
     if (error) {
         NSLog(@"%@", [error localizedDescription]);
@@ -215,18 +206,14 @@ profileManager *userProfile;
 
 -(void)didReceiveDataWithNotification:(NSNotification *)notification{
     //MCPeerID *peerID = [[notification userInfo] objectForKey:@"peerID"];
-    //NSString *peerDisplayName = peerID.displayName;
+   //NSString *peerDisplayName = peerID.displayName;
     
     NSData *receivedData = [[notification userInfo] objectForKey:@"data"];
     id myObject = [NSKeyedUnarchiver unarchiveObjectWithData:receivedData];
     
     NSLog(@"receiving profile");
     
-    if ([myObject isKindOfClass:[NSDictionary class]]){
-        
-        NSArray *guestArtists3 = [[NSArray alloc] init];
-        guestArtists3 = [myObject objectForKey:@"artists"];
-        NSLog(@"Guest Artists 3 array count in connections: %lu", (unsigned long)[guestArtists3 count]);
+   if ([myObject isKindOfClass:[NSDictionary class]]){
         
         //Handle
         [self.guestProfiles addObject:myObject];
@@ -234,11 +221,11 @@ profileManager *userProfile;
         //NSString *tagline = [NSString stringWithFormat:@"%@",[profile valueForKey:@"tagline"]];
         
         NSLog(@"if array");
+
         
-        
-        
+
     }
-    
+
 }
 
 -(void)peerDidChangeStateWithNotification:(NSNotification *)notification{
@@ -267,28 +254,28 @@ profileManager *userProfile;
 }
 
 -(bool)hasProfileData:(NSString *)name{
-    for(int i=0; i<[self.guestProfiles count]; i++)
-    {
-        if([[[self.guestProfiles objectAtIndex:i] objectForKey:@"name"] isEqualToString:name]) {
-            return true;
-        }
-        
-    }
-    return false;
+        for(int i=0; i<[self.guestProfiles count]; i++)
+            {
+                    if([[[self.guestProfiles objectAtIndex:i] objectForKey:@"name"] isEqualToString:name]) {
+                            return true;
+                        }
+            
+            }
+        return false;
     
-}
+    }
 
 -(int)profileIndex:(NSString *)name{
-    for(int i=0; i<[self.guestProfiles count]; i++)
-    {
-        if([[[self.guestProfiles objectAtIndex:i] objectForKey:@"name"] isEqualToString:name]) {
-            return i;
-        }
-        
-    }
+        for(int i=0; i<[self.guestProfiles count]; i++)
+            {
+                    if([[[self.guestProfiles objectAtIndex:i] objectForKey:@"name"] isEqualToString:name]) {
+                            return i;
+                        }
+                
+            }
     
-    return -1;
-}
+        return -1;
+    }
 
 
 #pragma mark - UITableView Delegate and Datasource method implementation
@@ -301,7 +288,7 @@ profileManager *userProfile;
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return [_arrConnectedDevices count];
 }
-
+    
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellIdentifier"];
@@ -312,41 +299,31 @@ profileManager *userProfile;
     
     NSString *peerID = [_arrConnectedDevices objectAtIndex:indexPath.row];
     UILabel *profileNameLabel = (UILabel *)[cell.contentView viewWithTag:101];
-    
+
     //profileNameLabel.text = [_arrConnectedDevices objectAtIndex:indexPath.row];
     [profileNameLabel setText:[_arrConnectedDevices objectAtIndex:indexPath.row]];
     
     if([self hasProfileData:[_arrConnectedDevices objectAtIndex:indexPath.row]])
-    {
-        NSLog(@"set photo");
-        int profileIndex = [self profileIndex:peerID];
-        
-        UIImageView *profileImageView = (UIImageView *)[cell viewWithTag:100];
-        profileImageView.image = [[self.guestProfiles objectAtIndex:profileIndex] objectForKey:@"image"];
-        
-        UILabel *profileTaglineLabel = (UILabel *)[cell viewWithTag:102];
-        [profileTaglineLabel setText:[[self.guestProfiles objectAtIndex:profileIndex] objectForKey:@"tagline"]];
-        
-        UILabel *profileCompatabilityRating = (UILabel *)[cell viewWithTag:103];
-        NSDictionary *compatabilityDictionary = [[NSDictionary alloc] init];
-        NSArray *guestArtists = [[NSArray alloc] init];
-        guestArtists = [[self.guestProfiles objectAtIndex:profileIndex] objectForKey:@"artists"];
-        NSLog(@"Guest Artists array count in connections: %lu", (unsigned long)[guestArtists count]);
-        
-        compatabilityDictionary = [userProfile getArtistsDictionary:guestArtists];
-        [profileCompatabilityRating setText:[compatabilityDictionary objectForKey:@"rating"]];
-        
-        
-    }
-    
+           {
+                    NSLog(@"set photo");
+                    int profileIndex = [self profileIndex:peerID];
+               
+                    UIImageView *profileImageView = (UIImageView *)[cell viewWithTag:100];
+                    profileImageView.image = [[self.guestProfiles objectAtIndex:profileIndex] objectForKey:@"image"];
+               
+                    UILabel *profileTaglineLabel = (UILabel *)[cell viewWithTag:102];
+                    [profileTaglineLabel setText:[[self.guestProfiles objectAtIndex:profileIndex] objectForKey:@"tagline"]];
+
+            }
+
     
     return cell;
 }
 
 //commented this out due to custom storyboard height setting
 /*-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
- return 60.0;
- }*/
+    return 60.0;
+}*/
 
 
 @end
