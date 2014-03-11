@@ -24,5 +24,8 @@
 - (void)playlistUpvote:(NSInteger)loc;
 - (void)playlistDownvote:(NSInteger)loc;
 - (NSInteger)countOfPlaylistInfo;
+- (BOOL)upvoteSongAtLocation:(NSInteger)loc :(NSInteger)peerCount;
+- (BOOL)downvoteSongAtLocation:(NSInteger)loc :(NSInteger)peerCount;
+- (void)moveSongToTop:(NSInteger)loc;
 
 @end
