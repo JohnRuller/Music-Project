@@ -97,24 +97,12 @@
 - (IBAction)play:(id)sender
 {
     NSLog(@"play");
-<<<<<<< HEAD
     
 <<<<<<< HEAD
     NSError *error;
     
 =======
 >>>>>>> parent of c78cd53... reverted playlist view controller
-=======
-    NSError *error;
-    
-    NSMutableArray *playlist = [_playlistInfo getArray];
-    NSDictionary *firstSong = [playlist objectAtIndex:0];
-    _songName.text = [firstSong objectForKey:@"songTitle"];
-    _artist.text = [firstSong objectForKey:@"artistName"];
-    _albumName.text = [firstSong objectForKey:@"albumName"];
-    _albumArt.image = [firstSong objectForKey:@"albumArt"];
-    
->>>>>>> FETCH_HEAD
     if ([_songQueue count] != 0)
     {
         NSMutableArray *playlist = [_playlistInfo getArray];
@@ -238,8 +226,7 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-/*
- - (IBAction)send:(id)sender
+/*- (IBAction)send:(id)sender
  {
  //
  // NSData *data = [NSKeyedArchiver archivedDataWithRootObject:[_songQueue objectAtIndex:0]];
@@ -272,6 +259,7 @@
  //
  // NSURL *exportURL = [NSURL fileURLWithPath:exportFile];
  // exporter.outputURL = exportURL;
+ 
  NSURL *url = [[_songQueue objectAtIndex:0] valueForProperty: MPMediaItemPropertyAssetURL];
  AVURLAsset *songAsset = [AVURLAsset URLAssetWithURL: url options:nil];
  AVAssetExportSession *exporter = [[AVAssetExportSession alloc] initWithAsset: songAsset
@@ -309,6 +297,7 @@
  //_coolPlayer =[[AVAudioPlayer alloc] initWithData:data error:&error];
  //[_coolPlayer play];
  NSLog(@"%@", [error localizedDescription]);
+ 
  NSData *toBeSent = [NSKeyedArchiver archivedDataWithRootObject:data];
  //
  //
@@ -345,8 +334,7 @@
  }
  }
  }];
- }
- */
+ }*/
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
     
@@ -513,8 +501,7 @@
                                                            error:&error];
                 }
                 
-                /*
-                 if ([type isEqualToString:@"anarchy"])
+                /*if ([type isEqualToString:@"anarchy"])
                  {
                  NSString *kind = [dic objectForKey:@"kind"];
                  if ([kind isEqualToString:@"play"])
@@ -543,8 +530,7 @@
                  if([kind isEqualToString:@"playbackNormal"])
                  {
                  }
-                 }
-                 */
+                 }*/
             }
         }
     }
@@ -585,64 +571,6 @@
     
 }
 
-<<<<<<< HEAD
-=======
-/*
- //-(void)nowPlayingChanged:(NSNotification *)notification
- //{
- // NSLog(@"nowPlayingChanged");
- //
- // //_startTime = [NSDate date];
- // //[NSThread sleepForTimeInterval:1.0];
- //
- // NSTimeInterval elapsedTime = [_startTime timeIntervalSinceNow];
- // NSLog([NSString stringWithFormat:@"Elapsed time interval: %f", -elapsedTime]);
- // int time = round(elapsedTime);
- // NSLog(@"Elapsed time: %tu", -time);
- //
- //
- // _startTime = [NSDate date];
- // NSLog(@"nowPlayingChanged in loop");
- // NSInteger SQcount = [_songQueue count];
- // NSLog(@"nowPlayingChanged SQCount 1: %tu", SQcount);
- //
- // NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
- // info = [_playlistInfo objectAtIndex:0];
- //
- //
- // _songName.text = [info objectForKey:@"songTitle"];
- // _artist.text = [info objectForKey:@"artistName"];
- // _albumName.text = [info objectForKey:@"albumName"];
- // //_albumArt.image = [info objectForKey:@"albumArt"];
- //
- // NSData *toBeSent = [NSKeyedArchiver archivedDataWithRootObject:_playlistInfo];
- // NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
- // NSError *error;
- //
- // NSLog(@"Sending");
- // [_appDelegate.mpcController.session sendData:toBeSent
- // toPeers:allPeers
- // withMode:MCSessionSendDataReliable
- // error:&error];
- //
- // //[_playlistInfo removeObjectAtIndex:0];
- // //[_songQueue removeObjectAtIndex:0];
- // [_playlistTable reloadData];
- //
- // SQcount = [_songQueue count];
- // NSLog(@"nowPlayingChanged SQCount 2: %tu", SQcount);
- //
- // _startTime = [NSDate date];
- //
- //// NSTimeInterval elapsedTime = [_startTime timeIntervalSinceNow];
- //// NSLog([NSString stringWithFormat:@"Elapsed time interval: %f", -elapsedTime]);
- //// int time = round(elapsedTime);
- //// NSLog(@"Elapsed time: %tu", -time);
- //}
- */
-
-
->>>>>>> FETCH_HEAD
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -653,20 +581,16 @@
 - (void)audioPlayerDidFinish:(AVAudioPlayer *)player successfully:(BOOL)flag
 {
     NSLog(@"didFinish");
+    
     NSError *error = nil;
+    
     
     [_songQueue removeObjectAtIndex:0];
     [_playlistInfo removeSong:0];
     
+    
     if ([_songQueue count] != 0)
     {
-        NSMutableArray *playlist = [_playlistInfo getArray];
-        NSDictionary *firstSong = [playlist objectAtIndex:0];
-        _songName.text = [firstSong objectForKey:@"songTitle"];
-        _artist.text = [firstSong objectForKey:@"artistName"];
-        _albumName.text = [firstSong objectForKey:@"albumName"];
-        _albumArt.image = [firstSong objectForKey:@"albumArt"];
-        
         NSLog(@"Play next");
         AVAudioPlayer *neatPlayer = [[AVAudioPlayer alloc]initWithData:[_songQueue objectAtIndex:0] error:&error];
         _coolPlayer = neatPlayer;
@@ -689,8 +613,6 @@
     
     NSData *toBeSent = [NSKeyedArchiver archivedDataWithRootObject:[_playlistInfo getArray]];
     NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
-    
-    
     
     NSLog(@"Sending");
     [_appDelegate.mpcController.session sendData:toBeSent
@@ -725,7 +647,6 @@
     NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
     
 <<<<<<< HEAD
-<<<<<<< HEAD
     
     NSString *writer = [info objectForKey:@"artistName"];
     NSString *album = [info objectForKey:@"albumName"];
@@ -748,19 +669,6 @@
     final = [final stringByAppendingString:album];
     NSLog(@"%@", final);*/
 >>>>>>> parent of c78cd53... reverted playlist view controller
-=======
-    /*NSString *writer = [info objectForKey:@"artistName"];
-     NSString *album = [info objectForKey:@"albumName"];
-     NSString *middle = @" - ";
-     NSString *final = @"";
-     NSLog(@"%@", final);
-     final = [final stringByAppendingString:writer];
-     NSLog(@"%@", final);
-     final = [final stringByAppendingString:middle];
-     NSLog(@"%@", final);
-     final = [final stringByAppendingString:album];
-     NSLog(@"%@", final);*/
->>>>>>> FETCH_HEAD
     
     info = [play objectAtIndex:indexPath.row];
     
@@ -768,10 +676,10 @@
     [songTitle setText:[info objectForKey:@"songTitle"]];
     
     UILabel *artist = (UILabel *)[cell.contentView viewWithTag:112];
-    [artist setText:[info objectForKey:@"artistName"]];
+    [artist setText:final];
     
-    UILabel *albumName = (UILabel *)[cell.contentView viewWithTag:113];
-    [albumName setText:[info objectForKey:@"albumName"]];
+    //UILabel *albumName = (UILabel *)[cell.contentView viewWithTag:113];
+    //[albumName setText:[info objectForKey:@"albumName"]];
     
     UIImageView *profileImageView = (UIImageView *)[cell viewWithTag:110];
     profileImageView.image = [info objectForKey:@"albumArt"];
@@ -810,13 +718,11 @@
 
 
 #pragma mark - action sheet
--(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    NSString *buttonTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
-    //NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
-    //NSMutableArray *play = [_playlistInfo getArray];
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
     
-<<<<<<< HEAD
+    
+    NSString *buttonTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
+    
     NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
     NSMutableArray *play = [_playlistInfo getArray];
     NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
@@ -831,14 +737,6 @@
     NSString *type;
     NSNumber *loc = [[NSNumber alloc] initWithLong:_location];
     BOOL updated = false;
-=======
-    //info = [play objectAtIndex:_location];
-    //NSNumber *cool = [info objectForKey:@"votes"];
-    //NSNumber *replace;
-    
-    //NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-    //NSString *type;
->>>>>>> FETCH_HEAD
     
     MyManager *sharedManager = [MyManager sharedManager];
     if ([sharedManager.someProperty isEqualToString:@"YES"])
@@ -848,28 +746,20 @@
         {
             NSLog(@"Upvote!");
 <<<<<<< HEAD
-<<<<<<< HEAD
             replace = [NSNumber numberWithInt:[cool intValue] + 1];
             [info setObject:replace forKey:@"votes"];
-=======
-            
-            //replace = [NSNumber numberWithInt:[cool intValue] + 1];
-            //[info setObject:replace forKey:@"votes"];
->>>>>>> FETCH_HEAD
             
             NSLog(@"replace! Location: %ld", (long)_location);
             
             //[_playlistInfo replaceObjectAtIndex:_location withObject:info];
-            //NSLog(@"exchange!");
-            
-            
+            NSLog(@"exchange!");
             [_playlistInfo playlistUpvote:_location];
             [_songQueue exchangeObjectAtIndex:_location withObjectAtIndex:_location-1];
             
             //prepare dictionary to be sent to peers
-            //type = @"Upvote";
-            //[dic setObject:type forKey:@"type"];
-            //[dic setObject:loc forKey:@"where"];
+            type = @"Upvote";
+            [dic setObject:type forKey:@"type"];
+            [dic setObject:loc forKey:@"where"];
             
 =======
             
@@ -957,22 +847,6 @@
         } else if ([buttonTitle isEqualToString:@"Downboat!"])
         {
             NSLog(@"Downvote!");
-<<<<<<< HEAD
-=======
-            //replace = [NSNumber numberWithInt:[cool intValue] - 1];
-            //[info setObject:replace forKey:@"votes"];
-            
-            
-            //[_playlistInfo replaceObjectAtIndex:_location withObject:info];
-            //[_playlistInfo exchangeObjectAtIndex:_location withObjectAtIndex:_location+1];
-            [_playlistInfo playlistDownvote:_location];
-            [_songQueue exchangeObjectAtIndex:_location withObjectAtIndex:_location+1];
-            
-            //prepare dictionary to be sent to peers
-            //type = @"Downvote";
-            //[dic setObject:type forKey:@"type"];
-            //[dic setObject:loc forKey:@"where"];
->>>>>>> FETCH_HEAD
             
             //if the location of the chosen song is not the first song.
             if (_location != 0)
@@ -1059,32 +933,20 @@
                                                error:&error];
     }else{
         
-<<<<<<< HEAD
         
         
         NSLog(@"Guest");
 
         
         
-=======
-        NSLog(@"Guest");
-        NSNumber *loc = [[NSNumber alloc] initWithLong:_location];
->>>>>>> FETCH_HEAD
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
         [dic setObject:@"upvote" forKey:@"type"];
         
-        //upvote first
         if ([buttonTitle isEqualToString:@"Upvote!"])
         {
-            if (_location != 0)
-            {
-                [dic setObject:@"upvote" forKey:@"type"];
-                [dic setObject:loc forKey:@"where"];
-            }else
-            {
-                NSLog(@"Show message that you cannot upvote it anymore");
-            }
-        //downvote second
+            [dic setObject:@"upvote" forKey:@"type"];
+            [dic setObject:loc forKey:@"where"];
+            
         } else if ([buttonTitle isEqualToString:@"Downboat!"])
         {
             [dic setObject:@"downvote" forKey:@"type"];
@@ -1094,12 +956,11 @@
             NSLog(@"Cancel!");
             return;
         }
-        
         NSData *toBeSent = [NSKeyedArchiver archivedDataWithRootObject:dic];
         NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
         NSError *error;
         
-        NSLog(@"Vote Sending");
+        NSLog(@"Sending");
         [_appDelegate.mpcController.session sendData:toBeSent
                                              toPeers:allPeers
                                             withMode:MCSessionSendDataReliable
