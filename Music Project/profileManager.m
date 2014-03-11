@@ -209,8 +209,6 @@
     MPMediaQuery *artistsQuery = [MPMediaQuery artistsQuery];
     artistsArray = artistsQuery.collections;
     
-    [self artistsArrayToString];
-    
     /*if([artistsArray count] == 0) {
         NSMutableArray *emptyArtists = [[NSMutableArray alloc] init];
         [emptyArtists addObject:@"There are no artists on this device"];
@@ -219,20 +217,38 @@
     
 }
 
--(void) artistsArrayToString {
+-(int) getCompatabilityInt:(NSArray *)guestArtists {
     
-    NSMutableArray *stringArtistsArray = [[NSMutableArray alloc] init];
+    int count = 0;
     
-    //convert from mpmediaitem to string
+    [self setupArtistsArray];
+    
     for(int i=0; i<[artistsArray count]; i++)
     {
-        MPMediaItemCollection *artistCollection = artistsArray[i];
-        NSString *artistTitle = [[artistCollection representativeItem] valueForProperty:MPMediaItemPropertyArtist];
-        [stringArtistsArray addObject:artistTitle];
+        for(int j=0; j<[guestArtists count]; j++)
+        {
+            if([[artistsArray objectAtIndex:i] isEqualToString:[guestArtists objectAtIndex:j]]) {
+                count++;
+            }
+            
+        }
     }
     
-    artistsArray = stringArtistsArray;
+    NSLog(@"artists count = %d", count);
+    return count;
+}
+
+-(NSString *) getCompatabilityRating:(NSArray *)guestArtists {
     
+    float percentage = 0;
+    int matchingArtists = [self getCompatabilityInt:guestArtists];
+    int totalArtists = [artistsArray count] + [guestArtists count] - matchingArtists;
+    
+    percentage = matchingArtists/totalArtists;
+    
+    if(percentage >= 0 && percentage <= .25)
+        return @"Low compatability";
+    return @"test";
 }
 
 -(NSDictionary*)getArtistsDictionary:(NSArray *)guestArtists {
@@ -247,16 +263,11 @@
     //find matching artists
     for(int i=0; i<[artistsArray count]; i++)
     {
-        NSString *artistTitle = artistsArray[i];
-        
         for(int j=0; j<[guestArtists count]; j++)
         {
-            NSString *guestArtistTitle = guestArtists[j];
-            
-            if([artistTitle isEqualToString:guestArtistTitle]) {
+            if([[artistsArray objectAtIndex:i] isEqualToString:[guestArtists objectAtIndex:j]]) {
                 
-                NSLog(@"matching artists");
-                [matchingArtists addObject:artistTitle];
+                [matchingArtists addObject:[artistsArray objectAtIndex:i]];
                 
             }
         }
@@ -264,24 +275,15 @@
     
     //determine percentage
     float percentage = 0;
-    float numMatchingArtists = [matchingArtists count];
-    //float totalArtists = [artistsArray count] + [guestArtists count] - numMatchingArtists;
+    int numMatchingArtists = [matchingArtists count];
+    int totalArtists = [artistsArray count] + [guestArtists count] - numMatchingArtists;
     
-    percentage = numMatchingArtists/[artistsArray count];
-    
-    NSLog(@"Artists array = %lu", (unsigned long)[artistsArray count]);
-    NSLog(@"GUest Artists array = %lu", (unsigned long)[guestArtists count]);
-
-    
-    NSLog(@"numMatchingArtists = %f", numMatchingArtists);
-    //NSLog(@"totalArtists = %f", totalArtists);
-    NSLog(@"percentage = %f", percentage);
-
+    percentage = numMatchingArtists/totalArtists;
     
     //set compatability ratings
     NSString *compatabilityRating = [[NSString alloc] init];
     
-    if(percentage > 0 && percentage <= .33)
+    if(percentage >= 0 && percentage <= .33)
         compatabilityRating = @"Low compatability";
     else if(percentage > .33 && percentage <= .66)
         compatabilityRating = @"Medium compatability";
@@ -291,7 +293,7 @@
         compatabilityRating = @"Rating could not be determined";
     
     //set dictionary values
-    compatabilityDictionary = [NSDictionary dictionaryWithObjectsAndKeys: matchingArtists, @"artists", compatabilityRating, @"rating", nil];
+    compatabilityDictionary = [NSDictionary dictionaryWithObjectsAndKeys: matchingArtists, @"artists", compatabilityRating, "rating", nil];
     
     return compatabilityDictionary;
 }

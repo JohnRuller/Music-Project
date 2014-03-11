@@ -99,6 +99,9 @@
     NSLog(@"play");
     
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of 6fec1fa... Revert 1d2927a..321948b
     NSError *error;
     
 =======
@@ -531,6 +534,7 @@
                  {
                  }
                  }*/
+<<<<<<< HEAD
             }
         }
     }
@@ -563,6 +567,8 @@
                     _albumName.text = @"";
                     _albumArt.image = [UIImage imageNamed:@"penguin.png"];
                 }
+=======
+>>>>>>> parent of 6fec1fa... Revert 1d2927a..321948b
             }
         }
     }
@@ -571,6 +577,63 @@
     
 }
 
+<<<<<<< HEAD
+=======
+/*
+ //-(void)nowPlayingChanged:(NSNotification *)notification
+ //{
+ // NSLog(@"nowPlayingChanged");
+ //
+ // //_startTime = [NSDate date];
+ // //[NSThread sleepForTimeInterval:1.0];
+ //
+ // NSTimeInterval elapsedTime = [_startTime timeIntervalSinceNow];
+ // NSLog([NSString stringWithFormat:@"Elapsed time interval: %f", -elapsedTime]);
+ // int time = round(elapsedTime);
+ // NSLog(@"Elapsed time: %tu", -time);
+ //
+ //
+ // _startTime = [NSDate date];
+ // NSLog(@"nowPlayingChanged in loop");
+ // NSInteger SQcount = [_songQueue count];
+ // NSLog(@"nowPlayingChanged SQCount 1: %tu", SQcount);
+ //
+ // NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
+ // info = [_playlistInfo objectAtIndex:0];
+ //
+ //
+ // _songName.text = [info objectForKey:@"songTitle"];
+ // _artist.text = [info objectForKey:@"artistName"];
+ // _albumName.text = [info objectForKey:@"albumName"];
+ // //_albumArt.image = [info objectForKey:@"albumArt"];
+ //
+ // NSData *toBeSent = [NSKeyedArchiver archivedDataWithRootObject:_playlistInfo];
+ // NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
+ // NSError *error;
+ //
+ // NSLog(@"Sending");
+ // [_appDelegate.mpcController.session sendData:toBeSent
+ // toPeers:allPeers
+ // withMode:MCSessionSendDataReliable
+ // error:&error];
+ //
+ // //[_playlistInfo removeObjectAtIndex:0];
+ // //[_songQueue removeObjectAtIndex:0];
+ // [_playlistTable reloadData];
+ //
+ // SQcount = [_songQueue count];
+ // NSLog(@"nowPlayingChanged SQCount 2: %tu", SQcount);
+ //
+ // _startTime = [NSDate date];
+ //
+ //// NSTimeInterval elapsedTime = [_startTime timeIntervalSinceNow];
+ //// NSLog([NSString stringWithFormat:@"Elapsed time interval: %f", -elapsedTime]);
+ //// int time = round(elapsedTime);
+ //// NSLog(@"Elapsed time: %tu", -time);
+ //}*/
+
+
+>>>>>>> parent of 6fec1fa... Revert 1d2927a..321948b
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -647,6 +710,9 @@
     NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
     
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of 6fec1fa... Revert 1d2927a..321948b
     
     NSString *writer = [info objectForKey:@"artistName"];
     NSString *album = [info objectForKey:@"albumName"];
@@ -655,6 +721,7 @@
     NSString *final = [NSString stringWithFormat:@"%@%@%@", writer, middle, album];
 
     NSLog(@"%@", final);
+<<<<<<< HEAD
 =======
     /*NSString *writer = [info objectForKey:@"artistName"];
     NSString *album = [info objectForKey:@"albumName"];
@@ -669,6 +736,8 @@
     final = [final stringByAppendingString:album];
     NSLog(@"%@", final);*/
 >>>>>>> parent of c78cd53... reverted playlist view controller
+=======
+>>>>>>> parent of 6fec1fa... Revert 1d2927a..321948b
     
     info = [play objectAtIndex:indexPath.row];
     
@@ -725,6 +794,7 @@
     
     NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
     NSMutableArray *play = [_playlistInfo getArray];
+<<<<<<< HEAD
     NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
     NSInteger peerCount = [allPeers count];
     
@@ -737,6 +807,16 @@
     NSString *type;
     NSNumber *loc = [[NSNumber alloc] initWithLong:_location];
     BOOL updated = false;
+=======
+    
+    info = [play objectAtIndex:_location];
+    NSNumber *cool = [info objectForKey:@"votes"];
+    NSNumber *replace;
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    NSString *type;
+    NSNumber *loc = [[NSNumber alloc] initWithLong:_location];
+>>>>>>> parent of 6fec1fa... Revert 1d2927a..321948b
     
     MyManager *sharedManager = [MyManager sharedManager];
     if ([sharedManager.someProperty isEqualToString:@"YES"])
@@ -746,6 +826,9 @@
         {
             NSLog(@"Upvote!");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of 6fec1fa... Revert 1d2927a..321948b
             replace = [NSNumber numberWithInt:[cool intValue] + 1];
             [info setObject:replace forKey:@"votes"];
             
@@ -847,6 +930,22 @@
         } else if ([buttonTitle isEqualToString:@"Downboat!"])
         {
             NSLog(@"Downvote!");
+<<<<<<< HEAD
+=======
+            replace = [NSNumber numberWithInt:[cool intValue] - 1];
+            [info setObject:replace forKey:@"votes"];
+            
+            
+            //[_playlistInfo replaceObjectAtIndex:_location withObject:info];
+            //[_playlistInfo exchangeObjectAtIndex:_location withObjectAtIndex:_location+1];
+            [_playlistInfo playlistDownvote:_location];
+            [_songQueue exchangeObjectAtIndex:_location withObjectAtIndex:_location+1];
+            
+            //prepare dictionary to be sent to peers
+            type = @"Downvote";
+            [dic setObject:type forKey:@"type"];
+            [dic setObject:loc forKey:@"where"];
+>>>>>>> parent of 6fec1fa... Revert 1d2927a..321948b
             
             //if the location of the chosen song is not the first song.
             if (_location != 0)
@@ -932,6 +1031,7 @@
                                             withMode:MCSessionSendDataReliable
                                                error:&error];
     }else{
+<<<<<<< HEAD
         
         
         
@@ -939,6 +1039,9 @@
 
         
         
+=======
+        NSLog(@"Guest");
+>>>>>>> parent of 6fec1fa... Revert 1d2927a..321948b
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
         [dic setObject:@"upvote" forKey:@"type"];
         

@@ -49,18 +49,9 @@ profileManager *userProfile;
     NSArray *artistsArray = [[NSArray alloc] init];
     artistsArray = userProfile.artistsArray;
     
-    NSLog(@"Artists array count in connections: %lu", (unsigned long)[artistsArray count]);
-    
-    
     //pass profile data into dictionary
     self.profileData = [[NSDictionary alloc] init];
     self.profileData = [NSDictionary dictionaryWithObjectsAndKeys: name, @"name", tagline, @"tagline", image, @"image", artistsArray, @"artists", nil];
-    
-    NSArray *guestArtists2 = [[NSArray alloc] init];
-    guestArtists2 = [self.profileData objectForKey:@"artists"];
-    NSLog(@"Guest Artists 2 array count in connections: %lu", (unsigned long)[guestArtists2 count]);
-    
-    [userProfile getArtistsDictionary:guestArtists2];
     
     //init array
     self.guestProfiles = [[NSMutableArray alloc] init];
@@ -223,10 +214,6 @@ profileManager *userProfile;
     NSLog(@"receiving profile");
     
    if ([myObject isKindOfClass:[NSDictionary class]]){
-       
-       NSArray *guestArtists3 = [[NSArray alloc] init];
-       guestArtists3 = [myObject objectForKey:@"artists"];
-       NSLog(@"Guest Artists 3 array count in connections: %lu", (unsigned long)[guestArtists3 count]);
         
         //Handle
         [self.guestProfiles addObject:myObject];
@@ -326,16 +313,6 @@ profileManager *userProfile;
                
                     UILabel *profileTaglineLabel = (UILabel *)[cell viewWithTag:102];
                     [profileTaglineLabel setText:[[self.guestProfiles objectAtIndex:profileIndex] objectForKey:@"tagline"]];
-               
-                    UILabel *profileCompatabilityRating = (UILabel *)[cell viewWithTag:103];
-                    NSDictionary *compatabilityDictionary = [[NSDictionary alloc] init];
-                    NSArray *guestArtists = [[NSArray alloc] init];
-                    guestArtists = [[self.guestProfiles objectAtIndex:profileIndex] objectForKey:@"artists"];
-                    NSLog(@"Guest Artists array count in connections: %lu", (unsigned long)[guestArtists count]);
-
-                    compatabilityDictionary = [userProfile getArtistsDictionary:guestArtists];
-                    [profileCompatabilityRating setText:[compatabilityDictionary objectForKey:@"rating"]];
-               
 
             }
 

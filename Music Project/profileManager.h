@@ -36,9 +36,11 @@
 -(void) setProfilePhoto:(UIImage *)newProfilePhoto;
 -(void) setArtistsArray:(NSArray *)newArtistsArray;
 -(void) setupArtistsArray;
--(void) artistsArrayToString;
 
 -(void) saveData;
+
+-(int) getCompatabilityInt:(NSArray *)guestArtists;
+-(NSString *) getCompatabilityRating:(NSArray *)guestArtists;
 
 -(NSDictionary*)getArtistsDictionary:(NSArray *)guestArtists;
 
