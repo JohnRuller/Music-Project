@@ -42,7 +42,7 @@ profileManager *userProfile;
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-
+    
     userProfile = [[profileManager alloc] init];
     
     //labels
@@ -69,16 +69,16 @@ profileManager *userProfile;
 
 #pragma mark - Segue
 /*
-//passing profile managedObject to edit profile view
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    
-    if ([[segue identifier] isEqualToString:@"UpdateProfile"] && [self.profiles count] != 0) {
-        NSManagedObject *selectedProfile = [self.profiles objectAtIndex:0];
-        EditProfileViewController *destViewController = segue.destinationViewController;
-        destViewController.profile = selectedProfile;
-    }
-}
+ //passing profile managedObject to edit profile view
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+ {
+ 
+ if ([[segue identifier] isEqualToString:@"UpdateProfile"] && [self.profiles count] != 0) {
+ NSManagedObject *selectedProfile = [self.profiles objectAtIndex:0];
+ EditProfileViewController *destViewController = segue.destinationViewController;
+ destViewController.profile = selectedProfile;
+ }
+ }
  */
 
 #pragma mark - Artists
@@ -91,9 +91,8 @@ profileManager *userProfile;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ArtistsCell"];
-
-    MPMediaItemCollection *artistCollection = userProfile.artistsArray[indexPath.row];
-    NSString *artistTitle = [[artistCollection representativeItem] valueForProperty:MPMediaItemPropertyArtist];
+    
+    NSString *artistTitle = userProfile.artistsArray[indexPath.row];
     
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ArtistsCell"];
