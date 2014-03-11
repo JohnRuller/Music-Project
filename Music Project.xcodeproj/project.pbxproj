@@ -51,6 +51,10 @@
 		02E8C75918A869DD007AA6A3 /* MusicProject.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 02E8C75718A869DD007AA6A3 /* MusicProject.xcdatamodeld */; };
 		02E8C75C18A8A83E007AA6A3 /* EditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02E8C75B18A8A83E007AA6A3 /* EditProfileViewController.m */; };
 		02E8C75D18A8A83E007AA6A3 /* EditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02E8C75B18A8A83E007AA6A3 /* EditProfileViewController.m */; };
+		02F5DCDB18CF8BF20006D633 /* NoComp.png in Resources */ = {isa = PBXBuildFile; fileRef = 02F5DCD718CF8BF20006D633 /* NoComp.png */; };
+		02F5DCDC18CF8BF20006D633 /* HighComp.png in Resources */ = {isa = PBXBuildFile; fileRef = 02F5DCD818CF8BF20006D633 /* HighComp.png */; };
+		02F5DCDD18CF8BF20006D633 /* LowComp.png in Resources */ = {isa = PBXBuildFile; fileRef = 02F5DCD918CF8BF20006D633 /* LowComp.png */; };
+		02F5DCDE18CF8BF20006D633 /* MediumComp.png in Resources */ = {isa = PBXBuildFile; fileRef = 02F5DCDA18CF8BF20006D633 /* MediumComp.png */; };
 		9445D0EA18BA628800BAFF5F /* ChooseSongViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9445D0E918BA628800BAFF5F /* ChooseSongViewController.m */; };
 		945B78431895812500C26AAA /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 945B78421895812500C26AAA /* MainStoryboard.storyboard */; };
 		945B78621895822E00C26AAA /* NSMutableArray+QueueMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 945B78471895822E00C26AAA /* NSMutableArray+QueueMethods.m */; };
@@ -136,6 +140,10 @@
 		02E8C75818A869DD007AA6A3 /* MusicProject.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MusicProject.xcdatamodel; sourceTree = "<group>"; };
 		02E8C75A18A8A83E007AA6A3 /* EditProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProfileViewController.h; sourceTree = "<group>"; };
 		02E8C75B18A8A83E007AA6A3 /* EditProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditProfileViewController.m; sourceTree = "<group>"; };
+		02F5DCD718CF8BF20006D633 /* NoComp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NoComp.png; sourceTree = "<group>"; };
+		02F5DCD818CF8BF20006D633 /* HighComp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HighComp.png; sourceTree = "<group>"; };
+		02F5DCD918CF8BF20006D633 /* LowComp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LowComp.png; sourceTree = "<group>"; };
+		02F5DCDA18CF8BF20006D633 /* MediumComp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MediumComp.png; sourceTree = "<group>"; };
 		9445D0E818BA628800BAFF5F /* ChooseSongViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseSongViewController.h; sourceTree = "<group>"; };
 		9445D0E918BA628800BAFF5F /* ChooseSongViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseSongViewController.m; sourceTree = "<group>"; };
 		945B78421895812500C26AAA /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
@@ -321,6 +329,10 @@
 		02E5363518C13B5D00CC53B3 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				02F5DCD718CF8BF20006D633 /* NoComp.png */,
+				02F5DCD818CF8BF20006D633 /* HighComp.png */,
+				02F5DCD918CF8BF20006D633 /* LowComp.png */,
+				02F5DCDA18CF8BF20006D633 /* MediumComp.png */,
 				94F965AF18CF79E400EBD344 /* penguin.png */,
 				02397E4A18CBC7B700B6F9A9 /* defaultProfile.png */,
 				02E5368F18C2BE1C00CC53B3 /* PeerAudio.png */,
@@ -525,15 +537,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				94F965B018CF79E400EBD344 /* penguin.png in Resources */,
+				02F5DCDE18CF8BF20006D633 /* MediumComp.png in Resources */,
 				023D1A5218A0127B009CA940 /* Icon.png in Resources */,
 				02E5368918C2BDA500CC53B3 /* Icon-Small-40@2x.png in Resources */,
 				02E5369018C2BE1D00CC53B3 /* PeerAudio.png in Resources */,
+				02F5DCDD18CF8BF20006D633 /* LowComp.png in Resources */,
 				02E5368818C2BDA500CC53B3 /* Icon-60@2x.png in Resources */,
 				02E5368C18C2BDA500CC53B3 /* Default@2x.png in Resources */,
 				02397E4B18CBC7B700B6F9A9 /* defaultProfile.png in Resources */,
 				02E5368B18C2BDA500CC53B3 /* Default.png in Resources */,
+				02F5DCDC18CF8BF20006D633 /* HighComp.png in Resources */,
 				0220CB52182C977F006C10A8 /* InfoPlist.strings in Resources */,
 				945B78431895812500C26AAA /* MainStoryboard.storyboard in Resources */,
+				02F5DCDB18CF8BF20006D633 /* NoComp.png in Resources */,
 				0220CB5A182C977F006C10A8 /* Images.xcassets in Resources */,
 				02E5368A18C2BDA500CC53B3 /* Icon-Small@2x.png in Resources */,
 			);

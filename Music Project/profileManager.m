@@ -280,15 +280,29 @@
     
     //set compatability ratings
     NSString *compatabilityRating = [[NSString alloc] init];
+    UIImage *compBar = [[UIImage alloc] init];
     
-    if(percentage > 0 && percentage <= .33)
-        compatabilityRating = @"Low compatability";
-    else if(percentage > .33 && percentage <= .66)
+    if(percentage > 0 && percentage <= .33) {
+       compatabilityRating = @"Low compatability";
+        compBar = [UIImage imageNamed:@"LowComp.png"];
+    }
+    else if(percentage > .33 && percentage <= .66) {
         compatabilityRating = @"Medium compatability";
-    else if(percentage > .66 && percentage <= 1.00)
+        compBar = [UIImage imageNamed:@"MediumComp.png"];
+    }
+    else if(percentage > .66 && percentage <= 1.00) {
         compatabilityRating = @"High compatability";
-    else
+        compBar = [UIImage imageNamed:@"HighComp.png"];
+    }
+    else if (percentage == 0) {
+        compatabilityRating = @"No matching artists";
+        compBar = [UIImage imageNamed:@"NoComp.png"];
+    }
+    else {
         compatabilityRating = @"Rating could not be determined";
+        compBar = [UIImage imageNamed:@"NoComp.png"];
+    }
+    
     
     //set dictionary values
     compatabilityDictionary = [NSDictionary dictionaryWithObjectsAndKeys: matchingArtists, @"artists", compatabilityRating, @"rating", nil];
