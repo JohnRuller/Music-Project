@@ -157,6 +157,14 @@
     
 }
 
+-(NSString *)getSongName:(NSInteger)location
+{
+    NSDictionary *dic = [_playlistInfo objectAtIndex:location];
+    NSString *songName = [dic objectForKey:@"songTitle"];
+    
+    return songName;
+}
+
 
 
 
