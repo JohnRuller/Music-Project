@@ -1191,7 +1191,7 @@
             {
                 NSLog(@"Move Song to the top");
                 [_playlistInfo moveSongToTop:_location];
-                //insert code here that moves the songQueue to the top
+                NSLog(@"insert code here that moves the songQueue to the top");
             }
             else
             {
