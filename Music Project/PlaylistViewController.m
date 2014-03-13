@@ -487,7 +487,7 @@
                         NSLog(@"song is not in correct location. locating song");
                         NSInteger i = 0;
                         BOOL found = false;
-                        while (i < [_playlistInfo countOfPlaylistInfo] || found != true)
+                        while (i < [_playlistInfo countOfPlaylistInfo] && found != true)
                         {
                             if ([songTitle isEqualToString:[_playlistInfo getSongName:i]])
                             {

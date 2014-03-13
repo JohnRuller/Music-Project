@@ -105,4 +105,9 @@
                                                       userInfo:@{@"progress": (NSProgress *)object}];
 }
 
+- (void) session:(MCSession*)session didReceiveCertificate:(NSArray*)certificate fromPeer:(MCPeerID*)peerID certificateHandler:(void (^)(BOOL accept))certificateHandler
+{
+    if (certificateHandler != nil) { certificateHandler(YES); }
+}
+
 @end

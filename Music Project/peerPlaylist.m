@@ -41,11 +41,18 @@
     MPMediaItemArtwork *artz = [song valueForProperty:MPMediaItemPropertyArtwork];
     UIImage *art = NULL;
     
+    
+/*
+    
     if (artz != nil)
     {
         art = [artz imageWithSize:CGSizeMake(90.0, 90.0)];
         
-    }
+//        UIGraphicsBeginImageContext(CGSizeMake(90, 90));
+//        //[artz drawInRect:CGRectMake(0,0,CGSizeMake(90, 90).width,CGSizeMake(90, 90).height)];
+//        UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+//        UIGraphicsEndImageContext();
+    }*/
     
     if (!art) {
         NSLog(@"No ALBUM ARTWORK");
@@ -102,6 +109,8 @@
     
     [dic setObject:replace forKey:@"upVotes"];
     [_playlistInfo replaceObjectAtIndex:location withObject:dic];
+    
+    NSLog(@"Upvote Count is: %@", replace);
 }
 
 - (void)addDownvote:(NSInteger)location
@@ -113,6 +122,8 @@
     
     [dic setObject:replace forKey:@"downVotes"];
     [_playlistInfo replaceObjectAtIndex:location withObject:dic];
+    
+    NSLog(@"Downvote Count is: %@", replace);
 }
 
 - (NSInteger)getUpvoteCount:(NSInteger)location
@@ -121,6 +132,8 @@
     NSMutableDictionary *dic = [_playlistInfo objectAtIndex:location];
     NSNumber *upVotes = [dic objectForKey:@"upVotes"];
     NSInteger upVotesInt = [upVotes intValue];
+    NSLog(@"Upvote Count is: %ld", (long)upVotesInt);
+
     return upVotesInt;
 }
 
@@ -130,6 +143,7 @@
     NSMutableDictionary *dic = [_playlistInfo objectAtIndex:location];
     NSNumber *downVotes = [dic objectForKey:@"downVotes"];
     NSInteger downVotesInt = [downVotes intValue];
+    NSLog(@"Downvote Count is: %ld", (long)downVotesInt);
     return downVotesInt;
 }
 
