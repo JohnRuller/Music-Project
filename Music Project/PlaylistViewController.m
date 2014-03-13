@@ -180,7 +180,7 @@
     
     // //NSInteger = [_playlistInfo ]
     //
-    // NSLog(@"Sending");
+    NSLog(@"Sending Song");
     [_appDelegate.mpcController.session sendData:data
                                          toPeers:allPeers
                                         withMode:MCSessionSendDataReliable
@@ -713,6 +713,10 @@
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     NSString *buttonTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
+    NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
+    NSInteger totalPeers = [allPeers count];
+    
+    /*
     //NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
     //NSMutableArray *play = [_playlistInfo getArray];
     
@@ -722,6 +726,7 @@
     
     //NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     //NSString *type;
+    */
     
     MyManager *sharedManager = [MyManager sharedManager];
     if ([sharedManager.someProperty isEqualToString:@"YES"])
@@ -731,6 +736,37 @@
         {
             NSLog(@"Upvote!");
             
+            if (_location != 0)
+            {
+                NSLog(@"Location != 0");
+                [_playlistInfo addUpvote:_location];
+                
+                if (_location == 1 && [_coolPlayer isPlaying] == true)
+                {
+                    NSLog(@"location is 1 and player is playing. upvotes added");
+                }
+                else
+                {
+                    NSLog(@"all other conditions failed, do full upvote routine");
+                    NSInteger totalUpvotes = [_playlistInfo getUpvoteCount:_location];
+                    if (((totalUpvotes/totalPeers)*100) >= 50 && totalPeers > 2)
+                    {
+                        NSLog(@"Move Song to the top");
+                        [_playlistInfo moveSongToTop:_location];
+                        //insert code here that moves the songQueue to the top
+                    }
+                    else
+                    {
+                        NSLog(@"Move Song up one position");
+                        [_songQueue exchangeObjectAtIndex:_location withObjectAtIndex:_location-1];
+                        [_playlistInfo moveSongUpOnePosition:_location];
+                    }
+                }
+            }
+            else
+                NSLog(@"Location is equal to 0 - do nothing");
+            
+            /*
             //replace = [NSNumber numberWithInt:[cool intValue] + 1];
             //[info setObject:replace forKey:@"votes"];
             
@@ -739,20 +775,118 @@
             //[_playlistInfo replaceObjectAtIndex:_location withObject:info];
             //NSLog(@"exchange!");
             
+            if (_location != 0 && _location != 1)
+            {
+                [_playlistInfo playlistUpvote:_location];
+                [_songQueue exchangeObjectAtIndex:_location withObjectAtIndex:_location-1];
+                NSLog(@"Location = whatever");
+            }
             
-            [_playlistInfo playlistUpvote:_location];
-            [_songQueue exchangeObjectAtIndex:_location withObjectAtIndex:_location-1];
+            if (_location == 1)
+            {
+                NSLog(@"Location = 1");
+                if (![_coolPlayer isPlaying])
+                {
+                    [_songQueue exchangeObjectAtIndex:_location withObjectAtIndex:_location-1];
+                    NSLog(@"player not playing");
+                }
+                [_playlistInfo playlistUpvote:_location];
+            }
+            
+            if (_location == 0)
+            {
+                NSLog(@"location = 0");
+            }
             
             //prepare dictionary to be sent to peers
             //type = @"Upvote";
             //[dic setObject:type forKey:@"type"];
             //[dic setObject:loc forKey:@"where"];
+             */
             
         } else if ([buttonTitle isEqualToString:@"Downboat!"])
         {
             NSLog(@"Downvote!");
+            
+            [_playlistInfo addDownvote:_location];
+            NSInteger totalDownvotes = [_playlistInfo getDownvoteCount:_location];
+            NSInteger downVotePercentage = (totalDownvotes/totalPeers)*100;
+            
+            
+            //if it is the first song and its playing
+            if (_location == 0 && [_coolPlayer isPlaying] == true)
+            {
+                if (downVotePercentage >= 50 && totalPeers > 2)
+                {
+                    NSLog(@"Remove first song and play next");
+                    [_coolPlayer stop];
+                    
+                    [_playlistInfo removeSong:_location];
+                    [_songQueue removeObjectAtIndex:_location];
+                    
+                    if ([_songQueue count] != 0)
+                    {
+                        NSError *error;
+                        NSMutableArray *playlist = [_playlistInfo getArray];
+                        NSDictionary *firstSong = [playlist objectAtIndex:0];
+                        _songName.text = [firstSong objectForKey:@"songTitle"];
+                        _artist.text = [firstSong objectForKey:@"artistName"];
+                        _albumName.text = [firstSong objectForKey:@"albumName"];
+                        _albumArt.image = [firstSong objectForKey:@"albumArt"];
+                        
+                        NSLog(@"Play next");
+                        AVAudioPlayer *neatPlayer = [[AVAudioPlayer alloc]initWithData:[_songQueue objectAtIndex:0] error:&error];
+                        _coolPlayer = neatPlayer;
+                        [_coolPlayer prepareToPlay];
+                        [_coolPlayer setDelegate:self];
+                        [_coolPlayer play];
+                    }
+                }
+            //if last in queue
+            }else if (_location == ([_playlistInfo countOfPlaylistInfo] - 1))
+            {
+                if (downVotePercentage >= 50 && totalPeers > 2)
+                {
+                    NSLog(@"Remove last song");
+                    [_playlistInfo removeSong:_location];
+                    [_songQueue removeObjectAtIndex:_location];
+                }
+            //other
+            } else {
+                if (downVotePercentage >= 50 && totalPeers > 2)
+                {
+                    NSLog(@"Remove song");
+                    [_playlistInfo removeSong:_location];
+                    [_songQueue removeObjectAtIndex:_location];
+                } else {
+                    NSLog(@"Move song down one position");
+                    [_playlistInfo moveSongDownOnePosition:_location];
+                    [_songQueue exchangeObjectAtIndex:_location withObjectAtIndex:_location+1];
+                }
+            }
+
+            
+            /*
             //replace = [NSNumber numberWithInt:[cool intValue] - 1];
             //[info setObject:replace forKey:@"votes"];
+            
+            if (_location != 0 && _location != ([_playlistInfo countOfPlaylistInfo] - 1))
+            {
+                NSLog(@"location = whatever");
+                [_playlistInfo playlistDownvote:_location];
+                [_songQueue exchangeObjectAtIndex:_location withObjectAtIndex:_location+1];
+            }
+            
+            if (_location == 0)
+            {
+                NSLog(@"location = 0");
+                if (![_coolPlayer isPlaying])
+                {
+                    NSLog(@"player not playing");
+                    [_songQueue exchangeObjectAtIndex:_location withObjectAtIndex:_location+1];
+                }
+                [_playlistInfo playlistDownvote:_location];
+            }
             
             
             //[_playlistInfo replaceObjectAtIndex:_location withObject:info];
@@ -764,7 +898,7 @@
             //type = @"Downvote";
             //[dic setObject:type forKey:@"type"];
             //[dic setObject:loc forKey:@"where"];
-            
+            */
         } else
         {
             NSLog(@"Cancel!");
@@ -780,6 +914,9 @@
                                              toPeers:allPeers
                                             withMode:MCSessionSendDataReliable
                                                error:&error];
+        
+        
+        
     }else{
         
         NSLog(@"Guest");
@@ -792,6 +929,7 @@
         {
             if (_location != 0)
             {
+                //[dic setObject:<#(id)#> forKey:<#(id<NSCopying>)#>]
                 [dic setObject:@"upvote" forKey:@"type"];
                 [dic setObject:loc forKey:@"where"];
             }else

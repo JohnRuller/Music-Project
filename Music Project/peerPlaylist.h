@@ -21,11 +21,25 @@
 - (void)updatePlaylist:(NSMutableArray *)receivedPlaylist;
 - (void)removeSong:(NSInteger) location;
 - (NSMutableArray *)getArray;
+- (NSInteger)countOfPlaylistInfo;
+
+- (void)addUpvote:(NSInteger)location;
+- (void)addDownvote:(NSInteger)location;
+- (NSInteger)getUpvoteCount:(NSInteger)location;
+- (NSInteger)getDownvoteCount:(NSInteger)location;
+- (void)moveSongUpOnePosition:(NSInteger)location;
+- (void)moveSongDownOnePosition:(NSInteger)location;
+- (void)moveSongToTop:(NSInteger)location;
+
+
+
+
+
+
 - (void)playlistUpvote:(NSInteger)loc;
 - (void)playlistDownvote:(NSInteger)loc;
-- (NSInteger)countOfPlaylistInfo;
 - (BOOL)upvoteSongAtLocation:(NSInteger)loc :(NSInteger)peerCount;
 - (BOOL)downvoteSongAtLocation:(NSInteger)loc :(NSInteger)peerCount;
-- (void)moveSongToTop:(NSInteger)loc;
+//- (void)moveSongToTop:(NSInteger)loc;
 
 @end

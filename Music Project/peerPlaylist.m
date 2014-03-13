@@ -71,32 +71,108 @@
 
 -(void)removeSong:(NSInteger)location
 {
+    NSLog(@"remove song at location %ld", (long)location);
     [_playlistInfo removeObjectAtIndex:location];
 }
 
 -(NSMutableArray *)getArray
 {
+    NSLog(@"get array");
     return _playlistInfo;
 }
 
 -(void)updatePlaylist:(NSMutableArray *)receivedPlaylist
 {
+    NSLog(@"guest - update playlist with new received playlist");
     _playlistInfo = [receivedPlaylist copy];
 }
+
+- (NSInteger)countOfPlaylistInfo
+{
+    NSLog(@"return playlist count");
+    return [_playlistInfo count];
+}
+
+- (void)addUpvote:(NSInteger)location
+{
+    NSLog(@"add Upvote");
+    NSMutableDictionary *dic = [_playlistInfo objectAtIndex:location];
+    NSNumber *upVotes = [dic objectForKey:@"upVotes"];
+    NSNumber *replace = [NSNumber numberWithInt:[upVotes intValue] + 1];
+    
+    [dic setObject:replace forKey:@"upVotes"];
+    [_playlistInfo replaceObjectAtIndex:location withObject:dic];
+}
+
+- (void)addDownvote:(NSInteger)location
+{
+    NSLog(@"add downVote");
+    NSMutableDictionary *dic = [_playlistInfo objectAtIndex:location];
+    NSNumber *downVotes = [dic objectForKey:@"downVotes"];
+    NSNumber *replace = [NSNumber numberWithInt:[downVotes intValue] + 1];
+    
+    [dic setObject:replace forKey:@"downVotes"];
+    [_playlistInfo replaceObjectAtIndex:location withObject:dic];
+}
+
+- (NSInteger)getUpvoteCount:(NSInteger)location
+{
+    NSLog(@"get upvote count");
+    NSMutableDictionary *dic = [_playlistInfo objectAtIndex:location];
+    NSNumber *upVotes = [dic objectForKey:@"upVotes"];
+    NSInteger upVotesInt = [upVotes intValue];
+    return upVotesInt;
+}
+
+- (NSInteger)getDownvoteCount:(NSInteger)location
+{
+    NSLog(@"get downvote count");
+    NSMutableDictionary *dic = [_playlistInfo objectAtIndex:location];
+    NSNumber *downVotes = [dic objectForKey:@"downVotes"];
+    NSInteger downVotesInt = [downVotes intValue];
+    return downVotesInt;
+}
+
+- (void)moveSongUpOnePosition:(NSInteger)location
+{
+    NSLog(@"move song up one position");
+    [_playlistInfo exchangeObjectAtIndex:location withObjectAtIndex:location - 1];
+}
+
+- (void)moveSongDownOnePosition:(NSInteger)location
+{
+    NSLog(@"move song down one position");
+    [_playlistInfo exchangeObjectAtIndex:location withObjectAtIndex:location + 1];
+}
+
+-(void)moveSongToTop:(NSInteger)location
+{
+    NSLog(@"moveSongToTop");
+    NSInteger loc = location;
+    while (loc != 1)
+    {
+        [self moveSongUpOnePosition:loc];
+        location--;
+    }
+    
+}
+
+
+
+
+
+
+
 
 -(void)playlistUpvote:(NSInteger)loc
 {
     [_playlistInfo exchangeObjectAtIndex:loc withObjectAtIndex:loc-1];
+    
 }
 
 -(void)playlistDownvote:(NSInteger)loc
 {
     [_playlistInfo exchangeObjectAtIndex:loc withObjectAtIndex:loc+1];
-}
-
-- (NSInteger)countOfPlaylistInfo
-{
-    return [_playlistInfo count];
 }
 
 
@@ -178,7 +254,8 @@
     return false;
 }
 
--(void)moveSongToTop:(NSInteger)loc
+/*
+ -(void)moveSongToTop:(NSInteger)loc
 {
     NSLog(@"moveSongToTop");
     NSInteger location = loc;
@@ -188,6 +265,7 @@
         location--;
     }
 }
+*/
 
 
 @end
