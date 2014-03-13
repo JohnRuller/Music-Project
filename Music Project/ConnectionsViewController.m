@@ -40,6 +40,7 @@ profileManager *userProfile;
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+    //initialize user profile class
     userProfile = [[profileManager alloc] init];
     
     //store values from profile managed object
@@ -167,6 +168,10 @@ profileManager *userProfile;
         [_appDelegate.mpcController advertiseSelf:NO];
     }
     
+    //reload table data
+    [_tblConnectedDevices reloadData];
+    NSLog(@"Refreshing table data after dismissing browser view controller.");
+    
     /*
      NSString *message = @"WhoseHost?";
      NSString *returnTo = [UIDevice currentDevice].name;
@@ -220,13 +225,12 @@ profileManager *userProfile;
         
         //Handle
         [self.guestProfiles addObject:myObject];
-        
-        //NSString *tagline = [NSString stringWithFormat:@"%@",[profile valueForKey:@"tagline"]];
-        
         NSLog(@"Setting profile data in array.");
         
-        
-        
+        //refresh table
+        [_tblConnectedDevices reloadData];
+        NSLog(@"Refreshing table data after receiving profile and setting it.");
+
     }
     
 }
