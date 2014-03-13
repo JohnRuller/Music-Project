@@ -56,12 +56,6 @@ profileManager *userProfile;
     self.profileData = [[NSDictionary alloc] init];
     self.profileData = [NSDictionary dictionaryWithObjectsAndKeys: name, @"name", tagline, @"tagline", image, @"image", artistsArray, @"artists", nil];
     
-    NSArray *guestArtists2 = [[NSArray alloc] init];
-    guestArtists2 = [self.profileData objectForKey:@"artists"];
-    NSLog(@"Guest Artists 2 array count in connections: %lu", (unsigned long)[guestArtists2 count]);
-    
-    [userProfile getArtistsDictionary:guestArtists2];
-    
     //init array
     self.guestProfiles = [[NSMutableArray alloc] init];
     
@@ -224,16 +218,12 @@ profileManager *userProfile;
     
     if ([myObject isKindOfClass:[NSDictionary class]]){
         
-        NSArray *guestArtists3 = [[NSArray alloc] init];
-        guestArtists3 = [myObject objectForKey:@"artists"];
-        NSLog(@"Guest Artists 3 array count in connections: %lu", (unsigned long)[guestArtists3 count]);
-        
         //Handle
         [self.guestProfiles addObject:myObject];
         
         //NSString *tagline = [NSString stringWithFormat:@"%@",[profile valueForKey:@"tagline"]];
         
-        NSLog(@"if array");
+        NSLog(@"Setting profile data in array.");
         
         
         
