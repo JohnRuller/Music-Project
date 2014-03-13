@@ -602,7 +602,9 @@
         }
     }
     
-    [_playlistTable reloadData];
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        [_playlistTable reloadData];
+    }];
     
 }
 
@@ -1054,7 +1056,9 @@
         }
     }
     
-    [_playlistTable reloadData];
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        [_playlistTable reloadData];
+    }];
 }
 
 - (void)turnSongIntoData:(MPMediaItem *) item
