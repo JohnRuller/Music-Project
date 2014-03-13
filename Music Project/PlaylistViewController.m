@@ -1222,7 +1222,7 @@
     //if it is the first song and its playing
     if (_location == 0 && [_coolPlayer isPlaying] == true)
     {
-        if (downVotePercentage >= 50 && totalPeers > 2)
+        if (downVotePercentage >= 50 && totalPeers > 1)
         {
             NSLog(@"Remove first song and play next");
             [_coolPlayer stop];
@@ -1251,7 +1251,7 @@
         //if last in queue
     }else if (_location == ([_playlistInfo countOfPlaylistInfo] - 1))
     {
-        if (downVotePercentage >= 50 && totalPeers > 2)
+        if (downVotePercentage >= 50 && totalPeers > 1)
         {
             NSLog(@"Remove last song");
             [_playlistInfo removeSong:_location];
@@ -1259,7 +1259,7 @@
         }
         //other
     } else {
-        if (downVotePercentage >= 50 && totalPeers > 2)
+        if (downVotePercentage >= 50 && totalPeers > 1)
         {
             NSLog(@"Remove song");
             [_playlistInfo removeSong:_location];
