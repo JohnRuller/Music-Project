@@ -149,7 +149,10 @@ profileManager *userProfile;
     [_appDelegate.mpcController.session disconnect];
     
     [_arrConnectedDevices removeAllObjects];
-    [_tblConnectedDevices reloadData];
+    
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        [_tblConnectedDevices reloadData];
+    }];
 }
 
 
@@ -169,7 +172,9 @@ profileManager *userProfile;
     }
     
     //reload table data
-    [_tblConnectedDevices reloadData];
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        [_tblConnectedDevices reloadData];
+    }];
     NSLog(@"Refreshing table data after dismissing browser view controller.");
     
     /*
@@ -228,7 +233,9 @@ profileManager *userProfile;
         NSLog(@"Setting profile data in array.");
         
         //refresh table
-        [_tblConnectedDevices reloadData];
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            [_tblConnectedDevices reloadData];
+        }];
         NSLog(@"Refreshing table data after receiving profile and setting it.");
 
     }
@@ -245,15 +252,18 @@ profileManager *userProfile;
         if (state == MCSessionStateConnected) {
             [_arrConnectedDevices addObject:peerDisplayName];
             [self sendProfileData];
-            [_tblConnectedDevices reloadData];
-        }
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                [_tblConnectedDevices reloadData];
+            }];        }
         else if (state == MCSessionStateNotConnected){
             if ([_arrConnectedDevices count] > 0) {
                 int indexOfPeer = [_arrConnectedDevices indexOfObject:peerDisplayName];
                 [_arrConnectedDevices removeObjectAtIndex:indexOfPeer];
             }
         }
-        [_tblConnectedDevices reloadData];
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            [_tblConnectedDevices reloadData];
+        }];
         
         BOOL peersExist = ([[_appDelegate.mpcController.session connectedPeers] count] == 0);
         [_btnDisconnect setEnabled:!peersExist];
