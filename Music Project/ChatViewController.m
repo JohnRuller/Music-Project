@@ -20,11 +20,20 @@
 @end
 
 @implementation ChatViewController
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:YES];
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        [self.tabBarItem setBadgeValue:nil];
+    }];
+}
 
 - (void)loadView {
     [super loadView];
     NSLog(@"Loading chat view controller.");
-    
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        [self.tabBarItem setBadgeValue:nil];
+    }];
+
     [self viewDidLoad];
     
     
@@ -46,8 +55,6 @@
                                              selector:@selector(didReceiveDataWithNotification:)
                                                  name:@"MCDidReceiveDataNotification"
                                                object:nil];
-    
-    [self.tabBarItem setBadgeValue:@"1"];
 
 }
 
@@ -114,7 +121,15 @@
         NSLog(@"out");
         NSString *receivedText = [[NSString alloc] initWithString:myobject];
         [_tvChat performSelectorOnMainThread:@selector(setText:) withObject:[_tvChat.text stringByAppendingString:[NSString stringWithFormat:@"%@ wrote:\n%@\n\n", peerDisplayName, receivedText]] waitUntilDone:NO];
+        
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            [self.tabBarItem setBadgeValue:@"New"];
+        }];
     }
+    
+   
+    
+    
          
     //NSString *receivedText = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
 }
