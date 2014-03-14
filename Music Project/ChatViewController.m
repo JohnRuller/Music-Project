@@ -16,6 +16,9 @@
 
 -(void)sendMyMessage;
 -(void)didReceiveDataWithNotification:(NSNotification *)notification;
+-(void)peerJoinedRoom:(NSNotification *)notification;
+-(void)updateNewBadge;
+
 
 @end
 
@@ -55,6 +58,11 @@
                                              selector:@selector(didReceiveDataWithNotification:)
                                                  name:@"MCDidReceiveDataNotification"
                                                object:nil];
+    
+    // Register observer to be called when a peer has joined the room
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(peerJoinedRoom:)
+                                                 name:@"peerJoinedRoom" object:nil];
 
 }
 
@@ -114,6 +122,28 @@
 
 #pragma mark - Private method implementation
 
+-(void)peerJoinedRoom:(NSNotification *)notification {
+    NSLog(@"Received Notification - User has joined room");
+    
+    MCPeerID *peerID = [[notification userInfo] objectForKey:@"peerID"];
+    NSString *peerDisplayName = peerID.displayName;
+    
+    [_tvChat performSelectorOnMainThread:@selector(setText:) withObject:[_tvChat.text stringByAppendingString:[NSString stringWithFormat:@"%@ joined the room\n\n", peerDisplayName]] waitUntilDone:NO];
+    
+    [self updateNewBadge];
+}
+
+-(void)updateNewBadge {
+    
+    if(!self.view.window) {
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            [self.tabBarItem setBadgeValue:@"New"];
+        }];
+    }
+  
+}
+
+
 -(void)sendMyMessage{
     NSString *textString = _txtMessage.text;
     //NSData *dataToSend = [_txtMessage.text dataUsingEncoding:NSUTF8StringEncoding];
@@ -150,9 +180,7 @@
         NSString *receivedText = [[NSString alloc] initWithString:myobject];
         [_tvChat performSelectorOnMainThread:@selector(setText:) withObject:[_tvChat.text stringByAppendingString:[NSString stringWithFormat:@"%@ wrote:\n%@\n\n", peerDisplayName, receivedText]] waitUntilDone:NO];
         
-        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-            [self.tabBarItem setBadgeValue:@"New"];
-        }];
+        [self updateNewBadge];
     }
     
    

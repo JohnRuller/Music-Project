@@ -236,6 +236,11 @@ profileManager *userProfile;
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
             [_tblConnectedDevices reloadData];
         }];
+        
+        // Post a notification that a peer has joined the room
+        [[NSNotificationCenter defaultCenter]
+         postNotificationName:@"peerJoinedRoom" object:nil userInfo:[notification userInfo]];
+        
         NSLog(@"Refreshing table data after receiving profile and setting it.");
 
     }
