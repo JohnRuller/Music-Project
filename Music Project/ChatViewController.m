@@ -72,6 +72,34 @@
     return YES;
 }
 
+/*
+ functions for pushing the screen up when the keyboard is brought up: http://stackoverflow.com/questions/1247113/iphone-keyboard-covers-uitextfield
+ */
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    [self animateTextField: textField up: YES];
+}
+
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    [self animateTextField: textField up: NO];
+}
+
+- (void) animateTextField: (UITextField*) textField up: (BOOL) up
+{
+    const int movementDistance = 160; // tweak as needed
+    const float movementDuration = 0.3f; // tweak as needed
+    
+    int movement = (up ? -movementDistance : movementDistance);
+    
+    [UIView beginAnimations: @"anim" context: nil];
+    [UIView setAnimationBeginsFromCurrentState: YES];
+    [UIView setAnimationDuration: movementDuration];
+    self.view.frame = CGRectOffset(self.view.frame, 0, movement);
+    [UIView commitAnimations];
+}
+
 
 #pragma mark - IBAction method implementation
 
