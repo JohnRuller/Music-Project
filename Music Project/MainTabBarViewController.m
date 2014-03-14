@@ -41,6 +41,7 @@
     // load the chat view
     UIViewController *chatView = [tabBarController.viewControllers objectAtIndex:2];
     [chatView loadView];
+
 }
 
 - (void)didReceiveMemoryWarning

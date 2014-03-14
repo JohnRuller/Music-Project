@@ -27,6 +27,7 @@
     
     [self viewDidLoad];
     
+    
 }
 
 - (void)viewDidLoad
@@ -45,6 +46,9 @@
                                              selector:@selector(didReceiveDataWithNotification:)
                                                  name:@"MCDidReceiveDataNotification"
                                                object:nil];
+    
+    [self.tabBarItem setBadgeValue:@"1"];
+
 }
 
 - (void)didReceiveMemoryWarning
