@@ -70,12 +70,12 @@ profileManager *userProfile;
     MyManager *sharedManager = [MyManager sharedManager];
     if ([sharedManager.someProperty isEqualToString:@"YES"])
     {
-        _testLabel.text = @"YAY";
+        _testLabel.text = @"HOST";
         _hostName = [UIDevice currentDevice].name;
         NSLog(@"%@", _hostName);
     }
     else{
-        _testLabel.text = @"NAY";
+        _testLabel.text = @"GUEST";
     }
     
     _appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -153,6 +153,8 @@ profileManager *userProfile;
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
         [_tblConnectedDevices reloadData];
     }];
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 
@@ -270,8 +272,9 @@ profileManager *userProfile;
             [_tblConnectedDevices reloadData];
         }];
         
-        BOOL peersExist = ([[_appDelegate.mpcController.session connectedPeers] count] == 0);
-        [_btnDisconnect setEnabled:!peersExist];
+        //Commenting this out because I added disconnect to the navigation bar and you'll want to go back even when there are no peers
+        //BOOL peersExist = ([[_appDelegate.mpcController.session connectedPeers] count] == 0);
+        //[_btnDisconnect setEnabled:!peersExist];
     }
 }
 
