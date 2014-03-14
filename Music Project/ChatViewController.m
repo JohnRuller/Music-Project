@@ -21,10 +21,19 @@
 
 @implementation ChatViewController
 
+- (void)loadView {
+    [super loadView];
+    NSLog(@"Loading chat view controller.");
+    
+    [self viewDidLoad];
+    
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+
     
     _appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     

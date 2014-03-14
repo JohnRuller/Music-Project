@@ -52,6 +52,14 @@
 
 @synthesize player; // the player object
 
+- (void)loadView {
+    [super loadView];
+    NSLog(@"Loading playlist view controller.");
+    
+    [self viewDidLoad];
+    
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
