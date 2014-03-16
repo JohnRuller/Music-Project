@@ -23,6 +23,7 @@
 @end
 
 @implementation ChatViewController
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:YES];
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
@@ -116,6 +117,7 @@
 }
 
 - (IBAction)cancelMessage:(id)sender {
+    _txtMessage.text = @"";
     [_txtMessage resignFirstResponder];
 }
 
@@ -130,6 +132,8 @@
     
     [_tvChat performSelectorOnMainThread:@selector(setText:) withObject:[_tvChat.text stringByAppendingString:[NSString stringWithFormat:@"%@ joined the room\n\n", peerDisplayName]] waitUntilDone:NO];
     
+    [self scrollTextViewToBottom:_tvChat];
+    
     [self updateNewBadge];
 }
 
@@ -141,6 +145,15 @@
         }];
     }
   
+}
+
+//Function to scroll text to bottom: http://stackoverflow.com/questions/16698638/textview-scroll-textview-to-bottom?answertab=oldest
+-(void)scrollTextViewToBottom:(UITextView *)textView {
+    if(textView.text.length > 0 ) {
+        NSRange bottom = NSMakeRange(textView.text.length -1, 1);
+        [textView scrollRangeToVisible:bottom];
+    }
+    
 }
 
 
@@ -163,6 +176,8 @@
     [_tvChat setText:[_tvChat.text stringByAppendingString:[NSString stringWithFormat:@"I wrote:\n%@\n\n", _txtMessage.text]]];
     [_txtMessage setText:@""];
     [_txtMessage resignFirstResponder];
+    
+    [self scrollTextViewToBottom:_tvChat];
 }
 
 
@@ -180,6 +195,8 @@
         NSString *receivedText = [[NSString alloc] initWithString:myobject];
         [_tvChat performSelectorOnMainThread:@selector(setText:) withObject:[_tvChat.text stringByAppendingString:[NSString stringWithFormat:@"%@ wrote:\n%@\n\n", peerDisplayName, receivedText]] waitUntilDone:NO];
         
+        [self scrollTextViewToBottom:_tvChat];
+
         [self updateNewBadge];
     }
     
