@@ -39,6 +39,7 @@
 		023D1A5318A0127B009CA940 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 023D1A5118A0127B009CA940 /* Icon.png */; };
 		023D1A5518A056A3009CA940 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 023D1A5418A056A3009CA940 /* MobileCoreServices.framework */; };
 		0242BB2D18D2B734007C2CA1 /* MainTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0242BB2C18D2B734007C2CA1 /* MainTabBarViewController.m */; };
+		0242BB3018D661AF007C2CA1 /* ViewGuestProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0242BB2F18D661AF007C2CA1 /* ViewGuestProfileViewController.m */; };
 		02CBB022188382C8008AF034 /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02CBB021188382C8008AF034 /* MultipeerConnectivity.framework */; };
 		02CBB02518838817008AF034 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CBB02418838817008AF034 /* ViewController.m */; };
 		02CBB02618838817008AF034 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CBB02418838817008AF034 /* ViewController.m */; };
@@ -130,6 +131,8 @@
 		023D1A5418A056A3009CA940 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		0242BB2B18D2B734007C2CA1 /* MainTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabBarViewController.h; sourceTree = "<group>"; };
 		0242BB2C18D2B734007C2CA1 /* MainTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabBarViewController.m; sourceTree = "<group>"; };
+		0242BB2E18D661AF007C2CA1 /* ViewGuestProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewGuestProfileViewController.h; sourceTree = "<group>"; };
+		0242BB2F18D661AF007C2CA1 /* ViewGuestProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewGuestProfileViewController.m; sourceTree = "<group>"; };
 		02CBB021188382C8008AF034 /* MultipeerConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultipeerConnectivity.framework; path = System/Library/Frameworks/MultipeerConnectivity.framework; sourceTree = SDKROOT; };
 		02CBB0231883880B008AF034 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		02CBB02418838817008AF034 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
@@ -424,6 +427,8 @@
 		94E3105018B687F9001DC113 /* New Views */ = {
 			isa = PBXGroup;
 			children = (
+				0242BB2E18D661AF007C2CA1 /* ViewGuestProfileViewController.h */,
+				0242BB2F18D661AF007C2CA1 /* ViewGuestProfileViewController.m */,
 				9466556118B93325009061C5 /* AnarchyViewController.h */,
 				9466556218B93325009061C5 /* AnarchyViewController.m */,
 				949ABA1E18B6923000D159A0 /* ChatViewController.h */,
@@ -608,6 +613,7 @@
 				02E8C75C18A8A83E007AA6A3 /* EditProfileViewController.m in Sources */,
 				945B786C1895822E00C26AAA /* TDAudioStreamer.m in Sources */,
 				945B786A1895822E00C26AAA /* TDAudioInputStreamer.m in Sources */,
+				0242BB3018D661AF007C2CA1 /* ViewGuestProfileViewController.m in Sources */,
 				0242BB2D18D2B734007C2CA1 /* MainTabBarViewController.m in Sources */,
 				949ABA2018B6923000D159A0 /* ChatViewController.m in Sources */,
 				0219FCE6183EFBF80080A1F1 /* ProfileViewController.m in Sources */,
