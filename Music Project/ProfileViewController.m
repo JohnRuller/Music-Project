@@ -29,6 +29,13 @@ profileManager *userProfile;
 {
     [super viewDidAppear:animated];
     
+    //try to fix the nav bar height: http://stackoverflow.com/questions/18737186/position-of-navigation-bar-for-modal-view-ios7
+    float currentVersion = 7.0;
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= currentVersion) {
+        // iOS 7
+        self.navBar.frame = CGRectMake(self.navBar.frame.origin.x, self.navBar.frame.origin.y, self.navBar.frame.size.width, 64);
+    }
+    
     //labels
     nameLabel.text = [NSString stringWithFormat:@"%@",userProfile.name];
     taglineLabel.text = [NSString stringWithFormat:@"%@",userProfile.tagline];

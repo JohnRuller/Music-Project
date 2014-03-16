@@ -16,6 +16,9 @@
 //buttons
 - (IBAction)back:(id)sender;
 
+//navigation bar
+@property (strong, nonatomic) IBOutlet UINavigationBar *navBar;
+
 //labels
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *taglineLabel;

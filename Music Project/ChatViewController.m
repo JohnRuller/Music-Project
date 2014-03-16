@@ -47,11 +47,15 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    
+
 
     
     _appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     _txtMessage.delegate = self;
+    _txtMessage.returnKeyType = UIReturnKeyDone;
+
     
     
     
@@ -71,6 +75,12 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+//function to resign keyboard when background is touched
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
 }
 
 

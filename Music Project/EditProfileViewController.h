@@ -10,11 +10,13 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <CoreData/CoreData.h>
 
-@interface EditProfileViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface EditProfileViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate>
 
 //text fields
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *taglineTextField;
+//navigation bar
+@property (strong, nonatomic) IBOutlet UINavigationBar *navBar;
 
 //camera functionality propertires
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
@@ -26,6 +28,7 @@
 //buttons
 - (IBAction)cancel:(id)sender;
 - (IBAction)save:(id)sender;
+- (IBAction)clear:(id)sender;
 
 
 @end

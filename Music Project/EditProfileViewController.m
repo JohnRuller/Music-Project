@@ -22,6 +22,22 @@ profileManager *userProfile;
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+    //try to fix the nav bar height
+    float currentVersion = 7.0;
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= currentVersion) {
+        // iOS 7
+        self.navBar.frame = CGRectMake(self.navBar.frame.origin.x, self.navBar.frame.origin.y, self.navBar.frame.size.width, 64);
+    }
+    
+    //set text field delegate
+    _nameTextField.delegate = self;
+    _taglineTextField.delegate = self;
+    
+    //set the return button to "done" for text fields: http://stackoverflow.com/questions/6311015/how-do-i-programmatically-set-the-return-key-for-a-particular-uitextfield
+    _nameTextField.returnKeyType = UIReturnKeyDone;
+    _taglineTextField.returnKeyType = UIReturnKeyDone;
+
+    //initiate profile class instance
     userProfile = [[profileManager alloc] init];
     
     //error handler for when device does not have camera
@@ -57,6 +73,12 @@ profileManager *userProfile;
     // Dispose of any resources that can be recreated.
 }
 
+//function to resign keyboard when background is touched: http://stackoverflow.com/questions/804563/how-to-hide-the-keyboard-when-empty-area-is-touched-on-iphone
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
+}
+
 #pragma mark - Buttons
 
 - (IBAction)cancel:(id)sender {
@@ -64,12 +86,28 @@ profileManager *userProfile;
 }
 
 - (IBAction)save:(id)sender {
+    
+    if([_nameTextField.text  isEqual: @""]) {
+        _nameTextField.text = [UIDevice currentDevice].name;
+    }
 
     [userProfile setName:self.nameTextField.text];
     [userProfile setTagline:self.taglineTextField.text];
     [userProfile setProfilePhoto:self.imageView.image];
     
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)clear:(id)sender {
+    _nameTextField.text = @"";
+    _taglineTextField.text = @"";
+}
+
+#pragma mark - UITextField Delegate method implementation
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    return YES;
 }
 
 #pragma mark - Camera
