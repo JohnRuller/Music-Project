@@ -12,7 +12,7 @@
 #import "myManager.h"
 
 
-@interface ConnectionsViewController : UIViewController <MCBrowserViewControllerDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface ConnectionsViewController : UIViewController <MCBrowserViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, UITabBarDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tblConnectedDevices;
 @property (weak, nonatomic) IBOutlet UIButton *btnDisconnect;

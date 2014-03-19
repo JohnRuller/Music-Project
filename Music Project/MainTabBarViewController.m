@@ -7,12 +7,16 @@
 //
 
 #import "MainTabBarViewController.h"
+#import "myManager.h"
 
 @interface MainTabBarViewController ()
-
+-(void)loadTabs;
+-(void)enableGuestTabs;
 @end
 
 @implementation MainTabBarViewController
+
+UITabBarController *tabBarController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -32,17 +36,20 @@
     NSLog(@"Load tab bar view controller.");
     
     //setup tabbarcontroller
-    UITabBarController *tabBarController = (UITabBarController *)self;
+    tabBarController = (UITabBarController *)self;
     
-    //load the playlist view
-    UIViewController *playlistView = [tabBarController.viewControllers objectAtIndex:1];
-    [playlistView loadView];
+    [self loadTabs];
     
-    // load the chat view
-    UIViewController *chatView = [tabBarController.viewControllers objectAtIndex:2];
-    [chatView loadView];
-    
-    
+    //setup mymanager
+    MyManager *sharedManager = [MyManager sharedManager];
+    if (![sharedManager.someProperty isEqualToString:@"YES"])
+    {
+        NSLog(@"Disable tabs for guest.");
+        
+        [[[[tabBarController tabBar]items]objectAtIndex:1]setEnabled:FALSE];
+        [[[[tabBarController tabBar]items]objectAtIndex:2]setEnabled:FALSE];
+        
+    }
 
 }
 
@@ -50,6 +57,21 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)loadTabs {
+    //load the playlist view
+    UIViewController *playlistView = [tabBarController.viewControllers objectAtIndex:1];
+    [playlistView loadView];
+    
+    // load the chat view
+    UIViewController *chatView = [tabBarController.viewControllers objectAtIndex:2];
+    [chatView loadView];
+}
+
+- (void)enableGuestTabs {
+    [[[[tabBarController tabBar]items]objectAtIndex:1]setEnabled:TRUE];
+    [[[[tabBarController tabBar]items]objectAtIndex:2]setEnabled:TRUE];
 }
 
 @end

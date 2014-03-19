@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MainTabBarViewController : UITabBarController
+@interface MainTabBarViewController : UITabBarController <UITabBarControllerDelegate>
+
+-(void)loadTabs;
+-(void)enableGuestTabs;
 
 @end

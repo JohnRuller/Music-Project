@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "profileManager.h"
 #import "ViewGuestProfileViewController.h"
+#import "MainTabBarViewController.h"
 
 @interface ConnectionsViewController ()
 
@@ -35,6 +36,7 @@
 @implementation ConnectionsViewController
 
 profileManager *userProfile;
+UITabBarController *tbc;
 
 - (void)viewDidLoad
 {
@@ -43,6 +45,8 @@ profileManager *userProfile;
     
     //initialize user profile class
     userProfile = [[profileManager alloc] init];
+    
+    tbc = self.tabBarController;
     
     //store values from profile managed object
     NSString *name = [NSString stringWithFormat:@"%@",userProfile.name];
@@ -289,8 +293,24 @@ profileManager *userProfile;
         }];
         
         //Commenting this out because I added disconnect to the navigation bar and you'll want to go back even when there are no peers
-        //BOOL peersExist = ([[_appDelegate.mpcController.session connectedPeers] count] == 0);
+        BOOL peersExist = ([[_appDelegate.mpcController.session connectedPeers] count] == 0);
         //[_btnDisconnect setEnabled:!peersExist];
+        
+        //setup tabbarcontroller
+        if(!peersExist) {
+            NSLog(@"PEERS EXIST.");
+            
+            [[[[tbc tabBar]items]objectAtIndex:1]setEnabled:TRUE];
+            [[[[tbc tabBar]items]objectAtIndex:2]setEnabled:TRUE];
+
+        }
+        else {
+            NSLog(@"PEERS DON'T EXIST.");
+            [[[[tbc tabBar]items]objectAtIndex:1]setEnabled:FALSE];
+            [[[[tbc tabBar]items]objectAtIndex:2]setEnabled:FALSE];
+        
+        }
+        
     }
 }
 

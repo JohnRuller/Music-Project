@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ChatViewController : UIViewController <UITextFieldDelegate>
+@interface ChatViewController : UIViewController <UITextFieldDelegate, UITabBarDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *txtMessage;
 @property (weak, nonatomic) IBOutlet UITextView *tvChat;
 
