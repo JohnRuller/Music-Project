@@ -87,7 +87,11 @@
 #pragma mark - UITextField Delegate method implementation
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
-    [self sendMyMessage];
+    if(![_txtMessage.text isEqualToString:@""])
+        [self sendMyMessage];
+    else
+        [_txtMessage resignFirstResponder];
+
     return YES;
 }
 
@@ -123,7 +127,8 @@
 #pragma mark - IBAction method implementation
 
 - (IBAction)sendMessage:(id)sender {
-    [self sendMyMessage];
+    if(![_txtMessage.text isEqualToString:@""])
+        [self sendMyMessage];
 }
 
 - (IBAction)cancelMessage:(id)sender {

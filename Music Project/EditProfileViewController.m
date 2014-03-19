@@ -53,7 +53,7 @@ profileManager *userProfile;
         
         //hide take photo button if camera doesn't exist on device
         _takePhotoButton.enabled = NO;
-        _takePhotoButton.hidden = YES;
+        //_takePhotoButton.hidden = YES;
         
     }
     
