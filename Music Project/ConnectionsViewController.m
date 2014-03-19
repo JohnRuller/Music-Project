@@ -9,6 +9,7 @@
 #import "ConnectionsViewController.h"
 #import "AppDelegate.h"
 #import "profileManager.h"
+#import "ViewGuestProfileViewController.h"
 
 @interface ConnectionsViewController ()
 
@@ -126,6 +127,21 @@ profileManager *userProfile;
     
     [self.refreshControl performSelector:@selector(endRefreshing)];
     
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"ViewProfile"]) {
+        
+        NSString *peerID = [_arrConnectedDevices objectAtIndex:[[_tblConnectedDevices indexPathForSelectedRow] row]];
+        
+        int profileIndex = [self profileIndex:peerID];
+        NSDictionary *guestDictionary = [[NSDictionary alloc] init];
+        guestDictionary = [self.guestProfiles objectAtIndex:profileIndex];
+        
+        ViewGuestProfileViewController *destViewController = segue.destinationViewController;
+        destViewController.guestDictionary = guestDictionary;
+    }
 }
 
 

@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewGuestProfileViewController : UIViewController
+@interface ViewGuestProfileViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) IBOutlet UIImageView *profileImage;
 @property (strong, nonatomic) IBOutlet UILabel *nameLabel;
 @property (strong, nonatomic) IBOutlet UILabel *taglineLabel;
 - (IBAction)back:(id)sender;
+
+@property (strong) NSDictionary *guestDictionary;
 
 @end

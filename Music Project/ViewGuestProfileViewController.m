@@ -10,9 +10,15 @@
 
 @interface ViewGuestProfileViewController ()
 
+
+
 @end
 
 @implementation ViewGuestProfileViewController
+
+NSArray *guestArtists;
+
+@synthesize guestDictionary;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -27,6 +33,18 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    //labels
+    _nameLabel.text = [guestDictionary objectForKey:@"name"];
+    _taglineLabel.text = [guestDictionary objectForKey:@"tagline"];
+    
+    //image
+    UIImage *image = [guestDictionary objectForKey:@"image"];
+    self.profileImage.image = image;
+    
+    guestArtists = [[NSArray alloc] init];
+    guestArtists = [guestDictionary objectForKey:@"artists"];
+    NSLog(@"Guest Artists array count in gues profile view: %lu", (unsigned long)[guestArtists count]);
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -37,5 +55,26 @@
 
 - (IBAction)back:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - Artists
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return guestArtists.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ArtistsCell"];
+    
+    NSString *artistTitle = guestArtists[indexPath.row];
+    
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ArtistsCell"];
+    }
+    
+    cell.textLabel.text = artistTitle;
+    return cell;
 }
 @end
