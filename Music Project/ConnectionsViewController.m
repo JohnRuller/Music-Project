@@ -250,20 +250,30 @@ UITabBarController *tbc;
     
     if ([myObject isKindOfClass:[NSDictionary class]]){
         
-        //Handle
-        [self.guestProfiles addObject:myObject];
-        NSLog(@"Setting profile data in array.");
         
-        //refresh table
-        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-            [_tblConnectedDevices reloadData];
-        }];
+        NSDictionary *dic = [myObject copy];
+        NSString *type = [dic objectForKey:@"type"];
         
-        // Post a notification that a peer has joined the room
-        [[NSNotificationCenter defaultCenter]
-         postNotificationName:@"peerJoinedRoom" object:nil userInfo:[notification userInfo]];
+        if (type == nil)
+        {
+            //Handle
+            [self.guestProfiles addObject:myObject];
+            NSLog(@"Setting profile data in array.");
+            
+            //refresh table
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                [_tblConnectedDevices reloadData];
+            }];
+            
+            // Post a notification that a peer has joined the room
+            [[NSNotificationCenter defaultCenter]
+             postNotificationName:@"peerJoinedRoom" object:nil userInfo:[notification userInfo]];
+            
+            NSLog(@"Refreshing table data after receiving profile and setting it.");
+            
+        }
         
-        NSLog(@"Refreshing table data after receiving profile and setting it.");
+       
 
     }
     
