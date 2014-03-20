@@ -58,7 +58,8 @@
 
     
     
-    
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+        //Your code goes in here
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(didReceiveDataWithNotification:)
                                                  name:@"MCDidReceiveDataNotification"
@@ -69,6 +70,7 @@
                                              selector:@selector(peerJoinedRoom:)
                                                  name:@"peerJoinedRoom" object:nil];
 
+    }];
 }
 
 - (void)didReceiveMemoryWarning
@@ -87,10 +89,17 @@
 #pragma mark - UITextField Delegate method implementation
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    
     if(![_txtMessage.text isEqualToString:@""])
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+            //Your code goes in here
         [self sendMyMessage];
+        }];
     else
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+            //Your code goes in here
         [_txtMessage resignFirstResponder];
+        }];
 
     return YES;
 }
@@ -100,17 +109,25 @@
  */
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+        //Your code goes in here
     [self animateTextField: textField up: YES];
+    }];
 }
 
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+        //Your code goes in here
     [self animateTextField: textField up: NO];
+    }];
 }
 
 - (void) animateTextField: (UITextField*) textField up: (BOOL) up
 {
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+        //Your code goes in here
     const int movementDistance = 160; // tweak as needed
     const float movementDuration = 0.3f; // tweak as needed
     
@@ -121,25 +138,34 @@
     [UIView setAnimationDuration: movementDuration];
     self.view.frame = CGRectOffset(self.view.frame, 0, movement);
     [UIView commitAnimations];
+    }];
 }
 
 
 #pragma mark - IBAction method implementation
 
 - (IBAction)sendMessage:(id)sender {
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+        //Your code goes in here
     if(![_txtMessage.text isEqualToString:@""])
         [self sendMyMessage];
+    }];
 }
 
 - (IBAction)cancelMessage:(id)sender {
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+        //Your code goes in here
     _txtMessage.text = @"";
     [_txtMessage resignFirstResponder];
+    }];
 }
 
 
 #pragma mark - Private method implementation
 
 -(void)peerJoinedRoom:(NSNotification *)notification {
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+        //Your code goes in here
     NSLog(@"Received Notification - User has joined room");
     
     MCPeerID *peerID = [[notification userInfo] objectForKey:@"peerID"];
@@ -150,6 +176,7 @@
     [self scrollTextViewToBottom:_tvChat];
     
     [self updateNewBadge];
+    }];
 }
 
 -(void)updateNewBadge {
@@ -164,15 +191,20 @@
 
 //Function to scroll text to bottom: http://stackoverflow.com/questions/16698638/textview-scroll-textview-to-bottom?answertab=oldest
 -(void)scrollTextViewToBottom:(UITextView *)textView {
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+        //Your code goes in here
     if(textView.text.length > 0 ) {
         NSRange bottom = NSMakeRange(textView.text.length -1, 1);
         [textView scrollRangeToVisible:bottom];
     }
+    }];
     
 }
 
 
 -(void)sendMyMessage{
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+        //Your code goes in here
     NSString *textString = _txtMessage.text;
     //NSData *dataToSend = [_txtMessage.text dataUsingEncoding:NSUTF8StringEncoding];
     NSData *dataToSend = [NSKeyedArchiver archivedDataWithRootObject:[textString copy]];
@@ -193,10 +225,13 @@
     [_txtMessage resignFirstResponder];
     
     [self scrollTextViewToBottom:_tvChat];
+    }];
 }
 
 
 -(void)didReceiveDataWithNotification:(NSNotification *)notification{
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+        //Your code goes in here
     MCPeerID *peerID = [[notification userInfo] objectForKey:@"peerID"];
     NSString *peerDisplayName = peerID.displayName;
     
@@ -214,6 +249,8 @@
 
         [self updateNewBadge];
     }
+        
+    }];
     
    
     

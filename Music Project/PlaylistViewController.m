@@ -87,7 +87,8 @@
         _buttonPlay.hidden = YES;
     }
     
-    
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+        //Your code goes in here
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(didReceiveDataWithNotification:)
                                                  name:@"MCDidReceiveDataNotification"
@@ -100,7 +101,9 @@
     [_playlistTable setDataSource:self];
     [_coolPlayer setDelegate:self];
     
-    [_playlistTable reloadData];}
+    [_playlistTable reloadData];
+    }];
+}
 
 - (IBAction)play:(id)sender
 {
@@ -186,10 +189,14 @@
     
     //NSData *data = [NSKeyedArchiver archivedDataWithRootObject:[_playlistInfo copy]];
     NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
-    NSError *error;
+    
     
     // //NSInteger = [_playlistInfo ]
     //
+    
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+        //Your code goes in here
+        NSError *error;
     NSLog(@"Sending Song");
     [_appDelegate.mpcController.session sendData:data
                                          toPeers:allPeers
@@ -197,6 +204,7 @@
                                            error:&error];
     
     [_playlistTable reloadData];
+    }];
 }
 
 - (IBAction)chooseSong:(id)sender
@@ -337,6 +345,8 @@
 
 -(void)didReceiveDataWithNotification:(NSNotification *)notification
 {
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+        //Your code goes in here
     NSLog(@"didReceiveDataWithNotification");
     
     //MCPeerID *peerID = [[notification userInfo] objectForKey:@"peerID"];
@@ -352,7 +362,20 @@
     
     // NSDictionary *info = [[NSMutableDictionary alloc] init];
     
+    NSKeyedUnarchiver* unarchiver;
     
+    @try {
+        unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:receivedData];
+    }
+    
+    @catch (NSException *exception) {
+        NSLog(@"unarchive exception");
+        return;
+
+        
+    }
+    NSLog(@"past exception");
+
     id myobject = [NSKeyedUnarchiver unarchiveObjectWithData:receivedData];
     
     NSLog(@"got object ID");
@@ -480,6 +503,8 @@
                         
                         NSData *toBeSent = [NSKeyedArchiver archivedDataWithRootObject:[_playlistInfo getArray]];
                         NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
+                        [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+                            //Your code goes in here
                         NSError *error;
                         
                         NSLog(@"Sending");
@@ -487,6 +512,7 @@
                                                              toPeers:allPeers
                                                             withMode:MCSessionSendDataReliable
                                                                error:&error];
+                        }];
                         
                         
                     }
@@ -522,6 +548,8 @@
                             
                             NSData *toBeSent = [NSKeyedArchiver archivedDataWithRootObject:[_playlistInfo getArray]];
                             NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
+                            [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+                                //Your code goes in here
                             NSError *error;
                             
                             NSLog(@"Sending");
@@ -530,7 +558,7 @@
                                                                 withMode:MCSessionSendDataReliable
                                                                    error:&error];
                             
-                            
+                            }];
                         }else
                             NSLog(@"Song no longer exists in the queue");
                     }
@@ -544,6 +572,8 @@
                     //send it out
                     NSData *toBeSent = [NSKeyedArchiver archivedDataWithRootObject:[_playlistInfo getArray]];
                     NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
+                    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+                        //Your code goes in here
                     NSError *error;
                     
                     NSLog(@"Sending");
@@ -551,6 +581,7 @@
                                                          toPeers:allPeers
                                                         withMode:MCSessionSendDataReliable
                                                            error:&error];
+                    }];
                 }
                 
                 if ([type isEqualToString:@"songFile"])
@@ -565,6 +596,8 @@
                     
                     NSData *toBeSent = [NSKeyedArchiver archivedDataWithRootObject:[_playlistInfo getArray]];
                     NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
+                    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+                        //Your code goes in here
                     NSError *error;
                     
                     NSLog(@"Sending");
@@ -572,6 +605,7 @@
                                                          toPeers:allPeers
                                                         withMode:MCSessionSendDataReliable
                                                            error:&error];
+                    }];
                 }
                 
                 /*
@@ -609,6 +643,7 @@
             }
         }
     }
+    }];
     
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
         [_playlistTable reloadData];
@@ -707,6 +742,10 @@
         NSLog(@"Stop");
     }
     
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+        //Your code goes in here
+        NSError *error = nil;
+    
     [_playlistTable reloadData];
     
     NSData *toBeSent = [NSKeyedArchiver archivedDataWithRootObject:[_playlistInfo getArray]];
@@ -719,6 +758,8 @@
                                          toPeers:allPeers
                                         withMode:MCSessionSendDataReliable
                                            error:&error];
+        
+    }];
     
     
 }
@@ -1009,6 +1050,8 @@
         
         NSData *toBeSent = [NSKeyedArchiver archivedDataWithRootObject:[_playlistInfo getArray]];
         NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+            //Your code goes in here
         NSError *error;
         
         NSLog(@"Sending");
@@ -1016,6 +1059,7 @@
                                              toPeers:allPeers
                                             withMode:MCSessionSendDataReliable
                                                error:&error];
+        }];
         
         
         //THIS IS NOW WHAT HAPPENS IF THE USER IS A GUEST
@@ -1054,6 +1098,8 @@
             
             NSData *toBeSent = [NSKeyedArchiver archivedDataWithRootObject:dic];
             NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+                //Your code goes in here
             NSError *error;
             
             NSLog(@"Vote Sending");
@@ -1061,6 +1107,7 @@
                                                  toPeers:allPeers
                                                 withMode:MCSessionSendDataReliable
                                                    error:&error];
+            }];
         }
     }
     

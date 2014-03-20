@@ -65,11 +65,15 @@ UITabBarController *tbc;
     //init array
     self.guestProfiles = [[NSMutableArray alloc] init];
     
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+        //Your code goes in here
     //profile observer
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(didReceiveDataWithNotification:)
                                                  name:@"MCDidReceiveDataNotification"
                                                object:nil];
+    
+    
     
     //setup mymanager
     MyManager *sharedManager = [MyManager sharedManager];
@@ -82,6 +86,7 @@ UITabBarController *tbc;
     else{
         _testLabel.text = @"GUEST";
     }
+    }];
     
     _appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
@@ -97,7 +102,8 @@ UITabBarController *tbc;
         
     }
     
-    
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+        //Your code goes in here
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(peerDidChangeStateWithNotification:)
                                                  name:@"MCDidChangeStateNotification"
@@ -115,8 +121,7 @@ UITabBarController *tbc;
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(refreshTable) forControlEvents:UIControlEventValueChanged];
     tableViewController.refreshControl = self.refreshControl;
-    
-    
+    }];
 }
 
 - (void)didReceiveMemoryWarning
@@ -127,10 +132,12 @@ UITabBarController *tbc;
 
 - (void)refreshTable
 {
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+        //Your code goes in here
     [_tblConnectedDevices reloadData];
     
     [self.refreshControl performSelector:@selector(endRefreshing)];
-    
+    }];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -152,9 +159,12 @@ UITabBarController *tbc;
 #pragma mark - Public method implementation
 
 - (IBAction)browseForDevices:(id)sender {
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+        //Your code goes in here
     [[_appDelegate mpcController] setupMCBrowser];
     [[[_appDelegate mpcController] browser] setDelegate:self];
     [self presentViewController:[[_appDelegate mpcController] browser] animated:YES completion:nil];
+    }];
 }
 
 
@@ -181,8 +191,10 @@ UITabBarController *tbc;
 #pragma mark - MCBrowserViewControllerDelegate method implementation
 
 -(void)browserViewControllerDidFinish:(MCBrowserViewController *)browserViewController{
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+        //Your code goes in here
     [_appDelegate.mpcController.browser dismissViewControllerAnimated:YES completion:nil];
-    
+    }];
     MyManager *sharedManager = [MyManager sharedManager];
     if ([sharedManager.someProperty isEqualToString:@"YES"])
     {
@@ -209,6 +221,7 @@ UITabBarController *tbc;
      toPeers:allPeers
      withMode:MCSessionSendDataReliable
      error:&error];*/
+        
 }
 
 
@@ -224,8 +237,11 @@ UITabBarController *tbc;
 -(void)sendProfileData{
     NSData *dataToSend = [NSKeyedArchiver archivedDataWithRootObject:self.profileData];
     NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
-    NSError *error;
     
+    
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+        //Your code goes in here
+        NSError *error;
     [_appDelegate.mpcController.session sendData:dataToSend
                                          toPeers:allPeers
                                         withMode:MCSessionSendDataReliable
@@ -237,9 +253,12 @@ UITabBarController *tbc;
     if (error) {
         NSLog(@"%@", [error localizedDescription]);
     }
+        }];
 }
 
 -(void)didReceiveDataWithNotification:(NSNotification *)notification{
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+        //Your code goes in here
     //MCPeerID *peerID = [[notification userInfo] objectForKey:@"peerID"];
     //NSString *peerDisplayName = peerID.displayName;
     
@@ -265,10 +284,12 @@ UITabBarController *tbc;
                 [_tblConnectedDevices reloadData];
             }];
             
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+                //Your code goes in here
             // Post a notification that a peer has joined the room
             [[NSNotificationCenter defaultCenter]
              postNotificationName:@"peerJoinedRoom" object:nil userInfo:[notification userInfo]];
-            
+            }];
             NSLog(@"Refreshing table data after receiving profile and setting it.");
             
         }
@@ -276,10 +297,12 @@ UITabBarController *tbc;
        
 
     }
+    }];
     
 }
 
 -(void)peerDidChangeStateWithNotification:(NSNotification *)notification{
+    
     MCPeerID *peerID = [[notification userInfo] objectForKey:@"peerID"];
     NSString *peerDisplayName = peerID.displayName;
     MCSessionState state = [[[notification userInfo] objectForKey:@"state"] intValue];
@@ -288,8 +311,9 @@ UITabBarController *tbc;
     {
         if (state == MCSessionStateConnected) {
             [_arrConnectedDevices addObject:peerDisplayName];
-            [self sendProfileData];
             [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            [self sendProfileData];
+            
                 [_tblConnectedDevices reloadData];
             }];        }
         else if (state == MCSessionStateNotConnected){
@@ -306,6 +330,9 @@ UITabBarController *tbc;
         BOOL peersExist = ([[_appDelegate.mpcController.session connectedPeers] count] == 0);
         //[_btnDisconnect setEnabled:!peersExist];
         
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+            //Your code goes in here
+        
         //setup tabbarcontroller
         if(!peersExist) {
             NSLog(@"PEERS EXIST.");
@@ -320,6 +347,7 @@ UITabBarController *tbc;
             [[[[tbc tabBar]items]objectAtIndex:2]setEnabled:FALSE];
         
         }
+            }];
         
     }
 }
