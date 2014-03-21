@@ -26,6 +26,7 @@
 -(int)profileIndex:(NSString *)name;
 @property (strong) NSDictionary *profileData;
 @property (strong) NSMutableArray *guestProfiles;
+@property (strong) NSString *isHost;
 
 //refresh property
 @property (nonatomic,retain) UIRefreshControl *refreshControl;
@@ -42,28 +43,45 @@ UITabBarController *tbc;
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    //initializers
+    userProfile = [[profileManager alloc] init];
+    _isHost = [[NSString alloc] init];
+    tbc = self.tabBarController;
+    _arrConnectedDevices = [[NSMutableArray alloc] init];
+    self.guestProfiles = [[NSMutableArray alloc] init];
+    
     _appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    //initialize user profile class
-    userProfile = [[profileManager alloc] init];
-    
-    NSString *isHost = [[NSString alloc] init];
+    //setup peer and session
+    if([userProfile hasProfileData]) {
+        [[_appDelegate mpcController] setupPeerAndSessionWithDisplayName:userProfile.name];
+    }
+    else {
+        [[_appDelegate mpcController] setupPeerAndSessionWithDisplayName:[UIDevice currentDevice].name];
+    }
     
     //setup mymanager
     MyManager *sharedManager = [MyManager sharedManager];
     if ([sharedManager.someProperty isEqualToString:@"YES"])
     {
-        isHost = @"YES";
+        //host does not want to advertise
+        [[_appDelegate mpcController] advertiseSelf:NO];
+        
+        //set host values
+        _isHost = @"YES";
         _testLabel.text = @"HOST";
         _hostName = [UIDevice currentDevice].name;
         NSLog(@"%@", _hostName);
     }
-    else{
-        isHost = @"NO";
+    else {
+        //guest wants to advertise
+        [_appDelegate.mpcController advertiseSelf:YES];
+        
+        //set guest values
+        _isHost = @"NO";
         _testLabel.text = @"GUEST";
     }
-    
-    tbc = self.tabBarController;
     
     //store values from profile managed object
     NSString *name = [NSString stringWithFormat:@"%@",userProfile.name];
@@ -71,57 +89,26 @@ UITabBarController *tbc;
     UIImage *image = [UIImage imageWithData:userProfile.profilePhoto];
     NSArray *artistsArray = [[NSArray alloc] init];
     artistsArray = userProfile.artistsArray;
-    
-    
     NSLog(@"Artists array count in connections: %lu", (unsigned long)[artistsArray count]);
-    
     
     //pass profile data into dictionary
     self.profileData = [[NSDictionary alloc] init];
-    self.profileData = [NSDictionary dictionaryWithObjectsAndKeys: isHost, @"isHost", name, @"name", tagline, @"tagline", image, @"image", artistsArray, @"artists", nil];
+    self.profileData = [NSDictionary dictionaryWithObjectsAndKeys: _isHost, @"isHost", name, @"name", tagline, @"tagline", image, @"image", artistsArray, @"artists", nil];
     
-    //init array
-    self.guestProfiles = [[NSMutableArray alloc] init];
-    
-    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
-        //Your code goes in here
     //profile observer
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(didReceiveDataWithNotification:)
                                                  name:@"MCDidReceiveDataNotification"
                                                object:nil];
-    
-    
-    
-  
-    }];
-    
-    
-    
-    //set the name
-    if([userProfile hasProfileData])
-    {
-        [[_appDelegate mpcController] setupPeerAndSessionWithDisplayName:userProfile.name];
-        
-    }
-    else{
-        [[_appDelegate mpcController] setupPeerAndSessionWithDisplayName:[UIDevice currentDevice].name];
-        
-        
-    }
-    
-    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
-        //Your code goes in here
+    //did change state observer
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(peerDidChangeStateWithNotification:)
                                                  name:@"MCDidChangeStateNotification"
                                                object:nil];
     
-    _arrConnectedDevices = [[NSMutableArray alloc] init];
-    
+    //setup table
     [_tblConnectedDevices setDelegate:self];
     [_tblConnectedDevices setDataSource:self];
-    [_appDelegate.mpcController advertiseSelf:YES];
     
     //refresh stuff
     UITableViewController *tableViewController = [[UITableViewController alloc] init];
@@ -129,7 +116,6 @@ UITabBarController *tbc;
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(refreshTable) forControlEvents:UIControlEventValueChanged];
     tableViewController.refreshControl = self.refreshControl;
-    }];
 }
 
 - (void)didReceiveMemoryWarning
