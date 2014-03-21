@@ -14,17 +14,13 @@
 
 @interface PlaylistViewController : UIViewController <MPMediaPickerControllerDelegate, AVAudioPlayerDelegate, UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate>
 
-//@property (strong, nonatomic) MPMediaItem *song;
-//@property (nonatomic, strong) AVAudioPlayer *player;
-@property (nonatomic, strong) MPMusicPlayerController *player;
-@property (nonatomic, strong) MPMediaItemCollection *allSongs;
+//visual elements. The table and play button declarations.
 @property (nonatomic, weak) IBOutlet UITableView *playlistTable;
 @property (nonatomic, strong) IBOutlet UIButton *buttonPlay;
 
 
 
 - (IBAction)chooseSong:(id)sender;
-- (IBAction)send:(id)sender;
 - (IBAction)play:(id)sender;
 
 

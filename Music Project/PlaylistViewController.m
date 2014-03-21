@@ -13,68 +13,82 @@
 
 @interface PlaylistViewController ()
 
+//************************ Properties ************************//
+
+//Initializes the app delegate which has our multipeer connectivity stuff in it
 @property (nonatomic, strong) AppDelegate *appDelegate;
 
+//these properties are all visual buttons and labels that exist on the storyboard
 @property (strong, nonatomic) IBOutlet UIImageView *albumArt;
 @property (strong, nonatomic) IBOutlet UILabel *songName;
 @property (strong, nonatomic) IBOutlet UILabel *artist;
 @property (strong, nonatomic) IBOutlet UILabel *albumName;
 @property (strong, nonatomic) IBOutlet UIButton *chooseSong;
 
-@property (strong, nonatomic) NSString *songNameString;
-@property (strong, nonatomic) NSString *artistNameString;
-@property (strong, nonatomic) NSString *albumNameString;
-@property (strong, nonatomic) UIImage *albumArtImage;
+//This is the MP media item chosen by the user
 @property (strong, nonatomic) MPMediaItem *song;
 
-@property (strong, nonatomic) NSURL *assetURL;
+//This is the queue of song files chosen and received.
 @property (strong, nonatomic) NSMutableArray *songQueue;
+
+//This is the name of the host device.
 @property (strong, nonatomic) NSString *hostName;
 
+//This is the location chosen by the actionsheet. Used for playlist voting.
 @property (nonatomic) NSUInteger location;
+
+//This is the player that plays the songs.
 @property (nonatomic, strong) AVAudioPlayer *coolPlayer;
 
+//This is an instance of the peerPlaylist class, which controls the playlist.
 @property (nonatomic, strong) peerPlaylist *playlistInfo;
+
+//This is the exported data created by the turnSongIntoData class
 @property (nonatomic, strong) NSData *exportedData;
 
-@property NSDate *startTime;
 
-//@property NSInteger *locationInSongQueue;
 
+
+//************************ Methods ************************//
+
+//This is called when data is received by the app.
 -(void)didReceiveDataWithNotification:(NSNotification *)notification;
+
+//A method that determines how to upvote the song.
 -(void)upvoteSong;
+
+//A method that determines how to downvote the song
 -(void)downvoteSong;
-//-(void)nowPlayingChanged:(NSNotification *)notification;
 
 @end
 
+
+//************************ Implementation ************************//
+
 @implementation PlaylistViewController
 
-@synthesize player; // the player object
 
+//used to load the playlist view controller
 - (void)loadView {
     [super loadView];
     NSLog(@"Loading playlist view controller.");
     
     [self viewDidLoad];
-    
 }
 
+//called when the playlistViewController loads. Initializes variables and sets it up.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
+    //initializes varaibles
     _appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     _songQueue = [[NSMutableArray alloc] init];
     _playlistInfo = [[peerPlaylist alloc] init];
-    //_playlistInfo = [[NSMutableArray alloc] init];
     _hostName = [[NSString alloc] init];
     
-    
-    //_startTime = [NSDate date];
-    
-    
-    
+    //Checks to see if it is the host device or not.
+    //If so, enable play button, if not, disable it.
     MyManager *sharedManager = [MyManager sharedManager];
     if ([sharedManager.someProperty isEqualToString:@"YES"])
     {
@@ -87,38 +101,46 @@
         _buttonPlay.hidden = YES;
     }
     
+    //setup the system notification for when the app receives data
     [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
-        //Your code goes in here
-    [[NSNotificationCenter defaultCenter] addObserver:self
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(didReceiveDataWithNotification:)
                                                  name:@"MCDidReceiveDataNotification"
                                                object:nil];
     
     
+        //sets up the playlist table
+        [_playlistTable setDelegate:self];
+        [_playlistTable setDataSource:self];
+        
+        //sets up the audio player
+        [_coolPlayer setDelegate:self];
     
-    
-    [_playlistTable setDelegate:self];
-    [_playlistTable setDataSource:self];
-    [_coolPlayer setDelegate:self];
-    
-    [_playlistTable reloadData];
+        //loads the table data (should be empty)
+        [_playlistTable reloadData];
     }];
 }
 
+//called when the play button is pressed.
 - (IBAction)play:(id)sender
 {
+    //write to log, set up error checking.
     NSLog(@"play");
     NSError *error;
     
-    NSMutableArray *playlist = [_playlistInfo getArray];
-    NSDictionary *firstSong = [playlist objectAtIndex:0];
-    _songName.text = [firstSong objectForKey:@"songTitle"];
-    _artist.text = [firstSong objectForKey:@"artistName"];
-    _albumName.text = [firstSong objectForKey:@"albumName"];
-    _albumArt.image = [firstSong objectForKey:@"albumArt"];
-    
+    //makes sure that there is a song in the queue
     if ([_songQueue count] != 0)
     {
+        //update the now playing portion at the top of the app from the top song in the playlist info
+        NSMutableArray *playlist = [_playlistInfo getArray];
+        NSDictionary *firstSong = [playlist objectAtIndex:0];
+        _songName.text = [firstSong objectForKey:@"songTitle"];
+        _artist.text = [firstSong objectForKey:@"artistName"];
+        _albumName.text = [firstSong objectForKey:@"albumName"];
+        _albumArt.image = [firstSong objectForKey:@"albumArt"];
+        
+        //begin playing the audio player
         AVAudioPlayer *neatPlayer = [[AVAudioPlayer alloc]initWithData:[_songQueue objectAtIndex:0] error:&error];
         _coolPlayer = neatPlayer;
         [_coolPlayer prepareToPlay];
@@ -127,6 +149,7 @@
     }
     else
     {
+        //alert the user that there is no song in the queue
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No Songs in Queue"
                                                         message:@"Please add a Song!"
                                                        delegate:nil
@@ -136,32 +159,38 @@
     }
 }
 
+//Called when someone chooses a song in the media picker.
 - (void)mediaPicker:(MPMediaPickerController *)mediaPicker didPickMediaItems:(MPMediaItemCollection *)mediaItemCollection
 {
+    //write to log and close the mediapicker view controller
     NSLog(@"mediaPicker");
-    
     [self dismissViewControllerAnimated:YES completion:nil];
     
+    //iniitalze variables. song is the media item chosen by the user, data is
     NSData *data;
     MPMediaItem *song = [mediaItemCollection.items objectAtIndex: 0];
     
+    //if host
     MyManager *sharedManager = [MyManager sharedManager];
     if ([sharedManager.someProperty isEqualToString:@"YES"])
     {
-        //is host
-        //get playlist ready to be sent out
+        //we have to send out the playlist to peers. this prepares that
+        //also adds song to the songqueue
         
+        //add song information to playlistInfo array
         [_playlistInfo addSongFromHost:song];
+        
+        //get the array and store it in a NSData type file.
         data = [NSKeyedArchiver archivedDataWithRootObject:[_playlistInfo getArray]];
         
-        //then add song to queue
-        
+        //turn the song file into a NSData type.
         [self turnSongIntoData:song];
         
-        
+        //wait while turnSongIntoData finishes
         while (_exportedData == nil) {
         }
         
+        //once complete, add to array and clear memory of exportedData
         [_songQueue addObject:_exportedData];
         _exportedData = nil;
     }
@@ -170,49 +199,66 @@
         //is guest
         //makes a NSDictionary containing the song file and the playlist information
         
+        //initialze dictionary to be sent
         NSMutableDictionary *newSong = [[NSMutableDictionary alloc] init];
+        
+        //create a dictionary item that will contain the info for playlistInfo
         NSDictionary *info = [_playlistInfo makeDictionaryItem:song];
+        
+        //turn song file into NSData type
         [self turnSongIntoData:song];
         
-        
+        //wait for turnSongIntoData
         while (_exportedData == nil) {
         }
+        
+        //setup the newSong Dictionary with required info
         [newSong setObject:@"songFile" forKey:@"type"];
         [newSong setObject:info forKey:@"songInfo"];
         [newSong setObject:_exportedData forKey:@"songData"];
         
+        //archive it
         data = [NSKeyedArchiver archivedDataWithRootObject:[newSong copy]];
+        
+        //release memory
         _exportedData = nil;
         
-        //add file sending to local table.
     }
     
-    //NSData *data = [NSKeyedArchiver archivedDataWithRootObject:[_playlistInfo copy]];
-    NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
-    
-    
-    // //NSInteger = [_playlistInfo ]
-    //
-    
     [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
-        //Your code goes in here
+        
+        //initialize error and array that will contain only the host device, as well of array of all peers.
         NSError *error;
-    NSLog(@"Sending Song");
+        NSMutableArray *hostDevice = [[NSMutableArray alloc] init];
+        NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
+
+        NSLog(@"Sending Song");
         
-         NSMutableArray *hostDevice = [[NSMutableArray alloc] init];
         
+        //find which device is the host device to send the song file too
         for(int i=0; i<[allPeers count]; i++)
         {
             if([[[allPeers objectAtIndex:i] displayName] isEqualToString:_appDelegate.hostName])
                 [hostDevice addObject:[allPeers objectAtIndex:i]];
         }
         
-    [_appDelegate.mpcController.session sendData:data
-                                         toPeers:hostDevice
-                                        withMode:MCSessionSendDataReliable
-                                           error:&error];
+        if ([sharedManager.someProperty isEqualToString:@"YES"])
+        {
+            [_appDelegate.mpcController.session sendData:data
+                                                 toPeers:allPeers
+                                                withMode:MCSessionSendDataReliable
+                                                   error:&error];
+        }
+        else
+        {
+            [_appDelegate.mpcController.session sendData:data
+                                                 toPeers:hostDevice
+                                                withMode:MCSessionSendDataReliable
+                                                error:&error];
+        }
+
     
-    [_playlistTable reloadData];
+        [_playlistTable reloadData];
     }];
 }
 
@@ -232,115 +278,7 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-/*
- - (IBAction)send:(id)sender
- {
- //
- // NSData *data = [NSKeyedArchiver archivedDataWithRootObject:[_songQueue objectAtIndex:0]];
- // NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
- // NSError *error;
- //
- // //NSInteger = [_playlistInfo ]
- //
- // NSLog(@"Sending");
- // [_appDelegate.mpcController.session sendData:data
- // toPeers:allPeers
- // withMode:MCSessionSendDataReliable
- // error:&error];
- // //MPMediaItem *curItem = [_songQueue objectAtIndex:0];
- // NSURL *url = [[_songQueue objectAtIndex:0] valueForProperty: MPMediaItemPropertyAssetURL];
- // AVURLAsset *songAsset = [AVURLAsset URLAssetWithURL: url options:nil];
- // AVAssetExportSession *exporter = [[AVAssetExportSession alloc] initWithAsset: songAsset
- // presetName: AVAssetExportPresetAppleM4A];
- // NSString *urlString = [url absoluteString];
- // NSLog(@"%@", urlString);
- //
- //
- //
- // // Implement in your project the media item picker
- // exporter.outputFileType = @"public.mpeg-4";
- // NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
- // NSString *documentsPath = [paths objectAtIndex:0]; //Get the docs directory
- // NSString *exportFile = [documentsPath stringByAppendingPathComponent:
- // @"exported.mp4"];
- //
- // NSURL *exportURL = [NSURL fileURLWithPath:exportFile];
- // exporter.outputURL = exportURL;
- NSURL *url = [[_songQueue objectAtIndex:0] valueForProperty: MPMediaItemPropertyAssetURL];
- AVURLAsset *songAsset = [AVURLAsset URLAssetWithURL: url options:nil];
- AVAssetExportSession *exporter = [[AVAssetExportSession alloc] initWithAsset: songAsset
- presetName:AVAssetExportPresetAppleM4A];
- exporter.outputFileType = @"com.apple.m4a-audio";
- NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
- NSString * myDocumentsDirectory = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
- [[NSDate date] timeIntervalSince1970];
- NSTimeInterval seconds = [[NSDate date] timeIntervalSince1970];
- NSString *intervalSeconds = [NSString stringWithFormat:@"%0.0f",seconds];
- NSString * fileName = [NSString stringWithFormat:@"%@.m4a",intervalSeconds];
- NSString *exportFile = [myDocumentsDirectory stringByAppendingPathComponent:fileName];
- NSURL *exportURL = [NSURL fileURLWithPath:exportFile];
- exporter.outputURL = exportURL;
- // do the export
- // (completion handler block omitted)
- [exporter exportAsynchronouslyWithCompletionHandler:
- ^{
- long int exportStatus = exporter.status;
- switch (exportStatus)
- {
- case AVAssetExportSessionStatusFailed:
- {
- NSError *exportError = exporter.error;
- NSLog (@"AVAssetExportSessionStatusFailed: %@", exportError);
- break;
- }
- case AVAssetExportSessionStatusCompleted:
- {
- NSLog (@"AVAssetExportSessionStatusCompleted");
- NSData *data = [NSData dataWithContentsOfFile: [myDocumentsDirectory
- stringByAppendingPathComponent:fileName]];
- NSError *error = nil;
- NSLog(@"Please play");
- //_coolPlayer =[[AVAudioPlayer alloc] initWithData:data error:&error];
- //[_coolPlayer play];
- NSLog(@"%@", [error localizedDescription]);
- NSData *toBeSent = [NSKeyedArchiver archivedDataWithRootObject:data];
- //
- //
- NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
- //
- NSLog(@"Sending");
- [_appDelegate.mpcController.session sendData:toBeSent
- toPeers:allPeers
- withMode:MCSessionSendDataReliable
- error:&error];
- //DLog(@"Data %@",data);
- data = nil;
- break;
- }
- case AVAssetExportSessionStatusUnknown:
- {
- NSLog (@"AVAssetExportSessionStatusUnknown"); break;
- }
- case AVAssetExportSessionStatusExporting:
- {
- NSLog (@"AVAssetExportSessionStatusExporting"); break;
- }
- case AVAssetExportSessionStatusCancelled:
- {
- NSLog (@"AVAssetExportSessionStatusCancelled"); break;
- }
- case AVAssetExportSessionStatusWaiting:
- {
- NSLog (@"AVAssetExportSessionStatusWaiting"); break;
- }
- default:
- {
- NSLog (@"didn't get export status"); break;
- }
- }
- }];
- }
- */
+
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
     
@@ -859,20 +797,6 @@
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     NSString *buttonTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
-    //NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
-    //NSInteger totalPeers = [allPeers count];
-    
-    /*
-    //NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
-    //NSMutableArray *play = [_playlistInfo getArray];
-    
-    //info = [play objectAtIndex:_location];
-    //NSNumber *cool = [info objectForKey:@"votes"];
-    //NSNumber *replace;
-    
-    //NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-    //NSString *type;
-    */
     
     MyManager *sharedManager = [MyManager sharedManager];
     if ([sharedManager.someProperty isEqualToString:@"YES"])
@@ -958,99 +882,7 @@
             
             [self downvoteSong];
             
-            /*
-            //initialize variables
-            [_playlistInfo addDownvote:_location];
-            NSInteger totalDownvotes = [_playlistInfo getDownvoteCount:_location];
-            NSInteger downVotePercentage = (totalDownvotes/totalPeers)*100;
-            
-            
-            //if it is the first song and its playing
-            if (_location == 0 && [_coolPlayer isPlaying] == true)
-            {
-                if (downVotePercentage >= 50 && totalPeers > 2)
-                {
-                    NSLog(@"Remove first song and play next");
-                    [_coolPlayer stop];
-                    
-                    [_playlistInfo removeSong:_location];
-                    [_songQueue removeObjectAtIndex:_location];
-                    
-                    if ([_songQueue count] != 0)
-                    {
-                        NSError *error;
-                        NSMutableArray *playlist = [_playlistInfo getArray];
-                        NSDictionary *firstSong = [playlist objectAtIndex:0];
-                        _songName.text = [firstSong objectForKey:@"songTitle"];
-                        _artist.text = [firstSong objectForKey:@"artistName"];
-                        _albumName.text = [firstSong objectForKey:@"albumName"];
-                        _albumArt.image = [firstSong objectForKey:@"albumArt"];
-                        
-                        NSLog(@"Play next");
-                        AVAudioPlayer *neatPlayer = [[AVAudioPlayer alloc]initWithData:[_songQueue objectAtIndex:0] error:&error];
-                        _coolPlayer = neatPlayer;
-                        [_coolPlayer prepareToPlay];
-                        [_coolPlayer setDelegate:self];
-                        [_coolPlayer play];
-                    }
-                }
-            //if last in queue
-            }else if (_location == ([_playlistInfo countOfPlaylistInfo] - 1))
-            {
-                if (downVotePercentage >= 50 && totalPeers > 2)
-                {
-                    NSLog(@"Remove last song");
-                    [_playlistInfo removeSong:_location];
-                    [_songQueue removeObjectAtIndex:_location];
-                }
-            //other
-            } else {
-                if (downVotePercentage >= 50 && totalPeers > 2)
-                {
-                    NSLog(@"Remove song");
-                    [_playlistInfo removeSong:_location];
-                    [_songQueue removeObjectAtIndex:_location];
-                } else {
-                    NSLog(@"Move song down one position");
-                    [_playlistInfo moveSongDownOnePosition:_location];
-                    [_songQueue exchangeObjectAtIndex:_location withObjectAtIndex:_location+1];
-                }
-            }
-
-            
-            /*
-            //replace = [NSNumber numberWithInt:[cool intValue] - 1];
-            //[info setObject:replace forKey:@"votes"];
-            
-            if (_location != 0 && _location != ([_playlistInfo countOfPlaylistInfo] - 1))
-            {
-                NSLog(@"location = whatever");
-                [_playlistInfo playlistDownvote:_location];
-                [_songQueue exchangeObjectAtIndex:_location withObjectAtIndex:_location+1];
-            }
-            
-            if (_location == 0)
-            {
-                NSLog(@"location = 0");
-                if (![_coolPlayer isPlaying])
-                {
-                    NSLog(@"player not playing");
-                    [_songQueue exchangeObjectAtIndex:_location withObjectAtIndex:_location+1];
-                }
-                [_playlistInfo playlistDownvote:_location];
-            }
-            
-            
-            //[_playlistInfo replaceObjectAtIndex:_location withObject:info];
-            //[_playlistInfo exchangeObjectAtIndex:_location withObjectAtIndex:_location+1];
-            [_playlistInfo playlistDownvote:_location];
-            [_songQueue exchangeObjectAtIndex:_location withObjectAtIndex:_location+1];
-            
-            //prepare dictionary to be sent to peers
-            //type = @"Downvote";
-            //[dic setObject:type forKey:@"type"];
-            //[dic setObject:loc forKey:@"where"];
-            */
+ 
         } else
         {
             NSLog(@"Cancel!");
@@ -1127,7 +959,6 @@
 
 - (void)turnSongIntoData:(MPMediaItem *) item
 {
-    //NSURL *url = [[_songQueue objectAtIndex:0] valueForProperty: MPMediaItemPropertyAssetURL];
     
     NSURL *url = [item valueForProperty: MPMediaItemPropertyAssetURL];
     
