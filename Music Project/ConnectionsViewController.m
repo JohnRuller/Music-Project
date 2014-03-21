@@ -36,6 +36,7 @@
 
 @implementation ConnectionsViewController
 
+//local vars
 profileManager *userProfile;
 UITabBarController *tbc;
 
@@ -65,16 +66,16 @@ UITabBarController *tbc;
     MyManager *sharedManager = [MyManager sharedManager];
     if ([sharedManager.someProperty isEqualToString:@"YES"])
     {
+        NSLog(@"Setting user as non-advertising host.");
         //host does not want to advertise
         [[_appDelegate mpcController] advertiseSelf:NO];
         
         //set host values
         _isHost = @"YES";
         _testLabel.text = @"HOST";
-        _hostName = [UIDevice currentDevice].name;
-        NSLog(@"%@", _hostName);
     }
     else {
+        NSLog(@"Setting user as advertising guest.");
         //guest wants to advertise
         [_appDelegate.mpcController advertiseSelf:YES];
         
@@ -167,6 +168,7 @@ UITabBarController *tbc;
      [[NSOperationQueue mainQueue] addOperationWithBlock:^{
          [_appDelegate.mpcController.session disconnect];
          [_arrConnectedDevices removeAllObjects];
+         [[_appDelegate mpcController] advertiseSelf:NO];
     
          [_tblConnectedDevices reloadData];
     
@@ -200,7 +202,7 @@ UITabBarController *tbc;
 //send profile data over
 -(void)sendProfileData{
     [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
-        //Your code goes in here
+        
         NSLog(@"Sending profile data to all peers.");
         
         NSData *dataToSend = [NSKeyedArchiver archivedDataWithRootObject:self.profileData];
@@ -220,11 +222,12 @@ UITabBarController *tbc;
 
 -(void)didReceiveDataWithNotification:(NSNotification *)notification{
     [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
-        //get user info
+        
+        //get notifier user info
         MCPeerID *peerID = [[notification userInfo] objectForKey:@"peerID"];
         NSString *peerDisplayName = peerID.displayName;
         
-        NSLog(@"Receiving profile data from %@", peerDisplayName);
+        NSLog(@"Receiving profile data from %@.", peerDisplayName);
         
         //receive data
         NSData *receivedData = [[notification userInfo] objectForKey:@"data"];
@@ -240,7 +243,7 @@ UITabBarController *tbc;
             //if it doesn't have a type, then it's profile data
             if (type == nil)
             {
-                //app profile data to profile array
+                //add profile data to profile array
                 NSLog(@"Adding %@'s profile data in array.", peerDisplayName);
                 [self.guestProfiles addObject:myObject];
                 
@@ -248,7 +251,7 @@ UITabBarController *tbc;
                 if([[dic objectForKey:@"isHost"] isEqualToString:@"YES"]) {
                     
                     NSString *hostName = [dic objectForKey:@"name"];
-                    NSLog(@"Setting host name to %@ in app delegate", hostName);
+                    NSLog(@"Setting host name to %@ in app delegate.", hostName);
                     _appDelegate.hostName = hostName;
                 }
             
@@ -266,76 +269,86 @@ UITabBarController *tbc;
 
 -(void)peerDidChangeStateWithNotification:(NSNotification *)notification{
     
+    //get notifier user info
     MCPeerID *peerID = [[notification userInfo] objectForKey:@"peerID"];
     NSString *peerDisplayName = peerID.displayName;
     MCSessionState state = [[[notification userInfo] objectForKey:@"state"] intValue];
     
+    //if not connecting
     if (state != MCSessionStateConnecting)
     {
+        //if connected
         if (state == MCSessionStateConnected) {
-            [_arrConnectedDevices addObject:peerDisplayName];
-            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-            [self sendProfileData];
             
-                [_tblConnectedDevices reloadData];
-            }];        }
+            //add peer to connected devices
+            [_arrConnectedDevices addObject:peerDisplayName];
+            
+            //send profile data
+            NSLog(@"Calling send profile data from didChangeState for %@.", peerDisplayName);
+            [self sendProfileData];
+        }
+        //if not connected
         else if (state == MCSessionStateNotConnected){
             if ([_arrConnectedDevices count] > 0) {
+                
+                //disconnect device
+                NSLog(@"Disconnecting %@ in didChangeState.", peerDisplayName);
                 int indexOfPeer = [_arrConnectedDevices indexOfObject:peerDisplayName];
                 [_arrConnectedDevices removeObjectAtIndex:indexOfPeer];
             }
         }
+        
+        //reload table data
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
             [_tblConnectedDevices reloadData];
         }];
         
-        //Commenting this out because I added disconnect to the navigation bar and you'll want to go back even when there are no peers
+        //determine if peers exist in room
         BOOL peersExist = ([[_appDelegate.mpcController.session connectedPeers] count] == 0);
         //[_btnDisconnect setEnabled:!peersExist];
         
         [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
-            //Your code goes in here
-        
-        //setup tabbarcontroller
-        if(!peersExist) {
-            NSLog(@"PEERS EXIST.");
             
-            [[[[tbc tabBar]items]objectAtIndex:1]setEnabled:TRUE];
-            [[[[tbc tabBar]items]objectAtIndex:2]setEnabled:TRUE];
-
-        }
-        else {
-            NSLog(@"PEERS DON'T EXIST.");
-            [[[[tbc tabBar]items]objectAtIndex:1]setEnabled:FALSE];
-            [[[[tbc tabBar]items]objectAtIndex:2]setEnabled:FALSE];
-        
-        }
-            }];
-        
+            //set tabs if not host
+            if([_isHost isEqualToString:@"NO"]) {
+                //set hidden tabs
+                if(!peersExist) {
+                    
+                    NSLog(@"Peers exist in room.");
+                    [[[[tbc tabBar]items]objectAtIndex:1]setEnabled:TRUE];
+                    [[[[tbc tabBar]items]objectAtIndex:2]setEnabled:TRUE];
+                }
+                else {
+                    
+                    NSLog(@"Peers do not exist in room.");
+                    [[[[tbc tabBar]items]objectAtIndex:1]setEnabled:FALSE];
+                    [[[[tbc tabBar]items]objectAtIndex:2]setEnabled:FALSE];
+                }
+            }
+          
+        }];
     }
 }
 
 -(bool)hasProfileData:(NSString *)name{
+    //determine if received profile data exists in connected devices list
     for(int i=0; i<[self.guestProfiles count]; i++)
     {
         if([[[self.guestProfiles objectAtIndex:i] objectForKey:@"name"] isEqualToString:name]) {
             return true;
         }
-        
     }
     return false;
-    
 }
 
 -(int)profileIndex:(NSString *)name{
+    //determine index of connected device
     for(int i=0; i<[self.guestProfiles count]; i++)
     {
         if([[[self.guestProfiles objectAtIndex:i] objectForKey:@"name"] isEqualToString:name]) {
             return i;
         }
-        
     }
-    
     return -1;
 }
 
@@ -359,27 +372,34 @@ UITabBarController *tbc;
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CellIdentifier"];
     }
     
+    //set peer name
     NSString *peerID = [_arrConnectedDevices objectAtIndex:indexPath.row];
     UILabel *profileNameLabel = (UILabel *)[cell.contentView viewWithTag:101];
+    [profileNameLabel setText:peerID];
+    NSLog(@"Set %@'s name in connections table.", peerID);
     
-    //profileNameLabel.text = [_arrConnectedDevices objectAtIndex:indexPath.row];
-    [profileNameLabel setText:[_arrConnectedDevices objectAtIndex:indexPath.row]];
-    
+    //set profile data if it has been received and matches a connected device
     if([self hasProfileData:[_arrConnectedDevices objectAtIndex:indexPath.row]])
     {
-        NSLog(@"set photo");
+        NSLog(@"%@'s profile data macthes a connected device - setting in table now.", peerID);
+        
+        //get index of profile
         int profileIndex = [self profileIndex:peerID];
         
+        //set the profile image
         UIImageView *profileImageView = (UIImageView *)[cell viewWithTag:100];
         profileImageView.image = [[self.guestProfiles objectAtIndex:profileIndex] objectForKey:@"image"];
+        
         // set image layer circular
         CALayer * l = [profileImageView layer];
         [l setMasksToBounds:YES];
         [l setCornerRadius:45.0];
         
+        //set tagline
         UILabel *profileTaglineLabel = (UILabel *)[cell viewWithTag:102];
         [profileTaglineLabel setText:[[self.guestProfiles objectAtIndex:profileIndex] objectForKey:@"tagline"]];
         
+        //set compatability
         UILabel *profileCompatabilityRating = (UILabel *)[cell viewWithTag:103];
         NSDictionary *compatabilityDictionary = [[NSDictionary alloc] init];
         NSArray *guestArtists = [[NSArray alloc] init];
@@ -392,10 +412,7 @@ UITabBarController *tbc;
         UIImageView *compBarImageView = (UIImageView *)[cell viewWithTag:105];
         compBarImageView.image = [compatabilityDictionary objectForKey:@"compBar"];
         
-        
-        
     }
-    
     
     return cell;
 }

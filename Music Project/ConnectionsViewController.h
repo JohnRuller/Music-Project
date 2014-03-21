@@ -16,7 +16,6 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tblConnectedDevices;
 @property (weak, nonatomic) IBOutlet UIButton *btnDisconnect;
-@property (nonatomic, strong) NSString *hostName;
 
 - (IBAction)browseForDevices:(id)sender;
 - (IBAction)disconnect:(id)sender;

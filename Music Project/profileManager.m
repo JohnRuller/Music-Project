@@ -50,7 +50,7 @@
         //set default profile data is none already exists
         if (![self hasProfileData]) {
             
-            NSLog(@"Creating a default profile for user");
+            NSLog(@"Creating a default profile for user.");
             
             //setup default image
             UIImage *defaultImage = [UIImage imageNamed:@"defaultProfile.png"];
@@ -75,7 +75,7 @@
         
         else {
             
-            NSLog(@"Update existing profile data");
+            NSLog(@"Update existing profile data.");
             
             //update profiles
             [self fetchArray];
