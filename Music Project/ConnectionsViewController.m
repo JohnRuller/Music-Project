@@ -220,55 +220,48 @@ UITabBarController *tbc;
 
 -(void)didReceiveDataWithNotification:(NSNotification *)notification{
     [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
-        //Your code goes in here
-    //MCPeerID *peerID = [[notification userInfo] objectForKey:@"peerID"];
-    //NSString *peerDisplayName = peerID.displayName;
-    
-    NSData *receivedData = [[notification userInfo] objectForKey:@"data"];
-    id myObject = [NSKeyedUnarchiver unarchiveObjectWithData:receivedData];
-    
-    NSLog(@"receiving profile");
-    
-    if ([myObject isKindOfClass:[NSDictionary class]]){
+        //get user info
+        MCPeerID *peerID = [[notification userInfo] objectForKey:@"peerID"];
+        NSString *peerDisplayName = peerID.displayName;
         
+        NSLog(@"Receiving profile data from %@", peerDisplayName);
         
-        NSDictionary *dic = [myObject copy];
-        NSString *type = [dic objectForKey:@"type"];
-        
-        if (type == nil)
-        {
-            //Handle
-            [self.guestProfiles addObject:myObject];
-            NSLog(@"Setting profile data in array.");
+        //receive data
+        NSData *receivedData = [[notification userInfo] objectForKey:@"data"];
+        id myObject = [NSKeyedUnarchiver unarchiveObjectWithData:receivedData];
+    
+        //ensure it is a dictionary
+        if ([myObject isKindOfClass:[NSDictionary class]]){
             
-            if([[dic objectForKey:@"isHost"] isEqualToString:@"YES"]) {
-                
-                NSLog(@"Setting HOST NAME.");
-
-                _appDelegate.hostName = [dic objectForKey:@"name"];
-                
-            }
+            //set dictionary values
+            NSDictionary *dic = [myObject copy];
+            NSString *type = [dic objectForKey:@"type"];
             
-            //refresh table
-            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            //if it doesn't have a type, then it's profile data
+            if (type == nil)
+            {
+                //app profile data to profile array
+                NSLog(@"Adding %@'s profile data in array.", peerDisplayName);
+                [self.guestProfiles addObject:myObject];
+                
+                //set host name in app delegate
+                if([[dic objectForKey:@"isHost"] isEqualToString:@"YES"]) {
+                    
+                    NSString *hostName = [dic objectForKey:@"name"];
+                    NSLog(@"Setting host name to %@ in app delegate", hostName);
+                    _appDelegate.hostName = hostName;
+                }
+            
+                //refresh table
+                NSLog(@"Refreshing table data after receiving profile and setting it.");
                 [_tblConnectedDevices reloadData];
-            }];
-            
-            [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
-                //Your code goes in here
-            // Post a notification that a peer has joined the room
-            [[NSNotificationCenter defaultCenter]
-             postNotificationName:@"peerJoinedRoom" object:nil userInfo:[notification userInfo]];
-            }];
-            NSLog(@"Refreshing table data after receiving profile and setting it.");
-            
+                    
+                // Post a notification that a peer has joined the room
+                [[NSNotificationCenter defaultCenter]
+                postNotificationName:@"peerJoinedRoom" object:nil userInfo:[notification userInfo]];
+            }
         }
-        
-       
-
-    }
     }];
-    
 }
 
 -(void)peerDidChangeStateWithNotification:(NSNotification *)notification{
