@@ -26,6 +26,7 @@
 -(int)profileIndex:(NSString *)name;
 @property (strong) NSDictionary *profileData;
 @property (strong) NSMutableArray *guestProfiles;
+@property (strong, nonatomic) NSString *isHost;
 
 //refresh property
 @property (nonatomic,retain) UIRefreshControl *refreshControl;
@@ -47,19 +48,19 @@ UITabBarController *tbc;
     //initialize user profile class
     userProfile = [[profileManager alloc] init];
     
-    NSString *isHost = [[NSString alloc] init];
+    _isHost = [[NSString alloc] init];
     
     //setup mymanager
     MyManager *sharedManager = [MyManager sharedManager];
     if ([sharedManager.someProperty isEqualToString:@"YES"])
     {
-        isHost = @"YES";
+        _isHost = @"YES";
         _testLabel.text = @"HOST";
         _hostName = [UIDevice currentDevice].name;
         NSLog(@"%@", _hostName);
     }
     else{
-        isHost = @"NO";
+        _isHost = @"NO";
         _testLabel.text = @"GUEST";
     }
     
@@ -78,7 +79,7 @@ UITabBarController *tbc;
     
     //pass profile data into dictionary
     self.profileData = [[NSDictionary alloc] init];
-    self.profileData = [NSDictionary dictionaryWithObjectsAndKeys: isHost, @"isHost", name, @"name", tagline, @"tagline", image, @"image", artistsArray, @"artists", nil];
+    self.profileData = [NSDictionary dictionaryWithObjectsAndKeys: _isHost, @"isHost", name, @"name", tagline, @"tagline", image, @"image", artistsArray, @"artists", nil];
     
     //init array
     self.guestProfiles = [[NSMutableArray alloc] init];
@@ -300,12 +301,6 @@ UITabBarController *tbc;
                 [_tblConnectedDevices reloadData];
             }];
             
-            [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
-                //Your code goes in here
-            // Post a notification that a peer has joined the room
-            [[NSNotificationCenter defaultCenter]
-             postNotificationName:@"peerJoinedRoom" object:nil userInfo:[notification userInfo]];
-            }];
             NSLog(@"Refreshing table data after receiving profile and setting it.");
             
         }
@@ -322,17 +317,25 @@ UITabBarController *tbc;
     MCPeerID *peerID = [[notification userInfo] objectForKey:@"peerID"];
     NSString *peerDisplayName = peerID.displayName;
     MCSessionState state = [[[notification userInfo] objectForKey:@"state"] intValue];
-    
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
     if (state != MCSessionStateConnecting)
     {
         if (state == MCSessionStateConnected) {
             [_arrConnectedDevices addObject:peerDisplayName];
             [[NSOperationQueue mainQueue] addOperationWithBlock:^{
             [self sendProfileData];
+                [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+                    //Your code goes in here
+                    // Post a notification that a peer has joined the room
+                    [[NSNotificationCenter defaultCenter]
+                     postNotificationName:@"peerJoinedRoom" object:nil userInfo:[notification userInfo]];
+                }];
+
             
                 [_tblConnectedDevices reloadData];
             }];        }
         else if (state == MCSessionStateNotConnected){
+            NSLog(@"%@ disconnected", peerDisplayName);
             if ([_arrConnectedDevices count] > 0) {
                 int indexOfPeer = [_arrConnectedDevices indexOfObject:peerDisplayName];
                 [_arrConnectedDevices removeObjectAtIndex:indexOfPeer];
@@ -350,6 +353,7 @@ UITabBarController *tbc;
             //Your code goes in here
         
         //setup tabbarcontroller
+            if([_isHost isEqualToString:@"NO"]) {
         if(!peersExist) {
             NSLog(@"PEERS EXIST.");
             
@@ -363,9 +367,12 @@ UITabBarController *tbc;
             [[[[tbc tabBar]items]objectAtIndex:2]setEnabled:FALSE];
         
         }
+            }
+            
             }];
         
     }
+    }];
 }
 
 -(bool)hasProfileData:(NSString *)name{
