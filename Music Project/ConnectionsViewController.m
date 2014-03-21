@@ -42,9 +42,26 @@ UITabBarController *tbc;
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    _appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     //initialize user profile class
     userProfile = [[profileManager alloc] init];
+    
+    NSString *isHost = [[NSString alloc] init];
+    
+    //setup mymanager
+    MyManager *sharedManager = [MyManager sharedManager];
+    if ([sharedManager.someProperty isEqualToString:@"YES"])
+    {
+        isHost = @"YES";
+        _testLabel.text = @"HOST";
+        _hostName = [UIDevice currentDevice].name;
+        NSLog(@"%@", _hostName);
+    }
+    else{
+        isHost = @"NO";
+        _testLabel.text = @"GUEST";
+    }
     
     tbc = self.tabBarController;
     
@@ -55,12 +72,13 @@ UITabBarController *tbc;
     NSArray *artistsArray = [[NSArray alloc] init];
     artistsArray = userProfile.artistsArray;
     
+    
     NSLog(@"Artists array count in connections: %lu", (unsigned long)[artistsArray count]);
     
     
     //pass profile data into dictionary
     self.profileData = [[NSDictionary alloc] init];
-    self.profileData = [NSDictionary dictionaryWithObjectsAndKeys: name, @"name", tagline, @"tagline", image, @"image", artistsArray, @"artists", nil];
+    self.profileData = [NSDictionary dictionaryWithObjectsAndKeys: isHost, @"isHost", name, @"name", tagline, @"tagline", image, @"image", artistsArray, @"artists", nil];
     
     //init array
     self.guestProfiles = [[NSMutableArray alloc] init];
@@ -75,20 +93,10 @@ UITabBarController *tbc;
     
     
     
-    //setup mymanager
-    MyManager *sharedManager = [MyManager sharedManager];
-    if ([sharedManager.someProperty isEqualToString:@"YES"])
-    {
-        _testLabel.text = @"HOST";
-        _hostName = [UIDevice currentDevice].name;
-        NSLog(@"%@", _hostName);
-    }
-    else{
-        _testLabel.text = @"GUEST";
-    }
+  
     }];
     
-    _appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
     
     //set the name
     if([userProfile hasProfileData])
@@ -278,6 +286,14 @@ UITabBarController *tbc;
             //Handle
             [self.guestProfiles addObject:myObject];
             NSLog(@"Setting profile data in array.");
+            
+            if([[dic objectForKey:@"isHost"] isEqualToString:@"YES"]) {
+                
+                NSLog(@"Setting HOST NAME.");
+
+                _appDelegate.hostName = [dic objectForKey:@"name"];
+                
+            }
             
             //refresh table
             [[NSOperationQueue mainQueue] addOperationWithBlock:^{

@@ -198,8 +198,17 @@
         //Your code goes in here
         NSError *error;
     NSLog(@"Sending Song");
+        
+         NSMutableArray *hostDevice = [[NSMutableArray alloc] init];
+        
+        for(int i=0; i<[allPeers count]; i++)
+        {
+            if([[[allPeers objectAtIndex:i] displayName] isEqualToString:_appDelegate.hostName])
+                [hostDevice addObject:[allPeers objectAtIndex:i]];
+        }
+        
     [_appDelegate.mpcController.session sendData:data
-                                         toPeers:allPeers
+                                         toPeers:hostDevice
                                         withMode:MCSessionSendDataReliable
                                            error:&error];
     

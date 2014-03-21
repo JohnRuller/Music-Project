@@ -20,6 +20,8 @@
 
 @property (strong, nonatomic) MPCConnection *mpcController;
 
+@property (strong, nonatomic) NSString *hostName;
+
 
 
 - (void)saveContext;
