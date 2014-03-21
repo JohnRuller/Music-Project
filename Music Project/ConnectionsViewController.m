@@ -122,28 +122,31 @@ UITabBarController *tbc;
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    NSLog(@"Memory warning on connections view controller.");
+
 }
 
 - (void)refreshTable
 {
     [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
-        //Your code goes in here
-    [_tblConnectedDevices reloadData];
+        //refresh table
+        [_tblConnectedDevices reloadData];
     
-    [self.refreshControl performSelector:@selector(endRefreshing)];
+        [self.refreshControl performSelector:@selector(endRefreshing)];
     }];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([[segue identifier] isEqualToString:@"ViewProfile"]) {
-        
+
+        //get table index of guest profile
         NSString *peerID = [_arrConnectedDevices objectAtIndex:[[_tblConnectedDevices indexPathForSelectedRow] row]];
-        
         int profileIndex = [self profileIndex:peerID];
         NSDictionary *guestDictionary = [[NSDictionary alloc] init];
         guestDictionary = [self.guestProfiles objectAtIndex:profileIndex];
         
+        //send guest profile data over to next view controller
         ViewGuestProfileViewController *destViewController = segue.destinationViewController;
         destViewController.guestDictionary = guestDictionary;
     }
@@ -154,74 +157,41 @@ UITabBarController *tbc;
 
 - (IBAction)browseForDevices:(id)sender {
     [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
-        //Your code goes in here
-    [[_appDelegate mpcController] setupMCBrowser];
-    [[[_appDelegate mpcController] browser] setDelegate:self];
-    [self presentViewController:[[_appDelegate mpcController] browser] animated:YES completion:nil];
+        [[_appDelegate mpcController] setupMCBrowser];
+        [[[_appDelegate mpcController] browser] setDelegate:self];
+        [self presentViewController:[[_appDelegate mpcController] browser] animated:YES completion:nil];
     }];
 }
-
-
-/*- (void)toggleVisibility
- {
- [_appDelegate.mpcController advertiseSelf:YES];
- }*/
-
-
 
 - (IBAction)disconnect:(id)sender {
-    [_appDelegate.mpcController.session disconnect];
+     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+         [_appDelegate.mpcController.session disconnect];
+         [_arrConnectedDevices removeAllObjects];
     
-    [_arrConnectedDevices removeAllObjects];
+         [_tblConnectedDevices reloadData];
     
-    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-        [_tblConnectedDevices reloadData];
+         [self dismissViewControllerAnimated:YES completion:nil];
     }];
-    
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
-
 
 #pragma mark - MCBrowserViewControllerDelegate method implementation
 
 -(void)browserViewControllerDidFinish:(MCBrowserViewController *)browserViewController{
     [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
-        //Your code goes in here
-    [_appDelegate.mpcController.browser dismissViewControllerAnimated:YES completion:nil];
-    }];
-    MyManager *sharedManager = [MyManager sharedManager];
-    if ([sharedManager.someProperty isEqualToString:@"YES"])
-    {
-        [_appDelegate.mpcController advertiseSelf:YES];
-        
-    }
-    else{
-        [_appDelegate.mpcController advertiseSelf:NO];
-    }
+       
+        [_appDelegate.mpcController.browser dismissViewControllerAnimated:YES completion:nil];
     
-    //reload table data
-    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        //reload table data
         [_tblConnectedDevices reloadData];
+         NSLog(@"Refreshing table data after dismissing browser view controller.");
     }];
-    NSLog(@"Refreshing table data after dismissing browser view controller.");
-    
-    /*
-     NSString *message = @"WhoseHost?";
-     NSString *returnTo = [UIDevice currentDevice].name;
-     NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
-     NSError *error;
-     
-     [_appDelegate.mpcController.session sendData:dataToSend
-     toPeers:allPeers
-     withMode:MCSessionSendDataReliable
-     error:&error];*/
-        
 }
 
 
 -(void)browserViewControllerWasCancelled:(MCBrowserViewController *)browserViewController{
-    
-    [_appDelegate.mpcController.browser dismissViewControllerAnimated:YES completion:nil];
+     [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+         [_appDelegate.mpcController.browser dismissViewControllerAnimated:YES completion:nil];
+     }];
 }
 
 
@@ -229,25 +199,23 @@ UITabBarController *tbc;
 
 //send profile data over
 -(void)sendProfileData{
-    NSData *dataToSend = [NSKeyedArchiver archivedDataWithRootObject:self.profileData];
-    NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
-    
-    
     [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
         //Your code goes in here
+        NSLog(@"Sending profile data to all peers.");
+        
+        NSData *dataToSend = [NSKeyedArchiver archivedDataWithRootObject:self.profileData];
+        NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
         NSError *error;
-    [_appDelegate.mpcController.session sendData:dataToSend
+        
+        [_appDelegate.mpcController.session sendData:dataToSend
                                          toPeers:allPeers
                                         withMode:MCSessionSendDataReliable
                                            error:&error];
-    
-    NSLog(@"sending profile");
-    
-    
-    if (error) {
-        NSLog(@"%@", [error localizedDescription]);
-    }
-        }];
+        
+        if (error) {
+            NSLog(@"%@", [error localizedDescription]);
+        }
+    }];
 }
 
 -(void)didReceiveDataWithNotification:(NSNotification *)notification{

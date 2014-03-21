@@ -19,7 +19,6 @@
 @property (nonatomic, strong) NSString *hostName;
 
 - (IBAction)browseForDevices:(id)sender;
-//- (IBAction)toggleVisibility:(id)sender;
 - (IBAction)disconnect:(id)sender;
 
 @end
