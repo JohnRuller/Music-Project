@@ -43,6 +43,7 @@ profileManager *userProfile;
     //image
     UIImage *image = [UIImage imageWithData:userProfile.profilePhoto];
     self.imageView.image = image;
+    
 }
 
 - (void)viewDidLoad
@@ -59,6 +60,10 @@ profileManager *userProfile;
     //image
     UIImage *image = [UIImage imageWithData:userProfile.profilePhoto];
     self.imageView.image = image;
+    // set image layer circular
+    CALayer * l = [self.imageView layer];
+    [l setMasksToBounds:YES];
+    [l setCornerRadius:45.0];
     
     
 }

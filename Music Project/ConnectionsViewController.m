@@ -425,6 +425,10 @@ UITabBarController *tbc;
         
         UIImageView *profileImageView = (UIImageView *)[cell viewWithTag:100];
         profileImageView.image = [[self.guestProfiles objectAtIndex:profileIndex] objectForKey:@"image"];
+        // set image layer circular
+        CALayer * l = [profileImageView layer];
+        [l setMasksToBounds:YES];
+        [l setCornerRadius:45.0];
         
         UILabel *profileTaglineLabel = (UILabel *)[cell viewWithTag:102];
         [profileTaglineLabel setText:[[self.guestProfiles objectAtIndex:profileIndex] objectForKey:@"tagline"]];
