@@ -172,6 +172,7 @@ UITabBarController *tbc;
      [[NSOperationQueue mainQueue] addOperationWithBlock:^{
          [_appDelegate.mpcController.session disconnect];
          [_arrConnectedDevices removeAllObjects];
+         [self.guestProfiles removeAllObjects];
          [[_appDelegate mpcController] advertiseSelf:NO];
     
          [_tblConnectedDevices reloadData];
@@ -245,14 +246,15 @@ UITabBarController *tbc;
             NSString *type = [dic objectForKey:@"type"];
             
             //if it doesn't have a type, then it's profile data
-            if (type == nil)
+            if (type == nil && ![self hasProfileData:peerDisplayName])
             {
                 //get compatability rating
                 NSDictionary *compatabilityDictionary = [[NSDictionary alloc] init];
                 NSArray *guestArtists = [[NSArray alloc] init];
                 guestArtists = [dic objectForKey:@"artists"];
-                NSLog(@"Guest Artists array count in connections: %lu", (unsigned long)[guestArtists count]);
                 compatabilityDictionary = [userProfile getArtistsDictionary:guestArtists];
+                
+                //set compatability in dictionary
                 [dic setObject:[compatabilityDictionary objectForKey:@"rating"] forKey:@"rating"];
                 [dic setObject:[compatabilityDictionary objectForKey:@"compBar"] forKey:@"compBarImage"];
                 [dic setObject:[compatabilityDictionary objectForKey:@"artists"] forKey:@"guestArtists"];
@@ -310,6 +312,8 @@ UITabBarController *tbc;
                 NSLog(@"Disconnecting %@ in didChangeState.", peerDisplayName);
                 int indexOfPeer = [_arrConnectedDevices indexOfObject:peerDisplayName];
                 [_arrConnectedDevices removeObjectAtIndex:indexOfPeer];
+                int indexOfProfile = [self profileIndex:peerDisplayName];
+                [self.guestProfiles removeObjectAtIndex:indexOfProfile];
             }
         }
         
