@@ -953,17 +953,28 @@
     }
 }
 
--(void)peerJoinedRoom:(NSNotification *)notification {
-    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
-        //Your code goes in here
-        NSLog(@"Received Notification - User has joined room");
-        
-        MCPeerID *peerID = [[notification userInfo] objectForKey:@"peerID"];
-        NSString *peerDisplayName = peerID.displayName;
-        
-        //send playlist here
-        
-    }];
+-(void)peerJoinedRoom:(NSNotification *)notification
+{
+    MyManager *sharedManager = [MyManager sharedManager];
+    if ([sharedManager.someProperty isEqualToString:@"YES"])
+    {
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+            NSLog(@"Received Notification - User has joined room");
+            
+            MCPeerID *peerID = [[notification userInfo] objectForKey:@"peerID"];
+            //NSString *peerDisplayName = peerID.displayName;
+            NSError *error;
+            NSMutableArray *deviceSendTo = [[NSMutableArray alloc] init];
+            [deviceSendTo addObject:peerID];
+            
+            NSData *data = [NSKeyedArchiver archivedDataWithRootObject:[_playlistInfo getArray]];
+            
+            [_appDelegate.mpcController.session sendData:data
+                                                 toPeers:deviceSendTo
+                                                withMode:MCSessionSendDataReliable
+                                                   error:&error];
+        }];
+    }
 }
 
 @end
