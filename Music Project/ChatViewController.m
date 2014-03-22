@@ -241,7 +241,7 @@
     
     if ([myobject isKindOfClass:[NSString class]])
     {
-        NSLog(@"out");
+        NSLog(@"Received chat message.");
         NSString *receivedText = [[NSString alloc] initWithString:myobject];
         [_tvChat performSelectorOnMainThread:@selector(setText:) withObject:[_tvChat.text stringByAppendingString:[NSString stringWithFormat:@"%@ wrote:\n%@\n\n", peerDisplayName, receivedText]] waitUntilDone:NO];
         

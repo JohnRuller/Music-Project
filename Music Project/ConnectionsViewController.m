@@ -169,16 +169,25 @@ UITabBarController *tbc;
 }
 
 - (IBAction)disconnect:(id)sender {
-     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-         [_appDelegate.mpcController.session disconnect];
-         [_arrConnectedDevices removeAllObjects];
-         [self.guestProfiles removeAllObjects];
-         [[_appDelegate mpcController] advertiseSelf:NO];
+         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+             [self sendDisconnectData];
+         }];
     
-         [_tblConnectedDevices reloadData];
+    
+        [self performSelector:@selector(disconnectFunc) withObject:self afterDelay:3.0 ];
+
+    
     
          [self dismissViewControllerAnimated:YES completion:nil];
-    }];
+   
+}
+
+-(void)disconnectFunc {
+    [_appDelegate.mpcController.session disconnect];
+    [_arrConnectedDevices removeAllObjects];
+    [self.guestProfiles removeAllObjects];
+    [[_appDelegate mpcController] advertiseSelf:NO];
+    
 }
 
 #pragma mark - MCBrowserViewControllerDelegate method implementation
@@ -224,6 +233,31 @@ UITabBarController *tbc;
         }
     }];
 }
+
+-(void)sendDisconnectData {
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+        
+        NSLog(@"Sending disconnect data to all peers.");
+        
+        NSDictionary *disconnectData = [[NSDictionary alloc] init];
+        disconnectData = [NSDictionary dictionaryWithObjectsAndKeys:@"Disconnect", @"type", nil];
+        NSData *dataToSend = [NSKeyedArchiver archivedDataWithRootObject:[disconnectData copy]];
+        NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
+        NSError *error;
+        
+        [_appDelegate.mpcController.session sendData:dataToSend
+                                             toPeers:allPeers
+                                            withMode:MCSessionSendDataReliable
+                                               error:&error];
+        
+        if (error) {
+            NSLog(@"%@", [error localizedDescription]);
+        }
+        
+        
+    }];
+}
+
 
 -(void)didReceiveDataWithNotification:(NSNotification *)notification{
     [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
@@ -280,6 +314,17 @@ UITabBarController *tbc;
                 [[NSNotificationCenter defaultCenter]
                 postNotificationName:@"peerJoinedRoom" object:nil userInfo:[notification userInfo]];
             }
+            else if ([type isEqualToString:@"Disconnect"]) {
+                NSLog(@"%@ DISCONNECTED!!!!!!", peerDisplayName);
+                int indexOfPeer = [_arrConnectedDevices indexOfObject:peerDisplayName];
+                [_arrConnectedDevices removeObjectAtIndex:indexOfPeer];
+                int indexOfProfile = [self profileIndex:peerDisplayName];
+                [self.guestProfiles removeObjectAtIndex:indexOfProfile];
+                
+                [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+                    [_tblConnectedDevices reloadData];
+                }];
+            }
         }
     }];
 }
@@ -310,10 +355,10 @@ UITabBarController *tbc;
                 
                 //disconnect device
                 NSLog(@"Disconnecting %@ in didChangeState.", peerDisplayName);
-                int indexOfPeer = [_arrConnectedDevices indexOfObject:peerDisplayName];
-                [_arrConnectedDevices removeObjectAtIndex:indexOfPeer];
-                int indexOfProfile = [self profileIndex:peerDisplayName];
-                [self.guestProfiles removeObjectAtIndex:indexOfProfile];
+                //int indexOfPeer = [_arrConnectedDevices indexOfObject:peerDisplayName];
+                //[_arrConnectedDevices removeObjectAtIndex:indexOfPeer];
+                //int indexOfProfile = [self profileIndex:peerDisplayName];
+                //[self.guestProfiles removeObjectAtIndex:indexOfProfile];
             }
         }
         
