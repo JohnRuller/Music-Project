@@ -324,6 +324,12 @@ UITabBarController *tbc;
                 [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
                     [_tblConnectedDevices reloadData];
                 }];
+                
+                if([peerDisplayName isEqualToString:_appDelegate.hostName]) {
+                    [self disconnectFunc];
+                    [self dismissViewControllerAnimated:YES completion:nil];
+                    
+                }
             }
         }
     }];
