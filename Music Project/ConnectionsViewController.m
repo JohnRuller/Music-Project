@@ -325,6 +325,10 @@ UITabBarController *tbc;
                     [_tblConnectedDevices reloadData];
                 }];
                 
+                // Post a notification that a peer has joined the room
+                [[NSNotificationCenter defaultCenter]
+                 postNotificationName:@"peerLeftRoom" object:nil userInfo:[notification userInfo]];
+                
                 if([peerDisplayName isEqualToString:_appDelegate.hostName]) {
                     [self disconnectFunc];
                     [self dismissViewControllerAnimated:YES completion:nil];

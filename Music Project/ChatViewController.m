@@ -69,6 +69,11 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(peerJoinedRoom:)
                                                  name:@"peerJoinedRoom" object:nil];
+        
+    // Register observer to be called when a peer has joined the room
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(peerLeftRoom:)
+                                                 name:@"peerLeftRoom" object:nil];
 
     }];
 }
@@ -176,6 +181,22 @@
     [self scrollTextViewToBottom:_tvChat];
     
     [self updateNewBadge];
+    }];
+}
+
+-(void)peerLeftRoom:(NSNotification *)notification {
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+        //Your code goes in here
+        NSLog(@"Received Notification - User has left room");
+        
+        MCPeerID *peerID = [[notification userInfo] objectForKey:@"peerID"];
+        NSString *peerDisplayName = peerID.displayName;
+        
+        [_tvChat performSelectorOnMainThread:@selector(setText:) withObject:[_tvChat.text stringByAppendingString:[NSString stringWithFormat:@"%@ left the room\n\n", peerDisplayName]] waitUntilDone:NO];
+        
+        [self scrollTextViewToBottom:_tvChat];
+        
+        [self updateNewBadge];
     }];
 }
 

@@ -108,6 +108,11 @@
                                              selector:@selector(didReceiveDataWithNotification:)
                                                  name:@"MCDidReceiveDataNotification"
                                                object:nil];
+        
+        // Register observer to be called when a peer has joined the room
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(peerJoinedRoom:)
+                                                     name:@"peerJoinedRoom" object:nil];
     
     
         //sets up the playlist table
