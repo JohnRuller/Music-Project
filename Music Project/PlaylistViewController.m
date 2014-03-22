@@ -953,4 +953,17 @@
     }
 }
 
+-(void)peerJoinedRoom:(NSNotification *)notification {
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+        //Your code goes in here
+        NSLog(@"Received Notification - User has joined room");
+        
+        MCPeerID *peerID = [[notification userInfo] objectForKey:@"peerID"];
+        NSString *peerDisplayName = peerID.displayName;
+        
+        //send playlist here
+        
+    }];
+}
+
 @end
