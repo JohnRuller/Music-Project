@@ -585,21 +585,25 @@
     return [_playlistInfo countOfPlaylistInfo];
 }
 
-//
+//this method tells the table what data to load. it is called x amount of times based on previous method
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    //identify the cells to be updated
     NSLog(@"reload table data");
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"newCell"];
     
+    //if nil, create a new one
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"newCell"];
     }
     
+    //get playlist data
     NSMutableArray *play = [_playlistInfo getArray];
     NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
     
     info = [play objectAtIndex:indexPath.row];
     
+    //load data into the cell
     UILabel *songTitle = (UILabel *)[cell.contentView viewWithTag:111];
     [songTitle setText:[info objectForKey:@"songTitle"]];
     
@@ -612,17 +616,23 @@
     UIImageView *profileImageView = (UIImageView *)[cell viewWithTag:110];
     profileImageView.image = [info objectForKey:@"albumArt"];
     
+    //return the cell
     return cell;
 }
 
-
+//this method tells the table what to do when a row is selected
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    //save the location in a method variable. this is due to accessing it later.
     _location = indexPath.row;
+    
+    //get the playlist info
     NSMutableArray *play = [_playlistInfo getArray];
     NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
-    
+
     info = [play objectAtIndex:indexPath.row];
     
+    //create a popup (action sheet) asking if you want to upvote or downvote
     UIActionSheet *chooseUpOrDown = [[UIActionSheet alloc] initWithTitle:[info objectForKey:@"songTitle"]
                                                                 delegate:self
                                                        cancelButtonTitle:nil
@@ -635,12 +645,16 @@
     [chooseUpOrDown showInView:self.view];
 }
 
+//************************ Table Delegate Methods ************************//
 
 #pragma mark - action sheet
+
+//this method decides what to do when upvote or downvote is clicked
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     NSString *buttonTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
     
+    //check for 
     MyManager *sharedManager = [MyManager sharedManager];
     if ([sharedManager.someProperty isEqualToString:@"YES"])
     {
@@ -656,10 +670,7 @@
         } else if ([buttonTitle isEqualToString:@"Downboat!"])
         {
             NSLog(@"Downvote!");
-            
             [self downvoteSong];
-            
- 
         } else
         {
             NSLog(@"Cancel!");
@@ -717,11 +728,10 @@
             NSData *toBeSent = [NSKeyedArchiver archivedDataWithRootObject:dic];
             NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
             [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
-                //Your code goes in here
-            NSError *error;
+                NSError *error;
             
-            NSLog(@"Vote Sending");
-            [_appDelegate.mpcController.session sendData:toBeSent
+                NSLog(@"Vote Sending");
+                [_appDelegate.mpcController.session sendData:toBeSent
                                                  toPeers:allPeers
                                                 withMode:MCSessionSendDataReliable
                                                    error:&error];
@@ -733,6 +743,14 @@
         [_playlistTable reloadData];
     }];
 }
+
+//This function was taken and modified from this location
+//http://stackoverflow.com/questions/17192716/ios-6-issue-convert-mpmediaitem-to-nsdata
+//it transforms the MPMediaItem song into a NSData type
+
+//************************ Turn Song Into Data ************************//
+
+#pragma mark - turn song into data
 
 - (void)turnSongIntoData:(MPMediaItem *) item
 {
@@ -786,32 +804,6 @@
                  {
                      NSLog(@"exported data in thing = nil");
                  }
-                 /*
-                  //return data;
-                  // NSError *error = nil;
-                  //
-                  // NSLog(@"Please play");
-                  // //_coolPlayer =[[AVAudioPlayer alloc] initWithData:data error:&error];
-                  // //[_coolPlayer play];
-                  //
-                  // NSLog(@"%@", [error localizedDescription]);
-                  //
-                  //
-                  //
-                  // NSData *toBeSent = [NSKeyedArchiver archivedDataWithRootObject:data];
-                  // //
-                  // //
-                  // NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
-                  // //
-                  // NSLog(@"Sending");
-                  // [_appDelegate.mpcController.session sendData:toBeSent
-                  // toPeers:allPeers
-                  // withMode:MCSessionSendDataReliable
-                  // error:&error];
-                  //
-                  // //DLog(@"Data %@",data);
-                  // data = nil;
-                  */
                  break;
              }
              case AVAssetExportSessionStatusUnknown:
@@ -837,39 +829,47 @@
          }
      }];
     [_playlistTable reloadData];
-    
-    //NSData *data = [NSData dataWithContentsOfFile: [myDocumentsDirectory
-    // stringByAppendingPathComponent:fileName]];
-    //return data;
 }
 
+//************************ Voting Methods ************************//
+
+#pragma mark - voting methods
+
+//this is called by the host when a song is to be upvoted
 -(void)upvoteSong
 {
     NSLog(@"Upvote!");
     
+    //init variables
     NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
     NSInteger totalPeers = [allPeers count];
     
+    
+    //if the song is not first in the queue
     if (_location != 0)
     {
         NSLog(@"Location != 0");
         [_playlistInfo addUpvote:_location];
         
+        //check to see if the song is playing
         if (_location == 1 && [_coolPlayer isPlaying] == true)
         {
             NSLog(@"location is 1 and player is playing. upvotes added");
         }
         else
         {
+            //add votes to song
             NSLog(@"all other conditions failed, do full upvote routine");
             NSInteger totalUpvotes = [_playlistInfo getUpvoteCount:_location];
+            
+            //if the total votes > 50% of the people in the room then move it to the top
             if (((totalUpvotes/totalPeers)*100) >= 50 && totalPeers > 2)
             {
                 NSLog(@"Move Song to the top");
                 [_playlistInfo moveSongToTop:_location];
                 NSLog(@"insert code here that moves the songQueue to the top");
             }
-            else
+            else //otherwise move it up one position
             {
                 NSLog(@"Move Song up one position");
                 [_songQueue exchangeObjectAtIndex:_location withObjectAtIndex:_location-1];
@@ -877,10 +877,11 @@
             }
         }
     }
-    else
+    else //this means the song is at the top and cant be upvoted anymore.
         NSLog(@"Location is equal to 0 - do nothing");
 }
 
+//this is called by the host when a song is to be downvoted
 -(void)downvoteSong
 {
     //initialize variables
@@ -894,6 +895,7 @@
     //if it is the first song and its playing
     if (_location == 0 && [_coolPlayer isPlaying] == true)
     {
+        //check to make sure it doesnt have 50% or more people hating
         if (downVotePercentage >= 50 && totalPeers > 1)
         {
             NSLog(@"Remove first song and play next");
@@ -902,6 +904,7 @@
             [_playlistInfo removeSong:_location];
             [_songQueue removeObjectAtIndex:_location];
             
+            //play the next song if there is one
             if ([_songQueue count] != 0)
             {
                 NSError *error;
@@ -920,7 +923,8 @@
                 [_coolPlayer play];
             }
         }
-        //if last in queue
+        
+    //if last in queue, just add downvotes, and check for >= 50
     }else if (_location == ([_playlistInfo countOfPlaylistInfo] - 1))
     {
         if (downVotePercentage >= 50 && totalPeers > 1)
@@ -929,7 +933,7 @@
             [_playlistInfo removeSong:_location];
             [_songQueue removeObjectAtIndex:_location];
         }
-        //other
+        //other, do general downvote routine
     } else {
         if (downVotePercentage >= 50 && totalPeers > 1)
         {
