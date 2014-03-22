@@ -89,12 +89,16 @@ UITabBarController *tbc;
     NSString *tagline = [NSString stringWithFormat:@"%@",userProfile.tagline];
     UIImage *image = [UIImage imageWithData:userProfile.profilePhoto];
     NSArray *artistsArray = [[NSArray alloc] init];
+    NSArray *guestArtistsArray = [[NSArray alloc] init];
+    NSString *rating = [[NSString alloc] init];
+    UIImage *compBarImage = [[UIImage alloc] init];
+
     artistsArray = userProfile.artistsArray;
     NSLog(@"Artists array count in connections: %lu", (unsigned long)[artistsArray count]);
     
     //pass profile data into dictionary
     self.profileData = [[NSDictionary alloc] init];
-    self.profileData = [NSDictionary dictionaryWithObjectsAndKeys: _isHost, @"isHost", name, @"name", tagline, @"tagline", image, @"image", artistsArray, @"artists", nil];
+    self.profileData = [NSDictionary dictionaryWithObjectsAndKeys: _isHost, @"isHost", name, @"name", tagline, @"tagline", image, @"image", artistsArray, @"artists", guestArtistsArray, @"guestArtists", rating, @"rating", compBarImage, @"compBarImage", nil];
     
     //profile observer
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -237,15 +241,26 @@ UITabBarController *tbc;
         if ([myObject isKindOfClass:[NSDictionary class]]){
             
             //set dictionary values
-            NSDictionary *dic = [myObject copy];
+            NSMutableDictionary *dic = [myObject mutableCopy];
             NSString *type = [dic objectForKey:@"type"];
             
             //if it doesn't have a type, then it's profile data
             if (type == nil)
             {
+                //get compatability rating
+                NSDictionary *compatabilityDictionary = [[NSDictionary alloc] init];
+                NSArray *guestArtists = [[NSArray alloc] init];
+                guestArtists = [dic objectForKey:@"artists"];
+                NSLog(@"Guest Artists array count in connections: %lu", (unsigned long)[guestArtists count]);
+                compatabilityDictionary = [userProfile getArtistsDictionary:guestArtists];
+                [dic setObject:[compatabilityDictionary objectForKey:@"rating"] forKey:@"rating"];
+                [dic setObject:[compatabilityDictionary objectForKey:@"compBar"] forKey:@"compBarImage"];
+                [dic setObject:[compatabilityDictionary objectForKey:@"artists"] forKey:@"guestArtists"];
+                
                 //add profile data to profile array
                 NSLog(@"Adding %@'s profile data in array.", peerDisplayName);
-                [self.guestProfiles addObject:myObject];
+                [self.guestProfiles addObject:dic];
+                NSLog(@"Current number of entries in profile data array: %d", [self.guestProfiles count]);
                 
                 //set host name in app delegate
                 if([[dic objectForKey:@"isHost"] isEqualToString:@"YES"]) {
@@ -398,19 +413,12 @@ UITabBarController *tbc;
         //set tagline
         UILabel *profileTaglineLabel = (UILabel *)[cell viewWithTag:102];
         [profileTaglineLabel setText:[[self.guestProfiles objectAtIndex:profileIndex] objectForKey:@"tagline"]];
-        
+    
         //set compatability
         UILabel *profileCompatabilityRating = (UILabel *)[cell viewWithTag:103];
-        NSDictionary *compatabilityDictionary = [[NSDictionary alloc] init];
-        NSArray *guestArtists = [[NSArray alloc] init];
-        guestArtists = [[self.guestProfiles objectAtIndex:profileIndex] objectForKey:@"artists"];
-        NSLog(@"Guest Artists array count in connections: %lu", (unsigned long)[guestArtists count]);
-        
-        compatabilityDictionary = [userProfile getArtistsDictionary:guestArtists];
-        [profileCompatabilityRating setText:[compatabilityDictionary objectForKey:@"rating"]];
-        
+        [profileCompatabilityRating setText:[[self.guestProfiles objectAtIndex:profileIndex] objectForKey:@"rating"]];
         UIImageView *compBarImageView = (UIImageView *)[cell viewWithTag:105];
-        compBarImageView.image = [compatabilityDictionary objectForKey:@"compBar"];
+        compBarImageView.image = [[self.guestProfiles objectAtIndex:profileIndex] objectForKey:@"compBarImage"];
         
     }
     

@@ -45,9 +45,10 @@
         artistsArray = [[NSArray alloc] init];
         profiles = [[NSMutableArray alloc] init];
         
+        //get artists from local device
         [self setupArtistsArray];
         
-        //set default profile data is none already exists
+        //set default profile data if none already exists
         if (![self hasProfileData]) {
             
             NSLog(@"Creating a default profile for user.");
@@ -80,8 +81,10 @@
             //update profiles
             [self fetchArray];
             
+            //get existing profile
             NSManagedObject *profile = [self.profiles objectAtIndex:0];
             
+            //set class variables equal to existing profile data
             name = [profile valueForKey:@"name"];
             tagline = [profile valueForKey:@"tagline"];
             profilePhoto = [profile valueForKey:@"photo"];
@@ -99,6 +102,8 @@
     return self;
 }
 
+#pragma mark - Helpers
+
 -(bool) hasProfileData {
     
     //update profiles
@@ -114,6 +119,20 @@
     }
 }
 
+-(void) saveData {
+    
+    NSManagedObjectContext *context = [self managedObjectContext];
+    
+    NSError *error = nil;
+    // Save the object to persistent store
+    if (![context save:&error]) {
+        NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
+    }
+    
+}
+
+#pragma mark - Getters
+
 -(NSString*)name {
     
     return name;
@@ -126,6 +145,8 @@
 -(NSData*)profilePhoto {
     return profilePhoto;
 }
+
+#pragma mark - Setters
 
 -(void) setName:(NSString *)newName {
     
@@ -172,18 +193,6 @@
         [profile setValue:imageData forKey:@"photo"];
         [self saveData];
         
-    }
-    
-}
-
--(void) saveData {
-    
-    NSManagedObjectContext *context = [self managedObjectContext];
-    
-    NSError *error = nil;
-    // Save the object to persistent store
-    if (![context save:&error]) {
-        NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
     }
     
 }
@@ -237,6 +246,8 @@
 
 -(NSDictionary*)getArtistsDictionary:(NSArray *)guestArtists {
     
+    NSLog(@"Getting compatability dictionary.");
+
     //setup
     NSDictionary *compatabilityDictionary = [[NSDictionary alloc] init];
     NSMutableArray *matchingArtists = [[NSMutableArray alloc] init];
@@ -255,7 +266,6 @@
             
             if([artistTitle isEqualToString:guestArtistTitle]) {
                 
-                NSLog(@"matching artists");
                 [matchingArtists addObject:artistTitle];
                 
             }
@@ -265,18 +275,11 @@
     //determine percentage
     float percentage = 0;
     float numMatchingArtists = [matchingArtists count];
-    //float totalArtists = [artistsArray count] + [guestArtists count] - numMatchingArtists;
     
     percentage = numMatchingArtists/[artistsArray count];
     
-    NSLog(@"Artists array = %lu", (unsigned long)[artistsArray count]);
-    NSLog(@"GUest Artists array = %lu", (unsigned long)[guestArtists count]);
-    
-    
     NSLog(@"numMatchingArtists = %f", numMatchingArtists);
-    //NSLog(@"totalArtists = %f", totalArtists);
     NSLog(@"percentage = %f", percentage);
-    
     
     //set compatability ratings
     NSString *compatabilityRating = [[NSString alloc] init];
@@ -302,7 +305,6 @@
         compatabilityRating = @"Rating could not be determined";
         compBar = [UIImage imageNamed:@"NoComp.png"];
     }
-    
     
     //set dictionary values
     compatabilityDictionary = [NSDictionary dictionaryWithObjectsAndKeys: matchingArtists, @"artists", compatabilityRating, @"rating", compBar, @"compBar", nil];
