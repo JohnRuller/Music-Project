@@ -16,12 +16,19 @@
 
 //visual elements. The table and play button declarations.
 @property (nonatomic, weak) IBOutlet UITableView *playlistTable;
+
 @property (nonatomic, strong) IBOutlet UIButton *buttonPlay;
+@property (nonatomic, strong) IBOutlet UIButton *buttonStop;
+@property (nonatomic, strong) IBOutlet UIButton *buttonSkip;
+
 
 
 
 - (IBAction)chooseSong:(id)sender;
 - (IBAction)play:(id)sender;
+- (IBAction)stop:(id)sender;
+- (IBAction)skip:(id)sender;
+
 
 
 

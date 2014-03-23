@@ -18,6 +18,7 @@
 @property (nonatomic, strong) AppDelegate *appDelegate;
 @property (nonatomic, strong) NSMutableArray *arrConnectedDevices;
 @property (nonatomic, weak) IBOutlet UILabel *testLabel;
+@property (nonatomic, weak) IBOutlet UIButton *browseButton;
 
 //profile data stuff
 -(void)sendProfileData;
@@ -73,6 +74,10 @@ UITabBarController *tbc;
         //set host values
         _isHost = @"YES";
         _testLabel.text = @"HOST";
+        
+        _browseButton.enabled = YES;
+        _browseButton.hidden = NO;
+        
     }
     else {
         NSLog(@"Setting user as advertising guest.");
@@ -82,6 +87,9 @@ UITabBarController *tbc;
         //set guest values
         _isHost = @"NO";
         _testLabel.text = @"GUEST";
+        
+        _browseButton.enabled = NO;
+        _browseButton.hidden = YES;
     }
     
     //store values from profile managed object

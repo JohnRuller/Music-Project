@@ -31,6 +31,7 @@
 - (void)moveSongDownOnePosition:(NSInteger)location;
 - (void)moveSongToTop:(NSInteger)location;
 - (NSString *)getSongName:(NSInteger)location;
+- (void)isPlayingSwap;
 
 
 

@@ -542,7 +542,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jhd-EP-Etx">
-                                <rect key="frame" x="137" y="125" width="46" height="30"/>
+                                <rect key="frame" x="125" y="125" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Play">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -577,7 +577,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YSa-8D-me5">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YSa-8D-me5">
                                 <rect key="frame" x="20" y="128" width="33" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Stop">
@@ -620,7 +620,6 @@
                     <connections>
                         <outlet property="anarchy" destination="vnT-7k-CbC" id="rcB-Qb-zJo"/>
                         <outlet property="play" destination="Jhd-EP-Etx" id="Tjn-4Q-WgT"/>
-                        <outlet property="skip" destination="puQ-6d-HYq" id="SU2-Q2-90g"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ylV-hD-hhj" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -673,7 +672,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wJ6-0K-KtY">
-                                <rect key="frame" x="145" y="120" width="30" height="30"/>
+                                <rect key="frame" x="115" y="120" width="91" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Play">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -729,7 +728,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="play:" destination="Li5-EP-eGG" eventType="touchUpInside" id="4jH-Pb-kYP"/>
+                                    <action selector="skip:" destination="Li5-EP-eGG" eventType="touchUpInside" id="cjg-Y4-g5Q"/>
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zIH-XN-aZ1">
@@ -739,7 +738,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="play:" destination="Li5-EP-eGG" eventType="touchUpInside" id="FnW-S5-dHo"/>
+                                    <action selector="stop:" destination="Li5-EP-eGG" eventType="touchUpInside" id="LMS-Er-ldT"/>
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Now Playing" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WJb-yz-tXM">
@@ -757,6 +756,8 @@
                         <outlet property="albumName" destination="F6K-Aq-yqx" id="ZhX-vy-brT"/>
                         <outlet property="artist" destination="rrr-uS-x5l" id="b34-iA-vyX"/>
                         <outlet property="buttonPlay" destination="wJ6-0K-KtY" id="39l-U4-mcO"/>
+                        <outlet property="buttonSkip" destination="5Ll-Rd-EbP" id="ii5-Bv-eta"/>
+                        <outlet property="buttonStop" destination="zIH-XN-aZ1" id="RLj-ZT-mtN"/>
                         <outlet property="chooseSong" destination="aTI-nc-VnA" id="SI5-Yx-Ke9"/>
                         <outlet property="playlistTable" destination="bjv-Dv-oW9" id="Cp0-fN-kPE"/>
                         <outlet property="songName" destination="k90-9N-HmX" id="Ayr-m0-uyu"/>
@@ -890,6 +891,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Connections" id="on6-XA-fZy"/>
                     <connections>
+                        <outlet property="browseButton" destination="hvV-IO-P0j" id="S58-QQ-g3L"/>
                         <outlet property="btnDisconnect" destination="FJa-il-yO4" id="vCz-vH-GQU"/>
                         <outlet property="tblConnectedDevices" destination="loD-6z-Tts" id="jGJ-Gc-y8V"/>
                         <outlet property="testLabel" destination="X2m-Zn-4Ph" id="ooZ-yf-MTv"/>

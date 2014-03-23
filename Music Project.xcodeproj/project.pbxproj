@@ -352,6 +352,8 @@
 		945B78411895809E00C26AAA /* Old Views */ = {
 			isa = PBXGroup;
 			children = (
+				9445D0E818BA628800BAFF5F /* ChooseSongViewController.h */,
+				9445D0E918BA628800BAFF5F /* ChooseSongViewController.m */,
 				94BB70EA18B53129003ED058 /* GuestsViewController.h */,
 				94BB70EB18B53129003ED058 /* GuestsViewController.m */,
 				945B78701895829C00C26AAA /* CreateRoomMenuViewController.h */,
@@ -433,8 +435,6 @@
 				9466556218B93325009061C5 /* AnarchyViewController.m */,
 				949ABA1E18B6923000D159A0 /* ChatViewController.h */,
 				949ABA1F18B6923000D159A0 /* ChatViewController.m */,
-				9445D0E818BA628800BAFF5F /* ChooseSongViewController.h */,
-				9445D0E918BA628800BAFF5F /* ChooseSongViewController.m */,
 				94E3105618B68D7C001DC113 /* ConnectionsViewController.h */,
 				94E3105718B68D7C001DC113 /* ConnectionsViewController.m */,
 				0242BB2B18D2B734007C2CA1 /* MainTabBarViewController.h */,
@@ -516,7 +516,7 @@
 				ORGANIZATIONNAME = "John Ruller";
 				TargetAttributes = {
 					0220CB43182C977F006C10A8 = {
-						DevelopmentTeam = 3UVA6AL657;
+						DevelopmentTeam = 3Y9N4UBV8R;
 					};
 					0220CB5E182C977F006C10A8 = {
 						TestTargetID = 0220CB43182C977F006C10A8;

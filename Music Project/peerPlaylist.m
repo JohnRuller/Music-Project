@@ -72,6 +72,7 @@
     [newSong setObject:nada forKey:@"downVotes"];
     [newSong setObject:@"newSong" forKey:@"type"];
     [newSong setObject:nada forKey:@"totalVotes"];
+    [newSong setObject:@"NO" forKey:@"isPlaying"];
     
     return newSong;
 }
@@ -179,7 +180,23 @@
     return songName;
 }
 
-
+- (void)isPlayingSwap
+{
+    NSLog(@"isPlayingSwap");
+    NSMutableDictionary *dic = [_playlistInfo objectAtIndex:0];
+    NSString *isItPlaying = [dic objectForKey:@"isPlaying"];
+    
+    if ([isItPlaying isEqualToString:@"NO"])
+    {
+        [dic setObject:@"YES" forKey:@"isPlaying"];
+    }
+    else
+    {
+        [dic setObject:@"NO" forKey:@"isPlaying"];
+    }
+    
+    [_playlistInfo replaceObjectAtIndex:0 withObject:dic];
+}
 
 
 

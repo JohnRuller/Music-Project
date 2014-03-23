@@ -60,13 +60,21 @@
 //A method that determines how to downvote the song
 -(void)downvoteSong;
 
+//method to send some type of data to all peers
+-(void)sendInfoToAllPeers:(NSData *)data;
+
+//method for updating the local playlist
+-(void)updateLocalNowPlaying:(NSArray *)playlist;
+
 @end
 
 
 //************************ Implementation ************************//
 
-@implementation PlaylistViewController
+//************************ Loading ************************//
 
+
+@implementation PlaylistViewController
 
 //used to load the playlist view controller
 - (void)loadView {
@@ -127,25 +135,44 @@
     }];
 }
 
-//called when the play button is pressed.
-- (IBAction)play:(id)sender
+//************************ Buttons ************************//
+
+-(void)stop:(id)sender
 {
-    //write to log, set up error checking.
-    NSLog(@"play");
-    NSError *error;
+    NSLog(@"Stop");
+    _buttonStop.enabled = NO;
+    _buttonStop.hidden = YES;
     
-    //makes sure that there is a song in the queue
+    _buttonSkip.enabled = NO;
+    _buttonSkip.hidden = YES;
+    
+    _buttonPlay.enabled = YES;
+    _buttonPlay.hidden = NO;
+    
+    [_coolPlayer stop];
+}
+
+-(void)skip:(id)sender
+{
+    NSLog(@"Skip");
+    [_coolPlayer stop];
+    
+    NSError *error = nil;
+    
+    //remove the song from the songqueue and the playlist info
+    [_songQueue removeObjectAtIndex:0];
+    [_playlistInfo removeSong:0];
+    
+    //if there is another song in the queue, play it
     if ([_songQueue count] != 0)
     {
+        [_playlistInfo isPlayingSwap];
+        
         //update the now playing portion at the top of the app from the top song in the playlist info
         NSMutableArray *playlist = [_playlistInfo getArray];
-        NSDictionary *firstSong = [playlist objectAtIndex:0];
-        _songName.text = [firstSong objectForKey:@"songTitle"];
-        _artist.text = [firstSong objectForKey:@"artistName"];
-        _albumName.text = [firstSong objectForKey:@"albumName"];
-        _albumArt.image = [firstSong objectForKey:@"albumArt"];
+        [self updateLocalNowPlaying:playlist];
         
-        //begin playing the audio player
+        NSLog(@"Play next");
         AVAudioPlayer *neatPlayer = [[AVAudioPlayer alloc]initWithData:[_songQueue objectAtIndex:0] error:&error];
         _coolPlayer = neatPlayer;
         [_coolPlayer prepareToPlay];
@@ -154,13 +181,85 @@
     }
     else
     {
-        //alert the user that there is no song in the queue
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No Songs in Queue"
-                                                        message:@"Please add a Song!"
-                                                       delegate:nil
-                                              cancelButtonTitle:@"Ok"
-                                              otherButtonTitles:nil];
-        [alert show];
+        NSLog(@"Stop");
+        _buttonSkip.enabled = NO;
+        _buttonSkip.hidden = YES;
+        
+        _buttonStop.enabled = NO;
+        _buttonStop.hidden = YES;
+    }
+    
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+        [_playlistTable reloadData];
+    
+        //send out new playlist
+        NSData *toBeSent = [NSKeyedArchiver archivedDataWithRootObject:[_playlistInfo getArray]];
+        [self sendInfoToAllPeers:toBeSent];
+    }];
+}
+
+//called when the play button is pressed.
+- (IBAction)play:(id)sender
+{
+    NSLog(@"play");
+
+    if ([_coolPlayer isPlaying] == NO)
+    {
+        //write to log, set up error checking.
+        NSError *error;
+        
+        //makes sure that there is a song in the queue
+        if ([_songQueue count] != 0)
+        {
+            //note that the playlist is nowPlaying
+            [_playlistInfo isPlayingSwap];
+            
+            //update the now playing portion at the top of the app from the top song in the playlist info
+            NSMutableArray *playlist = [_playlistInfo getArray];
+            [self updateLocalNowPlaying:playlist];
+            
+            //begin playing the audio player
+            AVAudioPlayer *neatPlayer = [[AVAudioPlayer alloc]initWithData:[_songQueue objectAtIndex:0] error:&error];
+            _coolPlayer = neatPlayer;
+            [_coolPlayer prepareToPlay];
+            [_coolPlayer setDelegate:self];
+            [_coolPlayer play];
+            
+            NSData *toBeSent = [NSKeyedArchiver archivedDataWithRootObject:[_playlistInfo getArray]];
+            [self sendInfoToAllPeers:toBeSent];
+            
+            _buttonPlay.enabled = NO;
+            _buttonPlay.hidden = YES;
+            
+            _buttonSkip.enabled = YES;
+            _buttonSkip.hidden = NO;
+            
+            _buttonStop.enabled = YES;
+            _buttonStop.hidden = NO;
+            
+            /*NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
+             
+             NSLog(@"Sending");
+             [_appDelegate.mpcController.session sendData:toBeSent
+             toPeers:allPeers
+             withMode:MCSessionSendDataReliable
+             error:&error];*/
+        }
+        else
+        {
+            //alert the user that there is no song in the queue
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No Songs in Queue"
+                                                            message:@"Please add a Song!"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"Ok"
+                                                  otherButtonTitles:nil];
+            [alert show];
+        }
+    }
+    else
+    {
+        [_buttonPlay setTitle:@"Play" forState:UIControlStateNormal];
+        [_coolPlayer pause];
     }
 }
 
@@ -235,7 +334,8 @@
         //initialize error and array that will contain only the host device, as well of array of all peers.
         NSError *error;
         NSMutableArray *hostDevice = [[NSMutableArray alloc] init];
-        NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
+        
+        //NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
 
         NSLog(@"Sending Song");
         
@@ -243,13 +343,17 @@
         //if we are the host device, send to all peers
         if ([sharedManager.someProperty isEqualToString:@"YES"])
         {
-            [_appDelegate.mpcController.session sendData:data
+            /*[_appDelegate.mpcController.session sendData:data
                                                  toPeers:allPeers
                                                 withMode:MCSessionSendDataReliable
-                                                   error:&error];
+                                                   error:&error];*/
+            
+            [self sendInfoToAllPeers:data];
         }
         else
         {
+            NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
+            
             //find which device is the host device to send the song file too, and send it
             for(int i=0; i<[allPeers count]; i++)
             {
@@ -335,8 +439,10 @@
             NSLog(@"got playlist");
             NSMutableArray *playlist = [myobject copy];
             [_playlistInfo updatePlaylist:playlist];
-        
-            [_playlistTable reloadData];
+            if ([playlist count] != 0)
+            {
+                [self updateLocalNowPlaying:playlist];
+            }
         }
     
         /* I don't think this is needed but I don't want to test it yet.
@@ -388,15 +494,17 @@
                     
                             //resend updated playlist info to all peers
                             NSData *toBeSent = [NSKeyedArchiver archivedDataWithRootObject:[_playlistInfo getArray]];
-                            NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
+                            //NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
                             [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
-                                NSError *error;
+                               /* NSError *error;
                     
                                 NSLog(@"Sending");
                                 [_appDelegate.mpcController.session sendData:toBeSent
                                                          toPeers:allPeers
                                                         withMode:MCSessionSendDataReliable
-                                                           error:&error];
+                                                           error:&error];*/
+                                
+                                [self sendInfoToAllPeers:toBeSent];
                             }];
                         
                         
@@ -434,17 +542,17 @@
                                 }
                             
                                 NSData *toBeSent = [NSKeyedArchiver archivedDataWithRootObject:[_playlistInfo getArray]];
-                                NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
+                                //NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
                                 [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
-                                //Your code goes in here
-                                    NSError *error;
+                                    /*NSError *error;
                             
                                     NSLog(@"Sending");
                                     [_appDelegate.mpcController.session sendData:toBeSent
                                                                  toPeers:allPeers
                                                                 withMode:MCSessionSendDataReliable
-                                                                   error:&error];
-                            
+                                                                   error:&error];*/
+                                    
+                                    [self sendInfoToAllPeers:toBeSent];
                                 }];
                             }else
                                 //if song wasn't found, do nothing
@@ -461,16 +569,17 @@
                     
                         //send out updated playlist
                         NSData *toBeSent = [NSKeyedArchiver archivedDataWithRootObject:[_playlistInfo getArray]];
-                        NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
+                        //NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
                         [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
-                        //Your code goes in here
-                            NSError *error;
+                            /*NSError *error;
                     
                             NSLog(@"Sending");
                             [_appDelegate.mpcController.session sendData:toBeSent
                                                          toPeers:allPeers
                                                         withMode:MCSessionSendDataReliable
-                                                           error:&error];
+                                                           error:&error];*/
+                            
+                            [self sendInfoToAllPeers:toBeSent];
                         }];
                     }
                 
@@ -489,15 +598,17 @@
                     
                         //send out new playlist to peers
                         NSData *toBeSent = [NSKeyedArchiver archivedDataWithRootObject:[_playlistInfo getArray]];
-                        NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
+                        //NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
                         [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
-                            NSError *error;
+                            /*NSError *error;
                     
                             NSLog(@"Sending");
                             [_appDelegate.mpcController.session sendData:toBeSent
                                                          toPeers:allPeers
                                                         withMode:MCSessionSendDataReliable
-                                                           error:&error];
+                                                           error:&error];*/
+                            
+                            [self sendInfoToAllPeers:toBeSent];
                         }];
                     }
                 }
@@ -536,12 +647,11 @@
     //if there is another song in the queue, play it
     if ([_songQueue count] != 0)
     {
+        
+        [_playlistInfo isPlayingSwap];
+        //update the now playing portion at the top of the app from the top song in the playlist info
         NSMutableArray *playlist = [_playlistInfo getArray];
-        NSDictionary *firstSong = [playlist objectAtIndex:0];
-        _songName.text = [firstSong objectForKey:@"songTitle"];
-        _artist.text = [firstSong objectForKey:@"artistName"];
-        _albumName.text = [firstSong objectForKey:@"albumName"];
-        _albumArt.image = [firstSong objectForKey:@"albumArt"];
+        [self updateLocalNowPlaying:playlist];
         
         NSLog(@"Play next");
         AVAudioPlayer *neatPlayer = [[AVAudioPlayer alloc]initWithData:[_songQueue objectAtIndex:0] error:&error];
@@ -553,25 +663,28 @@
     else
     {
         NSLog(@"Stop");
+        _buttonPlay.enabled = YES;
+        _buttonPlay.hidden = NO;
+       
+        _buttonSkip.enabled = NO;
+        _buttonSkip.hidden = YES;
+        
+        _buttonStop.enabled = NO;
+        _buttonStop.hidden = YES;
+        
+        NSMutableArray *playlist = [_playlistInfo getArray];
+        [self updateLocalNowPlaying:playlist];
+
+        [self updateLocalNowPlaying:playlist];
     }
     
     [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
-        NSError *error = nil;
-        
         //reload the table data
         [_playlistTable reloadData];
         
-        
         //send out new playlist
         NSData *toBeSent = [NSKeyedArchiver archivedDataWithRootObject:[_playlistInfo getArray]];
-        NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
-    
-        NSLog(@"Sending");
-        [_appDelegate.mpcController.session sendData:toBeSent
-                                         toPeers:allPeers
-                                        withMode:MCSessionSendDataReliable
-                                           error:&error];
-        
+        [self sendInfoToAllPeers:toBeSent];
     }];
 }
 
@@ -650,7 +763,7 @@
     [chooseUpOrDown showInView:self.view];
 }
 
-//************************ Table Delegate Methods ************************//
+//************************ Action Sheet Delegate Method ************************//
 
 #pragma mark - action sheet
 
@@ -667,11 +780,7 @@
         if ([buttonTitle isEqualToString:@"Upvote!"])
         {
             NSLog(@"Upvote!");
-            
             [self upvoteSong];
-            
- 
-            
         } else if ([buttonTitle isEqualToString:@"Downboat!"])
         {
             NSLog(@"Downvote!");
@@ -683,16 +792,16 @@
         }
         
         NSData *toBeSent = [NSKeyedArchiver archivedDataWithRootObject:[_playlistInfo getArray]];
-        NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
+        //NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
         [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
-            //Your code goes in here
-        NSError *error;
+        /*NSError *error;
         
         NSLog(@"Sending");
         [_appDelegate.mpcController.session sendData:toBeSent
                                              toPeers:allPeers
                                             withMode:MCSessionSendDataReliable
-                                               error:&error];
+                                               error:&error];*/
+            [self sendInfoToAllPeers:toBeSent];
         }];
         
         
@@ -729,17 +838,9 @@
         //check to be sure to send data only if user voted
         if ([[dic objectForKey:@"voteType"] isEqualToString:@""] == false)
         {
-            
-            NSData *toBeSent = [NSKeyedArchiver archivedDataWithRootObject:dic];
-            NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
             [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
-                NSError *error;
-            
-                NSLog(@"Vote Sending");
-                [_appDelegate.mpcController.session sendData:toBeSent
-                                                 toPeers:allPeers
-                                                withMode:MCSessionSendDataReliable
-                                                   error:&error];
+                NSData *toBeSent = [NSKeyedArchiver archivedDataWithRootObject:dic];
+                [self sendInfoToAllPeers:toBeSent];
             }];
         }
     }
@@ -953,6 +1054,7 @@
     }
 }
 
+//called when a new peer joins a room. sends the playlist information to them
 -(void)peerJoinedRoom:(NSNotification *)notification
 {
     MyManager *sharedManager = [MyManager sharedManager];
@@ -974,6 +1076,47 @@
                                                 withMode:MCSessionSendDataReliable
                                                    error:&error];
         }];
+    }
+}
+
+//sends in the passed nsdata value to all peers
+-(void)sendInfoToAllPeers:(NSData *)data
+{
+    NSLog(@"sendInfoToAllPeers");
+    NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
+    NSError *error;
+    
+    [_appDelegate.mpcController.session sendData:data
+                                         toPeers:allPeers
+                                        withMode:MCSessionSendDataReliable
+                                           error:&error];
+}
+
+//updates the nowPlaying information
+-(void)updateLocalNowPlaying:(NSArray *)playlist
+{
+    NSLog(@"updateLocalNowPlaying");
+    
+    if ([playlist count] != 0)
+    {
+        NSDictionary *firstSong = [playlist objectAtIndex:0];
+        if ([[firstSong objectForKey:@"isPlaying"] isEqualToString:@"YES"])
+        {
+            NSLog(@"Updating now playing");
+            _songName.text = [firstSong objectForKey:@"songTitle"];
+            _artist.text = [firstSong objectForKey:@"artistName"];
+            _albumName.text = [firstSong objectForKey:@"albumName"];
+            _albumArt.image = [firstSong objectForKey:@"albumArt"];
+        }
+        else
+            NSLog(@"Nothing is currently playing.");
+    }
+    else
+    {
+        _songName.text = @"Nothing is Playing!";
+        _artist.text = @"";
+        _albumName.text = @"";
+        _albumArt.image = nil;
     }
 }
 
