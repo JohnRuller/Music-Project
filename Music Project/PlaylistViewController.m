@@ -150,6 +150,13 @@
     _buttonPlay.hidden = NO;
     
     [_coolPlayer stop];
+    
+    [_playlistInfo isPlayingSwap];
+    NSMutableArray *playlist = [_playlistInfo getArray];
+    [self updateLocalNowPlaying:playlist];
+
+    NSData *toBeSent = [NSKeyedArchiver archivedDataWithRootObject:[_playlistInfo getArray]];
+    [self sendInfoToAllPeers:toBeSent];
 }
 
 -(void)skip:(id)sender
@@ -169,8 +176,6 @@
         [_playlistInfo isPlayingSwap];
         
         //update the now playing portion at the top of the app from the top song in the playlist info
-        NSMutableArray *playlist = [_playlistInfo getArray];
-        [self updateLocalNowPlaying:playlist];
         
         NSLog(@"Play next");
         AVAudioPlayer *neatPlayer = [[AVAudioPlayer alloc]initWithData:[_songQueue objectAtIndex:0] error:&error];
@@ -188,6 +193,9 @@
         _buttonStop.enabled = NO;
         _buttonStop.hidden = YES;
     }
+    
+    NSMutableArray *playlist = [_playlistInfo getArray];
+    [self updateLocalNowPlaying:playlist];
     
     [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
         [_playlistTable reloadData];
