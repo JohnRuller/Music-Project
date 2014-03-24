@@ -170,17 +170,22 @@
 
 -(void)peerJoinedRoom:(NSNotification *)notification {
     [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
-        //Your code goes in here
-    NSLog(@"Received Notification - User has joined room");
+        
+        NSLog(@"Received Notification - User has joined room.");
     
-    MCPeerID *peerID = [[notification userInfo] objectForKey:@"peerID"];
-    NSString *peerDisplayName = peerID.displayName;
+        MCPeerID *peerID = [[notification userInfo] objectForKey:@"peerID"];
+        NSString *peerDisplayName = peerID.displayName;
+        
+        if ([peerDisplayName isEqualToString:[_appDelegate hostName]]) {
+            [_tvChat performSelectorOnMainThread:@selector(setText:) withObject:[_tvChat.text stringByAppendingString:[NSString stringWithFormat:@"You joined %@'s room.\n\n", peerDisplayName]] waitUntilDone:NO];
+        }
+        else {
+            [_tvChat performSelectorOnMainThread:@selector(setText:) withObject:[_tvChat.text stringByAppendingString:[NSString stringWithFormat:@"%@ joined the room.\n\n", peerDisplayName]] waitUntilDone:NO];
+        }
     
-    [_tvChat performSelectorOnMainThread:@selector(setText:) withObject:[_tvChat.text stringByAppendingString:[NSString stringWithFormat:@"%@ joined the room\n\n", peerDisplayName]] waitUntilDone:NO];
+        [self scrollTextViewToBottom:_tvChat];
     
-    [self scrollTextViewToBottom:_tvChat];
-    
-    [self updateNewBadge];
+        [self updateNewBadge];
     }];
 }
 
@@ -192,7 +197,7 @@
         MCPeerID *peerID = [[notification userInfo] objectForKey:@"peerID"];
         NSString *peerDisplayName = peerID.displayName;
         
-        [_tvChat performSelectorOnMainThread:@selector(setText:) withObject:[_tvChat.text stringByAppendingString:[NSString stringWithFormat:@"%@ left the room\n\n", peerDisplayName]] waitUntilDone:NO];
+        [_tvChat performSelectorOnMainThread:@selector(setText:) withObject:[_tvChat.text stringByAppendingString:[NSString stringWithFormat:@"%@ left the room.\n\n", peerDisplayName]] waitUntilDone:NO];
         
         [self scrollTextViewToBottom:_tvChat];
         

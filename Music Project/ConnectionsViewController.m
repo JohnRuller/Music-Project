@@ -70,24 +70,27 @@ UITabBarController *tbc;
         NSLog(@"Setting user as non-advertising host.");
         //host does not want to advertise
         [[_appDelegate mpcController] advertiseSelf:NO];
-        
+    
         //set host values
         _isHost = @"YES";
         _testLabel.text = @"HOST";
-        
+        //_appDelegate.hostName = userProfile.name;
+    
+        //show browse button
         _browseButton.enabled = YES;
         _browseButton.hidden = NO;
-        
     }
     else {
+    
         NSLog(@"Setting user as advertising guest.");
         //guest wants to advertise
         [_appDelegate.mpcController advertiseSelf:YES];
-        
+    
         //set guest values
         _isHost = @"NO";
         _testLabel.text = @"GUEST";
-        
+    
+        //hide browse button
         _browseButton.enabled = NO;
         _browseButton.hidden = YES;
     }
@@ -324,6 +327,7 @@ UITabBarController *tbc;
             }
             else if ([type isEqualToString:@"Disconnect"]) {
                 NSLog(@"%@ DISCONNECTED!!!!!!", peerDisplayName);
+                
                 int indexOfPeer = [_arrConnectedDevices indexOfObject:peerDisplayName];
                 [_arrConnectedDevices removeObjectAtIndex:indexOfPeer];
                 int indexOfProfile = [self profileIndex:peerDisplayName];
@@ -340,7 +344,6 @@ UITabBarController *tbc;
                 if([peerDisplayName isEqualToString:_appDelegate.hostName]) {
                     [self disconnectFunc];
                     [self dismissViewControllerAnimated:YES completion:nil];
-                    
                 }
             }
         }
