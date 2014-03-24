@@ -220,6 +220,10 @@
     
     [self artistsArrayToString];
     
+    //check how big array is
+    NSData *dataToSend = [NSKeyedArchiver archivedDataWithRootObject:[artistsArray copy]];
+    NSLog(@"The size of the archived artists array is %d.", [dataToSend length]);
+    
     /*if([artistsArray count] == 0) {
      NSMutableArray *emptyArtists = [[NSMutableArray alloc] init];
      [emptyArtists addObject:@"There are no artists on this device"];
@@ -241,6 +245,7 @@
     }
     
     artistsArray = stringArtistsArray;
+
     
 }
 

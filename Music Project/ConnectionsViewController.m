@@ -21,7 +21,7 @@
 @property (nonatomic, weak) IBOutlet UIButton *browseButton;
 
 //profile data stuff
--(void)sendProfileData;
+-(void)sendProfileData:(MCPeerID *)peerID;
 -(void)didReceiveDataWithNotification:(NSNotification *)notification;
 -(bool)hasProfileData:(NSString *)name;
 -(int)profileIndex:(NSString *)name;
@@ -180,17 +180,16 @@ UITabBarController *tbc;
 }
 
 - (IBAction)disconnect:(id)sender {
-         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-             [self sendDisconnectData];
-         }];
     
+        //send disconnect data
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            [self sendDisconnectData];
+        }];
     
+        //run disconnect method after delay
         [self performSelector:@selector(disconnectFunc) withObject:self afterDelay:3.0 ];
-
     
-    
-         [self dismissViewControllerAnimated:YES completion:nil];
-   
+        [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(void)disconnectFunc {
@@ -225,17 +224,19 @@ UITabBarController *tbc;
 #pragma mark - Private method implementation
 
 //send profile data over
--(void)sendProfileData{
+-(void)sendProfileData:(MCPeerID *)peerID{
     [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
         
-        NSLog(@"Sending profile data to all peers.");
+        NSLog(@"Sending profile data to %@.", peerID.displayName);
+        
+        NSError *error;
+        NSMutableArray *deviceSendTo = [[NSMutableArray alloc] init];
+        [deviceSendTo addObject:peerID];
         
         NSData *dataToSend = [NSKeyedArchiver archivedDataWithRootObject:self.profileData];
-        NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
-        NSError *error;
         
         [_appDelegate.mpcController.session sendData:dataToSend
-                                         toPeers:allPeers
+                                         toPeers:deviceSendTo
                                         withMode:MCSessionSendDataReliable
                                            error:&error];
         
@@ -277,10 +278,12 @@ UITabBarController *tbc;
         MCPeerID *peerID = [[notification userInfo] objectForKey:@"peerID"];
         NSString *peerDisplayName = peerID.displayName;
         
-        NSLog(@"Receiving profile data from %@.", peerDisplayName);
+        NSLog(@"Receiving data from %@ in the connections view.", peerDisplayName);
         
         //receive data
         NSData *receivedData = [[notification userInfo] objectForKey:@"data"];
+        NSLog(@"The length of the data being received is %d bytes.", [receivedData length]);
+        
         id myObject = [NSKeyedUnarchiver unarchiveObjectWithData:receivedData];
     
         //ensure it is a dictionary
@@ -368,7 +371,7 @@ UITabBarController *tbc;
             
             //send profile data
             NSLog(@"Calling send profile data from didChangeState for %@.", peerDisplayName);
-            [self sendProfileData];
+            [self sendProfileData:peerID];
         }
         //if not connected
         else if (state == MCSessionStateNotConnected){

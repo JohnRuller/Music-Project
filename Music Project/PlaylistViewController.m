@@ -433,6 +433,8 @@
         }
         
         NSLog(@"past exception");
+        NSLog(@"The length of the data being received is %d bytes.", [receivedData length]);
+
 
         id myobject = [NSKeyedUnarchiver unarchiveObjectWithData:receivedData];
     
