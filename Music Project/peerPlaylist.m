@@ -52,7 +52,8 @@
 //        //[artz drawInRect:CGRectMake(0,0,CGSizeMake(90, 90).width,CGSizeMake(90, 90).height)];
 //        UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
 //        UIGraphicsEndImageContext();
-    }*/
+    }
+ */
     
     if (!art) {
         NSLog(@"No ALBUM ARTWORK");

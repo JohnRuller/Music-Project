@@ -57,6 +57,13 @@
 		02F5DCDC18CF8BF20006D633 /* HighComp.png in Resources */ = {isa = PBXBuildFile; fileRef = 02F5DCD818CF8BF20006D633 /* HighComp.png */; };
 		02F5DCDD18CF8BF20006D633 /* LowComp.png in Resources */ = {isa = PBXBuildFile; fileRef = 02F5DCD918CF8BF20006D633 /* LowComp.png */; };
 		02F5DCDE18CF8BF20006D633 /* MediumComp.png in Resources */ = {isa = PBXBuildFile; fileRef = 02F5DCDA18CF8BF20006D633 /* MediumComp.png */; };
+		943CAA6F18E2161200BA019B /* 30x30connections.png in Resources */ = {isa = PBXBuildFile; fileRef = 943CAA6918E2161200BA019B /* 30x30connections.png */; };
+		943CAA7018E2161200BA019B /* 30x30playlist.png in Resources */ = {isa = PBXBuildFile; fileRef = 943CAA6A18E2161200BA019B /* 30x30playlist.png */; };
+		943CAA7118E2161200BA019B /* 60x60chat.png in Resources */ = {isa = PBXBuildFile; fileRef = 943CAA6B18E2161200BA019B /* 60x60chat.png */; };
+		943CAA7218E2161200BA019B /* 60x60connections.png in Resources */ = {isa = PBXBuildFile; fileRef = 943CAA6C18E2161200BA019B /* 60x60connections.png */; };
+		943CAA7318E2161200BA019B /* 60x60playlist.png in Resources */ = {isa = PBXBuildFile; fileRef = 943CAA6D18E2161200BA019B /* 60x60playlist.png */; };
+		943CAA7418E2161200BA019B /* albumart.png in Resources */ = {isa = PBXBuildFile; fileRef = 943CAA6E18E2161200BA019B /* albumart.png */; };
+		943CAA7618E217F100BA019B /* 30x30chat.png in Resources */ = {isa = PBXBuildFile; fileRef = 943CAA7518E217F100BA019B /* 30x30chat.png */; };
 		9445D0EA18BA628800BAFF5F /* ChooseSongViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9445D0E918BA628800BAFF5F /* ChooseSongViewController.m */; };
 		945B78431895812500C26AAA /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 945B78421895812500C26AAA /* MainStoryboard.storyboard */; };
 		945B78621895822E00C26AAA /* NSMutableArray+QueueMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 945B78471895822E00C26AAA /* NSMutableArray+QueueMethods.m */; };
@@ -150,6 +157,13 @@
 		02F5DCD818CF8BF20006D633 /* HighComp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HighComp.png; sourceTree = "<group>"; };
 		02F5DCD918CF8BF20006D633 /* LowComp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LowComp.png; sourceTree = "<group>"; };
 		02F5DCDA18CF8BF20006D633 /* MediumComp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MediumComp.png; sourceTree = "<group>"; };
+		943CAA6918E2161200BA019B /* 30x30connections.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 30x30connections.png; sourceTree = "<group>"; };
+		943CAA6A18E2161200BA019B /* 30x30playlist.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 30x30playlist.png; sourceTree = "<group>"; };
+		943CAA6B18E2161200BA019B /* 60x60chat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 60x60chat.png; sourceTree = "<group>"; };
+		943CAA6C18E2161200BA019B /* 60x60connections.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 60x60connections.png; sourceTree = "<group>"; };
+		943CAA6D18E2161200BA019B /* 60x60playlist.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 60x60playlist.png; sourceTree = "<group>"; };
+		943CAA6E18E2161200BA019B /* albumart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = albumart.png; sourceTree = "<group>"; };
+		943CAA7518E217F100BA019B /* 30x30chat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 30x30chat.png; sourceTree = "<group>"; };
 		9445D0E818BA628800BAFF5F /* ChooseSongViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseSongViewController.h; sourceTree = "<group>"; };
 		9445D0E918BA628800BAFF5F /* ChooseSongViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseSongViewController.m; sourceTree = "<group>"; };
 		945B78421895812500C26AAA /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
@@ -335,8 +349,15 @@
 		02E5363518C13B5D00CC53B3 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				943CAA7518E217F100BA019B /* 30x30chat.png */,
 				02F5DCD718CF8BF20006D633 /* NoComp.png */,
 				02F5DCD818CF8BF20006D633 /* HighComp.png */,
+				943CAA6918E2161200BA019B /* 30x30connections.png */,
+				943CAA6A18E2161200BA019B /* 30x30playlist.png */,
+				943CAA6B18E2161200BA019B /* 60x60chat.png */,
+				943CAA6C18E2161200BA019B /* 60x60connections.png */,
+				943CAA6D18E2161200BA019B /* 60x60playlist.png */,
+				943CAA6E18E2161200BA019B /* albumart.png */,
 				02F5DCD918CF8BF20006D633 /* LowComp.png */,
 				02F5DCDA18CF8BF20006D633 /* MediumComp.png */,
 				94F965AF18CF79E400EBD344 /* penguin.png */,
@@ -546,9 +567,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				943CAA7018E2161200BA019B /* 30x30playlist.png in Resources */,
+				943CAA7418E2161200BA019B /* albumart.png in Resources */,
 				94F965B018CF79E400EBD344 /* penguin.png in Resources */,
 				02F5DCDE18CF8BF20006D633 /* MediumComp.png in Resources */,
 				023D1A5218A0127B009CA940 /* Icon.png in Resources */,
+				943CAA7318E2161200BA019B /* 60x60playlist.png in Resources */,
 				02E5368918C2BDA500CC53B3 /* Icon-Small-40@2x.png in Resources */,
 				02E5369018C2BE1D00CC53B3 /* PeerAudio.png in Resources */,
 				02F5DCDD18CF8BF20006D633 /* LowComp.png in Resources */,
@@ -556,7 +580,11 @@
 				02E5368C18C2BDA500CC53B3 /* Default@2x.png in Resources */,
 				02397E4B18CBC7B700B6F9A9 /* defaultProfile.png in Resources */,
 				02E5368B18C2BDA500CC53B3 /* Default.png in Resources */,
+				943CAA7618E217F100BA019B /* 30x30chat.png in Resources */,
+				943CAA7118E2161200BA019B /* 60x60chat.png in Resources */,
 				02F5DCDC18CF8BF20006D633 /* HighComp.png in Resources */,
+				943CAA6F18E2161200BA019B /* 30x30connections.png in Resources */,
+				943CAA7218E2161200BA019B /* 60x60connections.png in Resources */,
 				0220CB52182C977F006C10A8 /* InfoPlist.strings in Resources */,
 				945B78431895812500C26AAA /* MainStoryboard.storyboard in Resources */,
 				02F5DCDB18CF8BF20006D633 /* NoComp.png in Resources */,
