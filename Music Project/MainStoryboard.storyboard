@@ -671,10 +671,10 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wJ6-0K-KtY">
-                                <rect key="frame" x="115" y="120" width="91" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wJ6-0K-KtY">
+                                <rect key="frame" x="140" y="115" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Play">
+                                <state key="normal" backgroundImage="play.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -722,7 +722,7 @@
                                 </prototypes>
                             </tableView>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Ll-Rd-EbP">
-                                <rect key="frame" x="230" y="120" width="31" height="30"/>
+                                <rect key="frame" x="201" y="120" width="31" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Skip">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -731,10 +731,10 @@
                                     <action selector="skip:" destination="Li5-EP-eGG" eventType="touchUpInside" id="cjg-Y4-g5Q"/>
                                 </connections>
                             </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zIH-XN-aZ1">
-                                <rect key="frame" x="60" y="120" width="33" height="30"/>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zIH-XN-aZ1">
+                                <rect key="frame" x="83" y="115" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Stop">
+                                <state key="normal" backgroundImage="stop.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -750,7 +750,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Playlist" id="RH2-yP-zsI"/>
+                    <tabBarItem key="tabBarItem" title="Playlist" image="30x30playlist.png" id="RH2-yP-zsI"/>
                     <connections>
                         <outlet property="albumArt" destination="B0K-QG-OfB" id="84Q-Tl-Q5J"/>
                         <outlet property="albumName" destination="F6K-Aq-yqx" id="ZhX-vy-brT"/>
@@ -889,7 +889,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Connections" id="on6-XA-fZy"/>
+                    <tabBarItem key="tabBarItem" title="Connections" image="30x30connections.png" id="on6-XA-fZy"/>
                     <connections>
                         <outlet property="browseButton" destination="hvV-IO-P0j" id="S58-QQ-g3L"/>
                         <outlet property="btnDisconnect" destination="FJa-il-yO4" id="vCz-vH-GQU"/>
@@ -1025,7 +1025,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Chat" id="QBF-Zf-pBH"/>
+                    <tabBarItem key="tabBarItem" title="Chat" image="30x30chat.png" id="QBF-Zf-pBH"/>
                     <connections>
                         <outlet property="tvChat" destination="lrQ-HL-TC6" id="xkW-KG-o13"/>
                         <outlet property="txtMessage" destination="mOH-JP-vrg" id="gHg-jz-bMS"/>
@@ -1037,8 +1037,13 @@
         </scene>
     </scenes>
     <resources>
+        <image name="30x30chat.png" width="30" height="30"/>
+        <image name="30x30connections.png" width="30" height="30"/>
+        <image name="30x30playlist.png" width="30" height="30"/>
         <image name="PeerAudio.png" width="300" height="250"/>
         <image name="penguin.png" width="300" height="346"/>
+        <image name="play.png" width="200" height="200"/>
+        <image name="stop.png" width="200" height="200"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

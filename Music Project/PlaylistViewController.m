@@ -433,7 +433,7 @@
         }
         
         NSLog(@"past exception");
-        NSLog(@"The length of the data being received is %d bytes.", [receivedData length]);
+        NSLog(@"The length of the data being received is %lu bytes.", (unsigned long)[receivedData length]);
 
 
         id myobject = [NSKeyedUnarchiver unarchiveObjectWithData:receivedData];
@@ -452,6 +452,10 @@
             if ([playlist count] != 0)
             {
                 [self updateLocalNowPlaying:playlist];
+            }
+            else
+            {
+                [self updateLocalNowPlaying:nil];
             }
         }
     
