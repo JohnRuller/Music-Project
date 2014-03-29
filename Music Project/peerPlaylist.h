@@ -33,15 +33,4 @@
 - (NSString *)getSongName:(NSInteger)location;
 - (void)isPlayingSwap;
 
-
-
-
-
-
-- (void)playlistUpvote:(NSInteger)loc;
-- (void)playlistDownvote:(NSInteger)loc;
-- (BOOL)upvoteSongAtLocation:(NSInteger)loc :(NSInteger)peerCount;
-- (BOOL)downvoteSongAtLocation:(NSInteger)loc :(NSInteger)peerCount;
-//- (void)moveSongToTop:(NSInteger)loc;
-
 @end

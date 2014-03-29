@@ -983,7 +983,12 @@
             {
                 NSLog(@"Move Song to the top");
                 [_playlistInfo moveSongToTop:_location];
-                NSLog(@"insert code here that moves the songQueue to the top");
+                
+                //NSLog(@"insert code here that moves the songQueue to the top");
+                NSDictionary *dic = [_songQueue objectAtIndex:_location];
+                [_songQueue removeObjectAtIndex:_location];
+                
+                [_songQueue insertObject:dic atIndex:1];
             }
             else //otherwise move it up one position
             {
