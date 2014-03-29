@@ -41,27 +41,27 @@
     MPMediaItemArtwork *artz = [song valueForProperty:MPMediaItemPropertyArtwork];
     UIImage *art = NULL;
     
-    
-/*
-    
     if (artz != nil)
     {
-        art = [artz imageWithSize:CGSizeMake(90.0, 90.0)];
+        UIImage *tempArt = [artz imageWithSize:CGSizeMake(55.0, 55.0)];
+        art = tempArt;
+        //NSData *imageData = UIImageJPEGRepresentation(tempArt, 0.01);
+        //tempArt = [[UIImage alloc] initWithData:imageData];
         
-//        UIGraphicsBeginImageContext(CGSizeMake(90, 90));
-//        //[artz drawInRect:CGRectMake(0,0,CGSizeMake(90, 90).width,CGSizeMake(90, 90).height)];
-//        UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
-//        UIGraphicsEndImageContext();
+        //NSData *imageData2 = UIImagePNGRepresentation(tempArt);
+        //NSLog(@"Image file size = %lu", (unsigned long)imageData2.length);
+        //art = [[UIImage alloc] initWithData:imageData2];
     }
- */
+
     
     if (!art) {
         NSLog(@"No ALBUM ARTWORK");
-        art = [UIImage imageNamed:@"penguin.png"];
+        art = [UIImage imageNamed:@"albumart.png"];
     }
     
     NSNumber *nada = [[NSNumber alloc] initWithInt:0];
     NSMutableDictionary *newSong = [[NSMutableDictionary alloc] init];
+    
     
     [newSong removeAllObjects];
     [newSong setObject:songNameString forKey:@"songTitle"];
