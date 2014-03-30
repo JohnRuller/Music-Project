@@ -244,22 +244,20 @@
         [stringArtistsArray addObject:artistTitle];
     }
     
+    if([stringArtistsArray count] == 0) {
+        NSLog(@"Artist array is empty.");
+        [stringArtistsArray addObject:@"No artists on user's device."];
+
+    }
+    
     artistsArray = stringArtistsArray;
 
     
 }
 
--(NSDictionary*)getArtistsDictionary:(NSArray *)guestArtists {
-    
-    NSLog(@"Getting compatability dictionary.");
-
-    //setup
-    NSDictionary *compatabilityDictionary = [[NSDictionary alloc] init];
+-(NSArray*)getMatchingArtists:(NSArray *)guestArtists {
     NSMutableArray *matchingArtists = [[NSMutableArray alloc] init];
-    
-    //refresh artists
-    [self setupArtistsArray];
-    
+
     //find matching artists
     for(int i=0; i<[artistsArray count]; i++)
     {
@@ -276,6 +274,60 @@
             }
         }
     }
+    
+    return matchingArtists;
+}
+
+-(NSArray*)getUpdatedGuestArtists:(NSArray *)guestArtists {
+    NSMutableArray *updatedGuestArtists = [[NSMutableArray alloc] init];
+    NSDictionary *artistAtIndex = [[NSDictionary alloc] init];
+
+    BOOL isMatching;
+    
+    //find matching artists
+    for(int i=0; i<[guestArtists count]; i++)
+    {
+        NSString *guestArtistTitle = guestArtists[i];
+        
+        for(int j=0; j<[artistsArray count]; j++)
+        {
+            NSString *artistTitle = artistsArray[j];
+            
+            if([artistTitle isEqualToString:guestArtistTitle]) {
+                
+                isMatching = YES;
+                //artistAtIndex = [NSDictionary dictionaryWithObjectsAndKeys:guestArtistTitle, @"artist", @"YES", @"isMatching", nil];
+            }
+            else {
+                isMatching = NO;
+                //artistAtIndex = [NSDictionary dictionaryWithObjectsAndKeys:guestArtistTitle, @"artist", @"NO", @"isMatching", nil];
+
+            }
+            
+            
+        }
+        
+        NSLog(@"Adding guest artist.");
+        artistAtIndex = [NSDictionary dictionaryWithObjectsAndKeys:guestArtistTitle, @"artist", isMatching, @"isMatching", nil];
+        
+        [updatedGuestArtists addObject:artistAtIndex];
+    }
+    
+    return updatedGuestArtists;
+}
+
+-(NSDictionary*)getArtistsDictionary:(NSArray *)guestArtists {
+    
+    NSLog(@"Getting compatability dictionary.");
+
+    //setup
+    NSDictionary *compatabilityDictionary = [[NSDictionary alloc] init];
+    NSArray *matchingArtists = [self getMatchingArtists:guestArtists];
+    
+    //refresh artists
+    [self setupArtistsArray];
+    
+  
     
     //determine percentage
     float percentage = 0;

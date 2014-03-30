@@ -7,6 +7,8 @@
 //
 
 #import "ViewGuestProfileViewController.h"
+#import "profileManager.h"
+
 
 @interface ViewGuestProfileViewController ()
 
@@ -16,6 +18,8 @@
 
 @implementation ViewGuestProfileViewController
 
+//local vars
+profileManager *userProfile;
 NSArray *guestArtists;
 
 @synthesize guestDictionary;
@@ -33,6 +37,10 @@ NSArray *guestArtists;
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    //init
+    userProfile = [[profileManager alloc] init];
+
     //labels
     _nameLabel.text = [guestDictionary objectForKey:@"name"];
     _taglineLabel.text = [guestDictionary objectForKey:@"tagline"];
@@ -46,8 +54,10 @@ NSArray *guestArtists;
     [l setCornerRadius:45.0];
     
     guestArtists = [[NSArray alloc] init];
-    guestArtists = [guestDictionary objectForKey:@"artists"];
+    guestArtists = [userProfile getUpdatedGuestArtists:[guestDictionary objectForKey:@"artists"]];
+    //guestArtists = [guestDictionary objectForKey:@"artists"];
     NSLog(@"Guest Artists array count in gues profile view: %lu", (unsigned long)[guestArtists count]);
+    
     
     //setup table
     [self.artistTableView setDelegate:self];
@@ -75,7 +85,7 @@ NSArray *guestArtists;
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ArtistsCell"];
     
-    NSString *artistTitle = guestArtists[indexPath.row];
+    NSString *artistTitle = [guestArtists[indexPath.row] objectForKey:@"artist"];
     
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ArtistsCell"];
@@ -85,6 +95,18 @@ NSArray *guestArtists;
 
     
     cell.textLabel.text = artistTitle;
+    
+    if([guestArtists[indexPath.row] objectForKey:@"isMatching"]) {
+        NSLog(@"HIGHLIGHT ROW.");
+
+        UIView *bgColorView = [[UIView alloc] init];
+        bgColorView.backgroundColor = [UIColor greenColor];
+        bgColorView.layer.cornerRadius = 7;
+        bgColorView.layer.masksToBounds = YES;
+        [cell setBackgroundView:bgColorView];
+
+    }
+
     return cell;
 }
 @end

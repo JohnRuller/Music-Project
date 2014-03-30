@@ -41,6 +41,8 @@
 -(void) saveData;
 
 -(NSDictionary*)getArtistsDictionary:(NSArray *)guestArtists;
+-(NSArray*)getUpdatedGuestArtists:(NSArray *)guestArtists;
+
 
 
 
