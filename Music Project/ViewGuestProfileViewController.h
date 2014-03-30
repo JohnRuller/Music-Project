@@ -13,6 +13,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *nameLabel;
 @property (strong, nonatomic) IBOutlet UILabel *taglineLabel;
 - (IBAction)back:(id)sender;
+@property (strong, nonatomic) IBOutlet UITableView *artistTableView;
 
 @property (strong) NSDictionary *guestDictionary;
 

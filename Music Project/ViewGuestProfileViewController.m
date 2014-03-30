@@ -40,11 +40,18 @@ NSArray *guestArtists;
     //image
     UIImage *image = [guestDictionary objectForKey:@"image"];
     self.profileImage.image = image;
+    // set image layer circular
+    CALayer * l = [self.profileImage layer];
+    [l setMasksToBounds:YES];
+    [l setCornerRadius:45.0];
     
     guestArtists = [[NSArray alloc] init];
     guestArtists = [guestDictionary objectForKey:@"artists"];
     NSLog(@"Guest Artists array count in gues profile view: %lu", (unsigned long)[guestArtists count]);
-
+    
+    //setup table
+    [self.artistTableView setDelegate:self];
+    [self.artistTableView setDataSource:self];
 }
 
 - (void)didReceiveMemoryWarning
@@ -61,7 +68,7 @@ NSArray *guestArtists;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return guestArtists.count;
+    return [guestArtists count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -73,6 +80,9 @@ NSArray *guestArtists;
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ArtistsCell"];
     }
+    
+    //[tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+
     
     cell.textLabel.text = artistTitle;
     return cell;
