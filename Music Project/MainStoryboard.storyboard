@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="MBE-Et-hUL">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="MBE-Et-hUL">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -724,7 +724,7 @@
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Ll-Rd-EbP">
                                 <rect key="frame" x="201" y="120" width="31" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Skip">
+                                <state key="normal" backgroundImage="forward.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -750,7 +750,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Playlist" image="30x30playlist.png" id="RH2-yP-zsI"/>
+                    <tabBarItem key="tabBarItem" title="Playlist" image="playlist.png" id="RH2-yP-zsI"/>
                     <connections>
                         <outlet property="albumArt" destination="B0K-QG-OfB" id="84Q-Tl-Q5J"/>
                         <outlet property="albumName" destination="F6K-Aq-yqx" id="ZhX-vy-brT"/>
@@ -889,7 +889,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Connections" image="30x30connections.png" id="on6-XA-fZy"/>
+                    <tabBarItem key="tabBarItem" title="Connections" image="connections.png" id="on6-XA-fZy"/>
                     <connections>
                         <outlet property="browseButton" destination="hvV-IO-P0j" id="S58-QQ-g3L"/>
                         <outlet property="btnDisconnect" destination="FJa-il-yO4" id="vCz-vH-GQU"/>
@@ -1026,7 +1026,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Chat" image="30x30chat.png" id="QBF-Zf-pBH"/>
+                    <tabBarItem key="tabBarItem" title="Chat" image="chat.png" id="QBF-Zf-pBH"/>
                     <connections>
                         <outlet property="tvChat" destination="lrQ-HL-TC6" id="xkW-KG-o13"/>
                         <outlet property="txtMessage" destination="mOH-JP-vrg" id="gHg-jz-bMS"/>
@@ -1038,12 +1038,13 @@
         </scene>
     </scenes>
     <resources>
-        <image name="30x30chat.png" width="30" height="30"/>
-        <image name="30x30connections.png" width="30" height="30"/>
-        <image name="30x30playlist.png" width="30" height="30"/>
         <image name="PeerAudio.png" width="300" height="250"/>
+        <image name="chat.png" width="30" height="30"/>
+        <image name="connections.png" width="30" height="30"/>
+        <image name="forward.png" width="200" height="200"/>
         <image name="penguin.png" width="300" height="346"/>
         <image name="play.png" width="200" height="200"/>
+        <image name="playlist.png" width="30" height="30"/>
         <image name="stop.png" width="200" height="200"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

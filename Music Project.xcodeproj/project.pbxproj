@@ -57,10 +57,12 @@
 		02F5DCDC18CF8BF20006D633 /* HighComp.png in Resources */ = {isa = PBXBuildFile; fileRef = 02F5DCD818CF8BF20006D633 /* HighComp.png */; };
 		02F5DCDD18CF8BF20006D633 /* LowComp.png in Resources */ = {isa = PBXBuildFile; fileRef = 02F5DCD918CF8BF20006D633 /* LowComp.png */; };
 		02F5DCDE18CF8BF20006D633 /* MediumComp.png in Resources */ = {isa = PBXBuildFile; fileRef = 02F5DCDA18CF8BF20006D633 /* MediumComp.png */; };
-		9429658118E7C80D00FAB1F0 /* 30x30connections.png in Resources */ = {isa = PBXBuildFile; fileRef = 9429658018E7C80D00FAB1F0 /* 30x30connections.png */; };
 		943CAA7418E2161200BA019B /* albumart.png in Resources */ = {isa = PBXBuildFile; fileRef = 943CAA6E18E2161200BA019B /* albumart.png */; };
+		943DEC8418E8A38E008C0C77 /* playlist30.png in Resources */ = {isa = PBXBuildFile; fileRef = 943DEC8218E8A38E008C0C77 /* playlist30.png */; };
+		943DEC8518E8A38E008C0C77 /* playlist@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 943DEC8318E8A38E008C0C77 /* playlist@2x.png */; };
+		943DEC8818E8A3D1008C0C77 /* chat@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 943DEC8618E8A3D1008C0C77 /* chat@2x.png */; };
+		943DEC8918E8A3D1008C0C77 /* chat30.png in Resources */ = {isa = PBXBuildFile; fileRef = 943DEC8718E8A3D1008C0C77 /* chat30.png */; };
 		9445D0EA18BA628800BAFF5F /* ChooseSongViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9445D0E918BA628800BAFF5F /* ChooseSongViewController.m */; };
-		944649B218E7CC3C00889C7F /* 60x60connections.png in Resources */ = {isa = PBXBuildFile; fileRef = 944649B118E7CC3C00889C7F /* 60x60connections.png */; };
 		945B78431895812500C26AAA /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 945B78421895812500C26AAA /* MainStoryboard.storyboard */; };
 		945B78621895822E00C26AAA /* NSMutableArray+QueueMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 945B78471895822E00C26AAA /* NSMutableArray+QueueMethods.m */; };
 		945B78631895822E00C26AAA /* TDAudioFileStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 945B784A1895822E00C26AAA /* TDAudioFileStream.m */; };
@@ -78,6 +80,9 @@
 		945B78711895829C00C26AAA /* CreateRoomMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 945B786F1895829C00C26AAA /* CreateRoomMenuViewController.m */; };
 		946243B618B7022D00F5D0C6 /* myManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 946243B518B7022D00F5D0C6 /* myManager.m */; };
 		9466556318B93325009061C5 /* AnarchyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9466556218B93325009061C5 /* AnarchyViewController.m */; };
+		948071AB18E8A772008241D0 /* connections30.png in Resources */ = {isa = PBXBuildFile; fileRef = 948071A918E8A772008241D0 /* connections30.png */; };
+		948071AC18E8A772008241D0 /* connections@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 948071AA18E8A772008241D0 /* connections@2x.png */; };
+		948071AE18E8A7E6008241D0 /* forward.png in Resources */ = {isa = PBXBuildFile; fileRef = 948071AD18E8A7E6008241D0 /* forward.png */; };
 		948E7FD718C3DC1700842EDB /* peerPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = 948E7FD618C3DC1700842EDB /* peerPlaylist.m */; };
 		949ABA2018B6923000D159A0 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 949ABA1F18B6923000D159A0 /* ChatViewController.m */; };
 		94AEB3EB18E783D200EC1E0B /* pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 94AEB3E818E783D200EC1E0B /* pause.png */; };
@@ -156,11 +161,13 @@
 		02F5DCD818CF8BF20006D633 /* HighComp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HighComp.png; sourceTree = "<group>"; };
 		02F5DCD918CF8BF20006D633 /* LowComp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LowComp.png; sourceTree = "<group>"; };
 		02F5DCDA18CF8BF20006D633 /* MediumComp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MediumComp.png; sourceTree = "<group>"; };
-		9429658018E7C80D00FAB1F0 /* 30x30connections.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 30x30connections.png; sourceTree = "<group>"; };
 		943CAA6E18E2161200BA019B /* albumart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = albumart.png; sourceTree = "<group>"; };
+		943DEC8218E8A38E008C0C77 /* playlist30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playlist30.png; sourceTree = "<group>"; };
+		943DEC8318E8A38E008C0C77 /* playlist@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "playlist@2x.png"; sourceTree = "<group>"; };
+		943DEC8618E8A3D1008C0C77 /* chat@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chat@2x.png"; sourceTree = "<group>"; };
+		943DEC8718E8A3D1008C0C77 /* chat30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat30.png; sourceTree = "<group>"; };
 		9445D0E818BA628800BAFF5F /* ChooseSongViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseSongViewController.h; sourceTree = "<group>"; };
 		9445D0E918BA628800BAFF5F /* ChooseSongViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseSongViewController.m; sourceTree = "<group>"; };
-		944649B118E7CC3C00889C7F /* 60x60connections.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 60x60connections.png; sourceTree = "<group>"; };
 		945B78421895812500C26AAA /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
 		945B78461895822E00C26AAA /* NSMutableArray+QueueMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+QueueMethods.h"; sourceTree = "<group>"; };
 		945B78471895822E00C26AAA /* NSMutableArray+QueueMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+QueueMethods.m"; sourceTree = "<group>"; };
@@ -194,6 +201,9 @@
 		946243B518B7022D00F5D0C6 /* myManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myManager.m; sourceTree = "<group>"; };
 		9466556118B93325009061C5 /* AnarchyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnarchyViewController.h; sourceTree = "<group>"; };
 		9466556218B93325009061C5 /* AnarchyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnarchyViewController.m; sourceTree = "<group>"; };
+		948071A918E8A772008241D0 /* connections30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = connections30.png; sourceTree = "<group>"; };
+		948071AA18E8A772008241D0 /* connections@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "connections@2x.png"; sourceTree = "<group>"; };
+		948071AD18E8A7E6008241D0 /* forward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = forward.png; sourceTree = "<group>"; };
 		948E7FD518C3DC1700842EDB /* peerPlaylist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = peerPlaylist.h; sourceTree = "<group>"; };
 		948E7FD618C3DC1700842EDB /* peerPlaylist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = peerPlaylist.m; sourceTree = "<group>"; };
 		949ABA1E18B6923000D159A0 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
@@ -347,22 +357,27 @@
 		02E5363518C13B5D00CC53B3 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				944649B118E7CC3C00889C7F /* 60x60connections.png */,
-				9429658018E7C80D00FAB1F0 /* 30x30connections.png */,
-				94AEB3E818E783D200EC1E0B /* pause.png */,
-				94AEB3E918E783D200EC1E0B /* play.png */,
-				94AEB3EA18E783D200EC1E0B /* stop.png */,
-				02F5DCD718CF8BF20006D633 /* NoComp.png */,
-				02F5DCD818CF8BF20006D633 /* HighComp.png */,
 				943CAA6E18E2161200BA019B /* albumart.png */,
-				02F5DCD918CF8BF20006D633 /* LowComp.png */,
-				02F5DCDA18CF8BF20006D633 /* MediumComp.png */,
-				94F965AF18CF79E400EBD344 /* penguin.png */,
+				02E5363418C13B4400CC53B3 /* AppIcons */,
+				943DEC8718E8A3D1008C0C77 /* chat30.png */,
+				943DEC8618E8A3D1008C0C77 /* chat@2x.png */,
+				948071A918E8A772008241D0 /* connections30.png */,
+				948071AA18E8A772008241D0 /* connections@2x.png */,
 				02397E4A18CBC7B700B6F9A9 /* defaultProfile.png */,
-				02E5368F18C2BE1C00CC53B3 /* PeerAudio.png */,
+				948071AD18E8A7E6008241D0 /* forward.png */,
+				02F5DCD818CF8BF20006D633 /* HighComp.png */,
 				0220CB59182C977F006C10A8 /* Images.xcassets */,
 				02E5363318C13B3200CC53B3 /* LaunchImages */,
-				02E5363418C13B4400CC53B3 /* AppIcons */,
+				02F5DCD918CF8BF20006D633 /* LowComp.png */,
+				02F5DCDA18CF8BF20006D633 /* MediumComp.png */,
+				02F5DCD718CF8BF20006D633 /* NoComp.png */,
+				94AEB3E818E783D200EC1E0B /* pause.png */,
+				02E5368F18C2BE1C00CC53B3 /* PeerAudio.png */,
+				94F965AF18CF79E400EBD344 /* penguin.png */,
+				94AEB3E918E783D200EC1E0B /* play.png */,
+				943DEC8218E8A38E008C0C77 /* playlist30.png */,
+				943DEC8318E8A38E008C0C77 /* playlist@2x.png */,
+				94AEB3EA18E783D200EC1E0B /* stop.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -534,7 +549,7 @@
 				ORGANIZATIONNAME = "John Ruller";
 				TargetAttributes = {
 					0220CB43182C977F006C10A8 = {
-						DevelopmentTeam = 3UVA6AL657;
+						DevelopmentTeam = 3Y9N4UBV8R;
 					};
 					0220CB5E182C977F006C10A8 = {
 						TestTargetID = 0220CB43182C977F006C10A8;
@@ -564,27 +579,32 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				944649B218E7CC3C00889C7F /* 60x60connections.png in Resources */,
 				943CAA7418E2161200BA019B /* albumart.png in Resources */,
 				94AEB3EB18E783D200EC1E0B /* pause.png in Resources */,
 				94F965B018CF79E400EBD344 /* penguin.png in Resources */,
 				02F5DCDE18CF8BF20006D633 /* MediumComp.png in Resources */,
 				023D1A5218A0127B009CA940 /* Icon.png in Resources */,
 				02E5368918C2BDA500CC53B3 /* Icon-Small-40@2x.png in Resources */,
+				948071AE18E8A7E6008241D0 /* forward.png in Resources */,
 				02E5369018C2BE1D00CC53B3 /* PeerAudio.png in Resources */,
 				02F5DCDD18CF8BF20006D633 /* LowComp.png in Resources */,
+				943DEC8918E8A3D1008C0C77 /* chat30.png in Resources */,
 				02E5368818C2BDA500CC53B3 /* Icon-60@2x.png in Resources */,
+				948071AC18E8A772008241D0 /* connections@2x.png in Resources */,
 				02E5368C18C2BDA500CC53B3 /* Default@2x.png in Resources */,
 				02397E4B18CBC7B700B6F9A9 /* defaultProfile.png in Resources */,
+				948071AB18E8A772008241D0 /* connections30.png in Resources */,
 				02E5368B18C2BDA500CC53B3 /* Default.png in Resources */,
 				02F5DCDC18CF8BF20006D633 /* HighComp.png in Resources */,
 				0220CB52182C977F006C10A8 /* InfoPlist.strings in Resources */,
+				943DEC8418E8A38E008C0C77 /* playlist30.png in Resources */,
+				943DEC8818E8A3D1008C0C77 /* chat@2x.png in Resources */,
 				945B78431895812500C26AAA /* MainStoryboard.storyboard in Resources */,
 				94AEB3EC18E783D200EC1E0B /* play.png in Resources */,
 				02F5DCDB18CF8BF20006D633 /* NoComp.png in Resources */,
 				94AEB3ED18E783D200EC1E0B /* stop.png in Resources */,
+				943DEC8518E8A38E008C0C77 /* playlist@2x.png in Resources */,
 				0220CB5A182C977F006C10A8 /* Images.xcassets in Resources */,
-				9429658118E7C80D00FAB1F0 /* 30x30connections.png in Resources */,
 				02E5368A18C2BDA500CC53B3 /* Icon-Small@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
