@@ -158,13 +158,20 @@ UITabBarController *tbc;
 
         //get table index of guest profile
         NSString *peerID = [_arrConnectedDevices objectAtIndex:[[_tblConnectedDevices indexPathForSelectedRow] row]];
-        int profileIndex = [self profileIndex:peerID];
-        NSDictionary *guestDictionary = [[NSDictionary alloc] init];
-        guestDictionary = [self.guestProfiles objectAtIndex:profileIndex];
         
-        //send guest profile data over to next view controller
-        ViewGuestProfileViewController *destViewController = segue.destinationViewController;
-        destViewController.guestDictionary = guestDictionary;
+        //make sure profile data exists
+        if([self hasProfileData:peerID]) {
+            
+            //find index of guest profile
+            int profileIndex = [self profileIndex:peerID];
+            NSDictionary *guestDictionary = [[NSDictionary alloc] init];
+            guestDictionary = [self.guestProfiles objectAtIndex:profileIndex];
+            
+            //send guest profile data over to next view controller
+            ViewGuestProfileViewController *destViewController = segue.destinationViewController;
+            destViewController.guestDictionary = guestDictionary;
+        }
+      
     }
 }
 
