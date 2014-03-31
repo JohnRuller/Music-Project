@@ -914,19 +914,19 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rvD-1q-oz8">
-                                <rect key="frame" x="159" y="60" width="262" height="21"/>
+                                <rect key="frame" x="113" y="53" width="262" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tagline:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e4S-Nb-TP4">
-                                <rect key="frame" x="159" y="89" width="267" height="86"/>
+                                <rect key="frame" x="111" y="44" width="267" height="86"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oBS-hG-ibn">
-                                <rect key="frame" x="15" y="60" width="90" height="90"/>
+                                <rect key="frame" x="8" y="53" width="90" height="90"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Bih-Gh-KCZ">
@@ -981,11 +981,24 @@
                                     <segue destination="hHz-Yw-qGp" kind="modal" identifier="ViewMatchingArtists" id="bex-PS-mjg"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Compatability" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kmy-Qw-MOU">
+                                <rect key="frame" x="111" y="101" width="189" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eJf-QN-STo">
+                                <rect key="frame" x="111" y="125" width="199" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
                         <outlet property="artistTableView" destination="Bih-Gh-KCZ" id="zM9-rP-ePc"/>
+                        <outlet property="compImageView" destination="eJf-QN-STo" id="odd-v3-i7Z"/>
+                        <outlet property="compLabel" destination="Kmy-Qw-MOU" id="1gh-R7-wNk"/>
+                        <outlet property="matchingLabel" destination="fWR-eC-MCS" id="aJ0-bS-6CB"/>
                         <outlet property="nameLabel" destination="rvD-1q-oz8" id="M7c-uN-heb"/>
                         <outlet property="profileImage" destination="oBS-hG-ibn" id="G4e-r8-eXC"/>
                         <outlet property="taglineLabel" destination="e4S-Nb-TP4" id="leO-8a-xwE"/>

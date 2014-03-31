@@ -12,7 +12,7 @@
 - (IBAction)back:(id)sender;
 @property (strong, nonatomic) IBOutlet UITableView *artistsTable;
 
-@property (strong) NSArray *guestArtists;
+@property (strong) NSArray *matchingArtists;
 
 
 @end

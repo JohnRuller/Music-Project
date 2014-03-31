@@ -15,9 +15,7 @@
 
 @implementation MatchingArtistsViewController
 
-@synthesize guestArtists;
-profileManager *userProfile;
-NSArray *matchingArtists;
+@synthesize matchingArtists;
 
 
 
@@ -35,11 +33,6 @@ NSArray *matchingArtists;
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    //init
-    userProfile = [[profileManager alloc] init];
-    
-    matchingArtists = [userProfile getMatchingArtists:guestArtists];
     
     
      if([matchingArtists count] == 0) {

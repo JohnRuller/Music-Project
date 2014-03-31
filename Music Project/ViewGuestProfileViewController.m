@@ -22,6 +22,7 @@
 //local vars
 profileManager *userProfile;
 NSArray *guestArtists;
+NSArray *matchingArtists;
 
 @synthesize guestDictionary;
 
@@ -54,11 +55,17 @@ NSArray *guestArtists;
     [l setMasksToBounds:YES];
     [l setCornerRadius:45.0];
     
+    //set compatability
+    [_compLabel setText:[guestDictionary objectForKey:@"rating"]];
+    _compImageView.image = [guestDictionary objectForKey:@"compBarImage"];
+    
     guestArtists = [[NSArray alloc] init];
     guestArtists = [userProfile getUpdatedGuestArtists:[guestDictionary objectForKey:@"artists"]];
     //guestArtists = [guestDictionary objectForKey:@"artists"];
     NSLog(@"Guest Artists array count in gues profile view: %lu", (unsigned long)[guestArtists count]);
     
+    matchingArtists = [userProfile getMatchingArtists:[guestDictionary objectForKey:@"artists"]];
+    [_matchingLabel setText:[NSString stringWithFormat:@"You have %lu matching artists.", (unsigned long)[matchingArtists count]]];
     
     //setup table
     [self.artistTableView setDelegate:self];
@@ -84,7 +91,7 @@ NSArray *guestArtists;
             
         //send guest profile data over to next view controller
         MatchingArtistsViewController *destViewController = segue.destinationViewController;
-        destViewController.guestArtists = [guestDictionary objectForKey:@"artists"];
+        destViewController.matchingArtists = matchingArtists;
         
     }
 }
@@ -112,6 +119,7 @@ NSArray *guestArtists;
     
     cell.textLabel.text = artistTitle;
     
+    /*
     if([isMatching isEqualToString:@"YES"]) {
         NSLog(@"HIGHLIGHT ROW.");
 
@@ -121,7 +129,7 @@ NSArray *guestArtists;
         bgColorView.layer.masksToBounds = YES;
         [cell setBackgroundView:bgColorView];
 
-    }
+    }*/
 
     return cell;
 }
