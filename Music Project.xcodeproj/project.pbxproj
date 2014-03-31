@@ -35,6 +35,7 @@
 		0220CB7F183DD50F006C10A8 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0220CB7E183DD50F006C10A8 /* MainViewController.m */; };
 		0220CB80183DD50F006C10A8 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0220CB7E183DD50F006C10A8 /* MainViewController.m */; };
 		022FC9B418E9084B006FD44D /* MatchingArtistsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 022FC9B318E9084B006FD44D /* MatchingArtistsViewController.m */; };
+		022FC9B618E9DBFC006FD44D /* helpfiles.plist in Resources */ = {isa = PBXBuildFile; fileRef = 022FC9B518E9DBFC006FD44D /* helpfiles.plist */; };
 		02397E4B18CBC7B700B6F9A9 /* defaultProfile.png in Resources */ = {isa = PBXBuildFile; fileRef = 02397E4A18CBC7B700B6F9A9 /* defaultProfile.png */; };
 		023D1A5218A0127B009CA940 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 023D1A5118A0127B009CA940 /* Icon.png */; };
 		023D1A5318A0127B009CA940 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 023D1A5118A0127B009CA940 /* Icon.png */; };
@@ -140,6 +141,7 @@
 		0220CB7E183DD50F006C10A8 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		022FC9B218E9084B006FD44D /* MatchingArtistsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchingArtistsViewController.h; sourceTree = "<group>"; };
 		022FC9B318E9084B006FD44D /* MatchingArtistsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchingArtistsViewController.m; sourceTree = "<group>"; };
+		022FC9B518E9DBFC006FD44D /* helpfiles.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = helpfiles.plist; sourceTree = "<group>"; };
 		02397E4A18CBC7B700B6F9A9 /* defaultProfile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defaultProfile.png; sourceTree = SOURCE_ROOT; };
 		023D1A5118A0127B009CA940 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		023D1A5418A056A3009CA940 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -315,6 +317,7 @@
 				0220CB50182C977F006C10A8 /* InfoPlist.strings */,
 				0220CB53182C977F006C10A8 /* main.m */,
 				0220CB55182C977F006C10A8 /* Music Project-Prefix.pch */,
+				022FC9B518E9DBFC006FD44D /* helpfiles.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -606,6 +609,7 @@
 				943DEC8818E8A3D1008C0C77 /* chat@2x.png in Resources */,
 				945B78431895812500C26AAA /* MainStoryboard.storyboard in Resources */,
 				94AEB3EC18E783D200EC1E0B /* play.png in Resources */,
+				022FC9B618E9DBFC006FD44D /* helpfiles.plist in Resources */,
 				02F5DCDB18CF8BF20006D633 /* NoComp.png in Resources */,
 				94AEB3ED18E783D200EC1E0B /* stop.png in Resources */,
 				943DEC8518E8A38E008C0C77 /* playlist@2x.png in Resources */,

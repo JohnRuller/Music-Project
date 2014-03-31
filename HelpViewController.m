@@ -24,8 +24,14 @@
 	// Do any additional setup after loading the view.
     
     //initialize table data
-    helpFiles = [NSArray arrayWithObjects:@"Profile Data", @"Audio Streaming", nil];
-
+    //helpFiles = [NSArray arrayWithObjects:@"Profile Data", @"Audio Streaming", nil];
+    
+    // Find out the path of recipes.plist
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"helpfiles" ofType:@"plist"];
+    
+    // Load the file content and read the data into arrays
+    NSDictionary *dict = [[NSDictionary alloc] initWithContentsOfFile:path];
+    helpFiles = [dict objectForKey:@"Topic"];
 }
 
 - (void)didReceiveMemoryWarning
