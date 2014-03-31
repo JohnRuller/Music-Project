@@ -9,12 +9,13 @@
 #import <UIKit/UIKit.h>
 
 @interface ChatViewController : UIViewController <UITextFieldDelegate, UITabBarDelegate>
+
+//text
 @property (weak, nonatomic) IBOutlet UITextField *txtMessage;
 @property (weak, nonatomic) IBOutlet UITextView *tvChat;
 
-
+//buttons
 - (IBAction)sendMessage:(id)sender;
 - (IBAction)cancelMessage:(id)sender;
-
 
 @end

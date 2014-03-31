@@ -9,16 +9,15 @@
 #import "ChatViewController.h"
 #import "AppDelegate.h"
 
-
 @interface ChatViewController ()
 
 @property (nonatomic, strong) AppDelegate *appDelegate;
 
+//private functions
 -(void)sendMyMessage;
 -(void)didReceiveDataWithNotification:(NSNotification *)notification;
 -(void)peerJoinedRoom:(NSNotification *)notification;
 -(void)updateNewBadge;
-
 
 @end
 
@@ -26,6 +25,8 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:YES];
+    
+    //reset badge when appears
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
         [self.tabBarItem setBadgeValue:nil];
     }];
@@ -33,14 +34,14 @@
 
 - (void)loadView {
     [super loadView];
+    
+    //load view from tab bar
     NSLog(@"Loading chat view controller.");
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
         [self.tabBarItem setBadgeValue:nil];
     }];
 
     [self viewDidLoad];
-    
-    
 }
 
 - (void)viewDidLoad
@@ -48,18 +49,14 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
-
-
-    
+    //set app delegate
     _appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
+    //set text delegate
     _txtMessage.delegate = self;
     _txtMessage.returnKeyType = UIReturnKeyDone;
-
     
-    
-    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
-        //Your code goes in here
+    //setup did change state notification
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(didReceiveDataWithNotification:)
                                                  name:@"MCDidReceiveDataNotification"
@@ -74,8 +71,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(peerLeftRoom:)
                                                  name:@"peerLeftRoom" object:nil];
-
-    }];
 }
 
 - (void)didReceiveMemoryWarning
@@ -97,13 +92,11 @@
     
     if(![_txtMessage.text isEqualToString:@""])
         [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
-            //Your code goes in here
-        [self sendMyMessage];
+            [self sendMyMessage];
         }];
     else
         [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
-            //Your code goes in here
-        [_txtMessage resignFirstResponder];
+            [_txtMessage resignFirstResponder];
         }];
 
     return YES;
@@ -115,8 +108,7 @@
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
     [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
-        //Your code goes in here
-    [self animateTextField: textField up: YES];
+        [self animateTextField: textField up: YES];
     }];
 }
 
@@ -124,25 +116,24 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
-        //Your code goes in here
-    [self animateTextField: textField up: NO];
+        [self animateTextField: textField up: NO];
     }];
 }
 
 - (void) animateTextField: (UITextField*) textField up: (BOOL) up
 {
     [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
-        //Your code goes in here
-    const int movementDistance = 160; // tweak as needed
-    const float movementDuration = 0.3f; // tweak as needed
-    
-    int movement = (up ? -movementDistance : movementDistance);
-    
-    [UIView beginAnimations: @"anim" context: nil];
-    [UIView setAnimationBeginsFromCurrentState: YES];
-    [UIView setAnimationDuration: movementDuration];
-    self.view.frame = CGRectOffset(self.view.frame, 0, movement);
-    [UIView commitAnimations];
+        
+        const int movementDistance = 160; // tweak as needed
+        const float movementDuration = 0.3f; // tweak as needed
+        
+        int movement = (up ? -movementDistance : movementDistance);
+        
+        [UIView beginAnimations: @"anim" context: nil];
+        [UIView setAnimationBeginsFromCurrentState: YES];
+        [UIView setAnimationDuration: movementDuration];
+        self.view.frame = CGRectOffset(self.view.frame, 0, movement);
+        [UIView commitAnimations];
     }];
 }
 
@@ -151,17 +142,15 @@
 
 - (IBAction)sendMessage:(id)sender {
     [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
-        //Your code goes in here
-    if(![_txtMessage.text isEqualToString:@""])
-        [self sendMyMessage];
+        if(![_txtMessage.text isEqualToString:@""])
+            [self sendMyMessage];
     }];
 }
 
 - (IBAction)cancelMessage:(id)sender {
     [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
-        //Your code goes in here
-    _txtMessage.text = @"";
-    [_txtMessage resignFirstResponder];
+        _txtMessage.text = @"";
+        [_txtMessage resignFirstResponder];
     }];
 }
 
@@ -191,7 +180,6 @@
 
 -(void)peerLeftRoom:(NSNotification *)notification {
     [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
-        //Your code goes in here
         NSLog(@"Received Notification - User has left room");
         
         MCPeerID *peerID = [[notification userInfo] objectForKey:@"peerID"];
@@ -212,76 +200,68 @@
             [self.tabBarItem setBadgeValue:@"New"];
         }];
     }
-  
 }
 
 //Function to scroll text to bottom: http://stackoverflow.com/questions/16698638/textview-scroll-textview-to-bottom?answertab=oldest
 -(void)scrollTextViewToBottom:(UITextView *)textView {
     [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
-        //Your code goes in here
-    if(textView.text.length > 0 ) {
-        NSRange bottom = NSMakeRange(textView.text.length -1, 1);
-        [textView scrollRangeToVisible:bottom];
-    }
+        if(textView.text.length > 0 ) {
+            NSRange bottom = NSMakeRange(textView.text.length -1, 1);
+            [textView scrollRangeToVisible:bottom];
+        }
     }];
-    
 }
-
 
 -(void)sendMyMessage{
     [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
-        //Your code goes in here
-    NSString *textString = _txtMessage.text;
-    //NSData *dataToSend = [_txtMessage.text dataUsingEncoding:NSUTF8StringEncoding];
-    NSData *dataToSend = [NSKeyedArchiver archivedDataWithRootObject:[textString copy]];
-    NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
-    NSError *error;
-    
-    [_appDelegate.mpcController.session sendData:dataToSend
-                                     toPeers:allPeers
-                                    withMode:MCSessionSendDataReliable
-                                       error:&error];
-    
-    if (error) {
-        NSLog(@"%@", [error localizedDescription]);
-    }
-    
-    [_tvChat setText:[_tvChat.text stringByAppendingString:[NSString stringWithFormat:@"I wrote:\n%@\n\n", _txtMessage.text]]];
-    [_txtMessage setText:@""];
-    [_txtMessage resignFirstResponder];
-    
-    [self scrollTextViewToBottom:_tvChat];
+        
+        NSString *textString = _txtMessage.text;
+        //NSData *dataToSend = [_txtMessage.text dataUsingEncoding:NSUTF8StringEncoding];
+        NSData *dataToSend = [NSKeyedArchiver archivedDataWithRootObject:[textString copy]];
+        NSArray *allPeers = _appDelegate.mpcController.session.connectedPeers;
+        NSError *error;
+        
+        [_appDelegate.mpcController.session sendData:dataToSend
+                                         toPeers:allPeers
+                                        withMode:MCSessionSendDataReliable
+                                           error:&error];
+        
+        if (error) {
+            NSLog(@"%@", [error localizedDescription]);
+        }
+        
+        [_tvChat setText:[_tvChat.text stringByAppendingString:[NSString stringWithFormat:@"I wrote:\n%@\n\n", _txtMessage.text]]];
+        [_txtMessage setText:@""];
+        [_txtMessage resignFirstResponder];
+        
+        [self scrollTextViewToBottom:_tvChat];
     }];
 }
 
 
 -(void)didReceiveDataWithNotification:(NSNotification *)notification{
     [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
-        //Your code goes in here
-    MCPeerID *peerID = [[notification userInfo] objectForKey:@"peerID"];
-    NSString *peerDisplayName = peerID.displayName;
-    
-    NSData *receivedData = [[notification userInfo] objectForKey:@"data"];
-    id myobject = [NSKeyedUnarchiver unarchiveObjectWithData:receivedData];
-    
-    
-    if ([myobject isKindOfClass:[NSString class]])
-    {
-        NSLog(@"Received chat message.");
-        NSString *receivedText = [[NSString alloc] initWithString:myobject];
-        [_tvChat performSelectorOnMainThread:@selector(setText:) withObject:[_tvChat.text stringByAppendingString:[NSString stringWithFormat:@"%@ wrote:\n%@\n\n", peerDisplayName, receivedText]] waitUntilDone:NO];
         
-        [self scrollTextViewToBottom:_tvChat];
+        MCPeerID *peerID = [[notification userInfo] objectForKey:@"peerID"];
+        NSString *peerDisplayName = peerID.displayName;
+        
+        NSData *receivedData = [[notification userInfo] objectForKey:@"data"];
+        id myobject = [NSKeyedUnarchiver unarchiveObjectWithData:receivedData];
+        
+        
+        if ([myobject isKindOfClass:[NSString class]])
+        {
+            NSLog(@"Received chat message.");
+            NSString *receivedText = [[NSString alloc] initWithString:myobject];
+            [_tvChat performSelectorOnMainThread:@selector(setText:) withObject:[_tvChat.text stringByAppendingString:[NSString stringWithFormat:@"%@ wrote:\n%@\n\n", peerDisplayName, receivedText]] waitUntilDone:NO];
+            
+            [self scrollTextViewToBottom:_tvChat];
 
-        [self updateNewBadge];
-    }
+            [self updateNewBadge];
+        }
         
     }];
     
-   
-    
-    
-         
     //NSString *receivedText = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
 }
 
