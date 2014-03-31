@@ -62,6 +62,7 @@ NSArray *guestArtists;
     //setup table
     [self.artistTableView setDelegate:self];
     [self.artistTableView setDataSource:self];
+    [self.artistTableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -86,6 +87,7 @@ NSArray *guestArtists;
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ArtistsCell"];
     
     NSString *artistTitle = [guestArtists[indexPath.row] objectForKey:@"artist"];
+    NSString *isMatching = [guestArtists[indexPath.row] objectForKey:@"isMatching"];
     
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ArtistsCell"];
@@ -96,7 +98,7 @@ NSArray *guestArtists;
     
     cell.textLabel.text = artistTitle;
     
-    if([guestArtists[indexPath.row] objectForKey:@"isMatching"]) {
+    if([isMatching isEqualToString:@"YES"]) {
         NSLog(@"HIGHLIGHT ROW.");
 
         UIView *bgColorView = [[UIView alloc] init];

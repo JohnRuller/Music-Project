@@ -280,26 +280,28 @@
 
 -(NSArray*)getUpdatedGuestArtists:(NSArray *)guestArtists {
     NSMutableArray *updatedGuestArtists = [[NSMutableArray alloc] init];
-    NSDictionary *artistAtIndex = [[NSDictionary alloc] init];
 
-    BOOL isMatching;
+    NSString *isMatching;
     
     //find matching artists
     for(int i=0; i<[guestArtists count]; i++)
     {
         NSString *guestArtistTitle = guestArtists[i];
+        NSDictionary *artistAtIndex = [[NSDictionary alloc] init];
+
         
         for(int j=0; j<[artistsArray count]; j++)
         {
+            
             NSString *artistTitle = artistsArray[j];
             
             if([artistTitle isEqualToString:guestArtistTitle]) {
                 
-                isMatching = YES;
+                isMatching = @"YES";
                 //artistAtIndex = [NSDictionary dictionaryWithObjectsAndKeys:guestArtistTitle, @"artist", @"YES", @"isMatching", nil];
             }
             else {
-                isMatching = NO;
+                isMatching = @"NO";
                 //artistAtIndex = [NSDictionary dictionaryWithObjectsAndKeys:guestArtistTitle, @"artist", @"NO", @"isMatching", nil];
 
             }
