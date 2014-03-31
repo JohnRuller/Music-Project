@@ -61,12 +61,13 @@ profileManager *userProfile;
     //image
     UIImage *image = [UIImage imageWithData:userProfile.profilePhoto];
     self.imageView.image = image;
-    // set image layer circular
+    
+    // set image layer circular with border
     CALayer * l = [self.imageView layer];
     [l setMasksToBounds:YES];
     [l setCornerRadius:45.0];
-    
-    
+    [l setBorderWidth:0.25];
+    [l setBorderColor:[[UIColor blackColor] CGColor]];
 }
 
 - (void)didReceiveMemoryWarning

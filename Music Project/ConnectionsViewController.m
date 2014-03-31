@@ -495,6 +495,8 @@ UITabBarController *tbc;
         CALayer * l = [profileImageView layer];
         [l setMasksToBounds:YES];
         [l setCornerRadius:45.0];
+        [l setBorderWidth:0.25];
+        [l setBorderColor:[[UIColor blackColor] CGColor]];
         
         //set tagline
         UILabel *profileTaglineLabel = (UILabel *)[cell viewWithTag:102];

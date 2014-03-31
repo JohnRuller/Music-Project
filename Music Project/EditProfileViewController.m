@@ -69,6 +69,8 @@ profileManager *userProfile;
     CALayer * l = [self.imageView layer];
     [l setMasksToBounds:YES];
     [l setCornerRadius:45.0];
+    [l setBorderWidth:0.25];
+    [l setBorderColor:[[UIColor blackColor] CGColor]];
 
 }
 
