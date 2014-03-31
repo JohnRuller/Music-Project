@@ -99,6 +99,17 @@ UITabBarController *tbc;
     NSString *name = [NSString stringWithFormat:@"%@",userProfile.name];
     NSString *tagline = [NSString stringWithFormat:@"%@",userProfile.tagline];
     UIImage *image = [UIImage imageWithData:userProfile.profilePhoto];
+    
+
+        UIGraphicsBeginImageContext(CGSizeMake(90,90));
+        [image drawInRect:CGRectMake(0,0,90,90)];
+        UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+    
+    image = newImage;
+        
+    
+    
     NSArray *artistsArray = [[NSArray alloc] init];
     NSArray *guestArtistsArray = [[NSArray alloc] init];
     NSString *rating = [[NSString alloc] init];
