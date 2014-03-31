@@ -42,6 +42,8 @@
 
 -(NSDictionary*)getArtistsDictionary:(NSArray *)guestArtists;
 -(NSArray*)getUpdatedGuestArtists:(NSArray *)guestArtists;
+-(NSArray*)getMatchingArtists:(NSArray *)guestArtists;
+
 
 
 

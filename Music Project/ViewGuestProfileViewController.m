@@ -8,6 +8,7 @@
 
 #import "ViewGuestProfileViewController.h"
 #import "profileManager.h"
+#import "MatchingArtistsViewController.h"
 
 
 @interface ViewGuestProfileViewController ()
@@ -73,6 +74,19 @@ NSArray *guestArtists;
 
 - (IBAction)back:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"ViewMatchingArtists"]) {
+        
+
+            
+        //send guest profile data over to next view controller
+        MatchingArtistsViewController *destViewController = segue.destinationViewController;
+        destViewController.guestArtists = [guestDictionary objectForKey:@"artists"];
+        
+    }
 }
 
 #pragma mark - Artists

@@ -34,6 +34,7 @@
 		0220CB6B182C977F006C10A8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0220CB69182C977F006C10A8 /* InfoPlist.strings */; };
 		0220CB7F183DD50F006C10A8 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0220CB7E183DD50F006C10A8 /* MainViewController.m */; };
 		0220CB80183DD50F006C10A8 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0220CB7E183DD50F006C10A8 /* MainViewController.m */; };
+		022FC9B418E9084B006FD44D /* MatchingArtistsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 022FC9B318E9084B006FD44D /* MatchingArtistsViewController.m */; };
 		02397E4B18CBC7B700B6F9A9 /* defaultProfile.png in Resources */ = {isa = PBXBuildFile; fileRef = 02397E4A18CBC7B700B6F9A9 /* defaultProfile.png */; };
 		023D1A5218A0127B009CA940 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 023D1A5118A0127B009CA940 /* Icon.png */; };
 		023D1A5318A0127B009CA940 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 023D1A5118A0127B009CA940 /* Icon.png */; };
@@ -137,6 +138,8 @@
 		0220CB6A182C977F006C10A8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0220CB7D183DD50F006C10A8 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		0220CB7E183DD50F006C10A8 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		022FC9B218E9084B006FD44D /* MatchingArtistsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchingArtistsViewController.h; sourceTree = "<group>"; };
+		022FC9B318E9084B006FD44D /* MatchingArtistsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchingArtistsViewController.m; sourceTree = "<group>"; };
 		02397E4A18CBC7B700B6F9A9 /* defaultProfile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defaultProfile.png; sourceTree = SOURCE_ROOT; };
 		023D1A5118A0127B009CA940 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		023D1A5418A056A3009CA940 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -482,6 +485,8 @@
 				94D3AE2F18B6A84300495CAD /* PlaylistViewController.m */,
 				0219FCE4183EFBF80080A1F1 /* ProfileViewController.h */,
 				0219FCE5183EFBF80080A1F1 /* ProfileViewController.m */,
+				022FC9B218E9084B006FD44D /* MatchingArtistsViewController.h */,
+				022FC9B318E9084B006FD44D /* MatchingArtistsViewController.m */,
 			);
 			name = "New Views";
 			sourceTree = "<group>";
@@ -549,7 +554,7 @@
 				ORGANIZATIONNAME = "John Ruller";
 				TargetAttributes = {
 					0220CB43182C977F006C10A8 = {
-						DevelopmentTeam = 3Y9N4UBV8R;
+						DevelopmentTeam = 3UVA6AL657;
 					};
 					0220CB5E182C977F006C10A8 = {
 						TestTargetID = 0220CB43182C977F006C10A8;
@@ -649,6 +654,7 @@
 				945B78621895822E00C26AAA /* NSMutableArray+QueueMethods.m in Sources */,
 				945B78651895822E00C26AAA /* TDAudioQueueBuffer.m in Sources */,
 				945B78641895822E00C26AAA /* TDAudioQueue.m in Sources */,
+				022FC9B418E9084B006FD44D /* MatchingArtistsViewController.m in Sources */,
 				9445D0EA18BA628800BAFF5F /* ChooseSongViewController.m in Sources */,
 				9466556318B93325009061C5 /* AnarchyViewController.m in Sources */,
 				945B786D1895822E00C26AAA /* TDAudioStreamerConstants.m in Sources */,
