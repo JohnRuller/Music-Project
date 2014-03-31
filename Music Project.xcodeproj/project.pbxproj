@@ -17,10 +17,6 @@
 		0219FCE3183EF1560080A1F1 /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0219FCE1183EF1560080A1F1 /* HelpViewController.m */; };
 		0219FCE6183EFBF80080A1F1 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0219FCE5183EFBF80080A1F1 /* ProfileViewController.m */; };
 		0219FCE7183EFBF80080A1F1 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0219FCE5183EFBF80080A1F1 /* ProfileViewController.m */; };
-		0219FCEA183EFE2D0080A1F1 /* JoinRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0219FCE9183EFE2D0080A1F1 /* JoinRoomViewController.m */; };
-		0219FCEB183EFE2D0080A1F1 /* JoinRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0219FCE9183EFE2D0080A1F1 /* JoinRoomViewController.m */; };
-		0219FCEE183EFEEA0080A1F1 /* CreateRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0219FCED183EFEEA0080A1F1 /* CreateRoomViewController.m */; };
-		0219FCEF183EFEEA0080A1F1 /* CreateRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0219FCED183EFEEA0080A1F1 /* CreateRoomViewController.m */; };
 		0220CB48182C977F006C10A8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0220CB47182C977F006C10A8 /* Foundation.framework */; };
 		0220CB4A182C977F006C10A8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0220CB49182C977F006C10A8 /* CoreGraphics.framework */; };
 		0220CB4C182C977F006C10A8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0220CB4B182C977F006C10A8 /* UIKit.framework */; };
@@ -44,8 +40,6 @@
 		0242BB2D18D2B734007C2CA1 /* MainTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0242BB2C18D2B734007C2CA1 /* MainTabBarViewController.m */; };
 		0242BB3018D661AF007C2CA1 /* ViewGuestProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0242BB2F18D661AF007C2CA1 /* ViewGuestProfileViewController.m */; };
 		02CBB022188382C8008AF034 /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02CBB021188382C8008AF034 /* MultipeerConnectivity.framework */; };
-		02CBB02518838817008AF034 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CBB02418838817008AF034 /* ViewController.m */; };
-		02CBB02618838817008AF034 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CBB02418838817008AF034 /* ViewController.m */; };
 		02E5368818C2BDA500CC53B3 /* Icon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02E5368318C2BDA500CC53B3 /* Icon-60@2x.png */; };
 		02E5368918C2BDA500CC53B3 /* Icon-Small-40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02E5368418C2BDA500CC53B3 /* Icon-Small-40@2x.png */; };
 		02E5368A18C2BDA500CC53B3 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02E5368518C2BDA500CC53B3 /* Icon-Small@2x.png */; };
@@ -65,22 +59,7 @@
 		943DEC8518E8A38E008C0C77 /* playlist@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 943DEC8318E8A38E008C0C77 /* playlist@2x.png */; };
 		943DEC8818E8A3D1008C0C77 /* chat@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 943DEC8618E8A3D1008C0C77 /* chat@2x.png */; };
 		943DEC8918E8A3D1008C0C77 /* chat30.png in Resources */ = {isa = PBXBuildFile; fileRef = 943DEC8718E8A3D1008C0C77 /* chat30.png */; };
-		9445D0EA18BA628800BAFF5F /* ChooseSongViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9445D0E918BA628800BAFF5F /* ChooseSongViewController.m */; };
 		945B78431895812500C26AAA /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 945B78421895812500C26AAA /* MainStoryboard.storyboard */; };
-		945B78621895822E00C26AAA /* NSMutableArray+QueueMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 945B78471895822E00C26AAA /* NSMutableArray+QueueMethods.m */; };
-		945B78631895822E00C26AAA /* TDAudioFileStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 945B784A1895822E00C26AAA /* TDAudioFileStream.m */; };
-		945B78641895822E00C26AAA /* TDAudioQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 945B784C1895822E00C26AAA /* TDAudioQueue.m */; };
-		945B78651895822E00C26AAA /* TDAudioQueueBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 945B784E1895822E00C26AAA /* TDAudioQueueBuffer.m */; };
-		945B78661895822E00C26AAA /* TDAudioQueueBufferManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 945B78501895822E00C26AAA /* TDAudioQueueBufferManager.m */; };
-		945B78671895822E00C26AAA /* TDAudioQueueController.m in Sources */ = {isa = PBXBuildFile; fileRef = 945B78521895822E00C26AAA /* TDAudioQueueController.m */; };
-		945B78681895822E00C26AAA /* TDAudioQueueFiller.m in Sources */ = {isa = PBXBuildFile; fileRef = 945B78541895822E00C26AAA /* TDAudioQueueFiller.m */; };
-		945B78691895822E00C26AAA /* TDAudioStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 945B78561895822E00C26AAA /* TDAudioStream.m */; };
-		945B786A1895822E00C26AAA /* TDAudioInputStreamer.m in Sources */ = {isa = PBXBuildFile; fileRef = 945B78581895822E00C26AAA /* TDAudioInputStreamer.m */; };
-		945B786B1895822E00C26AAA /* TDAudioOutputStreamer.m in Sources */ = {isa = PBXBuildFile; fileRef = 945B785A1895822E00C26AAA /* TDAudioOutputStreamer.m */; };
-		945B786C1895822E00C26AAA /* TDAudioStreamer.m in Sources */ = {isa = PBXBuildFile; fileRef = 945B785C1895822E00C26AAA /* TDAudioStreamer.m */; };
-		945B786D1895822E00C26AAA /* TDAudioStreamerConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 945B785E1895822E00C26AAA /* TDAudioStreamerConstants.m */; };
-		945B786E1895822E00C26AAA /* TDSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 945B78611895822E00C26AAA /* TDSession.m */; };
-		945B78711895829C00C26AAA /* CreateRoomMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 945B786F1895829C00C26AAA /* CreateRoomMenuViewController.m */; };
 		946243B618B7022D00F5D0C6 /* myManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 946243B518B7022D00F5D0C6 /* myManager.m */; };
 		9466556318B93325009061C5 /* AnarchyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9466556218B93325009061C5 /* AnarchyViewController.m */; };
 		948071AB18E8A772008241D0 /* connections30.png in Resources */ = {isa = PBXBuildFile; fileRef = 948071A918E8A772008241D0 /* connections30.png */; };
@@ -91,7 +70,6 @@
 		94AEB3EB18E783D200EC1E0B /* pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 94AEB3E818E783D200EC1E0B /* pause.png */; };
 		94AEB3EC18E783D200EC1E0B /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 94AEB3E918E783D200EC1E0B /* play.png */; };
 		94AEB3ED18E783D200EC1E0B /* stop.png in Resources */ = {isa = PBXBuildFile; fileRef = 94AEB3EA18E783D200EC1E0B /* stop.png */; };
-		94BB70EC18B53129003ED058 /* GuestsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94BB70EB18B53129003ED058 /* GuestsViewController.m */; };
 		94D3AE3018B6A84300495CAD /* PlaylistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94D3AE2F18B6A84300495CAD /* PlaylistViewController.m */; };
 		94E3105318B68825001DC113 /* MPCConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E3105218B68825001DC113 /* MPCConnection.m */; };
 		94E3105818B68D7C001DC113 /* ConnectionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E3105718B68D7C001DC113 /* ConnectionsViewController.m */; };
@@ -119,10 +97,6 @@
 		0219FCE1183EF1560080A1F1 /* HelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HelpViewController.m; path = ../HelpViewController.m; sourceTree = "<group>"; };
 		0219FCE4183EFBF80080A1F1 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		0219FCE5183EFBF80080A1F1 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
-		0219FCE8183EFE2D0080A1F1 /* JoinRoomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JoinRoomViewController.h; sourceTree = "<group>"; };
-		0219FCE9183EFE2D0080A1F1 /* JoinRoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JoinRoomViewController.m; sourceTree = "<group>"; };
-		0219FCEC183EFEEA0080A1F1 /* CreateRoomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateRoomViewController.h; sourceTree = "<group>"; };
-		0219FCED183EFEEA0080A1F1 /* CreateRoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateRoomViewController.m; sourceTree = "<group>"; };
 		0220CB44182C977F006C10A8 /* Music Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Music Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0220CB47182C977F006C10A8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0220CB49182C977F006C10A8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -153,8 +127,6 @@
 		0242BB2E18D661AF007C2CA1 /* ViewGuestProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewGuestProfileViewController.h; sourceTree = "<group>"; };
 		0242BB2F18D661AF007C2CA1 /* ViewGuestProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewGuestProfileViewController.m; sourceTree = "<group>"; };
 		02CBB021188382C8008AF034 /* MultipeerConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultipeerConnectivity.framework; path = System/Library/Frameworks/MultipeerConnectivity.framework; sourceTree = SDKROOT; };
-		02CBB0231883880B008AF034 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		02CBB02418838817008AF034 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		02E5368318C2BDA500CC53B3 /* Icon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-60@2x.png"; path = "Images.xcassets/AppIcon.appiconset/Icon-60@2x.png"; sourceTree = "<group>"; };
 		02E5368418C2BDA500CC53B3 /* Icon-Small-40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small-40@2x.png"; path = "Images.xcassets/AppIcon.appiconset/Icon-Small-40@2x.png"; sourceTree = "<group>"; };
 		02E5368518C2BDA500CC53B3 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small@2x.png"; path = "Images.xcassets/AppIcon.appiconset/Icon-Small@2x.png"; sourceTree = "<group>"; };
@@ -174,37 +146,7 @@
 		943DEC8318E8A38E008C0C77 /* playlist@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "playlist@2x.png"; sourceTree = "<group>"; };
 		943DEC8618E8A3D1008C0C77 /* chat@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chat@2x.png"; sourceTree = "<group>"; };
 		943DEC8718E8A3D1008C0C77 /* chat30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat30.png; sourceTree = "<group>"; };
-		9445D0E818BA628800BAFF5F /* ChooseSongViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseSongViewController.h; sourceTree = "<group>"; };
-		9445D0E918BA628800BAFF5F /* ChooseSongViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseSongViewController.m; sourceTree = "<group>"; };
 		945B78421895812500C26AAA /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
-		945B78461895822E00C26AAA /* NSMutableArray+QueueMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+QueueMethods.h"; sourceTree = "<group>"; };
-		945B78471895822E00C26AAA /* NSMutableArray+QueueMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+QueueMethods.m"; sourceTree = "<group>"; };
-		945B78491895822E00C26AAA /* TDAudioFileStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDAudioFileStream.h; sourceTree = "<group>"; };
-		945B784A1895822E00C26AAA /* TDAudioFileStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDAudioFileStream.m; sourceTree = "<group>"; };
-		945B784B1895822E00C26AAA /* TDAudioQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDAudioQueue.h; sourceTree = "<group>"; };
-		945B784C1895822E00C26AAA /* TDAudioQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDAudioQueue.m; sourceTree = "<group>"; };
-		945B784D1895822E00C26AAA /* TDAudioQueueBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDAudioQueueBuffer.h; sourceTree = "<group>"; };
-		945B784E1895822E00C26AAA /* TDAudioQueueBuffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDAudioQueueBuffer.m; sourceTree = "<group>"; };
-		945B784F1895822E00C26AAA /* TDAudioQueueBufferManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDAudioQueueBufferManager.h; sourceTree = "<group>"; };
-		945B78501895822E00C26AAA /* TDAudioQueueBufferManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDAudioQueueBufferManager.m; sourceTree = "<group>"; };
-		945B78511895822E00C26AAA /* TDAudioQueueController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDAudioQueueController.h; sourceTree = "<group>"; };
-		945B78521895822E00C26AAA /* TDAudioQueueController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDAudioQueueController.m; sourceTree = "<group>"; };
-		945B78531895822E00C26AAA /* TDAudioQueueFiller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDAudioQueueFiller.h; sourceTree = "<group>"; };
-		945B78541895822E00C26AAA /* TDAudioQueueFiller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDAudioQueueFiller.m; sourceTree = "<group>"; };
-		945B78551895822E00C26AAA /* TDAudioStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDAudioStream.h; sourceTree = "<group>"; };
-		945B78561895822E00C26AAA /* TDAudioStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDAudioStream.m; sourceTree = "<group>"; };
-		945B78571895822E00C26AAA /* TDAudioInputStreamer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDAudioInputStreamer.h; sourceTree = "<group>"; };
-		945B78581895822E00C26AAA /* TDAudioInputStreamer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDAudioInputStreamer.m; sourceTree = "<group>"; };
-		945B78591895822E00C26AAA /* TDAudioOutputStreamer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDAudioOutputStreamer.h; sourceTree = "<group>"; };
-		945B785A1895822E00C26AAA /* TDAudioOutputStreamer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDAudioOutputStreamer.m; sourceTree = "<group>"; };
-		945B785B1895822E00C26AAA /* TDAudioStreamer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDAudioStreamer.h; sourceTree = "<group>"; };
-		945B785C1895822E00C26AAA /* TDAudioStreamer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDAudioStreamer.m; sourceTree = "<group>"; };
-		945B785D1895822E00C26AAA /* TDAudioStreamerConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDAudioStreamerConstants.h; sourceTree = "<group>"; };
-		945B785E1895822E00C26AAA /* TDAudioStreamerConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDAudioStreamerConstants.m; sourceTree = "<group>"; };
-		945B78601895822E00C26AAA /* TDSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDSession.h; sourceTree = "<group>"; };
-		945B78611895822E00C26AAA /* TDSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDSession.m; sourceTree = "<group>"; };
-		945B786F1895829C00C26AAA /* CreateRoomMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CreateRoomMenuViewController.m; path = ../CreateRoomMenuViewController.m; sourceTree = "<group>"; };
-		945B78701895829C00C26AAA /* CreateRoomMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CreateRoomMenuViewController.h; path = ../CreateRoomMenuViewController.h; sourceTree = "<group>"; };
 		946243B418B7022D00F5D0C6 /* myManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myManager.h; sourceTree = "<group>"; };
 		946243B518B7022D00F5D0C6 /* myManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myManager.m; sourceTree = "<group>"; };
 		9466556118B93325009061C5 /* AnarchyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnarchyViewController.h; sourceTree = "<group>"; };
@@ -219,8 +161,6 @@
 		94AEB3E818E783D200EC1E0B /* pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause.png; sourceTree = "<group>"; };
 		94AEB3E918E783D200EC1E0B /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
 		94AEB3EA18E783D200EC1E0B /* stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stop.png; sourceTree = "<group>"; };
-		94BB70EA18B53129003ED058 /* GuestsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuestsViewController.h; sourceTree = "<group>"; };
-		94BB70EB18B53129003ED058 /* GuestsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuestsViewController.m; sourceTree = "<group>"; };
 		94D3AE2E18B6A84300495CAD /* PlaylistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaylistViewController.h; sourceTree = "<group>"; };
 		94D3AE2F18B6A84300495CAD /* PlaylistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaylistViewController.m; sourceTree = "<group>"; };
 		94E3105118B68825001DC113 /* MPCConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPCConnection.h; sourceTree = "<group>"; };
@@ -299,10 +239,8 @@
 		0220CB4D182C977F006C10A8 /* Music Project */ = {
 			isa = PBXGroup;
 			children = (
-				94E3105518B68837001DC113 /* New Classes */,
-				94E3105018B687F9001DC113 /* New Views */,
-				945B78441895822E00C26AAA /* AudioStreamer */,
-				945B78411895809E00C26AAA /* Old Views */,
+				94E3105518B68837001DC113 /* Classes */,
+				94E3105018B687F9001DC113 /* Views */,
 				945B78421895812500C26AAA /* MainStoryboard.storyboard */,
 				0220CB56182C977F006C10A8 /* AppDelegate.h */,
 				0220CB57182C977F006C10A8 /* AppDelegate.m */,
@@ -391,84 +329,7 @@
 			name = Images;
 			sourceTree = "<group>";
 		};
-		945B78411895809E00C26AAA /* Old Views */ = {
-			isa = PBXGroup;
-			children = (
-				9445D0E818BA628800BAFF5F /* ChooseSongViewController.h */,
-				9445D0E918BA628800BAFF5F /* ChooseSongViewController.m */,
-				94BB70EA18B53129003ED058 /* GuestsViewController.h */,
-				94BB70EB18B53129003ED058 /* GuestsViewController.m */,
-				945B78701895829C00C26AAA /* CreateRoomMenuViewController.h */,
-				945B786F1895829C00C26AAA /* CreateRoomMenuViewController.m */,
-				0219FCEC183EFEEA0080A1F1 /* CreateRoomViewController.h */,
-				0219FCED183EFEEA0080A1F1 /* CreateRoomViewController.m */,
-				0219FCE8183EFE2D0080A1F1 /* JoinRoomViewController.h */,
-				0219FCE9183EFE2D0080A1F1 /* JoinRoomViewController.m */,
-				02CBB0231883880B008AF034 /* ViewController.h */,
-				02CBB02418838817008AF034 /* ViewController.m */,
-			);
-			name = "Old Views";
-			sourceTree = "<group>";
-		};
-		945B78441895822E00C26AAA /* AudioStreamer */ = {
-			isa = PBXGroup;
-			children = (
-				945B785F1895822E00C26AAA /* Classes */,
-				945B78451895822E00C26AAA /* Categories */,
-				945B78481895822E00C26AAA /* Classes */,
-				945B78571895822E00C26AAA /* TDAudioInputStreamer.h */,
-				945B78581895822E00C26AAA /* TDAudioInputStreamer.m */,
-				945B78591895822E00C26AAA /* TDAudioOutputStreamer.h */,
-				945B785A1895822E00C26AAA /* TDAudioOutputStreamer.m */,
-				945B785B1895822E00C26AAA /* TDAudioStreamer.h */,
-				945B785C1895822E00C26AAA /* TDAudioStreamer.m */,
-				945B785D1895822E00C26AAA /* TDAudioStreamerConstants.h */,
-				945B785E1895822E00C26AAA /* TDAudioStreamerConstants.m */,
-			);
-			path = AudioStreamer;
-			sourceTree = "<group>";
-		};
-		945B78451895822E00C26AAA /* Categories */ = {
-			isa = PBXGroup;
-			children = (
-				945B78461895822E00C26AAA /* NSMutableArray+QueueMethods.h */,
-				945B78471895822E00C26AAA /* NSMutableArray+QueueMethods.m */,
-			);
-			path = Categories;
-			sourceTree = "<group>";
-		};
-		945B78481895822E00C26AAA /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				945B78491895822E00C26AAA /* TDAudioFileStream.h */,
-				945B784A1895822E00C26AAA /* TDAudioFileStream.m */,
-				945B784B1895822E00C26AAA /* TDAudioQueue.h */,
-				945B784C1895822E00C26AAA /* TDAudioQueue.m */,
-				945B784D1895822E00C26AAA /* TDAudioQueueBuffer.h */,
-				945B784E1895822E00C26AAA /* TDAudioQueueBuffer.m */,
-				945B784F1895822E00C26AAA /* TDAudioQueueBufferManager.h */,
-				945B78501895822E00C26AAA /* TDAudioQueueBufferManager.m */,
-				945B78511895822E00C26AAA /* TDAudioQueueController.h */,
-				945B78521895822E00C26AAA /* TDAudioQueueController.m */,
-				945B78531895822E00C26AAA /* TDAudioQueueFiller.h */,
-				945B78541895822E00C26AAA /* TDAudioQueueFiller.m */,
-				945B78551895822E00C26AAA /* TDAudioStream.h */,
-				945B78561895822E00C26AAA /* TDAudioStream.m */,
-			);
-			path = Classes;
-			sourceTree = "<group>";
-		};
-		945B785F1895822E00C26AAA /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				945B78601895822E00C26AAA /* TDSession.h */,
-				945B78611895822E00C26AAA /* TDSession.m */,
-			);
-			name = Classes;
-			path = ../Classes;
-			sourceTree = "<group>";
-		};
-		94E3105018B687F9001DC113 /* New Views */ = {
+		94E3105018B687F9001DC113 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				0242BB2E18D661AF007C2CA1 /* ViewGuestProfileViewController.h */,
@@ -496,10 +357,10 @@
 				022FC9B718E9E072006FD44D /* ViewHelpFileViewController.h */,
 				022FC9B818E9E072006FD44D /* ViewHelpFileViewController.m */,
 			);
-			name = "New Views";
+			name = Views;
 			sourceTree = "<group>";
 		};
-		94E3105518B68837001DC113 /* New Classes */ = {
+		94E3105518B68837001DC113 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
 				948E7FD518C3DC1700842EDB /* peerPlaylist.h */,
@@ -511,7 +372,7 @@
 				0217EEAE18C514D70060DA48 /* profileManager.h */,
 				0217EEAF18C514D70060DA48 /* profileManager.m */,
 			);
-			name = "New Classes";
+			name = Classes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -639,40 +500,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				945B78691895822E00C26AAA /* TDAudioStream.m in Sources */,
 				0220CB58182C977F006C10A8 /* AppDelegate.m in Sources */,
 				022FC9B918E9E072006FD44D /* ViewHelpFileViewController.m in Sources */,
-				945B786E1895822E00C26AAA /* TDSession.m in Sources */,
-				945B78661895822E00C26AAA /* TDAudioQueueBufferManager.m in Sources */,
-				945B78671895822E00C26AAA /* TDAudioQueueController.m in Sources */,
 				0220CB7F183DD50F006C10A8 /* MainViewController.m in Sources */,
-				945B78631895822E00C26AAA /* TDAudioFileStream.m in Sources */,
 				948E7FD718C3DC1700842EDB /* peerPlaylist.m in Sources */,
-				945B786B1895822E00C26AAA /* TDAudioOutputStreamer.m in Sources */,
 				94D3AE3018B6A84300495CAD /* PlaylistViewController.m in Sources */,
-				945B78711895829C00C26AAA /* CreateRoomMenuViewController.m in Sources */,
-				02CBB02518838817008AF034 /* ViewController.m in Sources */,
-				94BB70EC18B53129003ED058 /* GuestsViewController.m in Sources */,
 				0220CB54182C977F006C10A8 /* main.m in Sources */,
 				0217EEB018C514D70060DA48 /* profileManager.m in Sources */,
 				94E3105318B68825001DC113 /* MPCConnection.m in Sources */,
 				94E3105818B68D7C001DC113 /* ConnectionsViewController.m in Sources */,
-				0219FCEA183EFE2D0080A1F1 /* JoinRoomViewController.m in Sources */,
-				945B78681895822E00C26AAA /* TDAudioQueueFiller.m in Sources */,
 				946243B618B7022D00F5D0C6 /* myManager.m in Sources */,
-				0219FCEE183EFEEA0080A1F1 /* CreateRoomViewController.m in Sources */,
-				945B78621895822E00C26AAA /* NSMutableArray+QueueMethods.m in Sources */,
-				945B78651895822E00C26AAA /* TDAudioQueueBuffer.m in Sources */,
-				945B78641895822E00C26AAA /* TDAudioQueue.m in Sources */,
 				022FC9B418E9084B006FD44D /* MatchingArtistsViewController.m in Sources */,
-				9445D0EA18BA628800BAFF5F /* ChooseSongViewController.m in Sources */,
 				9466556318B93325009061C5 /* AnarchyViewController.m in Sources */,
-				945B786D1895822E00C26AAA /* TDAudioStreamerConstants.m in Sources */,
 				02E8C75918A869DD007AA6A3 /* MusicProject.xcdatamodeld in Sources */,
 				0219FCE2183EF1560080A1F1 /* HelpViewController.m in Sources */,
 				02E8C75C18A8A83E007AA6A3 /* EditProfileViewController.m in Sources */,
-				945B786C1895822E00C26AAA /* TDAudioStreamer.m in Sources */,
-				945B786A1895822E00C26AAA /* TDAudioInputStreamer.m in Sources */,
 				0242BB3018D661AF007C2CA1 /* ViewGuestProfileViewController.m in Sources */,
 				0242BB2D18D2B734007C2CA1 /* MainTabBarViewController.m in Sources */,
 				949ABA2018B6923000D159A0 /* ChatViewController.m in Sources */,
@@ -684,13 +526,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				02CBB02618838817008AF034 /* ViewController.m in Sources */,
-				0219FCEF183EFEEA0080A1F1 /* CreateRoomViewController.m in Sources */,
 				0219FCE3183EF1560080A1F1 /* HelpViewController.m in Sources */,
 				02E8C75D18A8A83E007AA6A3 /* EditProfileViewController.m in Sources */,
 				0219FCE7183EFBF80080A1F1 /* ProfileViewController.m in Sources */,
 				0220CB80183DD50F006C10A8 /* MainViewController.m in Sources */,
-				0219FCEB183EFE2D0080A1F1 /* JoinRoomViewController.m in Sources */,
 				0217EEB118C514D70060DA48 /* profileManager.m in Sources */,
 				0217EEB518C62A230060DA48 /* ProfileTests.m in Sources */,
 			);
