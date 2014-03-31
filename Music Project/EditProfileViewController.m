@@ -92,10 +92,12 @@ profileManager *userProfile;
 
 - (IBAction)save:(id)sender {
     
+    //ensure there is a name set
     if([_nameTextField.text  isEqual: @""]) {
         _nameTextField.text = [UIDevice currentDevice].name;
     }
-
+    
+    //set values in core data
     [userProfile setName:self.nameTextField.text];
     [userProfile setTagline:self.taglineTextField.text];
     [userProfile setProfilePhoto:self.imageView.image];
@@ -106,6 +108,7 @@ profileManager *userProfile;
 - (IBAction)clear:(id)sender {
     _nameTextField.text = @"";
     _taglineTextField.text = @"";
+    _imageView.image = [UIImage imageNamed:@"defaultProfile.png"];
 }
 
 #pragma mark - UITextField Delegate method implementation

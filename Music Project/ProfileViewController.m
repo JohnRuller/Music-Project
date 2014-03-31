@@ -51,6 +51,7 @@ profileManager *userProfile;
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+    //init
     userProfile = [[profileManager alloc] init];
     
     //labels
@@ -78,20 +79,6 @@ profileManager *userProfile;
 - (IBAction)back:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-
-#pragma mark - Segue
-/*
- //passing profile managedObject to edit profile view
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
- {
- 
- if ([[segue identifier] isEqualToString:@"UpdateProfile"] && [self.profiles count] != 0) {
- NSManagedObject *selectedProfile = [self.profiles objectAtIndex:0];
- EditProfileViewController *destViewController = segue.destinationViewController;
- destViewController.profile = selectedProfile;
- }
- }
- */
 
 #pragma mark - Artists
 

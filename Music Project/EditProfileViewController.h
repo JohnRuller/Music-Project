@@ -22,7 +22,6 @@
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
 - (IBAction)takePhoto:(UIButton *)sender;
 - (IBAction)selectPhoto:(UIButton *)sender;
-
 @property (nonatomic, strong) IBOutlet UIButton *takePhotoButton;
 
 //buttons

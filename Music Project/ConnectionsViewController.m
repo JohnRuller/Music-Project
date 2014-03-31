@@ -19,6 +19,7 @@
 @property (nonatomic, strong) NSMutableArray *arrConnectedDevices;
 @property (nonatomic, weak) IBOutlet UILabel *testLabel;
 @property (nonatomic, weak) IBOutlet UIButton *browseButton;
+@property (strong) NSString *isHost;
 
 //profile data stuff
 -(void)sendProfileData:(MCPeerID *)peerID;
@@ -27,7 +28,6 @@
 -(int)profileIndex:(NSString *)name;
 @property (strong) NSDictionary *profileData;
 @property (strong) NSMutableArray *guestProfiles;
-@property (strong) NSString *isHost;
 
 //refresh property
 @property (nonatomic,retain) UIRefreshControl *refreshControl;
@@ -99,25 +99,20 @@ UITabBarController *tbc;
     NSString *name = [NSString stringWithFormat:@"%@",userProfile.name];
     NSString *tagline = [NSString stringWithFormat:@"%@",userProfile.tagline];
     UIImage *image = [UIImage imageWithData:userProfile.profilePhoto];
-    
-
-        UIGraphicsBeginImageContext(CGSizeMake(90,90));
-        [image drawInRect:CGRectMake(0,0,90,90)];
-        UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
-    
-    image = newImage;
-        
-    
-    
     NSArray *artistsArray = [[NSArray alloc] init];
     NSArray *guestArtistsArray = [[NSArray alloc] init];
     NSString *rating = [[NSString alloc] init];
     UIImage *compBarImage = [[UIImage alloc] init];
-
     artistsArray = userProfile.artistsArray;
-    NSLog(@"Artists array count in connections: %lu", (unsigned long)[artistsArray count]);
+    //NSLog(@"Artists array count in connections: %lu", (unsigned long)[artistsArray count]);
     
+    //compress image for better sending time
+    UIGraphicsBeginImageContext(CGSizeMake(90,90));
+    [image drawInRect:CGRectMake(0,0,90,90)];
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    image = newImage;
+
     //pass profile data into dictionary
     self.profileData = [[NSDictionary alloc] init];
     self.profileData = [NSDictionary dictionaryWithObjectsAndKeys: _isHost, @"isHost", name, @"name", tagline, @"tagline", image, @"image", artistsArray, @"artists", guestArtistsArray, @"guestArtists", rating, @"rating", compBarImage, @"compBarImage", nil];
@@ -347,7 +342,7 @@ UITabBarController *tbc;
                 postNotificationName:@"peerJoinedRoom" object:nil userInfo:[notification userInfo]];
             }
             else if ([type isEqualToString:@"Disconnect"]) {
-                NSLog(@"%@ DISCONNECTED!!!!!!", peerDisplayName);
+                NSLog(@"%@ has disconnected from the room.", peerDisplayName);
                 
                 int indexOfPeer = [_arrConnectedDevices indexOfObject:peerDisplayName];
                 [_arrConnectedDevices removeObjectAtIndex:indexOfPeer];
@@ -358,7 +353,7 @@ UITabBarController *tbc;
                     [_tblConnectedDevices reloadData];
                 }];
                 
-                // Post a notification that a peer has joined the room
+                // Post a notification that a peer has left the room
                 [[NSNotificationCenter defaultCenter]
                  postNotificationName:@"peerLeftRoom" object:nil userInfo:[notification userInfo]];
                 
