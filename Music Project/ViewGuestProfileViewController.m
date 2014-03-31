@@ -108,7 +108,7 @@ NSArray *matchingArtists;
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ArtistsCell"];
     
     NSString *artistTitle = [guestArtists[indexPath.row] objectForKey:@"artist"];
-    NSString *isMatching = [guestArtists[indexPath.row] objectForKey:@"isMatching"];
+    //NSString *isMatching = [guestArtists[indexPath.row] objectForKey:@"isMatching"];
     
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ArtistsCell"];

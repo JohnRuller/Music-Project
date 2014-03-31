@@ -47,7 +47,7 @@
         
             
         //send guest profile data over to next view controller
-        ViewHelpFileViewController *destViewController = segue.destinationViewController;
+        //ViewHelpFileViewController *destViewController = segue.destinationViewController;
         //destViewController.guestDictionary = guestDictionary;
         
     }
