@@ -41,6 +41,12 @@ NSArray *matchingArtists;
     
     matchingArtists = [userProfile getMatchingArtists:guestArtists];
     
+    
+     if([matchingArtists count] == 0) {
+         NSArray *noArtists = [[NSArray alloc] initWithObjects:@"There are no matching artists.", nil];
+         matchingArtists = [noArtists copy];
+     }
+    
     //setup table
     [self.artistsTable setDelegate:self];
     [self.artistsTable setDataSource:self];
