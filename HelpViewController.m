@@ -7,6 +7,7 @@
 //
 
 #import "HelpViewController.h"
+#import "ViewHelpFileViewController.h"
 
 @interface HelpViewController ()
 
@@ -38,6 +39,18 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"HelpFileSegue"]) {
+        
+            
+        //send guest profile data over to next view controller
+        ViewHelpFileViewController *destViewController = segue.destinationViewController;
+        //destViewController.guestDictionary = guestDictionary;
+        
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

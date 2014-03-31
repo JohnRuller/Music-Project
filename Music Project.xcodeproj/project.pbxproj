@@ -36,6 +36,7 @@
 		0220CB80183DD50F006C10A8 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0220CB7E183DD50F006C10A8 /* MainViewController.m */; };
 		022FC9B418E9084B006FD44D /* MatchingArtistsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 022FC9B318E9084B006FD44D /* MatchingArtistsViewController.m */; };
 		022FC9B618E9DBFC006FD44D /* helpfiles.plist in Resources */ = {isa = PBXBuildFile; fileRef = 022FC9B518E9DBFC006FD44D /* helpfiles.plist */; };
+		022FC9B918E9E072006FD44D /* ViewHelpFileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 022FC9B818E9E072006FD44D /* ViewHelpFileViewController.m */; };
 		02397E4B18CBC7B700B6F9A9 /* defaultProfile.png in Resources */ = {isa = PBXBuildFile; fileRef = 02397E4A18CBC7B700B6F9A9 /* defaultProfile.png */; };
 		023D1A5218A0127B009CA940 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 023D1A5118A0127B009CA940 /* Icon.png */; };
 		023D1A5318A0127B009CA940 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 023D1A5118A0127B009CA940 /* Icon.png */; };
@@ -142,6 +143,8 @@
 		022FC9B218E9084B006FD44D /* MatchingArtistsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchingArtistsViewController.h; sourceTree = "<group>"; };
 		022FC9B318E9084B006FD44D /* MatchingArtistsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchingArtistsViewController.m; sourceTree = "<group>"; };
 		022FC9B518E9DBFC006FD44D /* helpfiles.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = helpfiles.plist; sourceTree = "<group>"; };
+		022FC9B718E9E072006FD44D /* ViewHelpFileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewHelpFileViewController.h; sourceTree = "<group>"; };
+		022FC9B818E9E072006FD44D /* ViewHelpFileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewHelpFileViewController.m; sourceTree = "<group>"; };
 		02397E4A18CBC7B700B6F9A9 /* defaultProfile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defaultProfile.png; sourceTree = SOURCE_ROOT; };
 		023D1A5118A0127B009CA940 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		023D1A5418A056A3009CA940 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -490,6 +493,8 @@
 				0219FCE5183EFBF80080A1F1 /* ProfileViewController.m */,
 				022FC9B218E9084B006FD44D /* MatchingArtistsViewController.h */,
 				022FC9B318E9084B006FD44D /* MatchingArtistsViewController.m */,
+				022FC9B718E9E072006FD44D /* ViewHelpFileViewController.h */,
+				022FC9B818E9E072006FD44D /* ViewHelpFileViewController.m */,
 			);
 			name = "New Views";
 			sourceTree = "<group>";
@@ -636,6 +641,7 @@
 			files = (
 				945B78691895822E00C26AAA /* TDAudioStream.m in Sources */,
 				0220CB58182C977F006C10A8 /* AppDelegate.m in Sources */,
+				022FC9B918E9E072006FD44D /* ViewHelpFileViewController.m in Sources */,
 				945B786E1895822E00C26AAA /* TDSession.m in Sources */,
 				945B78661895822E00C26AAA /* TDAudioQueueBufferManager.m in Sources */,
 				945B78671895822E00C26AAA /* TDAudioQueueController.m in Sources */,
