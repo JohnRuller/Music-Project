@@ -41,6 +41,7 @@
 		02E3859018EB17460040BB76 /* Host.png in Resources */ = {isa = PBXBuildFile; fileRef = 02E3858E18EB17460040BB76 /* Host.png */; };
 		02E3859218EB28680040BB76 /* defaultProfile.png in Resources */ = {isa = PBXBuildFile; fileRef = 02E3859118EB28680040BB76 /* defaultProfile.png */; };
 		02E3859518EB28820040BB76 /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02E3859318EB28820040BB76 /* HelpViewController.m */; };
+		02E3859718EB2D120040BB76 /* defaultProfile2.png in Resources */ = {isa = PBXBuildFile; fileRef = 02E3859618EB2D120040BB76 /* defaultProfile2.png */; };
 		02E5368818C2BDA500CC53B3 /* Icon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02E5368318C2BDA500CC53B3 /* Icon-60@2x.png */; };
 		02E5368918C2BDA500CC53B3 /* Icon-Small-40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02E5368418C2BDA500CC53B3 /* Icon-Small-40@2x.png */; };
 		02E5368A18C2BDA500CC53B3 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02E5368518C2BDA500CC53B3 /* Icon-Small@2x.png */; };
@@ -129,6 +130,7 @@
 		02E3859118EB28680040BB76 /* defaultProfile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defaultProfile.png; sourceTree = "<group>"; };
 		02E3859318EB28820040BB76 /* HelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpViewController.m; sourceTree = "<group>"; };
 		02E3859418EB28820040BB76 /* HelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpViewController.h; sourceTree = "<group>"; };
+		02E3859618EB2D120040BB76 /* defaultProfile2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defaultProfile2.png; sourceTree = "<group>"; };
 		02E5368318C2BDA500CC53B3 /* Icon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-60@2x.png"; path = "Images.xcassets/AppIcon.appiconset/Icon-60@2x.png"; sourceTree = "<group>"; };
 		02E5368418C2BDA500CC53B3 /* Icon-Small-40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small-40@2x.png"; path = "Images.xcassets/AppIcon.appiconset/Icon-Small-40@2x.png"; sourceTree = "<group>"; };
 		02E5368518C2BDA500CC53B3 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small@2x.png"; path = "Images.xcassets/AppIcon.appiconset/Icon-Small@2x.png"; sourceTree = "<group>"; };
@@ -305,6 +307,7 @@
 		02E5363518C13B5D00CC53B3 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				02E3859618EB2D120040BB76 /* defaultProfile2.png */,
 				02E3859118EB28680040BB76 /* defaultProfile.png */,
 				02E3858D18EB17460040BB76 /* Guest.png */,
 				02E3858E18EB17460040BB76 /* Host.png */,
@@ -455,6 +458,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02E3859718EB2D120040BB76 /* defaultProfile2.png in Resources */,
 				943CAA7418E2161200BA019B /* albumart.png in Resources */,
 				94AEB3EB18E783D200EC1E0B /* pause.png in Resources */,
 				02F5DCDE18CF8BF20006D633 /* MediumComp.png in Resources */,

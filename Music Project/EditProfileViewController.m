@@ -111,7 +111,7 @@ profileManager *userProfile;
 - (IBAction)clear:(id)sender {
     _nameTextField.text = @"";
     _taglineTextField.text = @"";
-    _imageView.image = [UIImage imageNamed:@"defaultProfile.png"];
+    _imageView.image = [UIImage imageNamed:@"defaultProfile2.png"];
 }
 
 #pragma mark - UITextField Delegate method implementation

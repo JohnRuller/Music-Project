@@ -54,7 +54,7 @@
             NSLog(@"Creating a default profile for user.");
             
             //setup default image
-            UIImage *defaultImage = [UIImage imageNamed:@"defaultProfile.png"];
+            UIImage *defaultImage = [UIImage imageNamed:@"defaultProfile2.png"];
             
             // Create a new managed object
             NSManagedObjectContext *context = [self managedObjectContext];
