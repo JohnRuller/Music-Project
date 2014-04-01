@@ -12,8 +12,9 @@
 @property (strong, nonatomic) IBOutlet UIImageView *profileImage;
 @property (strong, nonatomic) IBOutlet UILabel *nameLabel;
 @property (strong, nonatomic) IBOutlet UILabel *taglineLabel;
-@property (strong, nonatomic) IBOutlet UILabel *matchingLabel;
+@property (strong, nonatomic) IBOutlet UILabel *artistLabel;
 @property (strong, nonatomic) IBOutlet UILabel *compLabel;
+@property (strong, nonatomic) IBOutlet UIButton *compButton;
 @property (strong, nonatomic) IBOutlet UIImageView *compImageView;
 - (IBAction)back:(id)sender;
 @property (strong, nonatomic) IBOutlet UITableView *artistTableView;

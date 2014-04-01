@@ -244,11 +244,12 @@
         [stringArtistsArray addObject:artistTitle];
     }
     
+    /*
     if([stringArtistsArray count] == 0) {
         NSLog(@"Artist array is empty.");
         [stringArtistsArray addObject:@"No artists on user's device."];
 
-    }
+    }*/
     
     artistsArray = stringArtistsArray;
 
@@ -347,23 +348,23 @@
     UIImage *compBar = [[UIImage alloc] init];
     
     if(percentage > 0 && percentage <= .33) {
-       compatabilityRating = @"Low compatability!";
+       compatabilityRating = @"LOW";
         compBar = [UIImage imageNamed:@"LowComp.png"];
     }
     else if(percentage > .33 && percentage <= .66) {
-        compatabilityRating = @"Medium compatability!";
+        compatabilityRating = @"MEDIUM";
         compBar = [UIImage imageNamed:@"MediumComp.png"];
     }
     else if(percentage > .66 && percentage <= 1.00) {
-        compatabilityRating = @"High compatability!";
+        compatabilityRating = @"HIGH";
         compBar = [UIImage imageNamed:@"HighComp.png"];
     }
     else if (percentage == 0) {
-        compatabilityRating = @"No matching artists.";
+        compatabilityRating = @"NONE";
         compBar = [UIImage imageNamed:@"NoComp.png"];
     }
     else {
-        compatabilityRating = @"Rating could not be determined.";
+        compatabilityRating = @"NONE";
         compBar = [UIImage imageNamed:@"NoComp.png"];
     }
     

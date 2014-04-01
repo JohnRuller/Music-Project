@@ -504,7 +504,8 @@ UITabBarController *tbc;
     
         //set compatability
         UILabel *profileCompatabilityRating = (UILabel *)[cell viewWithTag:103];
-        [profileCompatabilityRating setText:[[self.guestProfiles objectAtIndex:profileIndex] objectForKey:@"rating"]];
+        //set compatability
+        [profileCompatabilityRating setText:[NSString stringWithFormat:@"Your artists compatability is %@", [[self.guestProfiles objectAtIndex:profileIndex] objectForKey:@"rating"]]];
         UIImageView *compBarImageView = (UIImageView *)[cell viewWithTag:105];
         compBarImageView.image = [[self.guestProfiles objectAtIndex:profileIndex] objectForKey:@"compBarImage"];
         

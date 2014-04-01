@@ -44,7 +44,8 @@ NSArray *matchingArtists;
     userProfile = [[profileManager alloc] init];
 
     //labels
-    _nameLabel.text = [guestDictionary objectForKey:@"name"];
+    NSString *name = [guestDictionary objectForKey:@"name"];
+    _nameLabel.text = name;
     _taglineLabel.text = [guestDictionary objectForKey:@"tagline"];
     
     //image
@@ -54,18 +55,28 @@ NSArray *matchingArtists;
     CALayer * l = [self.profileImage layer];
     [l setMasksToBounds:YES];
     [l setCornerRadius:45.0];
+    [l setBorderWidth:0.25];
+    [l setBorderColor:[[UIColor blackColor] CGColor]];
     
     //set compatability
-    [_compLabel setText:[guestDictionary objectForKey:@"rating"]];
+    [_compLabel setText:[NSString stringWithFormat:@"Your artists compatability is %@", [guestDictionary objectForKey:@"rating"]]];
     _compImageView.image = [guestDictionary objectForKey:@"compBarImage"];
     
     guestArtists = [[NSArray alloc] init];
     guestArtists = [userProfile getUpdatedGuestArtists:[guestDictionary objectForKey:@"artists"]];
     //guestArtists = [guestDictionary objectForKey:@"artists"];
     NSLog(@"Guest Artists array count in gues profile view: %lu", (unsigned long)[guestArtists count]);
+    if([guestArtists count] == 0) {
+        [_artistLabel setText:[NSString stringWithFormat:@"%@ has no artists.", name]];
+    }
+    else {
+        [_artistLabel setText:[NSString stringWithFormat:@"%@'s %lu artists:", name, (unsigned long)[guestArtists count]]];
+    }
+
     
     matchingArtists = [userProfile getMatchingArtists:[guestDictionary objectForKey:@"artists"]];
-    [_matchingLabel setText:[NSString stringWithFormat:@"You have %lu matching artists.", (unsigned long)[matchingArtists count]]];
+    [_compButton setTitle:[NSString stringWithFormat:@"You have %lu artists in common.", (unsigned long)[matchingArtists count]] forState:UIControlStateNormal];
+
     
     //setup table
     [self.artistTableView setDelegate:self];
@@ -77,6 +88,9 @@ NSArray *matchingArtists;
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)matchingButton:(id)sender {
 }
 
 - (IBAction)back:(id)sender {
@@ -118,6 +132,9 @@ NSArray *matchingArtists;
 
     
     cell.textLabel.text = artistTitle;
+    
+    cell.detailTextLabel.font = [UIFont fontWithName:@"System" size:12];
+
     
     /*
     if([isMatching isEqualToString:@"YES"]) {
