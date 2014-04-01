@@ -510,7 +510,7 @@ UITabBarController *tbc;
         
         //set room identifier
         UIImageView *identifierImageView = (UIImageView *)[cell viewWithTag:107];
-        if([_isHost isEqualToString:@"YES"]) {
+        if([_appDelegate.hostName isEqualToString:peerID]) {
             identifierImageView.image = [UIImage imageNamed:@"Host.png"];
         }
         else {
