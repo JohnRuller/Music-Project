@@ -33,7 +33,7 @@
 
 -(void) setName:(NSString *)newName;
 -(void) setTagline:(NSString *)newTagline;
--(void) setProfilePhoto:(UIImage *)newProfilePhoto;
+-(void) setProfilePhoto:(NSData *)newProfilePhoto;
 -(void) setArtistsArray:(NSArray *)newArtistsArray;
 -(void) setupArtistsArray;
 -(void) artistsArrayToString;

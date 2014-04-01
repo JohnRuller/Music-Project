@@ -102,7 +102,8 @@ profileManager *userProfile;
     //set values in core data
     [userProfile setName:self.nameTextField.text];
     [userProfile setTagline:self.taglineTextField.text];
-    [userProfile setProfilePhoto:self.imageView.image];
+    NSData *imageData = UIImagePNGRepresentation(self.imageView.image);
+    [userProfile setProfilePhoto:imageData];
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }

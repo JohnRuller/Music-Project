@@ -295,7 +295,7 @@ UITabBarController *tbc;
         
         //receive data
         NSData *receivedData = [[notification userInfo] objectForKey:@"data"];
-        NSLog(@"The length of the data being received is %d bytes.", [receivedData length]);
+        NSLog(@"The length of the data being received is %lu bytes.", (unsigned long)[receivedData length]);
         
         id myObject = [NSKeyedUnarchiver unarchiveObjectWithData:receivedData];
     
@@ -323,7 +323,7 @@ UITabBarController *tbc;
                 //add profile data to profile array
                 NSLog(@"Adding %@'s profile data in array.", peerDisplayName);
                 [self.guestProfiles addObject:dic];
-                NSLog(@"Current number of entries in profile data array: %d", [self.guestProfiles count]);
+                NSLog(@"Current number of entries in profile data array: %lu", (unsigned long)[self.guestProfiles count]);
                 
                 //set host name in app delegate
                 if([[dic objectForKey:@"isHost"] isEqualToString:@"YES"]) {

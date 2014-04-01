@@ -63,7 +63,8 @@
             //using setters
             [self setName:[UIDevice currentDevice].name];
             [self setTagline:@"Music is cool!"];
-            [self setProfilePhoto:defaultImage];
+            NSData *imageData = UIImagePNGRepresentation(defaultImage);
+            [self setProfilePhoto:imageData];
             
             [self saveData];
             
@@ -179,9 +180,8 @@
     }
     
 }
--(void) setProfilePhoto:(UIImage *)newProfilePhoto {
+-(void) setProfilePhoto:(NSData *)imageData {
     
-    NSData *imageData = UIImagePNGRepresentation(newProfilePhoto);
     profilePhoto = imageData;
     
     //update profiles
@@ -222,7 +222,7 @@
     
     //check how big array is
     NSData *dataToSend = [NSKeyedArchiver archivedDataWithRootObject:[artistsArray copy]];
-    NSLog(@"The size of the archived artists array is %d.", [dataToSend length]);
+    NSLog(@"The size of the archived artists array is %lu.", (unsigned long)[dataToSend length]);
     
     /*if([artistsArray count] == 0) {
      NSMutableArray *emptyArtists = [[NSMutableArray alloc] init];
