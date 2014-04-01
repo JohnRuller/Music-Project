@@ -73,7 +73,7 @@ UITabBarController *tbc;
     
         //set host values
         _isHost = @"YES";
-        _testLabel.text = @"HOST";
+        //_testLabel.text = @"HOST";
         //_appDelegate.hostName = userProfile.name;
     
         //show browse button
@@ -88,7 +88,7 @@ UITabBarController *tbc;
     
         //set guest values
         _isHost = @"NO";
-        _testLabel.text = @"GUEST";
+        //_testLabel.text = @"GUEST";
     
         //hide browse button
         _browseButton.enabled = NO;
@@ -344,7 +344,7 @@ UITabBarController *tbc;
             else if ([type isEqualToString:@"Disconnect"]) {
                 NSLog(@"%@ has disconnected from the room.", peerDisplayName);
                 
-                int indexOfPeer = [_arrConnectedDevices indexOfObject:peerDisplayName];
+                NSInteger indexOfPeer = [_arrConnectedDevices indexOfObject:peerDisplayName];
                 [_arrConnectedDevices removeObjectAtIndex:indexOfPeer];
                 int indexOfProfile = [self profileIndex:peerDisplayName];
                 [self.guestProfiles removeObjectAtIndex:indexOfProfile];
@@ -507,6 +507,16 @@ UITabBarController *tbc;
         [profileCompatabilityRating setText:[[self.guestProfiles objectAtIndex:profileIndex] objectForKey:@"rating"]];
         UIImageView *compBarImageView = (UIImageView *)[cell viewWithTag:105];
         compBarImageView.image = [[self.guestProfiles objectAtIndex:profileIndex] objectForKey:@"compBarImage"];
+        
+        //set room identifier
+        UIImageView *identifierImageView = (UIImageView *)[cell viewWithTag:107];
+        if([_isHost isEqualToString:@"YES"]) {
+            identifierImageView.image = [UIImage imageNamed:@"Host.png"];
+        }
+        else {
+            identifierImageView.image = [UIImage imageNamed:@"Guest.png"];
+        }
+        
         
     }
     

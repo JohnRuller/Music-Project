@@ -40,6 +40,8 @@
 		0242BB2D18D2B734007C2CA1 /* MainTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0242BB2C18D2B734007C2CA1 /* MainTabBarViewController.m */; };
 		0242BB3018D661AF007C2CA1 /* ViewGuestProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0242BB2F18D661AF007C2CA1 /* ViewGuestProfileViewController.m */; };
 		02CBB022188382C8008AF034 /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02CBB021188382C8008AF034 /* MultipeerConnectivity.framework */; };
+		02E3858F18EB17460040BB76 /* Guest.png in Resources */ = {isa = PBXBuildFile; fileRef = 02E3858D18EB17460040BB76 /* Guest.png */; };
+		02E3859018EB17460040BB76 /* Host.png in Resources */ = {isa = PBXBuildFile; fileRef = 02E3858E18EB17460040BB76 /* Host.png */; };
 		02E5368818C2BDA500CC53B3 /* Icon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02E5368318C2BDA500CC53B3 /* Icon-60@2x.png */; };
 		02E5368918C2BDA500CC53B3 /* Icon-Small-40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02E5368418C2BDA500CC53B3 /* Icon-Small-40@2x.png */; };
 		02E5368A18C2BDA500CC53B3 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02E5368518C2BDA500CC53B3 /* Icon-Small@2x.png */; };
@@ -127,6 +129,8 @@
 		0242BB2E18D661AF007C2CA1 /* ViewGuestProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewGuestProfileViewController.h; sourceTree = "<group>"; };
 		0242BB2F18D661AF007C2CA1 /* ViewGuestProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewGuestProfileViewController.m; sourceTree = "<group>"; };
 		02CBB021188382C8008AF034 /* MultipeerConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultipeerConnectivity.framework; path = System/Library/Frameworks/MultipeerConnectivity.framework; sourceTree = SDKROOT; };
+		02E3858D18EB17460040BB76 /* Guest.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Guest.png; sourceTree = "<group>"; };
+		02E3858E18EB17460040BB76 /* Host.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Host.png; sourceTree = "<group>"; };
 		02E5368318C2BDA500CC53B3 /* Icon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-60@2x.png"; path = "Images.xcassets/AppIcon.appiconset/Icon-60@2x.png"; sourceTree = "<group>"; };
 		02E5368418C2BDA500CC53B3 /* Icon-Small-40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small-40@2x.png"; path = "Images.xcassets/AppIcon.appiconset/Icon-Small-40@2x.png"; sourceTree = "<group>"; };
 		02E5368518C2BDA500CC53B3 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small@2x.png"; path = "Images.xcassets/AppIcon.appiconset/Icon-Small@2x.png"; sourceTree = "<group>"; };
@@ -304,6 +308,8 @@
 		02E5363518C13B5D00CC53B3 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				02E3858D18EB17460040BB76 /* Guest.png */,
+				02E3858E18EB17460040BB76 /* Host.png */,
 				943CAA6E18E2161200BA019B /* albumart.png */,
 				02E5363418C13B4400CC53B3 /* AppIcons */,
 				943DEC8718E8A3D1008C0C77 /* chat30.png */,
@@ -474,11 +480,13 @@
 				943DEC8418E8A38E008C0C77 /* playlist30.png in Resources */,
 				943DEC8818E8A3D1008C0C77 /* chat@2x.png in Resources */,
 				945B78431895812500C26AAA /* MainStoryboard.storyboard in Resources */,
+				02E3858F18EB17460040BB76 /* Guest.png in Resources */,
 				94AEB3EC18E783D200EC1E0B /* play.png in Resources */,
 				022FC9B618E9DBFC006FD44D /* helpfiles.plist in Resources */,
 				02F5DCDB18CF8BF20006D633 /* NoComp.png in Resources */,
 				94AEB3ED18E783D200EC1E0B /* stop.png in Resources */,
 				943DEC8518E8A38E008C0C77 /* playlist@2x.png in Resources */,
+				02E3859018EB17460040BB76 /* Host.png in Resources */,
 				0220CB5A182C977F006C10A8 /* Images.xcassets in Resources */,
 				02E5368A18C2BDA500CC53B3 /* Icon-Small@2x.png in Resources */,
 			);
