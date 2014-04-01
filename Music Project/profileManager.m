@@ -347,23 +347,23 @@
     UIImage *compBar = [[UIImage alloc] init];
     
     if(percentage > 0 && percentage <= .33) {
-       compatabilityRating = @"Low compatability";
+       compatabilityRating = @"Low compatability!";
         compBar = [UIImage imageNamed:@"LowComp.png"];
     }
     else if(percentage > .33 && percentage <= .66) {
-        compatabilityRating = @"Medium compatability";
+        compatabilityRating = @"Medium compatability!";
         compBar = [UIImage imageNamed:@"MediumComp.png"];
     }
     else if(percentage > .66 && percentage <= 1.00) {
-        compatabilityRating = @"High compatability";
+        compatabilityRating = @"High compatability!";
         compBar = [UIImage imageNamed:@"HighComp.png"];
     }
     else if (percentage == 0) {
-        compatabilityRating = @"No matching artists";
+        compatabilityRating = @"No matching artists.";
         compBar = [UIImage imageNamed:@"NoComp.png"];
     }
     else {
-        compatabilityRating = @"Rating could not be determined";
+        compatabilityRating = @"Rating could not be determined.";
         compBar = [UIImage imageNamed:@"NoComp.png"];
     }
     
