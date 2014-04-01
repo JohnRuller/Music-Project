@@ -13,8 +13,6 @@
 		0217EEB018C514D70060DA48 /* profileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0217EEAF18C514D70060DA48 /* profileManager.m */; };
 		0217EEB118C514D70060DA48 /* profileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0217EEAF18C514D70060DA48 /* profileManager.m */; };
 		0217EEB518C62A230060DA48 /* ProfileTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0217EEB418C62A230060DA48 /* ProfileTests.m */; };
-		0219FCE2183EF1560080A1F1 /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0219FCE1183EF1560080A1F1 /* HelpViewController.m */; };
-		0219FCE3183EF1560080A1F1 /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0219FCE1183EF1560080A1F1 /* HelpViewController.m */; };
 		0219FCE6183EFBF80080A1F1 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0219FCE5183EFBF80080A1F1 /* ProfileViewController.m */; };
 		0219FCE7183EFBF80080A1F1 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0219FCE5183EFBF80080A1F1 /* ProfileViewController.m */; };
 		0220CB48182C977F006C10A8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0220CB47182C977F006C10A8 /* Foundation.framework */; };
@@ -33,7 +31,6 @@
 		022FC9B418E9084B006FD44D /* MatchingArtistsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 022FC9B318E9084B006FD44D /* MatchingArtistsViewController.m */; };
 		022FC9B618E9DBFC006FD44D /* helpfiles.plist in Resources */ = {isa = PBXBuildFile; fileRef = 022FC9B518E9DBFC006FD44D /* helpfiles.plist */; };
 		022FC9B918E9E072006FD44D /* ViewHelpFileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 022FC9B818E9E072006FD44D /* ViewHelpFileViewController.m */; };
-		02397E4B18CBC7B700B6F9A9 /* defaultProfile.png in Resources */ = {isa = PBXBuildFile; fileRef = 02397E4A18CBC7B700B6F9A9 /* defaultProfile.png */; };
 		023D1A5218A0127B009CA940 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 023D1A5118A0127B009CA940 /* Icon.png */; };
 		023D1A5318A0127B009CA940 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 023D1A5118A0127B009CA940 /* Icon.png */; };
 		023D1A5518A056A3009CA940 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 023D1A5418A056A3009CA940 /* MobileCoreServices.framework */; };
@@ -42,6 +39,8 @@
 		02CBB022188382C8008AF034 /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02CBB021188382C8008AF034 /* MultipeerConnectivity.framework */; };
 		02E3858F18EB17460040BB76 /* Guest.png in Resources */ = {isa = PBXBuildFile; fileRef = 02E3858D18EB17460040BB76 /* Guest.png */; };
 		02E3859018EB17460040BB76 /* Host.png in Resources */ = {isa = PBXBuildFile; fileRef = 02E3858E18EB17460040BB76 /* Host.png */; };
+		02E3859218EB28680040BB76 /* defaultProfile.png in Resources */ = {isa = PBXBuildFile; fileRef = 02E3859118EB28680040BB76 /* defaultProfile.png */; };
+		02E3859518EB28820040BB76 /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02E3859318EB28820040BB76 /* HelpViewController.m */; };
 		02E5368818C2BDA500CC53B3 /* Icon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02E5368318C2BDA500CC53B3 /* Icon-60@2x.png */; };
 		02E5368918C2BDA500CC53B3 /* Icon-Small-40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02E5368418C2BDA500CC53B3 /* Icon-Small-40@2x.png */; };
 		02E5368A18C2BDA500CC53B3 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02E5368518C2BDA500CC53B3 /* Icon-Small@2x.png */; };
@@ -75,7 +74,6 @@
 		94D3AE3018B6A84300495CAD /* PlaylistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94D3AE2F18B6A84300495CAD /* PlaylistViewController.m */; };
 		94E3105318B68825001DC113 /* MPCConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E3105218B68825001DC113 /* MPCConnection.m */; };
 		94E3105818B68D7C001DC113 /* ConnectionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E3105718B68D7C001DC113 /* ConnectionsViewController.m */; };
-		94F965B018CF79E400EBD344 /* penguin.png in Resources */ = {isa = PBXBuildFile; fileRef = 94F965AF18CF79E400EBD344 /* penguin.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,8 +93,6 @@
 		0217EEAE18C514D70060DA48 /* profileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = profileManager.h; sourceTree = "<group>"; };
 		0217EEAF18C514D70060DA48 /* profileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = profileManager.m; sourceTree = "<group>"; };
 		0217EEB418C62A230060DA48 /* ProfileTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileTests.m; sourceTree = "<group>"; };
-		0219FCE0183EF1560080A1F1 /* HelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HelpViewController.h; path = ../HelpViewController.h; sourceTree = "<group>"; };
-		0219FCE1183EF1560080A1F1 /* HelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HelpViewController.m; path = ../HelpViewController.m; sourceTree = "<group>"; };
 		0219FCE4183EFBF80080A1F1 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		0219FCE5183EFBF80080A1F1 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		0220CB44182C977F006C10A8 /* Music Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Music Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -121,7 +117,6 @@
 		022FC9B518E9DBFC006FD44D /* helpfiles.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = helpfiles.plist; sourceTree = "<group>"; };
 		022FC9B718E9E072006FD44D /* ViewHelpFileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewHelpFileViewController.h; sourceTree = "<group>"; };
 		022FC9B818E9E072006FD44D /* ViewHelpFileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewHelpFileViewController.m; sourceTree = "<group>"; };
-		02397E4A18CBC7B700B6F9A9 /* defaultProfile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defaultProfile.png; sourceTree = SOURCE_ROOT; };
 		023D1A5118A0127B009CA940 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		023D1A5418A056A3009CA940 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		0242BB2B18D2B734007C2CA1 /* MainTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabBarViewController.h; sourceTree = "<group>"; };
@@ -131,6 +126,9 @@
 		02CBB021188382C8008AF034 /* MultipeerConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultipeerConnectivity.framework; path = System/Library/Frameworks/MultipeerConnectivity.framework; sourceTree = SDKROOT; };
 		02E3858D18EB17460040BB76 /* Guest.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Guest.png; sourceTree = "<group>"; };
 		02E3858E18EB17460040BB76 /* Host.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Host.png; sourceTree = "<group>"; };
+		02E3859118EB28680040BB76 /* defaultProfile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defaultProfile.png; sourceTree = "<group>"; };
+		02E3859318EB28820040BB76 /* HelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpViewController.m; sourceTree = "<group>"; };
+		02E3859418EB28820040BB76 /* HelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpViewController.h; sourceTree = "<group>"; };
 		02E5368318C2BDA500CC53B3 /* Icon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-60@2x.png"; path = "Images.xcassets/AppIcon.appiconset/Icon-60@2x.png"; sourceTree = "<group>"; };
 		02E5368418C2BDA500CC53B3 /* Icon-Small-40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small-40@2x.png"; path = "Images.xcassets/AppIcon.appiconset/Icon-Small-40@2x.png"; sourceTree = "<group>"; };
 		02E5368518C2BDA500CC53B3 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small@2x.png"; path = "Images.xcassets/AppIcon.appiconset/Icon-Small@2x.png"; sourceTree = "<group>"; };
@@ -171,7 +169,6 @@
 		94E3105218B68825001DC113 /* MPCConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPCConnection.m; sourceTree = "<group>"; };
 		94E3105618B68D7C001DC113 /* ConnectionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectionsViewController.h; sourceTree = "<group>"; };
 		94E3105718B68D7C001DC113 /* ConnectionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectionsViewController.m; sourceTree = "<group>"; };
-		94F965AF18CF79E400EBD344 /* penguin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = penguin.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -308,6 +305,7 @@
 		02E5363518C13B5D00CC53B3 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				02E3859118EB28680040BB76 /* defaultProfile.png */,
 				02E3858D18EB17460040BB76 /* Guest.png */,
 				02E3858E18EB17460040BB76 /* Host.png */,
 				943CAA6E18E2161200BA019B /* albumart.png */,
@@ -316,7 +314,6 @@
 				943DEC8618E8A3D1008C0C77 /* chat@2x.png */,
 				948071A918E8A772008241D0 /* connections30.png */,
 				948071AA18E8A772008241D0 /* connections@2x.png */,
-				02397E4A18CBC7B700B6F9A9 /* defaultProfile.png */,
 				948071AD18E8A7E6008241D0 /* forward.png */,
 				02F5DCD818CF8BF20006D633 /* HighComp.png */,
 				0220CB59182C977F006C10A8 /* Images.xcassets */,
@@ -326,7 +323,6 @@
 				02F5DCD718CF8BF20006D633 /* NoComp.png */,
 				94AEB3E818E783D200EC1E0B /* pause.png */,
 				02E5368F18C2BE1C00CC53B3 /* PeerAudio.png */,
-				94F965AF18CF79E400EBD344 /* penguin.png */,
 				94AEB3E918E783D200EC1E0B /* play.png */,
 				943DEC8218E8A38E008C0C77 /* playlist30.png */,
 				943DEC8318E8A38E008C0C77 /* playlist@2x.png */,
@@ -338,6 +334,8 @@
 		94E3105018B687F9001DC113 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				02E3859318EB28820040BB76 /* HelpViewController.m */,
+				02E3859418EB28820040BB76 /* HelpViewController.h */,
 				0242BB2E18D661AF007C2CA1 /* ViewGuestProfileViewController.h */,
 				0242BB2F18D661AF007C2CA1 /* ViewGuestProfileViewController.m */,
 				9466556118B93325009061C5 /* AnarchyViewController.h */,
@@ -350,8 +348,6 @@
 				0242BB2C18D2B734007C2CA1 /* MainTabBarViewController.m */,
 				02E8C75A18A8A83E007AA6A3 /* EditProfileViewController.h */,
 				02E8C75B18A8A83E007AA6A3 /* EditProfileViewController.m */,
-				0219FCE0183EF1560080A1F1 /* HelpViewController.h */,
-				0219FCE1183EF1560080A1F1 /* HelpViewController.m */,
 				0220CB7D183DD50F006C10A8 /* MainViewController.h */,
 				0220CB7E183DD50F006C10A8 /* MainViewController.m */,
 				94D3AE2E18B6A84300495CAD /* PlaylistViewController.h */,
@@ -461,7 +457,6 @@
 			files = (
 				943CAA7418E2161200BA019B /* albumart.png in Resources */,
 				94AEB3EB18E783D200EC1E0B /* pause.png in Resources */,
-				94F965B018CF79E400EBD344 /* penguin.png in Resources */,
 				02F5DCDE18CF8BF20006D633 /* MediumComp.png in Resources */,
 				023D1A5218A0127B009CA940 /* Icon.png in Resources */,
 				02E5368918C2BDA500CC53B3 /* Icon-Small-40@2x.png in Resources */,
@@ -472,7 +467,6 @@
 				02E5368818C2BDA500CC53B3 /* Icon-60@2x.png in Resources */,
 				948071AC18E8A772008241D0 /* connections@2x.png in Resources */,
 				02E5368C18C2BDA500CC53B3 /* Default@2x.png in Resources */,
-				02397E4B18CBC7B700B6F9A9 /* defaultProfile.png in Resources */,
 				948071AB18E8A772008241D0 /* connections30.png in Resources */,
 				02E5368B18C2BDA500CC53B3 /* Default.png in Resources */,
 				02F5DCDC18CF8BF20006D633 /* HighComp.png in Resources */,
@@ -481,6 +475,7 @@
 				943DEC8818E8A3D1008C0C77 /* chat@2x.png in Resources */,
 				945B78431895812500C26AAA /* MainStoryboard.storyboard in Resources */,
 				02E3858F18EB17460040BB76 /* Guest.png in Resources */,
+				02E3859218EB28680040BB76 /* defaultProfile.png in Resources */,
 				94AEB3EC18E783D200EC1E0B /* play.png in Resources */,
 				022FC9B618E9DBFC006FD44D /* helpfiles.plist in Resources */,
 				02F5DCDB18CF8BF20006D633 /* NoComp.png in Resources */,
@@ -521,8 +516,8 @@
 				022FC9B418E9084B006FD44D /* MatchingArtistsViewController.m in Sources */,
 				9466556318B93325009061C5 /* AnarchyViewController.m in Sources */,
 				02E8C75918A869DD007AA6A3 /* MusicProject.xcdatamodeld in Sources */,
-				0219FCE2183EF1560080A1F1 /* HelpViewController.m in Sources */,
 				02E8C75C18A8A83E007AA6A3 /* EditProfileViewController.m in Sources */,
+				02E3859518EB28820040BB76 /* HelpViewController.m in Sources */,
 				0242BB3018D661AF007C2CA1 /* ViewGuestProfileViewController.m in Sources */,
 				0242BB2D18D2B734007C2CA1 /* MainTabBarViewController.m in Sources */,
 				949ABA2018B6923000D159A0 /* ChatViewController.m in Sources */,
@@ -534,7 +529,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0219FCE3183EF1560080A1F1 /* HelpViewController.m in Sources */,
 				02E8C75D18A8A83E007AA6A3 /* EditProfileViewController.m in Sources */,
 				0219FCE7183EFBF80080A1F1 /* ProfileViewController.m in Sources */,
 				0220CB80183DD50F006C10A8 /* MainViewController.m in Sources */,
