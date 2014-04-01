@@ -54,10 +54,13 @@
     if ([[segue identifier] isEqualToString:@"HelpSegue"]) {
         
         NSString *helpIndex = [helpContent objectAtIndex:[[_helpfilesTable indexPathForSelectedRow] row]];
-            
+        NSString *helpTitle = [helpFiles objectAtIndex:[[_helpfilesTable indexPathForSelectedRow] row]];
+
+        
         //send index over to next view controller
         ViewHelpFileViewController *destViewController = segue.destinationViewController;
         destViewController.helpIndex = helpIndex;
+        destViewController.helpTitle = helpTitle;
         
     }
 }

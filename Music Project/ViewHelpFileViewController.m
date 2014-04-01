@@ -27,7 +27,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    [_navItem setTitle:_helpTitle];
     [_txtView setText:_helpIndex];
 }
 

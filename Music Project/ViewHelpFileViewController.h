@@ -12,5 +12,8 @@
 - (IBAction)back:(id)sender;
 @property (strong, nonatomic) IBOutlet UITextView *txtView;
 @property (strong) NSString *helpIndex;
+@property (strong) NSString *helpTitle;
+
+@property (strong, nonatomic) IBOutlet UINavigationItem *navItem;
 
 @end
