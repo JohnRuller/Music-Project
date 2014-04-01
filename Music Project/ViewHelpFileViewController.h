@@ -10,5 +10,7 @@
 
 @interface ViewHelpFileViewController : UIViewController
 - (IBAction)back:(id)sender;
+@property (strong, nonatomic) IBOutlet UITextView *txtView;
+@property (strong) NSString *helpIndex;
 
 @end

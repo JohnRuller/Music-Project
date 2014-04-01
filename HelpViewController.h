@@ -11,5 +11,6 @@
 @interface HelpViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 - (IBAction)backButton:(id)sender;
+@property (strong, nonatomic) IBOutlet UITableView *helpfilesTable;
 
 @end

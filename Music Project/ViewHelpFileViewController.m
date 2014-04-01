@@ -27,6 +27,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    [_txtView setText:_helpIndex];
 }
 
 - (void)didReceiveMemoryWarning
@@ -47,5 +49,7 @@
 */
 
 - (IBAction)back:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+
 }
 @end

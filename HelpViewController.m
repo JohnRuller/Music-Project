@@ -16,6 +16,7 @@
 @implementation HelpViewController
 {
     NSArray *helpFiles;
+    NSArray *helpContent;
 }
 
 
@@ -33,6 +34,13 @@
     // Load the file content and read the data into arrays
     NSDictionary *dict = [[NSDictionary alloc] initWithContentsOfFile:path];
     helpFiles = [dict objectForKey:@"Topic"];
+    helpContent = [dict objectForKey:@"File"];
+
+    
+    
+    //setup table
+    [_helpfilesTable setDelegate:self];
+    [_helpfilesTable setDataSource:self];
 }
 
 - (void)didReceiveMemoryWarning
@@ -43,12 +51,13 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([[segue identifier] isEqualToString:@"HelpFileSegue"]) {
+    if ([[segue identifier] isEqualToString:@"HelpSegue"]) {
         
+        NSString *helpIndex = [helpContent objectAtIndex:[[_helpfilesTable indexPathForSelectedRow] row]];
             
-        //send guest profile data over to next view controller
-        //ViewHelpFileViewController *destViewController = segue.destinationViewController;
-        //destViewController.guestDictionary = guestDictionary;
+        //send index over to next view controller
+        ViewHelpFileViewController *destViewController = segue.destinationViewController;
+        destViewController.helpIndex = helpIndex;
         
     }
 }
@@ -60,12 +69,11 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *simpleTableIdentifier = @"SimpleTableCell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NewCellIdentifier"];
+
     
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"NewCellIdentifier"];
     }
     
     cell.textLabel.text = [helpFiles objectAtIndex:indexPath.row];
