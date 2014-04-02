@@ -67,7 +67,7 @@ NSArray *matchingArtists;
     //guestArtists = [guestDictionary objectForKey:@"artists"];
     NSLog(@"Guest Artists array count in gues profile view: %lu", (unsigned long)[guestArtists count]);
     if([guestArtists count] == 0) {
-        [_artistLabel setText:[NSString stringWithFormat:@"%@ has no artists.", name]];
+        [_artistLabel setText:[NSString stringWithFormat:@"%@ has no artists", name]];
     }
     else {
         [_artistLabel setText:[NSString stringWithFormat:@"%@'s %lu artists:", name, (unsigned long)[guestArtists count]]];
@@ -75,7 +75,13 @@ NSArray *matchingArtists;
 
     
     matchingArtists = [userProfile getMatchingArtists:[guestDictionary objectForKey:@"artists"]];
-    [_compButton setTitle:[NSString stringWithFormat:@"You have %lu artists in common.", (unsigned long)[matchingArtists count]] forState:UIControlStateNormal];
+    if([matchingArtists count] == 0) {
+        [_compButton setTitle:[NSString stringWithFormat:@"You have no artists in common"] forState:UIControlStateNormal];
+    }
+    else {
+        [_compButton setTitle:[NSString stringWithFormat:@"You have %lu artists in common", (unsigned long)[matchingArtists count]] forState:UIControlStateNormal];
+    }
+    
 
     
     //setup table

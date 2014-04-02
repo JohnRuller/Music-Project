@@ -44,6 +44,14 @@ profileManager *userProfile;
     UIImage *image = [UIImage imageWithData:userProfile.profilePhoto];
     self.imageView.image = image;
     
+    //artists label
+    if([userProfile.artistsArray count] == 0) {
+        _artistsLabel.text = @"No artists on this device.";
+    }
+    else {
+        [_artistsLabel setText:[NSString stringWithFormat:@"%@'s %lu artists:", userProfile.name, (unsigned long)[userProfile.artistsArray count]]];
+    }
+    
 }
 
 - (void)viewDidLoad
@@ -68,6 +76,14 @@ profileManager *userProfile;
     [l setCornerRadius:45.0];
     [l setBorderWidth:0.25];
     [l setBorderColor:[[UIColor blackColor] CGColor]];
+    
+    //artists label
+    if([userProfile.artistsArray count] == 0) {
+        _artistsLabel.text = @"No artists on this device.";
+    }
+    else {
+        [_artistsLabel setText:[NSString stringWithFormat:@"%@'s %lu artists:", userProfile.name, (unsigned long)[userProfile.artistsArray count]]];
+    }
 }
 
 - (void)didReceiveMemoryWarning

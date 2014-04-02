@@ -18,6 +18,7 @@
 
 //navigation bar
 @property (strong, nonatomic) IBOutlet UINavigationBar *navBar;
+@property (strong, nonatomic) IBOutlet UILabel *artistsLabel;
 
 //labels
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;

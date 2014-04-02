@@ -68,7 +68,7 @@ profileManager *userProfile;
     // set image layer circular
     CALayer * l = [self.imageView layer];
     [l setMasksToBounds:YES];
-    [l setCornerRadius:45.0];
+    [l setCornerRadius:80.0];
     [l setBorderWidth:0.25];
     [l setBorderColor:[[UIColor blackColor] CGColor]];
 
@@ -84,6 +84,41 @@ profileManager *userProfile;
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [self.view endEditing:YES];
+}
+
+/*
+ functions for pushing the screen up when the keyboard is brought up: http://stackoverflow.com/questions/1247113/iphone-keyboard-covers-uitextfield
+ */
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+        [self animateTextField: textField up: YES];
+    }];
+}
+
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+        [self animateTextField: textField up: NO];
+    }];
+}
+
+- (void) animateTextField: (UITextField*) textField up: (BOOL) up
+{
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+        
+        const int movementDistance = 160; // tweak as needed
+        const float movementDuration = 0.3f; // tweak as needed
+        
+        int movement = (up ? -movementDistance : movementDistance);
+        
+        [UIView beginAnimations: @"anim" context: nil];
+        [UIView setAnimationBeginsFromCurrentState: YES];
+        [UIView setAnimationDuration: movementDuration];
+        self.view.frame = CGRectOffset(self.view.frame, 0, movement);
+        [UIView commitAnimations];
+    }];
 }
 
 #pragma mark - Buttons

@@ -11,6 +11,7 @@
 @interface MatchingArtistsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 - (IBAction)back:(id)sender;
 @property (strong, nonatomic) IBOutlet UITableView *artistsTable;
+@property (strong, nonatomic) IBOutlet UILabel *tableLabel;
 
 @property (strong) NSArray *matchingArtists;
 

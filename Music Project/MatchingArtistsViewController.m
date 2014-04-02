@@ -36,8 +36,10 @@
     
     
      if([matchingArtists count] == 0) {
-         NSArray *noArtists = [[NSArray alloc] initWithObjects:@"There are no matching artists.", nil];
-         matchingArtists = [noArtists copy];
+         _tableLabel.text = @"There are no matching artists";
+     }
+     else {
+         [_tableLabel setText:[NSString stringWithFormat:@"%lu matching artists:", (unsigned long)[matchingArtists count]]];
      }
     
     //setup table
