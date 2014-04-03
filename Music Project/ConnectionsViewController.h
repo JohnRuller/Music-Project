@@ -19,5 +19,9 @@
 
 - (IBAction)browseForDevices:(id)sender;
 - (IBAction)disconnect:(id)sender;
+-(void)setupDisconnect;
+
+-(void)disconnectFunc;
+
 
 @end

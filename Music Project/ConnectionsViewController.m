@@ -54,6 +54,7 @@ UITabBarController *tbc;
     self.guestProfiles = [[NSMutableArray alloc] init];
     
     _appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    _appDelegate.myConnectionsViewController = self;
     
     //setup peer and session
     if([userProfile hasProfileData]) {
@@ -194,18 +195,23 @@ UITabBarController *tbc;
 
 - (IBAction)disconnect:(id)sender {
     
-        //send disconnect data
-        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-            [self sendDisconnectData];
-        }];
-    
-        //run disconnect method after delay
-        [self performSelector:@selector(disconnectFunc) withObject:self afterDelay:3.0 ];
+    [self setupDisconnect];
     
         [self dismissViewControllerAnimated:YES completion:nil];
 }
-
+-(void)setupDisconnect {
+    NSLog(@"Setup disconnect.");
+    //send disconnect data
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        [self sendDisconnectData];
+    }];
+    
+    //run disconnect method after delay
+    [self performSelector:@selector(disconnectFunc) withObject:self afterDelay:3.0 ];
+}
 -(void)disconnectFunc {
+    NSLog(@"Disconnect func.");
+
     [_appDelegate.mpcController.session disconnect];
     [_arrConnectedDevices removeAllObjects];
     [self.guestProfiles removeAllObjects];
@@ -389,15 +395,16 @@ UITabBarController *tbc;
         //if not connected
         else if (state == MCSessionStateNotConnected){
             NSLog(@"%@ didChangeState to disconnected.", peerDisplayName);
-            /*
+            
             if ([_arrConnectedDevices count] > 0) {
                 
                 //disconnect device
                 int indexOfPeer = [_arrConnectedDevices indexOfObject:peerDisplayName];
-                if(indexOfPeer > 0 && indexOfPeer < 8) {
+                if(indexOfPeer >= 0 && indexOfPeer < 8) {
                     NSLog(@"Disconnecting %@ in didChangeState.", peerDisplayName);
-
-                    [_arrConnectedDevices removeObjectAtIndex:indexOfPeer];
+                    
+                    if ([_arrConnectedDevices count] > 0) {
+                        [_arrConnectedDevices removeObjectAtIndex:indexOfPeer]; }
                     
                     if([self hasProfileData:peerDisplayName]) {
                         int indexOfProfile = [self profileIndex:peerDisplayName];
@@ -417,7 +424,7 @@ UITabBarController *tbc;
                 }
                 
             }
-             */
+            
         }
         
         //reload table data

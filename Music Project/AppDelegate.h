@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
 #import "MPCConnection.h"
+#import "ConnectionsViewController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -21,6 +22,9 @@
 @property (strong, nonatomic) MPCConnection *mpcController;
 
 @property (strong, nonatomic) NSString *hostName;
+
+@property (weak, nonatomic) ConnectionsViewController *myConnectionsViewController;
+
 
 
 
