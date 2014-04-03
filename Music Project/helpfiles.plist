@@ -13,12 +13,32 @@
 	</array>
 	<key>File</key>
 	<array>
-		<string>Peer Audio is created by Ryan Fraser and John Ruller. The idea behind the app is that a crowd-sourced music playlist can be created by all connected devices in a room.</string>
-		<string>You can set your profile name, tagline and image. This will be displayed when you connect to a room. If no profile is set, a default profile will be created, using your device name.</string>
-		<string>Creating a room sets you as the host. You can browse for guests and send them an invite to the room. As host, you are the only one able to playback the songs in the playlist.</string>
-		<string>Joining a room sets you as a guest. You automatically set to adverstise, and must wait for a host to invite you to their room. Once in a room, you can add songs to the playlist from your music library.</string>
-		<string>You are able to add songs that are locally stored on your device. Unfortunately, this mean songs located in the cloud are not accessable in this application.</string>
-		<string>Once you are finished in a room, you can selec the disconnect button to leave. If a host disconnects, the room is cleared (all guests will be disconnected).</string>
+		<string>Peer Audio allows users connected on local WiFi and Bluetooth networks to create and collaborate on a music playlist. The idea is that many users together in a room can create and listen to a playlist together using all of the music on each user&apos;s device.
+
+Example setup:
+----
+User A launches the app and selects to create a room. They are set as the Host.
+
+User B launches the app and selects to join a room. They are set as a Guest.
+
+User A selects to browse for others. They find User B and send them an invite
+
+User B gets the invite, accepts, and the two users are then connected in the room.
+
+User A and B can both add songs from their device music library. They can both see the playlist as it is created, and vote to up vote or down vote any songs in the playlist.
+
+The Host (User A) can then play back the music, as they are the only user that has music playback functionality.
+----
+
+Peer Audio is created by Ryan Fraser and John Ruller</string>
+		<string>Each users has the ability to set a profile. This includes the user&apos;s name, tagline, and profile image. This profile, along with a list of the artists from the users music library will be displayed to all other users when connected to a room.
+
+If a users chooses not to set a profile, a default image will be set, and their device name will be set as their profile name.</string>
+		<string>When a user selects to create a room, they are set as the Host. As the host, they have the functionality to playback the music. They can also browse for any Guests and send them invites.</string>
+		<string>When a user selects to join a room, they are set as a Guest. Automatically Guest&apos;s are set to advertise their availability. They can then receive an invite from a Host.
+</string>
+		<string>Songs can be added from a user&apos;s device music library. These are local songs (MP3s, AACs, etc.) that can be added to the playlist. Once a song is selected, it is sent to the Host to be added to the playlist.</string>
+		<string>Once you are done in a room, you can select to Disconnect. If a Host disconnects, all Guests will be disconnected from the room.</string>
 	</array>
 </dict>
 </plist>
