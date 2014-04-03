@@ -192,6 +192,9 @@
         
         _buttonStop.enabled = NO;
         _buttonStop.hidden = YES;
+        
+        _buttonPlay.enabled = YES;
+        _buttonPlay.hidden = NO;
     }
     
     NSMutableArray *playlist = [_playlistInfo getArray];
