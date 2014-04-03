@@ -388,15 +388,36 @@ UITabBarController *tbc;
         }
         //if not connected
         else if (state == MCSessionStateNotConnected){
+            NSLog(@"%@ didChangeState to disconnected.", peerDisplayName);
+            /*
             if ([_arrConnectedDevices count] > 0) {
                 
                 //disconnect device
-                NSLog(@"Disconnecting %@ in didChangeState.", peerDisplayName);
-                //int indexOfPeer = [_arrConnectedDevices indexOfObject:peerDisplayName];
-                //[_arrConnectedDevices removeObjectAtIndex:indexOfPeer];
-                //int indexOfProfile = [self profileIndex:peerDisplayName];
-                //[self.guestProfiles removeObjectAtIndex:indexOfProfile];
+                int indexOfPeer = [_arrConnectedDevices indexOfObject:peerDisplayName];
+                if(indexOfPeer > 0 && indexOfPeer < 8) {
+                    NSLog(@"Disconnecting %@ in didChangeState.", peerDisplayName);
+
+                    [_arrConnectedDevices removeObjectAtIndex:indexOfPeer];
+                    
+                    if([self hasProfileData:peerDisplayName]) {
+                        int indexOfProfile = [self profileIndex:peerDisplayName];
+                        [self.guestProfiles removeObjectAtIndex:indexOfProfile];
+                    }
+                    
+                    
+                    // Post a notification that a peer has left the room
+                    [[NSNotificationCenter defaultCenter]
+                     postNotificationName:@"peerLeftRoom" object:nil userInfo:[notification userInfo]];
+                    
+                    if([peerDisplayName isEqualToString:_appDelegate.hostName]) {
+                        [self disconnectFunc];
+                        [self dismissViewControllerAnimated:YES completion:nil];
+                    }
+                    
+                }
+                
             }
+             */
         }
         
         //reload table data
