@@ -399,7 +399,7 @@ UITabBarController *tbc;
             if ([_arrConnectedDevices count] > 0) {
                 
                 //disconnect device
-                int indexOfPeer = [_arrConnectedDevices indexOfObject:peerDisplayName];
+                NSInteger indexOfPeer = [_arrConnectedDevices indexOfObject:peerDisplayName];
                 if(indexOfPeer >= 0 && indexOfPeer < 8) {
                     NSLog(@"Disconnecting %@ in didChangeState.", peerDisplayName);
                     

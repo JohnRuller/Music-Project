@@ -96,20 +96,19 @@
 		0217EEB418C62A230060DA48 /* ProfileTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileTests.m; sourceTree = "<group>"; };
 		0219FCE4183EFBF80080A1F1 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		0219FCE5183EFBF80080A1F1 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
-		0220CB44182C977F006C10A8 /* Music Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Music Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0220CB44182C977F006C10A8 /* Peer Audio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Peer Audio.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0220CB47182C977F006C10A8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0220CB49182C977F006C10A8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		0220CB4B182C977F006C10A8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		0220CB4F182C977F006C10A8 /* Music Project-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Music Project-Info.plist"; sourceTree = "<group>"; };
+		0220CB4F182C977F006C10A8 /* Peer Audio-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Peer Audio-Info.plist"; sourceTree = "<group>"; };
 		0220CB51182C977F006C10A8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0220CB53182C977F006C10A8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		0220CB55182C977F006C10A8 /* Music Project-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Music Project-Prefix.pch"; sourceTree = "<group>"; };
 		0220CB56182C977F006C10A8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		0220CB57182C977F006C10A8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		0220CB59182C977F006C10A8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		0220CB5F182C977F006C10A8 /* Music ProjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Music ProjectTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0220CB5F182C977F006C10A8 /* Peer AudioTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Peer AudioTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0220CB60182C977F006C10A8 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		0220CB68182C977F006C10A8 /* Music ProjectTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Music ProjectTests-Info.plist"; sourceTree = "<group>"; };
+		0220CB68182C977F006C10A8 /* Peer AudioTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Peer AudioTests-Info.plist"; sourceTree = "<group>"; };
 		0220CB6A182C977F006C10A8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0220CB7D183DD50F006C10A8 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		0220CB7E183DD50F006C10A8 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
@@ -216,8 +215,8 @@
 		0220CB45182C977F006C10A8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0220CB44182C977F006C10A8 /* Music Project.app */,
-				0220CB5F182C977F006C10A8 /* Music ProjectTests.xctest */,
+				0220CB44182C977F006C10A8 /* Peer Audio.app */,
+				0220CB5F182C977F006C10A8 /* Peer AudioTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -257,10 +256,9 @@
 			children = (
 				02E8C75718A869DD007AA6A3 /* MusicProject.xcdatamodeld */,
 				02E5363518C13B5D00CC53B3 /* Images */,
-				0220CB4F182C977F006C10A8 /* Music Project-Info.plist */,
+				0220CB4F182C977F006C10A8 /* Peer Audio-Info.plist */,
 				0220CB50182C977F006C10A8 /* InfoPlist.strings */,
 				0220CB53182C977F006C10A8 /* main.m */,
-				0220CB55182C977F006C10A8 /* Music Project-Prefix.pch */,
 				022FC9B518E9DBFC006FD44D /* helpfiles.plist */,
 			);
 			name = "Supporting Files";
@@ -279,7 +277,7 @@
 			isa = PBXGroup;
 			children = (
 				023D1A5118A0127B009CA940 /* Icon.png */,
-				0220CB68182C977F006C10A8 /* Music ProjectTests-Info.plist */,
+				0220CB68182C977F006C10A8 /* Peer AudioTests-Info.plist */,
 				0220CB69182C977F006C10A8 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
@@ -383,9 +381,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		0220CB43182C977F006C10A8 /* Music Project */ = {
+		0220CB43182C977F006C10A8 /* Peer Audio */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0220CB70182C977F006C10A8 /* Build configuration list for PBXNativeTarget "Music Project" */;
+			buildConfigurationList = 0220CB70182C977F006C10A8 /* Build configuration list for PBXNativeTarget "Peer Audio" */;
 			buildPhases = (
 				0220CB40182C977F006C10A8 /* Sources */,
 				0220CB41182C977F006C10A8 /* Frameworks */,
@@ -395,14 +393,14 @@
 			);
 			dependencies = (
 			);
-			name = "Music Project";
+			name = "Peer Audio";
 			productName = "Music Project";
-			productReference = 0220CB44182C977F006C10A8 /* Music Project.app */;
+			productReference = 0220CB44182C977F006C10A8 /* Peer Audio.app */;
 			productType = "com.apple.product-type.application";
 		};
-		0220CB5E182C977F006C10A8 /* Music ProjectTests */ = {
+		0220CB5E182C977F006C10A8 /* Peer AudioTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0220CB73182C977F006C10A8 /* Build configuration list for PBXNativeTarget "Music ProjectTests" */;
+			buildConfigurationList = 0220CB73182C977F006C10A8 /* Build configuration list for PBXNativeTarget "Peer AudioTests" */;
 			buildPhases = (
 				0220CB5B182C977F006C10A8 /* Sources */,
 				0220CB5C182C977F006C10A8 /* Frameworks */,
@@ -413,9 +411,9 @@
 			dependencies = (
 				0220CB65182C977F006C10A8 /* PBXTargetDependency */,
 			);
-			name = "Music ProjectTests";
+			name = "Peer AudioTests";
 			productName = "Music ProjectTests";
-			productReference = 0220CB5F182C977F006C10A8 /* Music ProjectTests.xctest */;
+			productReference = 0220CB5F182C977F006C10A8 /* Peer AudioTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -435,7 +433,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 0220CB3F182C977F006C10A8 /* Build configuration list for PBXProject "Music Project" */;
+			buildConfigurationList = 0220CB3F182C977F006C10A8 /* Build configuration list for PBXProject "Peer Audio" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -447,8 +445,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				0220CB43182C977F006C10A8 /* Music Project */,
-				0220CB5E182C977F006C10A8 /* Music ProjectTests */,
+				0220CB43182C977F006C10A8 /* Peer Audio */,
+				0220CB5E182C977F006C10A8 /* Peer AudioTests */,
 			);
 		};
 /* End PBXProject section */
@@ -546,7 +544,7 @@
 /* Begin PBXTargetDependency section */
 		0220CB65182C977F006C10A8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 0220CB43182C977F006C10A8 /* Music Project */;
+			target = 0220CB43182C977F006C10A8 /* Peer Audio */;
 			targetProxy = 0220CB64182C977F006C10A8 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -649,9 +647,9 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Music Project/Music Project-Prefix.pch";
-				INFOPLIST_FILE = "Music Project/Music Project-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "Music Project/Peer Audio-Prefix.pch";
+				INFOPLIST_FILE = "Music Project/Peer Audio-Info.plist";
+				PRODUCT_NAME = "Peer Audio";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
@@ -665,9 +663,9 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Music Project/Music Project-Prefix.pch";
-				INFOPLIST_FILE = "Music Project/Music Project-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "Music Project/Peer Audio-Prefix.pch";
+				INFOPLIST_FILE = "Music Project/Peer Audio-Info.plist";
+				PRODUCT_NAME = "Peer Audio";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
@@ -688,8 +686,8 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "Music ProjectTests/Music ProjectTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "Music ProjectTests/Peer AudioTests-Info.plist";
+				PRODUCT_NAME = "Peer AudioTests";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -706,8 +704,8 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Music Project/Music Project-Prefix.pch";
-				INFOPLIST_FILE = "Music ProjectTests/Music ProjectTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "Music ProjectTests/Peer AudioTests-Info.plist";
+				PRODUCT_NAME = "Peer AudioTests";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -716,7 +714,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0220CB3F182C977F006C10A8 /* Build configuration list for PBXProject "Music Project" */ = {
+		0220CB3F182C977F006C10A8 /* Build configuration list for PBXProject "Peer Audio" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0220CB6E182C977F006C10A8 /* Debug */,
@@ -725,7 +723,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0220CB70182C977F006C10A8 /* Build configuration list for PBXNativeTarget "Music Project" */ = {
+		0220CB70182C977F006C10A8 /* Build configuration list for PBXNativeTarget "Peer Audio" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0220CB71182C977F006C10A8 /* Debug */,
@@ -734,7 +732,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0220CB73182C977F006C10A8 /* Build configuration list for PBXNativeTarget "Music ProjectTests" */ = {
+		0220CB73182C977F006C10A8 /* Build configuration list for PBXNativeTarget "Peer AudioTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0220CB74182C977F006C10A8 /* Debug */,

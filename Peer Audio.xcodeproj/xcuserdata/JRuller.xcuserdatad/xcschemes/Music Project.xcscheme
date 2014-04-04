@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "0220CB43182C977F006C10A8"
-               BuildableName = "Music Project.app"
-               BlueprintName = "Music Project"
-               ReferencedContainer = "container:Music Project.xcodeproj">
+               BuildableName = "Peer Audio.app"
+               BlueprintName = "Peer Audio"
+               ReferencedContainer = "container:Peer Audio.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "0220CB5E182C977F006C10A8"
-               BuildableName = "Music ProjectTests.xctest"
-               BlueprintName = "Music ProjectTests"
-               ReferencedContainer = "container:Music Project.xcodeproj">
+               BuildableName = "Peer AudioTests.xctest"
+               BlueprintName = "Peer AudioTests"
+               ReferencedContainer = "container:Peer Audio.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -43,9 +43,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0220CB43182C977F006C10A8"
-            BuildableName = "Music Project.app"
-            BlueprintName = "Music Project"
-            ReferencedContainer = "container:Music Project.xcodeproj">
+            BuildableName = "Peer Audio.app"
+            BlueprintName = "Peer Audio"
+            ReferencedContainer = "container:Peer Audio.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -62,9 +62,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0220CB43182C977F006C10A8"
-            BuildableName = "Music Project.app"
-            BlueprintName = "Music Project"
-            ReferencedContainer = "container:Music Project.xcodeproj">
+            BuildableName = "Peer Audio.app"
+            BlueprintName = "Peer Audio"
+            ReferencedContainer = "container:Peer Audio.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -80,9 +80,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0220CB43182C977F006C10A8"
-            BuildableName = "Music Project.app"
-            BlueprintName = "Music Project"
-            ReferencedContainer = "container:Music Project.xcodeproj">
+            BuildableName = "Peer Audio.app"
+            BlueprintName = "Peer Audio"
+            ReferencedContainer = "container:Peer Audio.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
