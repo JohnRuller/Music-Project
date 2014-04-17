@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MyManager : NSObject {
-    NSString *someProperty;
+@interface hostManager : NSObject {
+    NSString *isHost;
 }
 
 @property (nonatomic, retain) NSString *someProperty;

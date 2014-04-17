@@ -8,7 +8,7 @@
 
 #import "PlaylistViewController.h"
 #import "AppDelegate.h"
-#import "myManager.h"
+#import "hostManager.h"
 
 
 @interface PlaylistViewController ()
@@ -97,7 +97,7 @@
     
     //Checks to see if it is the host device or not.
     //If so, enable play button, if not, disable it.
-    MyManager *sharedManager = [MyManager sharedManager];
+    hostManager *sharedManager = [hostManager sharedManager];
     if ([sharedManager.someProperty isEqualToString:@"YES"])
     {
         _buttonPlay.enabled = YES;
@@ -286,7 +286,7 @@
     MPMediaItem *song = [mediaItemCollection.items objectAtIndex: 0];
     
     //if host
-    MyManager *sharedManager = [MyManager sharedManager];
+    hostManager *sharedManager = [hostManager sharedManager];
     if ([sharedManager.someProperty isEqualToString:@"YES"])
     {
         //we have to send out the playlist to peers. this prepares that
@@ -471,7 +471,7 @@
         }*/
         
         //checks to see if this device is the host
-        MyManager *sharedManager = [MyManager sharedManager];
+        hostManager *sharedManager = [hostManager sharedManager];
         if ([sharedManager.someProperty isEqualToString:@"YES"])
         {
             //if the received data is dictionary type
@@ -790,7 +790,7 @@
     NSString *buttonTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
     
     //check for 
-    MyManager *sharedManager = [MyManager sharedManager];
+    hostManager *sharedManager = [hostManager sharedManager];
     if ([sharedManager.someProperty isEqualToString:@"YES"])
     {
         NSLog(@"Host");
@@ -1079,7 +1079,7 @@
 //called when a new peer joins a room. sends the playlist information to them
 -(void)peerJoinedRoom:(NSNotification *)notification
 {
-    MyManager *sharedManager = [MyManager sharedManager];
+    hostManager *sharedManager = [hostManager sharedManager];
     if ([sharedManager.someProperty isEqualToString:@"YES"])
     {
         [[NSOperationQueue mainQueue] addOperationWithBlock:^ {

@@ -7,7 +7,7 @@
 //
 
 #import "MainTabBarViewController.h"
-#import "myManager.h"
+#import "hostManager.h"
 
 @interface MainTabBarViewController ()
 -(void)loadTabs;
@@ -41,7 +41,7 @@ UITabBarController *tabBarController;
     [self loadTabs];
     
     //setup mymanager
-    MyManager *sharedManager = [MyManager sharedManager];
+    hostManager *sharedManager = [hostManager sharedManager];
     if (![sharedManager.someProperty isEqualToString:@"YES"])
     {
         NSLog(@"Disable tabs for guest.");
