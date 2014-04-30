@@ -62,7 +62,7 @@
 		943DEC8818E8A3D1008C0C77 /* chat@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 943DEC8618E8A3D1008C0C77 /* chat@2x.png */; };
 		943DEC8918E8A3D1008C0C77 /* chat30.png in Resources */ = {isa = PBXBuildFile; fileRef = 943DEC8718E8A3D1008C0C77 /* chat30.png */; };
 		945B78431895812500C26AAA /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 945B78421895812500C26AAA /* MainStoryboard.storyboard */; };
-		946243B618B7022D00F5D0C6 /* hostManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 946243B518B7022D00F5D0C6 /* hostManager.m */; };
+		946243B618B7022D00F5D0C6 /* myManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 946243B518B7022D00F5D0C6 /* myManager.m */; };
 		9466556318B93325009061C5 /* AnarchyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9466556218B93325009061C5 /* AnarchyViewController.m */; };
 		948071AB18E8A772008241D0 /* connections30.png in Resources */ = {isa = PBXBuildFile; fileRef = 948071A918E8A772008241D0 /* connections30.png */; };
 		948071AC18E8A772008241D0 /* connections@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 948071AA18E8A772008241D0 /* connections@2x.png */; };
@@ -150,8 +150,8 @@
 		943DEC8618E8A3D1008C0C77 /* chat@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chat@2x.png"; sourceTree = "<group>"; };
 		943DEC8718E8A3D1008C0C77 /* chat30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat30.png; sourceTree = "<group>"; };
 		945B78421895812500C26AAA /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
-		946243B418B7022D00F5D0C6 /* hostManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hostManager.h; sourceTree = "<group>"; };
-		946243B518B7022D00F5D0C6 /* hostManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = hostManager.m; sourceTree = "<group>"; };
+		946243B418B7022D00F5D0C6 /* myManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myManager.h; sourceTree = "<group>"; };
+		946243B518B7022D00F5D0C6 /* myManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myManager.m; sourceTree = "<group>"; };
 		9466556118B93325009061C5 /* AnarchyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnarchyViewController.h; sourceTree = "<group>"; };
 		9466556218B93325009061C5 /* AnarchyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnarchyViewController.m; sourceTree = "<group>"; };
 		948071A918E8A772008241D0 /* connections30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = connections30.png; sourceTree = "<group>"; };
@@ -370,8 +370,8 @@
 				948E7FD618C3DC1700842EDB /* peerPlaylist.m */,
 				94E3105118B68825001DC113 /* MPCConnection.h */,
 				94E3105218B68825001DC113 /* MPCConnection.m */,
-				946243B418B7022D00F5D0C6 /* hostManager.h */,
-				946243B518B7022D00F5D0C6 /* hostManager.m */,
+				946243B418B7022D00F5D0C6 /* myManager.h */,
+				946243B518B7022D00F5D0C6 /* myManager.m */,
 				0217EEAE18C514D70060DA48 /* profileManager.h */,
 				0217EEAF18C514D70060DA48 /* profileManager.m */,
 			);
@@ -426,7 +426,7 @@
 				ORGANIZATIONNAME = "John Ruller";
 				TargetAttributes = {
 					0220CB43182C977F006C10A8 = {
-						DevelopmentTeam = 3Y9N4UBV8R;
+						DevelopmentTeam = 3UVA6AL657;
 					};
 					0220CB5E182C977F006C10A8 = {
 						TestTargetID = 0220CB43182C977F006C10A8;
@@ -514,7 +514,7 @@
 				0217EEB018C514D70060DA48 /* profileManager.m in Sources */,
 				94E3105318B68825001DC113 /* MPCConnection.m in Sources */,
 				94E3105818B68D7C001DC113 /* ConnectionsViewController.m in Sources */,
-				946243B618B7022D00F5D0C6 /* hostManager.m in Sources */,
+				946243B618B7022D00F5D0C6 /* myManager.m in Sources */,
 				022FC9B418E9084B006FD44D /* MatchingArtistsViewController.m in Sources */,
 				9466556318B93325009061C5 /* AnarchyViewController.m in Sources */,
 				02E8C75918A869DD007AA6A3 /* MusicProject.xcdatamodeld in Sources */,

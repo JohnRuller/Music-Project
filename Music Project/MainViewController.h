@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "hostManager.h"
+#import "myManager.h"
 
 @interface MainViewController : UIViewController
 

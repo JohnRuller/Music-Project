@@ -46,14 +46,14 @@
     if ([segue.identifier isEqualToString:@"createRoom"])
     {
         NSLog(@"User chose to be host.");
-        hostManager *sharedManager = [hostManager sharedManager];
+        MyManager *sharedManager = [MyManager sharedManager];
         sharedManager.someProperty = @"YES";
     }
     
     if ([segue.identifier isEqualToString:@"joinRoom"])
     {
         NSLog(@"User chose to be guest.");
-        hostManager *sharedManager = [hostManager sharedManager];
+        MyManager *sharedManager = [MyManager sharedManager];
         sharedManager.someProperty = @"NO";
     }
 }

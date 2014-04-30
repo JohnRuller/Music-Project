@@ -6,27 +6,27 @@
 //  Copyright (c) 2014 John Ruller. All rights reserved.
 //
 
-#import "hostManager.h"
+#import "myManager.h"
 
-@implementation hostManager
+@implementation MyManager
 
 @synthesize someProperty;
 
 #pragma mark Singleton Methods
 
 + (id)sharedManager {
-    static hostManager *sharedHostManager = nil;
+    static MyManager *sharedMyManager = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        sharedHostManager = [[self alloc] init];
+        sharedMyManager = [[self alloc] init];
     });
-    return sharedHostManager;
+    return sharedMyManager;
 }
 
 - (id)init {
     if (self = [super init]) {
-        isHost = [[NSString alloc] init];
-        isHost = @"NO";
+        someProperty = [[NSString alloc] init];
+        someProperty = @"NO";
     }
     return self;
 }
