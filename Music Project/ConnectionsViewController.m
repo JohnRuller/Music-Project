@@ -65,7 +65,7 @@ UITabBarController *tbc;
     }
     
     //setup mymanager
-    hostManager *sharedManager = [hostManager sharedManager];
+    MyManager *sharedManager = [MyManager sharedManager];
     if ([sharedManager.someProperty isEqualToString:@"YES"])
     {
         NSLog(@"Setting user as non-advertising host.");

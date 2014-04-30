@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <MultipeerConnectivity/MultipeerConnectivity.h>
 #import <MobileCoreServices/MobileCoreServices.h>
-#import "hostManager.h"
+#import "myManager.h"
 
 
 @interface ConnectionsViewController : UIViewController <MCBrowserViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, UITabBarDelegate>
